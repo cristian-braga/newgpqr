@@ -16,7 +16,6 @@ $cakeDescription = 'Sistema GIM';
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'style', 'fontawesome/all']) ?>
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -164,11 +163,15 @@ $cakeDescription = 'Sistema GIM';
 </html>
 
 <script type="text/javascript">
-    $("#close-sidebar").click(function() {
-        $(".page-wrapper").removeClass("toggled");
+    const btn_close = document.getElementById('close-sidebar');
+    const btn_show = document.getElementById('show-sidebar');
+    const sidebar = document.querySelector('.page-wrapper');
+
+    btn_close.addEventListener('click', function() {
+        sidebar.classList.toggle('toggled');
     });
 
-    $("#show-sidebar").click(function() {
-        $(".page-wrapper").addClass("toggled");
+    btn_show.addEventListener('click', function() {
+        sidebar.classList.toggle('toggled');
     });
 </script>
