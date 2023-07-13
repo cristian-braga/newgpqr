@@ -1,23 +1,9 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- * @var \App\View\AppView $this
- */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Sistema GIM';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,29 +15,160 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
+    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'style', 'fontawesome/all']) ?>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
-        </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
-        </div>
-    </nav>
-    <main class="main">
-        <div class="container">
-            <?= $this->Flash->render() ?>
+    <div class="page-wrapper toggled">
+        <a id="show-sidebar" class="btn btn-sm" href="#">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <span id="logo">
+                        <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 140px']); ?>
+                    </span>
+                    <div id="close-sidebar">
+                        <i class="fa fa-angle-double-left"></i>
+                    </div>
+                </div>
+
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <!-- <img src="<?= $matricula ?>" alt="User picture"> -->
+                    </div>
+                    <div class="user-info">
+                        <!-- <span class="user-name"><?= $user['primeiroNome'] ?></span> -->
+                        <!-- <span class="user-name"><?= $user['matricula'] ?></span> -->
+                        <!-- <?php if ($this->Menu->validaPermissao($user, 'DESENVOLVEDOR')) { ?> -->
+                        <span class="user-role" style="color: red">Desenvolvedor</span>
+                        <!-- <?php } else if ($this->Menu->validaPermissao($user, 'ADMIN')) { ?> -->
+                        <span class="user-role" style="color: orange">Administrador</span>
+                        <!-- <?php } else { ?> -->
+                        <span class="user-role" style="color: cyan">Funcionário</span>
+                        <!-- <?php } ?> -->
+                    </div>
+                </div>
+
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/Permissoes/index">
+                                <i class="fa fa-user-secret"></i>
+                                <span>ADM</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <?= $this->Html->link(
+                                '<i class="fa fa-home" aria-hidden="true"></i><span>MENU</span>',
+                                ['controller' => 'Menu', 'action' => 'index'],
+                                ['escape' => false]
+                            ) ?>
+                        </li>
+
+                        <li onclick="history.back()" style="cursor: pointer">
+                            <a href="#">
+                                <i class="fa fa-chevron-circle-left"></i>
+                                <span>VOLTAR</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/impressao">
+                                <i class="fa fa-print"></i>
+                                <span>IMPRESSÃO</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/envelopamento">
+                                <i class="fa fa-envelope"></i>
+                                <span>ENVELOPAMENTO</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/triagem">
+                                <i class="fa fa-check-square"></i>
+                                <span>TRIAGEM</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/expedicao">
+                                <i class="fa fa-truck"></i>
+                                <span>EXPEDIÇÃO</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/digitalizacao">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span>DIGITALIZAÇÃO</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/remessas">
+                                <i class="fa fa-newspaper"></i>
+                                <span>REMESSAS</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/relatorios">
+                                <i class="fa fa-upload"></i>
+                                <span>RELATÓRIOS</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <?= $this->Html->link(
+                                '<i class="fa fa-question" aria-hidden="true"></i><span>AJUDA</span>',
+                                ['controller' => 'ajuda', 'action' => 'index'],
+                                ['escape' => false]
+                            ) ?>
+                        </li>
+
+                        <li>
+                            <?= $this->Html->link(
+                                '<i class="fa fa-sign-out" aria-hidden="true"></i><span>SAIR</span>',
+                                ['controller' => 'users', 'action' => 'logout'],
+                                ['escape' => false]
+                            ) ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <?= $this->Flash->render() ?>
+        <div class="page-content">
+
             <?= $this->fetch('content') ?>
+
+            <div class="footer">
+                <span>Desenvolvido pela PRODEMGE © <?= date('Y'); ?></span>
+                <?= $this->Html->image('logo_prodemge.png', ['alt' => 'Logo Prodemge',  'style' => "width: 130px; height: auto;"]) ?>
+            </div>
         </div>
-    </main>
-    <footer>
-    </footer>
+    </div>
 </body>
+
 </html>
+
+<script type="text/javascript">
+    $("#close-sidebar").click(function() {
+        $(".page-wrapper").removeClass("toggled");
+    });
+
+    $("#show-sidebar").click(function() {
+        $(".page-wrapper").addClass("toggled");
+    });
+</script>
