@@ -20,8 +20,7 @@ class AtividadeController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Servico', 'StatusAtividade'],
-            'conditions' => ['status_atividade_id' => 1]
+            'contain' => ['Servico', 'StatusAtividade']
         ];
 
         $atividade = $this->paginate($this->Atividade);
@@ -57,21 +56,23 @@ class AtividadeController extends AppController
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
 
-            $dados['data_atividade'] = date('Y-m-d H:i:s');
-            $dados['data_cadastro'] = date('Y-m-d');
-            $dados['funcionario'] = 'Cristian';
-            $dados['quantidade_folhas'] = 50;
-            $dados['quantidade_paginas'] = 50;
-            $dados['status_atividade_id'] = 1;
+            for ($i = 0; $i < count($dados['servico_id']); $i++) {
+                $dados['data_atividade'][$i] = date('Y-m-d H:i:s');
+                $dados['data_cadastro'][$i] = date('Y-m-d');
+                $dados['funcionario'][$i] = 'Cristian';
+                $dados['quantidade_folhas'][$i] = 50;
+                $dados['quantidade_paginas'][$i] = 50;
+                $dados['status_atividade_id'][$i] = 1;
 
-            $atividade = $this->Atividade->patchEntity($atividade, $dados);
+                $atividade = $this->Atividade->patchEntity($atividade, $dados);
 
-            if ($this->Atividade->save($atividade)) {
-                $this->Flash->success(__('The atividade has been saved.'));
+                if ($this->Atividade->save($atividade)) {
+                    $this->Flash->success(__('The atividade has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
         }
 
         $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
