@@ -20,7 +20,7 @@ Atualização do sistema GPQR.
 1. Faça o clone do projeto.
 
 ```
-git clone https://github.com/ricardodev10/newgpqr.git
+git clone https://github.com/cristian-braga/newgpqr.git
 ```
 
 2. Atualize o Composer.
