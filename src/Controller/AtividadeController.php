@@ -56,23 +56,44 @@ class AtividadeController extends AppController
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
 
-            for ($i = 0; $i < count($dados['servico_id']); $i++) {
-                $dados['data_atividade'][$i] = date('Y-m-d H:i:s');
-                $dados['data_cadastro'][$i] = date('Y-m-d');
-                $dados['funcionario'][$i] = 'Cristian';
-                $dados['quantidade_folhas'][$i] = 50;
-                $dados['quantidade_paginas'][$i] = 50;
-                $dados['status_atividade_id'][$i] = 1;
+            $jobs = $dados['job'];
+            $datas = $dados['data_postagem'];
+            $remessas = $dados['remessa_atividade'];
+            $documentos = $dados['quantidade_documentos'];
+            $recibos = $dados['recibo_postagem'];
+            $servico_ids = $dados['servico_id'];
 
-                $atividade = $this->Atividade->patchEntity($atividade, $dados);
+            $atividades = [];
 
-                if ($this->Atividade->save($atividade)) {
-                    $this->Flash->success(__('The atividade has been saved.'));
+            for ($i = 0; $i < count($servico_ids); $i++) {
+                $atividade = $this->Atividade->newEmptyEntity();
 
-                    return $this->redirect(['action' => 'index']);
-                }
-                $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
+                $nova_atividade = [
+                    'job' => $jobs[$i],
+                    'data_postagem' => $datas[$i],
+                    'remessa_atividade' => $remessas[$i],
+                    'quantidade_documentos' => $documentos[$i],
+                    'recibo_postagem' => $recibos[$i],
+                    'servico_id' => $servico_ids[$i],
+                    'data_atividade' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
+                    'funcionario' => 'Cristian',
+                    'quantidade_folhas' => 50,
+                    'quantidade_paginas' => 50,
+                    'status_atividade_id' => 1
+                ];
+
+                $atividade = $this->Atividade->patchEntity($atividade, $nova_atividade);
+
+                $atividades[] = $atividade;
             }
+
+            if ($this->Atividade->saveMany($atividades)) {
+                $this->Flash->success(__('The atividade has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
         }
 
         $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
