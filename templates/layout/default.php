@@ -148,8 +148,8 @@ $cakeDescription = 'Sistema GIM';
                 </div>
             </div>
         </nav>
-        <?= $this->Flash->render() ?>
         <div class="page-content">
+            <?= $this->Flash->render() ?>
 
             <?= $this->fetch('content') ?>
 
