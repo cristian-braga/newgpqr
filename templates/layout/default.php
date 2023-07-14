@@ -80,6 +80,13 @@ $cakeDescription = 'Sistema GIM';
                         </li>
 
                         <li>
+                            <a href="/atividade">
+                                <i class="fa-solid fa-file-arrow-down"></i>
+                                <span>ATIVIDADE</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="/impressao">
                                 <i class="fa fa-print"></i>
                                 <span>IMPRESSÃO</span>
