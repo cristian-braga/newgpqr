@@ -20,7 +20,8 @@ class AtividadeController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Servico', 'StatusAtividade']
+            'contain' => ['Servico', 'StatusAtividade'],
+            'conditions' => ['status_atividade_id' => 1]
         ];
 
         $atividade = $this->paginate($this->Atividade);
@@ -137,7 +138,7 @@ class AtividadeController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
         $atividade = $this->Atividade->get($id);
         if ($this->Atividade->delete($atividade)) {
             $this->Flash->success(__('The atividade has been deleted.'));
@@ -146,6 +147,14 @@ class AtividadeController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function calculaFolhas($documentos) {
+
+    }
+
+    public function calculaPaginas($folhas) {
+        
     }
 
     public function confirmaStatus()
@@ -169,15 +178,38 @@ class AtividadeController extends AppController
             $dados = $this->request->getData();
 
             for ($i = 0; $i < count($dados['servico_id']); $i++) {
-                $registro = $this->Atividade->get($dados['servico_id'][$i]);
+                $registroAtividade = $this->Atividade->get($dados['servico_id'][$i]);
+                $registroAtividade->status_atividade_id = 2;
+                $this->Atividade->save($registroAtividade);
 
                 if ($dados['impresso'][$i] == 1) {
-                    $registro->status_atividade_id = 2;
+                    $impressaoTable = $this->getTableLocator()->get('Impressao');
+                    $impressao = $impressaoTable->newEmptyEntity();
+
+                    $nova_impressao = [
+                        'funcionario' => 'CristianImp',
+                        'atividade_id' => $registroAtividade->id,
+                        'servico_id' => $registroAtividade->servico_id,
+                        'status_atividade_id' => 3,
+                        'impressora_id' => 5
+                    ];
+
+                    $impressao = $impressaoTable->patchEntity($impressao, $nova_impressao);
+                    $impressaoTable->save($impressao);
                 } else {
-                    $registro->status_atividade_id = 7;
-                }
-    
-                $this->Atividade->save($registro);
+                    $triagemTable = $this->getTableLocator()->get('Triagem');
+                    $triagem = $triagemTable->newEmptyEntity();
+
+                    $nova_triagem = [
+                        'funcionario' => 'CristianTri',
+                        'atividade_id' => $registroAtividade->id,
+                        'servico_id' => $registroAtividade->servico_id,
+                        'status_atividade_id' => 7
+                    ];
+
+                    $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);
+                    $triagemTable->save($triagem);
+                }                
             }
     
             $this->Flash->success('Registros atualizados com sucesso.');
