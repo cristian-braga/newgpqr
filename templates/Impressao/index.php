@@ -1,9 +1,3 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\Impressao> $impressao
- */
-?>
 <div class="impressao index content">
     <?= $this->Html->link(__('New Impressao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Impressao') ?></h3>
