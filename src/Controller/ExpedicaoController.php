@@ -19,8 +19,11 @@ class ExpedicaoController extends AppController
     public function index()
     {
         $this->paginate = [
+            'limit' => 20,
             'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'conditions' => ['Expedicao.status_atividade_id' => 9]
         ];
+        
         $expedicao = $this->paginate($this->Expedicao);
 
         $this->set(compact('expedicao'));
@@ -110,5 +113,25 @@ class ExpedicaoController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function confirmaExpedicao()
+    {
+        if ($this->request->is('post')) {
+            $selecionados = $this->request->getData('selecionados');
+            $servicos = [];
+    
+            foreach ($selecionados as $id) {
+                $query = $this->Expedicao->get($id, ['contain' => ['Atividade', 'Servico']]);
+                $servicos[] = $query;
+            }
+        }
+
+        $this->set(compact('servicos'));
+    }
+
+    public function atualizaExpedicao()
+    {
+
     }
 }

@@ -19,8 +19,11 @@ class TriagemController extends AppController
     public function index()
     {
         $this->paginate = [
+            'limit' => 20,
             'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'conditions' => ['Triagem.status_atividade_id' => 7]
         ];
+
         $triagem = $this->paginate($this->Triagem);
 
         $this->set(compact('triagem'));
@@ -110,5 +113,43 @@ class TriagemController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function atualizaTriagem()
+    {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData('selecionados');
+
+            for ($i = 0; $i < count($dados); $i++) {
+                $registroTriagem = $this->Triagem->get($dados[$i]);
+
+                $registroTriagem->funcionario = 'CristianTri';
+                $registroTriagem->data_Triagem = date('Y-m-d H:i:s');
+                $registroTriagem->status_atividade_id = 8;
+                
+                $this->Triagem->save($registroTriagem);
+
+                $this->novaExpedicao($registroTriagem);
+            }
+    
+            $this->Flash->success('Registros atualizados com sucesso.');
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+
+    public function novaExpedicao($registroTriagem)
+    {
+        $expedicaoTable = $this->getTableLocator()->get('Expedicao');
+        $expedicao = $expedicaoTable->newEmptyEntity();
+
+        $nova_expedicao = [
+            'funcionario' => 'CristianTri',
+            'atividade_id' => $registroTriagem->atividade_id,
+            'servico_id' => $registroTriagem->servico_id,
+            'status_atividade_id' => 9
+        ];
+
+        $expedicao = $expedicaoTable->patchEntity($expedicao, $nova_expedicao);
+        $expedicaoTable->save($expedicao); 
     }
 }
