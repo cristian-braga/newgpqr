@@ -1,8 +1,8 @@
 <div class="atividade index content">
-    <?= $this->Html->link(__('Cadastrar Atividade'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Atividade') ?></h3>
     <div class="table-responsive">
-        <?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'confirmaStatus']]) ?>
+        <?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'confirmaAtividade']]) ?>
             <?= $this->Form->button('Enviar', ['id' => 'submit', 'disabled']) ?>
             <table>
                 <thead>
@@ -14,7 +14,7 @@
                         <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                         <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
                         <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
-                        <th>Etapas</th>
+                        <th>Etapa</th>
                         <th class="actions"><?= __('Ações') ?></th>
                     </tr>
                 </thead>

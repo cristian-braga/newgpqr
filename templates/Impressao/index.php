@@ -1,39 +1,43 @@
 <div class="impressao index content">
-    <?= $this->Html->link(__('New Impressao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Impressao') ?></h3>
     <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('funcionario') ?></th>
-                    <th><?= $this->Paginator->sort('data_impressao') ?></th>
-                    <th><?= $this->Paginator->sort('atividade_id') ?></th>
-                    <th><?= $this->Paginator->sort('servico_id') ?></th>
-                    <th><?= $this->Paginator->sort('status_atividade_id') ?></th>
-                    <th><?= $this->Paginator->sort('impressora_id') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($impressao as $impressao): ?>
-                <tr>
-                    <td><?= $this->Number->format($impressao->id) ?></td>
-                    <td><?= h($impressao->funcionario) ?></td>
-                    <td><?= h($impressao->data_impressao) ?></td>
-                    <td><?= $impressao->has('atividade') ? $this->Html->link($impressao->atividade->id, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id]) : '' ?></td>
-                    <td><?= $impressao->has('servico') ? $this->Html->link($impressao->servico->id, ['controller' => 'Servico', 'action' => 'view', $impressao->servico->id]) : '' ?></td>
-                    <td><?= $impressao->has('status_atividade') ? $this->Html->link($impressao->status_atividade->id, ['controller' => 'StatusAtividade', 'action' => 'view', $impressao->status_atividade->id]) : '' ?></td>
-                    <td><?= $impressao->has('impressora') ? $this->Html->link($impressao->impressora->id, ['controller' => 'Impressora', 'action' => 'view', $impressao->impressora->id]) : '' ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $impressao->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $impressao->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $impressao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $impressao->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <?= $this->Form->create(null, ['url' => ['controller' => 'Impressao', 'action' => 'selecionaImpressora']]) ?>
+            <?= $this->Form->button('Enviar', ['id' => 'submit', 'disabled']) ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
+                        <th colspan="2"><?= $this->Paginator->sort('job') ?></th>
+                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Recibo/OCR/Remessa']) ?></th>
+                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
+                        <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                        <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
+                        <th>Etapa</th>
+                        <th class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($impressao as $impressao): ?>
+                    <tr>
+                        <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
+                        <td><?= $this->Html->link($impressao->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $impressao->servico->id]) ?></td>
+                        <td colspan="2"><?= h($impressao->atividade->job) ?></td>
+                        <td><?= h($impressao->atividade->remessa_atividade) ?></td>
+                        <td><?= h($impressao->atividade->data_postagem) ?></td>
+                        <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
+                        <td><?= h($impressao->atividade->recibo_postagem) ?></td>
+                        <td><?= $this->Html->link($impressao->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $impressao->status_atividade->id]) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $impressao->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $impressao->id)]) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?= $this->Form->end() ?>
     </div>
     <div class="paginator">
         <ul class="pagination">
@@ -46,3 +50,14 @@
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>
+
+<script>
+    const botao = document.getElementById('submit');
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('click', function() {
+            botao.disabled = !document.querySelector('input[type="checkbox"]:checked');
+        });
+    });
+</script>

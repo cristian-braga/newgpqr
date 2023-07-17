@@ -1,59 +1,43 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\Expedicao> $expedicao
- */
-?>
 <div class="expedicao index content">
-    <?= $this->Html->link(__('New Expedicao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Expedicao') ?></h3>
     <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('funcionario') ?></th>
-                    <th><?= $this->Paginator->sort('data_lancamento') ?></th>
-                    <th><?= $this->Paginator->sort('data_expedicao') ?></th>
-                    <th><?= $this->Paginator->sort('capas') ?></th>
-                    <th><?= $this->Paginator->sort('ocorrencia') ?></th>
-                    <th><?= $this->Paginator->sort('solicitante') ?></th>
-                    <th><?= $this->Paginator->sort('responsavel_remessa') ?></th>
-                    <th><?= $this->Paginator->sort('responsavel_expedicao') ?></th>
-                    <th><?= $this->Paginator->sort('responsavel_coleta') ?></th>
-                    <th><?= $this->Paginator->sort('hora') ?></th>
-                    <th><?= $this->Paginator->sort('atividade_id') ?></th>
-                    <th><?= $this->Paginator->sort('servico_id') ?></th>
-                    <th><?= $this->Paginator->sort('status_atividade_id') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($expedicao as $expedicao): ?>
-                <tr>
-                    <td><?= $this->Number->format($expedicao->id) ?></td>
-                    <td><?= h($expedicao->funcionario) ?></td>
-                    <td><?= h($expedicao->data_lancamento) ?></td>
-                    <td><?= h($expedicao->data_expedicao) ?></td>
-                    <td><?= $expedicao->capas === null ? '' : $this->Number->format($expedicao->capas) ?></td>
-                    <td><?= h($expedicao->ocorrencia) ?></td>
-                    <td><?= h($expedicao->solicitante) ?></td>
-                    <td><?= h($expedicao->responsavel_remessa) ?></td>
-                    <td><?= h($expedicao->responsavel_expedicao) ?></td>
-                    <td><?= h($expedicao->responsavel_coleta) ?></td>
-                    <td><?= h($expedicao->hora) ?></td>
-                    <td><?= $expedicao->has('atividade') ? $this->Html->link($expedicao->atividade->id, ['controller' => 'Atividade', 'action' => 'view', $expedicao->atividade->id]) : '' ?></td>
-                    <td><?= $expedicao->has('servico') ? $this->Html->link($expedicao->servico->id, ['controller' => 'Servico', 'action' => 'view', $expedicao->servico->id]) : '' ?></td>
-                    <td><?= $expedicao->has('status_atividade') ? $this->Html->link($expedicao->status_atividade->id, ['controller' => 'StatusAtividade', 'action' => 'view', $expedicao->status_atividade->id]) : '' ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $expedicao->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $expedicao->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $expedicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $expedicao->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'confirmaExpedicao']]) ?>
+            <?= $this->Form->button('Enviar', ['id' => 'submit', 'disabled']) ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
+                        <th colspan="2"><?= $this->Paginator->sort('job') ?></th>
+                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Recibo/OCR/Remessa']) ?></th>
+                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
+                        <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                        <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
+                        <th>Etapa</th>
+                        <th class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($expedicao as $expedicao): ?>
+                    <tr>
+                        <td><input type="checkbox" name="selecionados[]" value="<?= $expedicao->id ?>"></td>
+                        <td><?= $this->Html->link($expedicao->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $expedicao->servico->id]) ?></td>
+                        <td colspan="2"><?= h($expedicao->atividade->job) ?></td>
+                        <td><?= h($expedicao->atividade->remessa_atividade) ?></td>
+                        <td><?= h($expedicao->atividade->data_postagem) ?></td>
+                        <td><?= $this->Number->format($expedicao->atividade->quantidade_documentos) ?></td>
+                        <td><?= h($expedicao->atividade->recibo_postagem) ?></td>
+                        <td><?= $this->Html->link($expedicao->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $expedicao->status_atividade->id]) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $expedicao->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $expedicao->id]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $expedicao->id], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $expedicao->id)]) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?= $this->Form->end() ?>
     </div>
     <div class="paginator">
         <ul class="pagination">
@@ -66,3 +50,14 @@
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>
+
+<script>
+    const botao = document.getElementById('submit');
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('click', function() {
+            botao.disabled = !document.querySelector('input[type="checkbox"]:checked');
+        });
+    });
+</script>
