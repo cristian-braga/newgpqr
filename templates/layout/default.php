@@ -15,7 +15,7 @@ $cakeDescription = 'Sistema GIM';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'style', 'fontawesome/all']) ?>
+    <?= $this->Html->css(['cake', 'style', 'fontawesome/all', 'bootstrap.min', 'buttons']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -55,7 +55,7 @@ $cakeDescription = 'Sistema GIM';
                     </div>
                 </div>
 
-                <div class="menu">
+                <div>
                     <ul>
                         <li>
                             <a href="/Permissoes/index">
