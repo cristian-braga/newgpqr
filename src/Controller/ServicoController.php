@@ -33,7 +33,7 @@ class ServicoController extends AppController
     public function view($id = null)
     {
         $servico = $this->Servico->get($id, [
-            'contain' => ['Atividade', 'Digitalizacao', 'Envelopamento', 'Expedicao', 'Impressao', 'Triagem'],
+            'contain' => ['Atividade', 'Envelopamento', 'Expedicao', 'Impressao', 'Triagem'],
         ]);
 
         $this->set(compact('servico'));

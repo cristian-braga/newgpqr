@@ -9,10 +9,11 @@
                     <tr>
                         <th></th>
                         <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
-                        <th colspan="2"><?= $this->Paginator->sort('job') ?></th>
-                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Recibo/OCR/Remessa']) ?></th>
-                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
+                        <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
+                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
+                        <th><?= $this->Paginator->sort('job') ?></th>
                         <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                         <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
                         <th>Etapa</th>
                         <th class="actions"><?= __('Ações') ?></th>
@@ -23,10 +24,11 @@
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $atividade->id ?>"></td>
                         <td><?= $this->Html->link($atividade->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $atividade->servico->id]) ?></td>
-                        <td colspan="2"><?= h($atividade->job) ?></td>
+                        <td><?= h($atividade->data_cadastro) ?></td>
                         <td><?= h($atividade->remessa_atividade) ?></td>
-                        <td><?= h($atividade->data_postagem) ?></td>
+                        <td><?= h($atividade->job) ?></td>
                         <td><?= $this->Number->format($atividade->quantidade_documentos) ?></td>
+                        <td><?= h($atividade->data_postagem) ?></td>
                         <td><?= h($atividade->recibo_postagem) ?></td>
                         <td><?= $this->Html->link($atividade->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $atividade->status_atividade->id]) ?></td>
                         <td class="actions">
