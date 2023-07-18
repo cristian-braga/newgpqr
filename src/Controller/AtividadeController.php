@@ -21,7 +21,8 @@ class AtividadeController extends AppController
         $this->paginate = [
             'limit' => 20,
             'contain' => ['Servico', 'StatusAtividade'],
-            'conditions' => ['status_atividade_id' => 1]
+            'conditions' => ['status_atividade_id' => 1],
+            'order' => ['data_cadastro' => 'desc']
         ];
 
         $atividade = $this->paginate($this->Atividade);
@@ -71,16 +72,16 @@ class AtividadeController extends AppController
 
                 $nova_atividade = [
                     'job' => $jobs[$i],
-                    'data_postagem' => $datas[$i],
-                    'remessa_atividade' => $remessas[$i],
-                    'quantidade_documentos' => $documentos[$i],
-                    'recibo_postagem' => $recibos[$i],
-                    'servico_id' => $servico_ids[$i],
                     'data_atividade' => date('Y-m-d H:i:s'),
+                    'data_postagem' => $datas[$i],
                     'data_cadastro' => date('Y-m-d'),
                     'funcionario' => 'Cristian',
+                    'remessa_atividade' => $remessas[$i],
+                    'quantidade_documentos' => $documentos[$i],
                     'quantidade_folhas' => 50,
                     'quantidade_paginas' => 50,
+                    'recibo_postagem' => $recibos[$i],
+                    'servico_id' => $servico_ids[$i],
                     'status_atividade_id' => 1
                 ];
 
@@ -90,11 +91,11 @@ class AtividadeController extends AppController
             }
 
             if ($this->Atividade->saveMany($atividades)) {
-                $this->Flash->success(__('The atividade has been saved.'));
+                $this->Flash->success(__('Atividade cadastrada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
+            $this->Flash->error(__('Falha ao cadastrar atividade. Tente novamente.'));
         }
 
         $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
@@ -119,11 +120,11 @@ class AtividadeController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $atividade = $this->Atividade->patchEntity($atividade, $this->request->getData());
             if ($this->Atividade->save($atividade)) {
-                $this->Flash->success(__('The atividade has been saved.'));
+                $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
+            $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
         $servico = $this->Atividade->Servico->find('list', ['limit' => 200])->all();
@@ -144,9 +145,9 @@ class AtividadeController extends AppController
         $this->request->allowMethod(['get', 'post', 'delete']);
         $atividade = $this->Atividade->get($id);
         if ($this->Atividade->delete($atividade)) {
-            $this->Flash->success(__('The atividade has been deleted.'));
+            $this->Flash->success(__('Atividade excluída com sucesso!'));
         } else {
-            $this->Flash->error(__('The atividade could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao excluir atividade. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -190,14 +191,14 @@ class AtividadeController extends AppController
                 $this->salvaOutraTabela($dados['impresso'][$i], $registroAtividade);               
             }
     
-            $this->Flash->success('Registros atualizados com sucesso.');
+            $this->Flash->success('Atividade lançada com sucesso!');
             return $this->redirect(['action' => 'index']);
         }
     }
 
-    public function salvaOutraTabela($dados, $registroAtividade)
+    public function salvaOutraTabela($dados_impresso, $registroAtividade)
     {
-        if ($dados == 1) {
+        if ($dados_impresso == 1) {
             $impressaoTable = $this->getTableLocator()->get('Impressao');
             $impressao = $impressaoTable->newEmptyEntity();
 

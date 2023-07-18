@@ -1,11 +1,3 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Atividade $atividade
- * @var string[]|\Cake\Collection\CollectionInterface $servico
- * @var string[]|\Cake\Collection\CollectionInterface $statusAtividade
- */
-?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">

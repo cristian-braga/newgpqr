@@ -124,7 +124,7 @@ class TriagemController extends AppController
                 $registroTriagem = $this->Triagem->get($dados[$i]);
 
                 $registroTriagem->funcionario = 'CristianTri';
-                $registroTriagem->data_Triagem = date('Y-m-d H:i:s');
+                $registroTriagem->data_triagem = date('Y-m-d H:i:s');
                 $registroTriagem->status_atividade_id = 8;
                 
                 $this->Triagem->save($registroTriagem);

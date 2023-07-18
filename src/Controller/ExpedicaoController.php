@@ -132,6 +132,47 @@ class ExpedicaoController extends AppController
 
     public function atualizaExpedicao()
     {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData();
 
+            $expedicao_ids = $dados['expedicao_id'];
+            $capas = $dados['capas'];
+            $solicitantes = $dados['solicitante'];
+            $responsaveis_remessas = $dados['responsavel_remessa'];
+            $datas_expedicoes = $dados['data_expedicao'];
+            $horas = $dados['hora'];
+            $responsaveis_coletas = $dados['responsavel_coleta'];
+
+            $expedicoes = [];
+
+            for ($i = 0; $i < count($expedicao_ids); $i++) {
+                $expedicao = $this->Expedicao->get($expedicao_ids[$i], ['contain' => ['Atividade']]);
+
+                $dados_expedicao = [
+                    'capas' => $capas[$i],
+                    'solicitante' => $solicitantes[$i],
+                    'responsavel_remessa' => $responsaveis_remessas[$i],
+                    'data_expedicao' => $datas_expedicoes[$i],
+                    'hora' => $horas[$i],
+                    'responsavel_coleta' => $responsaveis_coletas[$i],
+                    'ocorrencia' => $expedicao->atividade->remessa_atividade,
+                    'data_lancamento' => date('Y-m-d H:i:s'),
+                    'responsavel_expedicao' => 'CristianExp',
+                    'funcionario' => 'CristianExp',
+                    'status_atividade_id' => 10
+                ];
+
+                $expedicao = $this->Expedicao->patchEntity($expedicao, $dados_expedicao);
+
+                $expedicoes[] = $expedicao;
+            }
+
+            if ($this->Expedicao->saveMany($expedicoes)) {
+                $this->Flash->success(__('The atividade has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
+        }
     }
 }
