@@ -156,13 +156,8 @@ $cakeDescription = 'Sistema GIM';
         </nav>
         <div class="page-content">
             <?= $this->Flash->render() ?>
-
             <?= $this->fetch('content') ?>
-
-            <div class="footer">
-                <span>Desenvolvido pela PRODEMGE © <?= date('Y'); ?></span>
-                <?= $this->Html->image('logo_prodemge.png', ['alt' => 'Logo Prodemge',  'style' => "width: 130px; height: auto;"]) ?>
-            </div>
+            <?= $this->element('footer'); ?>
         </div>
     </div>
 </body>
