@@ -1,3 +1,8 @@
+.btn-shadow {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
 /*==============================================
     BUTTON GPQR SUCCESS    
     =============================================*/
@@ -11,14 +16,11 @@
     );
 
     color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-weight: 600;
     cursor: pointer;
     text-align: center;
     border: none;
     background-size: 300% 100%;
-    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-        7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
 
     -o-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
@@ -27,7 +29,6 @@
 
 .btn-gpqr-success:hover {
     color: #fff;
-    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
     background-position: 100% 0;
     -o-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
@@ -38,9 +39,12 @@
     outline: none;
 }
 
+/*==============================================
+    BUTTON GPQR VIEW     
+    =============================================*/
+
 .custom-btn {
     width: fit-content;
-    height: 40px;
     color: #fff;
     border-radius: 5px;
     padding: 10px 25px;
@@ -55,34 +59,17 @@
     text-decoration: none;
 }
 
-/*==============================================
-    BUTTON GPQR VIEW     
-    =============================================*/
 .btn-gpqr-view {
     border: none;
     color: #000;
 }
-.btn-gpqr-view:after {
-    position: absolute;
-    content: "";
-    width: 0;
-    height: 100%;
-    top: 0;
-    left: 0;
-    direction: rtl;
-    z-index: -1;
-    box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
-        7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
-    transition: all 0.3s ease;
-}
+
 .btn-gpqr-view:hover {
     color: #000;
+    background: #ffffff;
 }
-.btn-gpqr-view:hover:after {
-    left: auto;
-    right: 0;
-    width: 100%;
-}
+
 .btn-gpqr-view:active {
     top: 2px;
+    color: #000;
 }

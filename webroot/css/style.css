@@ -54,9 +54,6 @@
     font-family: "Poppins", sans-serif;
 
     background: #232526;
-    background: -webkit-linear-gradient(to right, #414345, #232526);
-    background: linear-gradient(to right, #414345, #232526);
-
     position: fixed;
     height: 100%;
     top: 0;
@@ -259,6 +256,7 @@
     position: absolute;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 
     background: rgb(255, 255, 255);
     background: linear-gradient(
@@ -272,12 +270,8 @@
     height: 70px;
 }
 
-.footer img {
-    margin: auto;
-}
-
 .footer span {
-    padding-left: 150px;
+    font-family: "Poppins", sans-serif;
 }
 
 /*==============================================
@@ -290,4 +284,36 @@
     backdrop-filter: blur(10.4px);
     -webkit-backdrop-filter: blur(10.4px);
     border: 1px solid rgba(255, 255, 255, 0.53);
+}
+
+/*==============================================
+    PAGINATION STYLES     
+    =============================================*/
+.pagination-gpqr {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.pagination-gpqr li {
+    margin: 0 5px;
+}
+
+.pagination-gpqr a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.pagination-gpqr a:hover {
+    background-color: #ddd;
+}
+
+.pagination-gpqr .active a {
+    background-color: #3cba92;
+    color: #fff;
 }

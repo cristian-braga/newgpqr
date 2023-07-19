@@ -15,16 +15,6 @@ h6 {
     font-family: "Raleway", sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 400;
-    color: #363637;
-}
-
 a {
     color: #2f85ae;
     -webkit-transition: all 0.2s linear;
