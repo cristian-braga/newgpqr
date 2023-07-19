@@ -1,5 +1,7 @@
 <?php
-namespace App\Controller;
+declare(strict_types=1);
+
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -77,8 +79,8 @@ class MenuController extends AppController
     public function menuescala()
     {
     }
+
     public function menurotulos()
     {
-        
     }
 }

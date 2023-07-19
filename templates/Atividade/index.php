@@ -18,25 +18,24 @@
                             <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                             <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
                             <th>Etapa</th>
-                            <th class="actions"><?= __('Ações') ?></th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($atividade as $atividade) : ?>
                             <tr>
                                 <td><input type="checkbox" name="selecionados[]" value="<?= $atividade->id ?>"></td>
-                                <td><?= $this->Html->link($atividade->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $atividade->servico->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                                <td><?= $this->Html->link($atividade->servico->nome_servico, ['action' => 'view', $atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                                 <td><?= h($atividade->data_cadastro) ?></td>
                                 <td><?= h($atividade->remessa_atividade) ?></td>
                                 <td><?= h($atividade->job) ?></td>
                                 <td><?= $this->Number->format($atividade->quantidade_documentos) ?></td>
                                 <td><?= h($atividade->data_postagem) ?></td>
                                 <td><?= h($atividade->recibo_postagem) ?></td>
-                                <td><?= $this->Html->link($atividade->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $atividade->status_atividade->id]) ?></td>
+                                <td><?= h($atividade->status_atividade->status_atual) ?></td>
                                 <td>
-                                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $atividade->id], ['class' => 'btn btn-outline-secondary']) ?>
-                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-secondary']) ?>
-                                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-secondary'], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $atividade->id)]) ?>
+                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+                                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-secondary btn-sm'], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $atividade->id)]) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

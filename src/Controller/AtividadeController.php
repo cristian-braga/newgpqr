@@ -3,19 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-/**
- * Atividade Controller
- *
- * @property \App\Model\Table\AtividadeTable $Atividade
- * @method \App\Model\Entity\Atividade[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+use App\Controller\AppController;
+
 class AtividadeController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
         $this->paginate = [
@@ -30,13 +21,6 @@ class AtividadeController extends AppController
         $this->set(compact('atividade'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Atividade id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $atividade = $this->Atividade->get($id, [
@@ -46,11 +30,6 @@ class AtividadeController extends AppController
         $this->set(compact('atividade'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $atividade = $this->Atividade->newEmptyEntity();
@@ -104,13 +83,6 @@ class AtividadeController extends AppController
         $this->set(compact('atividade', 'servico', 'statusAtividade'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Atividade id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $atividade = $this->Atividade->get($id, [
@@ -127,19 +99,12 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $this->Atividade->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Atividade->StatusAtividade->find('list', ['limit' => 200])->all();
+        $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
+        $statusAtividade = $this->Atividade->StatusAtividade->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])->all();
 
         $this->set(compact('atividade', 'servico', 'statusAtividade'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Atividade id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['get', 'post', 'delete']);

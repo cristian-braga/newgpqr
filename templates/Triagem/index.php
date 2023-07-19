@@ -8,28 +8,29 @@
                     <tr>
                         <th></th>
                         <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
-                        <th colspan="2"><?= $this->Paginator->sort('job') ?></th>
-                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Recibo/OCR/Remessa']) ?></th>
-                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
+                        <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
+                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
+                        <th><?= $this->Paginator->sort('job') ?></th>
                         <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                         <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
                         <th>Etapa</th>
-                        <th class="actions"><?= __('Actions') ?></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($triagem as $triagem): ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $triagem->id ?>"></td>
-                        <td><?= $this->Html->link($triagem->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $triagem->servico->id]) ?></td>
-                        <td colspan="2"><?= h($triagem->atividade->job) ?></td>
+                        <td><?= $this->Html->link($triagem->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $triagem->atividade->id]) ?></td>
+                        <td><?= h($triagem->atividade->data_cadastro) ?></td>
                         <td><?= h($triagem->atividade->remessa_atividade) ?></td>
-                        <td><?= h($triagem->atividade->data_postagem) ?></td>
+                        <td><?= h($triagem->atividade->job) ?></td>
                         <td><?= $this->Number->format($triagem->atividade->quantidade_documentos) ?></td>
+                        <td><?= h($triagem->atividade->data_postagem) ?></td>
                         <td><?= h($triagem->atividade->recibo_postagem) ?></td>
-                        <td><?= $this->Html->link($triagem->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $triagem->status_atividade->id]) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $triagem->id]) ?>
+                        <td><?= h($triagem->status_atividade->status_atual) ?></td>
+                        <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $triagem->id]) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $triagem->id], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $triagem->id)]) ?>
                         </td>

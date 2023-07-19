@@ -8,28 +8,29 @@
                     <tr>
                         <th></th>
                         <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
-                        <th colspan="2"><?= $this->Paginator->sort('job') ?></th>
-                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Recibo/OCR/Remessa']) ?></th>
-                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
+                        <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
+                        <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
+                        <th><?= $this->Paginator->sort('job') ?></th>
                         <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                        <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                         <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
                         <th>Etapa</th>
-                        <th class="actions"><?= __('Actions') ?></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($expedicao as $expedicao): ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $expedicao->id ?>"></td>
-                        <td><?= $this->Html->link($expedicao->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $expedicao->servico->id]) ?></td>
-                        <td colspan="2"><?= h($expedicao->atividade->job) ?></td>
+                        <td><?= $this->Html->link($expedicao->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $expedicao->atividade->id]) ?></td>
+                        <td><?= h($expedicao->atividade->data_cadastro) ?></td>
                         <td><?= h($expedicao->atividade->remessa_atividade) ?></td>
-                        <td><?= h($expedicao->atividade->data_postagem) ?></td>
+                        <td><?= h($expedicao->atividade->job) ?></td>
                         <td><?= $this->Number->format($expedicao->atividade->quantidade_documentos) ?></td>
+                        <td><?= h($expedicao->atividade->data_postagem) ?></td>
                         <td><?= h($expedicao->atividade->recibo_postagem) ?></td>
-                        <td><?= $this->Html->link($expedicao->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $expedicao->status_atividade->id]) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $expedicao->id]) ?>
+                        <td><?= h($expedicao->status_atividade->status_atual) ?></td>
+                        <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $expedicao->id]) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $expedicao->id], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $expedicao->id)]) ?>
                         </td>

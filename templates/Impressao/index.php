@@ -15,23 +15,22 @@
                         <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                         <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
                         <th>Etapa</th>
-                        <th class="actions"><?= __('Actions') ?></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($impressao as $impressao): ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
-                        <td><?= $this->Html->link($impressao->servico->nome_servico, ['controller' => 'Servico', 'action' => 'view', $impressao->servico->id]) ?></td>
+                        <td><?= $this->Html->link($impressao->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id]) ?></td>
                         <td><?= h($impressao->atividade->data_cadastro) ?></td>
                         <td><?= h($impressao->atividade->remessa_atividade) ?></td>
                         <td><?= h($impressao->atividade->job) ?></td>
                         <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
                         <td><?= h($impressao->atividade->data_postagem) ?></td>
                         <td><?= h($impressao->atividade->recibo_postagem) ?></td>
-                        <td><?= $this->Html->link($impressao->status_atividade->status_atual, ['controller' => 'StatusAtividade', 'action' => 'view', $impressao->status_atividade->id]) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $impressao->id]) ?>
+                        <td><?= h($impressao->status_atividade->status_atual) ?></td>
+                        <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id]) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $impressao->id)]) ?>
                         </td>

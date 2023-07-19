@@ -3,26 +3,15 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-/**
- * Impressao Controller
- *
- * @property \App\Model\Table\ImpressaoTable $Impressao
- * @method \App\Model\Entity\Impressao[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
 class ImpressaoController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
         $this->paginate = [
             'limit' => 20,
             'contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora'],
             'conditions' => ['Impressao.status_atividade_id' => 3],
-            'order' => ['Atividade__data_atividade' => 'desc']
+            'order' => ['data_cadastro' => 'desc']
         ];
 
         $impressao = $this->paginate($this->Impressao);
@@ -30,13 +19,6 @@ class ImpressaoController extends AppController
         $this->set(compact('impressao'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Impressao id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $impressao = $this->Impressao->get($id, [
@@ -46,13 +28,6 @@ class ImpressaoController extends AppController
         $this->set(compact('impressao'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Impressao id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $impressao = $this->Impressao->get($id, [
@@ -74,13 +49,6 @@ class ImpressaoController extends AppController
         $this->set(compact('impressao', 'atividade', 'servico', 'statusAtividade', 'impressora'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Impressao id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
