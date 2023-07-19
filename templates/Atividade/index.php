@@ -34,8 +34,8 @@
                                 <td><?= h($atividade->recibo_postagem) ?></td>
                                 <td><?= h($atividade->status_atividade->status_atual) ?></td>
                                 <td>
-                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
-                                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-secondary btn-sm'], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $atividade->id)]) ?>
+                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $atividade->id)]) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -45,16 +45,7 @@
         </div>
         <?= $this->Form->end() ?>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('Primeira')) ?>
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Próxima') . ' >') ?>
-            <?= $this->Paginator->last(__('Última') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de {{count}} total')) ?></p>
-    </div>
+    <?= $this->element('pagination'); ?>
 </div>
 
 <script>
