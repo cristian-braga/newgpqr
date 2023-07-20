@@ -7,7 +7,7 @@
         <div class="table-responsive my-4 table-gpqr">
             <div class="table_fixed_box">
                 <table class="table table-borderless table-hover table-striped text-center">
-                    <thead class="cabecalho noHover">
+                    <thead>
                         <tr>
                             <th></th>
                             <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
@@ -35,7 +35,7 @@
                                 <td><?= h($atividade->status_atividade->status_atual) ?></td>
                                 <td>
                                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
-                                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Tem certeza que você quer excluir? # {0}?', $atividade->id)]) ?>
+                                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Tem certeza que você quer excluir? # {0}?', $atividade->id)]) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
