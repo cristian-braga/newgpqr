@@ -1,184 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-.page-wrapper .sidebar-wrapper,
-.sidebar-wrapper ul li a i,
-.page-wrapper .page-content,
-#show-sidebar,
-.footer,
-#close-sidebar {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.page-content {
-    background: #ececec;
-}
-
-/*----------------page-wrapper----------------*/
-.page-wrapper {
-    height: 100vh;
-}
-
-/*----------------toggeled sidebar----------------*/
-.page-wrapper.toggled .sidebar-wrapper {
-    left: 0px;
-}
-
-.page-wrapper.toggled .page-content {
-    padding-left: 240px;
-}
-
-/*----------------show sidebar button----------------*/
-#show-sidebar {
-    position: fixed;
-    color: #f0f0f0;
-    background-color: #12171e;
-    font-size: 20px;
-    left: 0;
-    top: 10px;
-    border-radius: 0 2px 2px 0px;
-    width: 35px;
-    z-index: 1;
-    transition-delay: 0.3s;
-}
-
-.page-wrapper.toggled #show-sidebar {
-    left: -40px;
-}
-
-/*----------------sidebar-wrapper----------------*/
-.sidebar-wrapper {
-    font-family: "Poppins", sans-serif;
-
-    background: #232526;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: -300px;
-    z-index: 999;
-}
-
-.sidebar-wrapper ul li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    height: 45px;
-    margin-top: 10px;
-}
-
-.sidebar-wrapper ul li#serviço {
-    color: #ffffffbd;
-    height: 36px;
-}
-
-.sidebar-wrapper ul li a {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    width: 95%;
-    height: 100%;
-    color: #fff;
-    border-radius: 2px;
-    margin: auto;
-    text-decoration: none;
-}
-
-.sidebar-wrapper ul li a:hover {
-    color: #12171e;
-    background: #fff;
-}
-
-.sidebar-wrapper ul li a i {
-    font-size: 18px;
-    width: 25%;
-    line-height: 50px;
-}
-
-.sidebar-wrapper ul li:hover a i {
-    color: #f30000;
-}
-
-/*----------------sidebar-content----------------*/
-.sidebar-content {
-    position: relative;
-    max-height: calc(100% - 30px);
-    overflow-y: auto;
-}
-
-.sidebar-content::-webkit-scrollbar {
-    display: none;
-}
-
-/*--------------------sidebar-brand----------------------*/
-.sidebar-wrapper .sidebar-brand {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0px 20px;
-    padding-top: 10px;
-}
-
-.sidebar-wrapper .sidebar-brand #logo {
-    margin: 8px 25px;
-}
-
-.sidebar-wrapper .sidebar-brand #close-sidebar {
-    color: #f0f0f0;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/*--------------------sidebar-header----------------------*/
-.sidebar-wrapper .sidebar-header {
-    padding: 15px 30px;
-    overflow: hidden;
-}
-
-.sidebar-wrapper .sidebar-header .user-pic {
-    float: left;
-    width: 60px;
-    padding: 2px;
-    border-radius: 2px;
-    margin-right: 10px;
-}
-
-.sidebar-wrapper .sidebar-header .user-pic img {
-    object-fit: cover;
-    height: 85%;
-    width: 85%;
-    border-radius: 2px;
-}
-
-.sidebar-wrapper .sidebar-header .user-info {
-    color: #ffffffbd;
-    float: left;
-}
-
-.sidebar-wrapper .sidebar-header .user-name {
-    font-size: 15px;
-}
-
-.sidebar-wrapper .sidebar-header .user-info > span {
-    display: block;
-}
-
-.sidebar-wrapper .sidebar-header .user-info .user-role {
-    font-size: 14px;
-}
-
-/*--------------------------page-content-----------------------------*/
-.page-wrapper .page-content {
-    position: relative;
-    min-height: 100%;
-    padding-left: 0;
-    padding-top: 10px;
-    padding-bottom: 80px;
-    overflow-x: hidden;
-    margin: 0 auto;
+/* Estilo específico para o background do body */
+body {
+    background-color: #f1f1f1 !important;
 }
 
 /*------scroll bar---------------------*/
@@ -252,7 +76,6 @@
     FOOTER STYLES     
     =============================================*/
 .footer {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -264,6 +87,7 @@
         rgba(216, 216, 216, 1) 100%
     );
 
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 70px;
@@ -332,4 +156,31 @@
 .pagination-gpqr .active a {
     background-color: #3cba92;
     color: #fff;
+}
+
+/*==============================================
+    NAVBAR STYLES     
+    =============================================*/
+.navbar-gpqr {
+    background: #232526;
+    height: 70px;
+}
+
+.navbar-ul-gpqr {
+    gap: 30px;
+    text-decoration: none;
+}
+
+.navbar-ul-gpqr li a {
+    text-decoration: none;
+    color: #ddd;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-ul-gpqr li a:hover {
+    color: #fff;
+    border-bottom: 1px solid white;
 }
