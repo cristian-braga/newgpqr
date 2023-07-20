@@ -78,7 +78,7 @@ class AtividadeTable extends Table
     {
         $validator
             ->scalar('job')
-            ->maxLength('job', 10)
+            ->maxLength('job', 10, 'Máximo de 10 caracteres')
             ->allowEmptyString('job');
 
         $validator
@@ -101,7 +101,7 @@ class AtividadeTable extends Table
 
         $validator
             ->scalar('remessa_atividade')
-            ->maxLength('remessa_atividade', 11)
+            ->maxLength('remessa_atividade', 11, 'Máximo de 11 caracteres')
             ->allowEmptyString('remessa_atividade');
 
         $validator
