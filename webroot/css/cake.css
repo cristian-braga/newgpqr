@@ -177,6 +177,10 @@ th {
     margin-bottom: 2rem;
 }
 
+.error-message {
+    color: #df2f2f;
+}
+
 /* Paginator */
 .paginator {
     text-align: right;
