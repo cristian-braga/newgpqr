@@ -1,6 +1,7 @@
-<div class="content">
-    <?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'atualizaAtividade']]) ?>
-        <table>
+<h3 class="text-center mt-2 mb-4">CONFIRMAR ATIVIDADE</h3>
+<?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'atualizaAtividade']]) ?>
+    <div class="table-responsive my-4 table-gpqr">
+        <table class="table table-borderless table-hover table-striped text-center">
             <thead>
                 <tr>
                     <th>Serviço</th>
@@ -30,6 +31,6 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?= $this->Form->button('Enviar') ?>
-    <?= $this->Form->end() ?>
-</div>
+    </div>
+    <?= $this->Form->button('Enviar') ?>
+<?= $this->Form->end() ?>

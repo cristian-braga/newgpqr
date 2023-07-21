@@ -24,10 +24,10 @@ $cakeDescription = 'Sistema GIM';
 
 <body>
     <?= $this->element('header') ?>
-    <div class="main">
+    <section>
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
-    </div>
+    </section>
     <?= $this->element('footer') ?>
 
     <?= $this->Html->script('bootstrap.bundle.min') ?>
