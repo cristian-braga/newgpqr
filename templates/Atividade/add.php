@@ -1,4 +1,4 @@
-<h3 class="text-center mt-2 mb-4">CADASTRAR!</h3>
+<h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
 <?= $this->Form->create($atividade, ['id' => 'form', 'class' => 'mx-auto p-3 form-ativ']) ?>
     <div class="row">
         <div class="col-md-2">
