@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-1">
             <label class="form-label">Job</label>
-            <?= $this->Form->control('job', ['type' => 'number', 'name' => 'job[]', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'N° do Job', 'label' => false]) ?>
+            <?= $this->Form->control('job', ['type' => 'number', 'name' => 'job[]', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Job', 'label' => false]) ?>
         </div>
         <div class="col-md-2">
             <label class="form-label">Remessa/OCR</label>
@@ -50,7 +50,7 @@
                     <?= $this->Form->control('servico', ['options' => $servico, 'name' => 'servico_id[]', 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>\
                 </div>\
                 <div class="col-md-1">\
-                    <?= $this->Form->control('job', ['type' => 'number', 'name' => 'job[]', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'N° do Job', 'label' => false]) ?>\
+                    <?= $this->Form->control('job', ['type' => 'number', 'name' => 'job[]', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Job', 'label' => false]) ?>\
                 </div>\
                 <div class="col-md-2">\
                     <?= $this->Form->control('remessa_atividade', ['type' => 'number','name' => 'remessa_atividade[]', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'N° da Remessa/OCR', 'label' => false]) ?>\
