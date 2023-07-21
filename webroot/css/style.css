@@ -136,11 +136,12 @@ section {
 
 .form {
     border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 input[type="checkbox"] {
-    accent-color: #008000;
+    accent-color: #349934;
+    width: 18px;
+    height: 18px;
 }
 
 /*==============================================
@@ -160,7 +161,7 @@ input[type="checkbox"] {
     display: block;
     padding: 8px 12px;
     text-decoration: none;
-    color: #333;
+    color: #349934;
     background-color: #f7f7f7;
     border-radius: 4px;
     transition: background-color 0.2s;
@@ -171,7 +172,7 @@ input[type="checkbox"] {
 }
 
 .pagination-gpqr .active a {
-    background-color: #3cba92;
+    background-color: #333;
     color: #fff;
 }
 
