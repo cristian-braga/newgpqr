@@ -27,7 +27,7 @@
         </div>
     </div>
     <div id="btn_add" class="col-md-12 mt-4">
-        <button type="button" id="add_campo" style="border: none; background: transparent;"><i class="fa fa-plus-circle fa-2x text-warning"></i></button>
+        <button type="button" id="add_campo"><i class="fa fa-plus-circle fa-2x text-warning"></i></button>
     </div>
     <div class="pt-5">
         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
@@ -65,7 +65,7 @@
                     <?= $this->Form->control('data_postagem', ['type' => 'date', 'name' => 'data_postagem[]', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>\
                 </div>\
                 <div class="col-md-1">\
-                    <button type="button" class="mt-1" style="border: none; background: transparent;" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>\
+                    <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>\
                 </div>\
             ';
 
