@@ -9,13 +9,14 @@
 body {
     background-color: #f1f1f1 !important;
     min-height: 100vh;
+    min-width: fit-content;
     display: flex;
     flex-direction: column;
 }
 
 section {
     flex: 1 0 auto;
-    padding: .5rem;
+    padding: 0.5rem;
     background: #fff;
     border-radius: 0.4rem;
     box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
@@ -183,12 +184,10 @@ input[type="checkbox"] {
 }
 
 .navbar-ul-gpqr {
-    gap: 30px;
-    text-decoration: none;
+    gap: 20px;
 }
 
 .navbar-ul-gpqr li a {
-    text-decoration: none;
     color: #ddd;
 
     display: flex;
@@ -196,7 +195,9 @@ input[type="checkbox"] {
     gap: 8px;
 }
 
-.navbar-ul-gpqr li a:hover {
+.navbar-ul-gpqr li a:hover,
+.navbar-ul-gpqr li a:active,
+.navbar-ul-gpqr li a:focus {
     color: #fff;
     border-bottom: 1px solid white;
 }
