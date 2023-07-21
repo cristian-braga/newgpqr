@@ -1,5 +1,44 @@
+#add_campo,
+.btn-remove {
+    border: none;
+    background: transparent;
+}
+
+#add_campo i,
+.btn-remove {
+    transition: all 0.3s ease;
+}
+
+/* Animação em loop infinito */
+@keyframes scaleLoop {
+    0%,
+    100% {
+        transform: scale(1); /* Tamanho original do ícone */
+    }
+    50% {
+        transform: scale(1.1); /* Tamanho aumentado do ícone */
+    }
+}
+
+/* Animação do ícone em hover */
+#add_campo i:hover,
+.btn-remove:hover {
+    animation: scaleLoop 1s infinite; /* Executa a animação em loop infinito */
+    filter: brightness(0.9);
+}
+
+/* Sombra padrão para os buttons */
 .btn-shadow {
     box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cadastrar {
+    float: left;
+}
+
+.btn-lancar {
+    float: left;
+    margin-left: 10px;
 }
 
 /*==============================================
@@ -20,18 +59,12 @@
     text-align: center;
     border: none;
     background-size: 300% 100%;
-
-    -o-transition: all 0.4s ease-in-out;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
+    height: 38px;
 }
 
 .btn-gpqr-success:hover {
     color: #fff;
-    background-position: 100% 0;
-    -o-transition: all 0.4s ease-in-out;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
+    filter: brightness(1.1);
 }
 
 .btn-gpqr-success:focus {
@@ -63,7 +96,8 @@
     color: #000;
 }
 
-.btn-gpqr-view:hover {
+.btn-gpqr-view:hover,
+.btn-gpqr-view:focus {
     color: #000;
     background: #ffffff;
 }
