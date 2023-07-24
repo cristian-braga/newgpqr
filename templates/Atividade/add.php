@@ -18,7 +18,7 @@
             <?= $this->Form->control('quantidade_documentos', ['type' => 'number','name' => 'quantidade_documentos[]', 'class' => 'form-control', 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-2">
-            <label class="form-label">Recibo Postagem</label>
+            <label class="form-label">Recibo(s) de postagem</label>
             <?= $this->Form->select('recibo_postagem', [0, 1, 2, 3], ['name' => 'recibo_postagem[]', 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-2">
@@ -29,7 +29,7 @@
     <div id="btn_add" class="col-md-12 mt-4">
         <button type="button" id="add_campo"><i class="fa fa-plus-circle fa-2x text-warning"></i></button>
     </div>
-    <div class="pt-5">
+    <div class="mt-5">
         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
     </div>

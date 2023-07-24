@@ -24,7 +24,7 @@ $cakeDescription = 'Sistema GIM';
 
 <body>
     <?= $this->element('header') ?>
-    <section>
+    <section class="conteudo">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </section>
