@@ -1,13 +1,17 @@
 <nav class="navbar navbar-expand-sm navbar-gpqr">
-    <!-- <span id="logo">
-            <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 140px']); ?>
-        </span> -->
+    <div class="perfil d-flex align-items-center">
+        <img src="https://github.com/ricardodev10.png" alt="">
+        <div>
+            <p class="text-light mb-0">Ricardo</p>
+            <span class="text-danger">Desenvolvedor</span>
+        </div>
+    </div>
     <div class="collapse navbar-collapse justify-content-center">
         <ul class="navbar-nav navbar-ul-gpqr">
             <li>
                 <?= $this->Html->link(
                     '<i class="fa fa-home" aria-hidden="true"></i><span>MENU</span>',
-                    ['controller' => 'Menu'],
+                    ['controller' => 'Menu', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -16,7 +20,7 @@
                 <?= $this->Html->link(
                     '<i class="fa-solid fa-file-arrow-down"></i>
                         <span>ATIVIDADE</span>',
-                    ['controller' => 'Atividade'],
+                    ['controller' => 'Atividade', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -25,7 +29,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-print"></i>
                         <span>IMPRESSÃO</span>',
-                    ['controller' => 'Impressao'],
+                    ['controller' => 'Impressao', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -34,7 +38,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-envelope"></i>
                         <span>ENVELOPAMENTO</span>',
-                    ['controller' => 'Envelopamento'],
+                    ['controller' => 'Envelopamento', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -43,7 +47,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-check-square"></i>
                         <span>TRIAGEM</span>',
-                    ['controller' => 'Triagem'],
+                    ['controller' => 'Triagem', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -52,7 +56,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-truck"></i>
                         <span>EXPEDIÇÃO</span>',
-                    ['controller' => 'Expedicao'],
+                    ['controller' => 'Expedicao', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -61,7 +65,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-question" aria-hidden="true"></i>
                         <span>AJUDA</span>',
-                    ['controller' => 'Ajuda'],
+                    ['controller' => 'Ajuda', 'action' => 'index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
@@ -76,4 +80,5 @@
             </li>
         </ul>
     </div>
+    <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 140px; margin-right: 24px']); ?>
 </nav>
