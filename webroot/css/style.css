@@ -215,6 +215,19 @@ input[type="checkbox"] {
     border-bottom: 1px solid white;
 }
 
+.perfil {
+    margin-left: 24px;
+    gap: 8px;
+
+    font-family: Poppins, sans-serif;
+}
+
+.perfil img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
 /*==============================================
     AJUDA STYLES     
     =============================================*/

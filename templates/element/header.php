@@ -1,7 +1,11 @@
 <nav class="navbar navbar-expand-sm navbar-gpqr">
-    <!-- <span id="logo">
-            <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 140px']); ?>
-        </span> -->
+    <div class="perfil d-flex align-items-center">
+        <img src="https://github.com/ricardodev10.png" alt="">
+        <div>
+            <p class="text-light mb-0">Ricardo</p>
+            <span class="text-danger">Desenvolvedor</span>
+        </div>
+    </div>
     <div class="collapse navbar-collapse justify-content-center">
         <ul class="navbar-nav navbar-ul-gpqr">
             <li>
@@ -76,4 +80,5 @@
             </li>
         </ul>
     </div>
+    <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 140px; margin-right: 24px']); ?>
 </nav>
