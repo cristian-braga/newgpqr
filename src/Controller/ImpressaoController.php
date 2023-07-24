@@ -11,7 +11,7 @@ class ImpressaoController extends AppController
             'limit' => 20,
             'contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora'],
             'conditions' => ['Impressao.status_atividade_id' => 3],
-            'order' => ['data_cadastro' => 'desc']
+            'order' => ['Atividade.data_cadastro' => 'desc']
         ];
 
         $impressao = $this->paginate($this->Impressao);
