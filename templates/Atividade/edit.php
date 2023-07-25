@@ -1,4 +1,4 @@
-<h3 class="text-center mt-2 mb-4">EDITAR</h3>
+<h3 class="text-center mt-2 mb-4">EDITAR ATIVIDADE</h3>
 <?= $this->Form->create($atividade, ['class' => 'mx-auto p-3 form']) ?>
     <div class="row g-3">
         <div class="col-md-6">

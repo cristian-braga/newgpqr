@@ -9,7 +9,7 @@ $paginator = $this->Paginator->setTemplates([
 ]);
 ?>
 
-<nav aria-label="Page navigation example" class="mt-4">
+<nav class="mt-4">
     <ul class="pagination-gpqr pagination-sm">
         <?php
         echo $paginator->first();

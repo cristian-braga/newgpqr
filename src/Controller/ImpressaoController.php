@@ -9,21 +9,13 @@ class ImpressaoController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora'],
+            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
             'conditions' => ['Impressao.status_atividade_id' => 3],
+            'sortableFields' => ['Atividade.data_cadastro'],
             'order' => ['Atividade.data_cadastro' => 'desc']
         ];
 
         $impressao = $this->paginate($this->Impressao);
-
-        $this->set(compact('impressao'));
-    }
-
-    public function view($id = null)
-    {
-        $impressao = $this->Impressao->get($id, [
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora'],
-        ]);
 
         $this->set(compact('impressao'));
     }
@@ -54,9 +46,9 @@ class ImpressaoController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $impressao = $this->Impressao->get($id);
         if ($this->Impressao->delete($impressao)) {
-            $this->Flash->success(__('The impressao has been deleted.'));
+            $this->Flash->success(__('Registro excluído com sucesso!'));
         } else {
-            $this->Flash->error(__('The impressao could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -95,7 +87,8 @@ class ImpressaoController extends AppController
                 $this->novoEnvelopamento($registroImpressao); 
             }
     
-            $this->Flash->success('Registros atualizados com sucesso.');
+            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
+
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -114,5 +107,20 @@ class ImpressaoController extends AppController
 
         $envelopamento = $envelopamentoTable->patchEntity($envelopamento, $novo_envelopamento);
         $envelopamentoTable->save($envelopamento); 
+    }
+
+    // TELA DE SERVIÇOS IMPRESSOS
+    public function servicosImpressos()
+    {
+        $this->paginate = [
+            'limit' => 20,
+            'contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora'],
+            'conditions' => ['Impressao.status_atividade_id' => 4],
+            'order' => ['data_impressao' => 'desc']
+        ];
+
+        $impressao = $this->paginate($this->Impressao);
+
+        $this->set(compact('impressao'));
     }
 }

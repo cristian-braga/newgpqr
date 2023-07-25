@@ -1,6 +1,7 @@
 <h3 class="text-center text-danger-emphasis mt-2 mb-4">IMPRESSÃO</h3>
+<?= $this->Html->link(__('Serviços Impressos'), ['action' => 'servicosImpressos'], ['class' => 'btn btn-gpqr-success float-end mb-4']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Impressao', 'action' => 'selecionaImpressora']]) ?>
-    <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark mb-3 btn-lancar', 'style' => 'visibility: hidden;']) ?>
+    <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-hover table-striped text-center">
             <thead>
@@ -31,7 +32,7 @@
                         <td><?= h($impressao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->id)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
