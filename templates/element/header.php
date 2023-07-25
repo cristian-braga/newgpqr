@@ -80,5 +80,5 @@
             </li>
         </ul>
     </div>
-    <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 140px; margin-right: 24px']); ?>
+    <?= $this->Html->image('logo_prodemge_sidebar.png', ['alt' => 'logo', 'style' => 'width: 120px; margin-right: 24px']); ?>
 </nav>
