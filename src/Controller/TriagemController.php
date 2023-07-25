@@ -19,15 +19,6 @@ class TriagemController extends AppController
         $this->set(compact('triagem'));
     }
 
-    public function view($id = null)
-    {
-        $triagem = $this->Triagem->get($id, [
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
-        ]);
-
-        $this->set(compact('triagem'));
-    }
-
     public function edit($id = null)
     {
         $triagem = $this->Triagem->get($id, [
@@ -53,9 +44,9 @@ class TriagemController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $triagem = $this->Triagem->get($id);
         if ($this->Triagem->delete($triagem)) {
-            $this->Flash->success(__('The triagem has been deleted.'));
+            $this->Flash->success(__('Registro excluído com sucesso!'));
         } else {
-            $this->Flash->error(__('The triagem could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -78,7 +69,7 @@ class TriagemController extends AppController
                 $this->novaExpedicao($registroTriagem);
             }
     
-            $this->Flash->success('Registros atualizados com sucesso.');
+            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -97,5 +88,20 @@ class TriagemController extends AppController
 
         $expedicao = $expedicaoTable->patchEntity($expedicao, $nova_expedicao);
         $expedicaoTable->save($expedicao); 
+    }
+
+    // TELA DE SERVIÇOS TRIADOS
+    public function servicosTriados()
+    {
+        $this->paginate = [
+            'limit' => 20,
+            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'conditions' => ['Triagem.status_atividade_id' => 8],
+            'order' => ['data_triagem' => 'desc']
+        ];
+
+        $triagem = $this->paginate($this->Triagem);
+
+        $this->set(compact('triagem'));
     }
 }

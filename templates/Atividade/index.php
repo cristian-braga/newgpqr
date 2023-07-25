@@ -1,7 +1,7 @@
 <h3 class="text-center text-danger-emphasis mt-2 mb-4">ATIVIDADE</h3>
-<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-gpqr-success mb-4 btn-cadastrar']) ?>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-gpqr-success float-start mb-4']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'confirmaAtividade']]) ?>
-    <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark mb-4 btn-lancar', 'style' => 'visibility: hidden;']) ?>
+    <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-hover table-striped text-center">
             <thead>
@@ -40,7 +40,7 @@
         </table>
     </div>
 <?= $this->Form->end() ?>
-<?= $this->element('pagination'); ?>
+<?= $this->element('pagination') ?>
 
 <script>
     const botao = document.getElementById('submit');

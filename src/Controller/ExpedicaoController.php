@@ -19,15 +19,6 @@ class ExpedicaoController extends AppController
         $this->set(compact('expedicao'));
     }
 
-    public function view($id = null)
-    {
-        $expedicao = $this->Expedicao->get($id, [
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
-        ]);
-
-        $this->set(compact('expedicao'));
-    }
-
     public function edit($id = null)
     {
         $expedicao = $this->Expedicao->get($id, [
@@ -53,9 +44,9 @@ class ExpedicaoController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $expedicao = $this->Expedicao->get($id);
         if ($this->Expedicao->delete($expedicao)) {
-            $this->Flash->success(__('The expedicao has been deleted.'));
+            $this->Flash->success(__('Registro excluído com sucesso!'));
         } else {
-            $this->Flash->error(__('The expedicao could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -114,11 +105,25 @@ class ExpedicaoController extends AppController
             }
 
             if ($this->Expedicao->saveMany($expedicoes)) {
-                $this->Flash->success(__('The atividade has been saved.'));
+                $this->Flash->success(__('Registro(s) lançado(s) com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The atividade could not be saved. Please, try again.'));
+            $this->Flash->error(__('Falha ao lançar registro(s). Tente novamente.'));
         }
+    }
+
+    public function servicosExpedidos()
+    {
+        $this->paginate = [
+            'limit' => 20,
+            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'conditions' => ['Expedicao.status_atividade_id' => 10],
+            'order' => ['data_expedicao' => 'desc']
+        ];
+        
+        $expedicao = $this->paginate($this->Expedicao);
+
+        $this->set(compact('expedicao'));
     }
 }
