@@ -9,6 +9,7 @@
                 <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
                 <th><?= $this->Paginator->sort('job') ?></th>
                 <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                <th><?= $this->Paginator->sort('nome_impressora', ['label' => 'Impressora']) ?></th>
                 <th>Etapa</th>
                 <th>Ações</th>
             </tr>
@@ -22,6 +23,7 @@
                     <td><?= h($impressao->atividade->remessa_atividade) ?></td>
                     <td><?= h($impressao->atividade->job) ?></td>
                     <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
+                    <td><?= h($impressao->impressora->nome_impressora) ?></td>
                     <td><?= h($impressao->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
