@@ -49,8 +49,6 @@ class AtividadeController extends AppController
             for ($i = 0; $i < count($servico_ids); $i++) {
                 $atividade = $this->Atividade->newEmptyEntity();
 
-
-
                 $nova_atividade = [
                     'job' => $jobs[$i],
                     'data_atividade' => date('Y-m-d H:i:s'),

@@ -17,7 +17,12 @@ class ImpressaoController extends AppController
 
         $impressao = $this->paginate($this->Impressao);
 
-        $this->set(compact('impressao'));
+        $balanco = $this->Impressao->dadosImpressoras()->toArray();
+
+        $nuv_1 = $balanco[0];
+        $nuv_2 = $balanco[1];
+
+        $this->set(compact('impressao', 'nuv_1', 'nuv_2'));
     }
 
     public function edit($id = null)

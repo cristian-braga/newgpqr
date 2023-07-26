@@ -117,4 +117,23 @@ class ImpressaoTable extends Table
 
         return $rules;
     }
+
+    public function dadosImpressoras()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome_impressora' => 'Impressora.nome_impressora',
+                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+            ])
+            ->innerJoinWith('Impressora')
+            ->innerJoinWith('Atividade')
+            ->where([
+                'Impressora.id IN' => [1, 2]
+            ])
+            ->group('Impressora.nome_impressora')
+            ->orderAsc('Impressora.nome_impressora')
+            ->all();
+
+        return $query;
+    }
 }
