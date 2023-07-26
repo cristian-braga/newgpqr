@@ -41,6 +41,22 @@
     </div>
 <?= $this->Form->end() ?>
 <?= $this->element('pagination'); ?>
+<div class="table-responsive table-gpqr">
+    <table class="table table-borderless table-hover table-striped text-center">
+        <thead>
+            <tr>
+                <th><?= $nuv_1->nome_impressora ?></th>
+                <th><?= $nuv_2->nome_impressora ?></th>
+            </tr>
+        </thead>
+        <tbody class="align-middle">
+            <tr>
+                <td><?= $nuv_1->total_documentos ?></td>
+                <td><?= $nuv_2->total_documentos ?></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <script>
     const botao = document.getElementById('submit');
