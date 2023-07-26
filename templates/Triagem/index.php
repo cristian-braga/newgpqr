@@ -1,5 +1,5 @@
-<h3 class="text-center text-danger-emphasis mt-2 mb-4">TRIAGEM</h3>
-<?= $this->Html->link(__('Serviços Triados'), ['action' => 'servicosTriados'], ['class' => 'btn btn-gpqr-success float-end mb-4']) ?>
+<h2 class="text-center text-gpqr mt-2 mb-4">TRIAGEM</h2>
+<?= $this->Html->link(__('Serviços Triados'), ['action' => 'servicosTriados'], ['class' => 'btn btn-secondary float-end mb-4']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Triagem', 'action' => 'atualizaTriagem']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
