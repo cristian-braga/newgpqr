@@ -1,5 +1,5 @@
-<h3 class="text-center text-danger-emphasis mt-2 mb-4">ATIVIDADE</h3>
-<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-gpqr-success float-start mb-4']) ?>
+<h2 class="text-center text-gpqr mt-2 mb-4">ATIVIDADE</h2>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'confirmaAtividade']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">

@@ -1,5 +1,5 @@
-<h3 class="text-center text-danger-emphasis mt-2 mb-4">ENVELOPAMENTO</h3>
-<?= $this->Html->link(__('Serviços Envelopados'), ['action' => 'servicosEnvelopados'], ['class' => 'btn btn-gpqr-success float-end mb-4']) ?>
+<h2 class="text-center text-gpqr mt-2 mb-4">ENVELOPAMENTO</h2>
+<?= $this->Html->link(__('Serviços Envelopados'), ['action' => 'servicosEnvelopados'], ['class' => 'btn btn-secondary float-end mb-4']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Envelopamento', 'action' => 'atualizaEnvelopamento']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">

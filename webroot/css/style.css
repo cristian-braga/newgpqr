@@ -19,6 +19,15 @@ section {
     width: 98%;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Raleway", sans-serif;
+}
+
 .conteudo {
     padding: 1rem;
     background: #fff;
@@ -79,21 +88,23 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+
     height: 200px;
     margin-bottom: 10px;
     padding: 10px;
-    color: #000;
-    text-decoration: none;
-    transition: 0.2s;
-}
 
-.menu-gpqr:hover {
-    color: #333;
+    text-decoration: none;
+    color: #000;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+
+    transition: transform 0.2s;
+}
+
+.menu-gpqr:hover {
+    transform: scale(1.04);
+    color: #000;
 }
 
 /*==============================================
@@ -264,4 +275,5 @@ input[type="checkbox"] {
 
 .text-gpqr {
     font-weight: 900;
+    color: #970000;
 }
