@@ -1,19 +1,19 @@
-<div class="content">
-    <?= $this->Form->create(null, ['url' => ['controller' => 'Impressao', 'action' => 'atualizaImpressao']]) ?>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Serviço</th>
-                        <th><?= $this->Paginator->sort('data_postagem') ?></th>
-                        <th><?= $this->Paginator->sort('remessa_atividade') ?></th>
-                        <th><?= $this->Paginator->sort('quantidade_documentos') ?></th>
-                        <th><?= $this->Paginator->sort('recibo_postagem') ?></th>
-                        <th>Impressora:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($servicos as $servico): ?>
+<h3 class="text-center mt-2 mb-4">CONFIRMAR IMPRESSÃO</h3>
+<?= $this->Form->create(null, ['url' => ['controller' => 'Impressao', 'action' => 'atualizaImpressao']]) ?>
+    <div class="table-responsive table-gpqr mb-4">
+        <table class="table table-borderless table-hover table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>Postagem</th>
+                    <th>Remessa/OCR</th>
+                    <th>Quantidade de documentos</th>
+                    <th>Recibo(s)</th>
+                    <th>Impressora</th>
+                </tr>
+            </thead>
+            <tbody class="align-middle">
+                <?php foreach ($servicos as $servico) : ?>
                     <tr>
                         <td><?= h($servico->servico->nome_servico) ?></td>
                         <td><?= h($servico->atividade->data_postagem) ?></td>
@@ -21,7 +21,7 @@
                         <td><?= $this->Number->format($servico->atividade->quantidade_documentos) ?></td>
                         <td><?= h($servico->atividade->recibo_postagem) ?></td>
                         <td>
-                            <select name="impressora[]">
+                            <select name="impressora[]" class="form-select" required>
                                 <option value="" hidden selected disabled>-- Selecione --</option>
                                 <option value="1">Nuvera 1 - Z8PB</option>
                                 <option value="2">Nuvera 2 - Z7PK</option>
@@ -30,10 +30,10 @@
                             <input type="hidden" name="servico_id[]" value="<?= $servico->id ?>">
                         </td>
                     </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-        <?= $this->Form->button('Enviar') ?>
-    <?= $this->Form->end() ?>
-</div>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+<?= $this->Form->end() ?>

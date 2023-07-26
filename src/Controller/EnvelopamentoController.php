@@ -19,15 +19,6 @@ class EnvelopamentoController extends AppController
         $this->set(compact('envelopamento'));
     }
 
-    public function view($id = null)
-    {
-        $envelopamento = $this->Envelopamento->get($id, [
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
-        ]);
-
-        $this->set(compact('envelopamento'));
-    }
-
     public function edit($id = null)
     {
         $envelopamento = $this->Envelopamento->get($id, [
@@ -53,9 +44,9 @@ class EnvelopamentoController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $envelopamento = $this->Envelopamento->get($id);
         if ($this->Envelopamento->delete($envelopamento)) {
-            $this->Flash->success(__('The envelopamento has been deleted.'));
+            $this->Flash->success(__('Registro excluído com sucesso!'));
         } else {
-            $this->Flash->error(__('The envelopamento could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -78,7 +69,8 @@ class EnvelopamentoController extends AppController
                 $this->novaTriagem($registroEnvelopamento);
             }
     
-            $this->Flash->success('Registros atualizados com sucesso.');
+            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
+
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -97,5 +89,20 @@ class EnvelopamentoController extends AppController
 
         $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);
         $triagemTable->save($triagem); 
+    }
+
+    // TELA DE SERVIÇOS ENVELOPADOS
+    public function servicosEnvelopados()
+    {
+        $this->paginate = [
+            'limit' => 20,
+            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'conditions' => ['Envelopamento.status_atividade_id' => 6],
+            'order' => ['data_envelopamento' => 'desc']
+        ];
+        
+        $envelopamento = $this->paginate($this->Envelopamento);
+
+        $this->set(compact('envelopamento'));
     }
 }

@@ -49,6 +49,8 @@ class AtividadeController extends AppController
             for ($i = 0; $i < count($servico_ids); $i++) {
                 $atividade = $this->Atividade->newEmptyEntity();
 
+
+
                 $nova_atividade = [
                     'job' => $jobs[$i],
                     'data_atividade' => date('Y-m-d H:i:s'),
@@ -70,11 +72,11 @@ class AtividadeController extends AppController
             }
 
             if ($this->Atividade->saveMany($atividades)) {
-                $this->Flash->success(__('Atividade cadastrada com sucesso!'));
+                $this->Flash->success(__('Atividade(s) cadastrada(s) com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Falha ao cadastrar atividade. Tente novamente.'));
+            $this->Flash->error(__('Falha ao cadastrar atividade(s). Tente novamente.'));
         }
 
         $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
@@ -156,7 +158,7 @@ class AtividadeController extends AppController
                 $this->salvaOutraTabela($dados['impresso'][$i], $registroAtividade);               
             }
     
-            $this->Flash->success('Atividade lançada com sucesso!');
+            $this->Flash->success('Atividade(s) lançada(s) com sucesso!');
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -190,6 +192,6 @@ class AtividadeController extends AppController
 
             $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);
             $triagemTable->save($triagem);
-        } 
+        }
     }
 }
