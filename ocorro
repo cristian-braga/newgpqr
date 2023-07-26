@@ -1,0 +1,333 @@
+[33mcommit c4a28c70bebafb76b0fd713931031091bc2567c6[m[33m ([m[1;36mHEAD -> [m[1;32mgpqr-laura[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: f24604e 8e6396b
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Thu Jul 20 18:13:36 2023 -0300
+
+    Merge pull request #22 from ricardodev10/newgpqr-ricardo
+    
+    Newgpqr ricardo
+
+[33mcommit 8e6396b7af38d3de015c84bb0085f9fc6c1da764[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Thu Jul 20 18:12:43 2023 -0300
+
+    :sparkles: feat: add nova navbar
+
+[33mcommit 2d47ba3adb1ffed1e1aa6bf79a7f60db41ca7d98[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Thu Jul 20 18:11:34 2023 -0300
+
+    :bug: fix: corrigido botao nao aparecer confirm
+
+[33mcommit f24604e43e1b4dd9b872c46a73d09ba3913c9843[m
+Merge: 689f2e5 e1db65c
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Thu Jul 20 14:20:33 2023 -0300
+
+    Merge pull request #21 from cristian-braga/newgpqr-cristian
+    
+    Layout form
+
+[33mcommit e1db65caf6f75e1cd2ce6113108adb19a6374bd6[m[33m ([m[1;31morigin/newgpqr-cristian[m[33m)[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Thu Jul 20 14:19:55 2023 -0300
+
+    Layout form
+
+[33mcommit 689f2e537ac0a7570d15f68c7270b15e16d6215a[m
+Merge: 0bcba8a 5571ab3
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Thu Jul 20 04:09:33 2023 -0300
+
+    Merge pull request #20 from cristian-braga/revert-18-newgpqr-cristian
+    
+    Revert "Criação das pastas Admin"
+
+[33mcommit 5571ab378dec9ade2aeccccaf3b648913992a34e[m[33m ([m[1;31morigin/revert-18-newgpqr-cristian[m[33m)[m
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Thu Jul 20 04:08:40 2023 -0300
+
+    Revert "Criação das pastas Admin"
+
+[33mcommit 0bcba8ab1cad3c63d27f243c6d620a250b296326[m
+Merge: f1bb394 b64bc62
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Wed Jul 19 19:02:39 2023 -0300
+
+    Merge pull request #19 from ricardodev10/newgpqr-ricardo
+    
+    Newgpqr ricardo
+
+[33mcommit b64bc627e0b6afd757c0a20d96d6ec4ae6cab1a3[m
+Merge: bc5d0a6 f1bb394
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Wed Jul 19 19:01:48 2023 -0300
+
+    Merge remote-tracking branch 'newgpqr/main' into newgpqr-ricardo
+
+[33mcommit bc5d0a6485f9adac12ad69b643992e85a10fae17[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Wed Jul 19 18:54:59 2023 -0300
+
+    :lipstick: style: alteração na estilização
+
+[33mcommit 2d590e8339da11d71874655e0fbde88f6ad5865f[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Wed Jul 19 18:54:23 2023 -0300
+
+    :sparkles: add element footer
+
+[33mcommit ad83b1bfe8a245c5b0d00227d9ec86c7f270b633[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Wed Jul 19 18:53:44 2023 -0300
+
+    :sparkles: add element pagination
+
+[33mcommit f1bb3946f910dfda4d79c43a1a0772a135b58b87[m
+Merge: e4f7306 3678c85
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Wed Jul 19 18:24:58 2023 -0300
+
+    Merge pull request #18 from cristian-braga/newgpqr-cristian
+    
+    Criação das pastas Admin
+
+[33mcommit 3678c858d514d43fdaf351b8a2f99641cf479e1f[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Wed Jul 19 18:24:02 2023 -0300
+
+    Criação das pastas Admin
+
+[33mcommit e4f73069d143f0b60a36f1f007ff2138cb707b71[m
+Merge: e1f3d21 c30c348
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Wed Jul 19 13:02:05 2023 -0300
+
+    Merge pull request #17 from cristian-braga/newgpqr-cristian
+    
+    Atualização controllers principais
+
+[33mcommit c30c34854ebefef03f871cb81908aee9eae4c28d[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Wed Jul 19 13:01:21 2023 -0300
+
+    Atualização controllers principais
+
+[33mcommit e1f3d21b88e5de7830054b218900b84eeb129e9c[m
+Merge: 6f7015c e2eba17
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Tue Jul 18 18:57:52 2023 -0300
+
+    Merge pull request #16 from ricardodev10/newgpqr-ricardo
+    
+    Newgpqr ricardo
+
+[33mcommit e2eba17e8716d28bac107a58d033b5e0d1e9f7f1[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Tue Jul 18 18:56:34 2023 -0300
+
+    :lipstick: estilizando com bootstrap e add estilos padronizados gpqr
+
+[33mcommit 4c6087d12e7f7ef118f2225d221e6144a579dd4e[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Tue Jul 18 18:54:02 2023 -0300
+
+    :lipstick: add bootstrap
+
+[33mcommit a973f13e553527cd442819b6939f9154368aa98a[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Tue Jul 18 18:53:21 2023 -0300
+
+    :lipstick: removendo framework css do cake
+
+[33mcommit 6f7015c0e8b08a7cfea7feb439972640122e21bd[m
+Merge: 5d5ef5a 41e8aea
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Tue Jul 18 13:31:14 2023 -0300
+
+    Merge pull request #15 from cristian-braga/newgpqr-cristian
+    
+    Atualização das controllers principais
+
+[33mcommit 41e8aeac6475544a56efbc8eca4fb0ad337e35f1[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Tue Jul 18 13:29:53 2023 -0300
+
+    Atualização das controllers principais
+
+[33mcommit 5d5ef5a653fbc499fdd05fd266259ba72f3ff25b[m
+Merge: 44b6bb8 76be000
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Mon Jul 17 16:05:47 2023 -0300
+
+    Merge pull request #14 from ricardodev10/newgpqr-ricardo
+    
+    :sparkles: add menu
+
+[33mcommit 76be0000348c23c9293e7091aa0a44c8055c39dc[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Mon Jul 17 16:04:03 2023 -0300
+
+    :sparkles: add menu
+
+[33mcommit 44b6bb8e80f597ff325e53e3b7460b658b57b015[m
+Merge: 1a87ff5 571a38b
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Mon Jul 17 14:03:52 2023 -0300
+
+    Merge pull request #13 from cristian-braga/newgpqr-cristian
+    
+    Atualizando as controllers principais
+
+[33mcommit 571a38bdbf45e9387fc9149c7b23553d79e00144[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Mon Jul 17 14:02:56 2023 -0300
+
+    Atualizando as controllers principais
+
+[33mcommit 1a87ff50283b51099fbb311ec28b0e373ea52f07[m[33m ([m[1;32mgpqr-giovanni[m[33m)[m
+Merge: 7ffe590 aa128de
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Fri Jul 14 14:52:34 2023 -0300
+
+    Merge pull request #12 from ricardodev10/newgpqr-ricardo
+    
+    :lipstick: ajustando campos na index atividade
+
+[33mcommit aa128de5ec4ce3e2ba4e8193efc941e7f03006cd[m
+Merge: 99d8c1b 7ffe590
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Fri Jul 14 14:52:27 2023 -0300
+
+    Merge branch 'main' into newgpqr-ricardo
+
+[33mcommit 7ffe59046d5162478272ff0344f1ffffc402d3bb[m
+Merge: 6af17ee ac1ccfd
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Fri Jul 14 14:50:01 2023 -0300
+
+    Merge pull request #11 from cristian-braga/newgpqr-cristian
+    
+    Brigando com a AtividadeController
+
+[33mcommit 99d8c1bd8d4326574ccc3110df002434af9fd4af[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Fri Jul 14 14:49:17 2023 -0300
+
+    :lipstick: ajustando campos na index atividade
+
+[33mcommit ac1ccfd96d215bf874812f93b6160778dcb21a95[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Fri Jul 14 14:49:01 2023 -0300
+
+    Brigando com a AtividadeController
+
+[33mcommit 6af17ee255e67b6d4dbfc5fc3dd86f6898cc6ac7[m
+Merge: 66c5b63 9a402eb
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Thu Jul 13 19:18:24 2023 -0300
+
+    Merge pull request #10 from cristian-braga/newgpqr-cristian
+    
+    Remossão do jQuery do projeto
+
+[33mcommit 9a402eb3e207708e0eb79ba5b13a2dfa44db8c89[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Thu Jul 13 19:14:57 2023 -0300
+
+    Remossão do jQuery do projeto
+
+[33mcommit 66c5b6305ba4e4dfbaf664acdc9304a39596b02d[m
+Merge: e87c9aa ecc7086
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Thu Jul 13 18:54:06 2023 -0300
+
+    Merge pull request #9 from cristian-braga/newgpqr-cristian
+    
+    Desenvolvendo AtividadeController
+
+[33mcommit ecc708613ae164cabbbbfd5efe094b8fd437feb1[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Thu Jul 13 18:52:10 2023 -0300
+
+    Desenvolvendo AtividadeController
+
+[33mcommit e87c9aa0b90d1492a9547a1a20cf0f7e4276149a[m
+Merge: d705288 d464cd7
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Thu Jul 13 16:28:16 2023 -0300
+
+    Merge pull request #8 from ricardodev10/newgpqr-ricardo
+    
+    Newgpqr ricardo
+
+[33mcommit d464cd7acd68a3eeebe0d83f96bc04abb27e3e5e[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Thu Jul 13 16:27:18 2023 -0300
+
+    :lipstick: add sidebar footer fontawesome e alteracoes no layout default
+
+[33mcommit d7052880ffae8494fd633c3e3fe22abe4d42807d[m
+Merge: 2299c9e 2dbf9e0
+Author: Cristian Braga <110575039+cristian-braga@users.noreply.github.com>
+Date:   Thu Jul 13 16:14:45 2023 -0300
+
+    Merge pull request #7 from cristian-braga/newgpqr-cristian
+    
+    Newgpqr cristian
+
+[33mcommit 2dbf9e06b99a431fb208698917284f630139a07d[m
+Merge: 17c2d71 2299c9e
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Thu Jul 13 16:13:20 2023 -0300
+
+    Merge branch 'newgpqr-cristian' of https://github.com/cristian-braga/newgpqr into newgpqr-cristian
+
+[33mcommit 17c2d714cfe9a80a7bb3f8e1b218ed8605ad0cdc[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Thu Jul 13 16:00:19 2023 -0300
+
+    :sparkles: alterações na controller atividade
+
+[33mcommit 5cd4741fa7201d5b300b44ebef1e216fe13d33f4[m
+Merge: ba0c5ee 2299c9e
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Thu Jul 13 13:17:04 2023 -0300
+
+    Merge remote-tracking branch 'newgpqr/main' into newgpqr-ricardo
+
+[33mcommit 2299c9e76bca8366cf295668984366fb48ad7bc9[m
+Author: Laura Costa <99484087+lauradsc@users.noreply.github.com>
+Date:   Thu Jul 13 08:41:04 2023 -0300
+
+    Update de URL de git clone no README.md
+
+[33mcommit ba0c5eed86e6190a4f0382cb9f34a7fb8ec5b5e2[m
+Merge: e5e04dd 64d69f2
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Wed Jul 12 15:51:10 2023 -0300
+
+    Merge pull request #1 from cristian-braga/main
+    
+    :books: atualização readme
+
+[33mcommit 64d69f28bf2962fc2be652ec4fa2665fcb04ba51[m[33m ([m[1;32mmain[m[33m)[m
+Merge: e5e04dd 9184c8d
+Author: Ricardo Junior <ricardodev10@yahoo.com>
+Date:   Wed Jul 12 15:37:40 2023 -0300
+
+    Merge pull request #6 from ricardodev10/newgpqr-ricardo
+    
+    :books: atualização readme
+
+[33mcommit 9184c8df1edd19c648caa1e5ebd4ec0798f08180[m
+Author: ricardodev10 <ricardodev10@yahoo.com>
+Date:   Wed Jul 12 15:35:48 2023 -0300
+
+    :books: atualização readme
+
+[33mcommit e5e04dd9a5e6093e7b12ef3d8cdacd3caa3bd3c6[m
+Author: Cristian Braga <crisllopes10@hotmail.com>
+Date:   Wed Jul 12 14:37:56 2023 -0300
+
+    :tada: initial commit
