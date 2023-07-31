@@ -1,41 +1,38 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Impressao $impressao
- * @var string[]|\Cake\Collection\CollectionInterface $atividade
- * @var string[]|\Cake\Collection\CollectionInterface $servico
- * @var string[]|\Cake\Collection\CollectionInterface $statusAtividade
- * @var string[]|\Cake\Collection\CollectionInterface $impressora
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $impressao->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $impressao->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Impressao'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<h3 class="text-center mt-2 mb-4">EDITAR IMPRESSÃO</h3>
+<?= $this->Form->create($impressao, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Serviço</label>
+            <?= $this->Form->control('servico_id', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'value' => $impressao->atividade->servico->nome_servico, 'required', 'label' => false]) ?>
+            <input type="text" value="<?= $impressao->atividade->servico->nome_servico ?>">
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="impressao form content">
-            <?= $this->Form->create($impressao) ?>
-            <fieldset>
-                <legend><?= __('Edit Impressao') ?></legend>
-                <?php
-                    echo $this->Form->control('funcionario');
-                    echo $this->Form->control('data_impressao', ['empty' => true]);
-                    echo $this->Form->control('atividade_id', ['options' => $atividade]);
-                    echo $this->Form->control('servico_id', ['options' => $servico]);
-                    echo $this->Form->control('status_atividade_id', ['options' => $statusAtividade]);
-                    echo $this->Form->control('impressora_id', ['options' => $impressora]);
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="col-md-6">
+            <label class="form-label">Cadastro</label>
+            <?= $this->Form->control('data_cadastro', ['type' => 'date', 'class' => 'form-control', 'value' => $impressao->atividade->data_cadastro, 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Remessa/OCR</label>
+            <?= $this->Form->control('remessa_atividade', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 11, 'value' => $impressao->atividade->remessa_atividade, 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Job</label>
+            <?= $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'value' => $impressao->atividade->job, 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Documentos</label>
+            <?= $this->Form->control('quantidade_documentos', ['type' => 'number', 'class' => 'form-control', 'value' => $impressao->atividade->quantidade_documentos, 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Postagem</label>
+            <?= $this->Form->control('data_postagem', ['type' => 'date', 'class' => 'form-control', 'value' => $impressao->atividade->data_postagem, 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Recibo(s) Postagem</label>
+            <?= $this->Form->select('recibo_postagem', [0, 1, 2, 3], ['class' => 'form-select', 'empty' => '-- Selecione --', 'value' => $impressao->atividade->recibo_postagem, 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-12 mt-5">
+            <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+            <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
-</div>
+<?= $this->Form->end() ?>

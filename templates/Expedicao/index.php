@@ -22,7 +22,7 @@
                 <?php foreach ($expedicao as $expedicao) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $expedicao->id ?>"></td>
-                        <td><?= $this->Html->link($expedicao->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $expedicao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($expedicao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $expedicao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($expedicao->atividade->data_cadastro) ?></td>
                         <td><?= h($expedicao->atividade->remessa_atividade) ?></td>
                         <td><?= h($expedicao->atividade->job) ?></td>
@@ -32,7 +32,7 @@
                         <td><?= h($expedicao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $expedicao->servico->nome_servico)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $expedicao->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

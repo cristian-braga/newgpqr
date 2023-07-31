@@ -15,7 +15,7 @@
             <tbody class="align-middle">
                 <?php foreach ($servicos as $servico) : ?>
                     <tr>
-                        <td><?= h($servico->servico->nome_servico) ?></td>
+                        <td><?= h($servico->atividade->servico->nome_servico) ?></td>
                         <td><?= h($servico->atividade->data_postagem) ?></td>
                         <td><?= h($servico->atividade->remessa_atividade) ?></td>
                         <td><?= $this->Number->format($servico->atividade->quantidade_documentos) ?></td>

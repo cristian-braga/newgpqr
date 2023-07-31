@@ -1,49 +1,53 @@
 <div class="conteudo view">
     <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($atividade->servico->nome_servico) ?></h3>
-    <table class="table table-borderless table-striped mb-5">
+    <table class="table table-borderless table-striped mb-4">
         <tr>
-            <th><?= __('Cadastro Atividade') ?></th>
-            <td><?= h($atividade->data_atividade) ?></td>
+            <th><?= __('Data de cadastro:') ?></th>
+            <td><?= h($atividade->data_cadastro) ?></td>
         </tr>
         <tr>
-            <th><?= __('Responsável') ?></th>
+            <th><?= __('Responsável:') ?></th>
             <td><?= h($atividade->funcionario) ?></td>
         </tr>
         <tr>
-            <th><?= __('Remessa/OCR') ?></th>
+            <th><?= __('Remessa/OCR:') ?></th>
             <td><?= h($atividade->remessa_atividade) ?></td>
         </tr>
         <tr>
-            <th><?= __('Job') ?></th>
+            <th><?= __('Job:') ?></th>
             <td><?= h($atividade->job) ?></td>
         </tr>
         <tr>
-            <th><?= __('Quantidade de documentos') ?></th>
+            <th><?= __('Quantidade de documentos:') ?></th>
             <td><?= $this->Number->format($atividade->quantidade_documentos) ?></td>
         </tr>
         <tr>
-            <th><?= __('Data de postagem') ?></th>
+            <th><?= __('Data de postagem:') ?></th>
             <td><?= h($atividade->data_postagem) ?></td>
         </tr>
         <tr>
-            <th><?= __('Recibo(s)') ?></th>
+            <th><?= __('Recibo(s) de postagem:') ?></th>
             <td><?= h($atividade->recibo_postagem) ?></td>
         </tr>
         <tr>
-            <th><?= __('Status Atividade') ?></th>
+            <th><?= __('Status atual:') ?></th>
             <td><?= h($atividade->status_atividade->status_atual) ?></td>
         </tr>
         <tr>
-            <th><?= __('Folhas de Rosto') ?></th>
+            <th><?= __('Folhas de rosto:') ?></th>
             <td><?= $this->Number->format($atividade->servico->folha_rosto) ?></td>
         </tr>
         <tr>
-            <th><?= __('Quantidade de folhas') ?></th>
+            <th><?= __('Quantidade de folhas:') ?></th>
             <td><?= $this->Number->format($atividade->quantidade_folhas) ?></td>
         </tr>
         <tr>
-            <th><?= __('Quantidade de paginas') ?></th>
+            <th><?= __('Quantidade de paginas:') ?></th>
             <td><?= $this->Number->format($atividade->quantidade_paginas) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Cadastro Atividade:') ?></th>
+            <td><?= h($atividade->data_atividade) ?></td>
         </tr>
     </table>
 </div>

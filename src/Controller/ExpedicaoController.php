@@ -9,7 +9,10 @@ class ExpedicaoController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Expedicao.status_atividade_id' => 9],
             'order' => ['data_cadastro' => 'desc']
         ];
@@ -34,7 +37,7 @@ class ExpedicaoController extends AppController
             $this->Flash->error(__('The expedicao could not be saved. Please, try again.'));
         }
         $atividade = $this->Expedicao->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Expedicao->Servico->find('list', ['limit' => 200])->all();
+        $servico = $this->Expedicao->Atividade->Servico->find('list', ['limit' => 200])->all();
         $statusAtividade = $this->Expedicao->StatusAtividade->find('list', ['limit' => 200])->all();
         $this->set(compact('expedicao', 'atividade', 'servico', 'statusAtividade'));
     }
@@ -59,7 +62,10 @@ class ExpedicaoController extends AppController
             $servicos = [];
     
             foreach ($selecionados as $id) {
-                $query = $this->Expedicao->get($id, ['contain' => ['Atividade', 'Servico']]);
+                $query = $this->Expedicao->get($id, [
+                    'contain' => ['Atividade' => ['Servico']]
+                ]);
+
                 $servicos[] = $query;
             }
         }
@@ -113,11 +119,15 @@ class ExpedicaoController extends AppController
         }
     }
 
+    // TELA DE SERVIÇOS EXPEDIDOS
     public function servicosExpedidos()
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Expedicao.status_atividade_id' => 10],
             'order' => ['data_expedicao' => 'desc']
         ];

@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
+                    <th>Serviço</th>
                     <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
                     <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
                     <th><?= $this->Paginator->sort('job') ?></th>
@@ -22,7 +22,7 @@
                 <?php foreach ($impressao as $impressao) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
-                        <td><?= $this->Html->link($impressao->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($impressao->atividade->data_cadastro) ?></td>
                         <td><?= h($impressao->atividade->remessa_atividade) ?></td>
                         <td><?= h($impressao->atividade->job) ?></td>
@@ -32,7 +32,7 @@
                         <td><?= h($impressao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->servico->nome_servico)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

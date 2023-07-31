@@ -22,7 +22,7 @@
                 <?php foreach ($envelopamento as $envelopamento) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $envelopamento->id ?>" class="btn-shadow"></td>
-                        <td><?= $this->Html->link($envelopamento->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $envelopamento->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($envelopamento->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $envelopamento->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($envelopamento->atividade->data_cadastro) ?></td>
                         <td><?= h($envelopamento->atividade->remessa_atividade) ?></td>
                         <td><?= h($envelopamento->atividade->job) ?></td>
@@ -32,7 +32,7 @@
                         <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $envelopamento->id)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $envelopamento->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

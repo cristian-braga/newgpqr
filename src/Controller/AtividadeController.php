@@ -49,6 +49,8 @@ class AtividadeController extends AppController
             for ($i = 0; $i < count($servico_ids); $i++) {
                 $atividade = $this->Atividade->newEmptyEntity();
 
+                $folhas_paginas = $this->calculaFolhasPaginas($servico_ids[$i], intval($documentos[$i]));
+
                 $nova_atividade = [
                     'job' => $jobs[$i],
                     'data_atividade' => date('Y-m-d H:i:s'),
@@ -57,8 +59,8 @@ class AtividadeController extends AppController
                     'funcionario' => 'Cristian',
                     'remessa_atividade' => $remessas[$i],
                     'quantidade_documentos' => $documentos[$i],
-                    'quantidade_folhas' => 50,
-                    'quantidade_paginas' => 50,
+                    'quantidade_folhas' => $folhas_paginas['folhas'],
+                    'quantidade_paginas' => $folhas_paginas['paginas'],
                     'recibo_postagem' => $recibos[$i],
                     'servico_id' => $servico_ids[$i],
                     'status_atividade_id' => 1
@@ -77,10 +79,13 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao cadastrar atividade(s). Tente novamente.'));
         }
 
-        $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
-        $statusAtividade = $this->Atividade->StatusAtividade->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])->all();
+        $servico = $this->Atividade->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->where(['ativo' => 'Sim'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
 
-        $this->set(compact('atividade', 'servico', 'statusAtividade'));
+        $this->set(compact('atividade', 'servico'));
     }
 
     public function edit($id = null)
@@ -90,7 +95,14 @@ class AtividadeController extends AppController
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $atividade = $this->Atividade->patchEntity($atividade, $this->request->getData());
+            $dados = $this->request->getData();
+
+            $folhas_paginas = $this->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+
+            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
+            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
+
+            $atividade = $this->Atividade->patchEntity($atividade, $dados);
             if ($this->Atividade->save($atividade)) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
@@ -99,10 +111,13 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $this->Atividade->Servico->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])->all();
-        $statusAtividade = $this->Atividade->StatusAtividade->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])->all();
+        $servico = $this->Atividade->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->where(['ativo' => 'Sim'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
 
-        $this->set(compact('atividade', 'servico', 'statusAtividade'));
+        $this->set(compact('atividade', 'servico'));
     }
 
     public function delete($id = null)
@@ -118,12 +133,45 @@ class AtividadeController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function calculaFolhas($documentos) {
+    public function calculaFolhasPaginas($servico_id, $documentos) {
+        $servico = $this->Atividade->Servico->get($servico_id);
+        $tipo_env = $servico->envelopamento_servico;
 
-    }
+        switch ($tipo_env) {
+            case 'A4':
+            case 'Sem Envelopamento':
+            case 'Sem Envelopamento FV':
+                $folhas = $documentos;
+                $paginas = $folhas * 2;
+                break;
+            case 'CD':
+            case 'Encadernação':
+                $folhas = 0;
+                $paginas = 0;
+                break;
+            case 'A5':
+                if ($documentos % 2 == 1) {
+                    $folhas = ($documentos + 1) / 2;
+                } else {
+                    $folhas = $documentos / 2;
+                }
+                $paginas = $folhas * 2;
+                break;
+            case 'Etiqueta':
+                $folhas = ceil($documentos / 21);
+                $paginas = $folhas;
+                break;
+            case 'Sem Envelopamento F':
+                $folhas = $documentos;
+                $paginas = $folhas;
+        }
 
-    public function calculaPaginas($folhas) {
-        
+        $folhas_paginas = [];
+
+        $folhas_paginas['folhas'] = $folhas;
+        $folhas_paginas['paginas'] = $paginas;
+
+        return $folhas_paginas;
     }
 
     public function confirmaAtividade()
@@ -170,7 +218,6 @@ class AtividadeController extends AppController
             $nova_impressao = [
                 'funcionario' => 'Cristian',
                 'atividade_id' => $registroAtividade->id,
-                'servico_id' => $registroAtividade->servico_id,
                 'status_atividade_id' => 3,
                 'impressora_id' => 5
             ];
@@ -184,7 +231,6 @@ class AtividadeController extends AppController
             $nova_triagem = [
                 'funcionario' => 'Cristian',
                 'atividade_id' => $registroAtividade->id,
-                'servico_id' => $registroAtividade->servico_id,
                 'status_atividade_id' => 7
             ];
 

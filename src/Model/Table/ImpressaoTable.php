@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Impressao Model
  *
  * @property \App\Model\Table\AtividadeTable&\Cake\ORM\Association\BelongsTo $Atividade
- * @property \App\Model\Table\ServicoTable&\Cake\ORM\Association\BelongsTo $Servico
  * @property \App\Model\Table\StatusAtividadeTable&\Cake\ORM\Association\BelongsTo $StatusAtividade
  * @property \App\Model\Table\ImpressoraTable&\Cake\ORM\Association\BelongsTo $Impressora
  *
@@ -50,10 +49,6 @@ class ImpressaoTable extends Table
             'foreignKey' => 'atividade_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Servico', [
-            'foreignKey' => 'servico_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('StatusAtividade', [
             'foreignKey' => 'status_atividade_id',
             'joinType' => 'INNER',
@@ -87,10 +82,6 @@ class ImpressaoTable extends Table
             ->notEmptyString('atividade_id');
 
         $validator
-            ->integer('servico_id')
-            ->notEmptyString('servico_id');
-
-        $validator
             ->integer('status_atividade_id')
             ->notEmptyString('status_atividade_id');
 
@@ -111,7 +102,6 @@ class ImpressaoTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('atividade_id', 'Atividade'), ['errorField' => 'atividade_id']);
-        $rules->add($rules->existsIn('servico_id', 'Servico'), ['errorField' => 'servico_id']);
         $rules->add($rules->existsIn('status_atividade_id', 'StatusAtividade'), ['errorField' => 'status_atividade_id']);
         $rules->add($rules->existsIn('impressora_id', 'Impressora'), ['errorField' => 'impressora_id']);
 
