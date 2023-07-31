@@ -81,11 +81,6 @@ class ExpedicaoTable extends Table
             ->allowEmptyString('capas');
 
         $validator
-            ->scalar('ocorrencia')
-            ->maxLength('ocorrencia', 15)
-            ->allowEmptyString('ocorrencia');
-
-        $validator
             ->scalar('solicitante')
             ->maxLength('solicitante', 45)
             ->allowEmptyString('solicitante');

@@ -6,29 +6,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Expedicao Entity
+ * Conferencia Entity
  *
  * @property int $id
  * @property string $funcionario
- * @property \Cake\I18n\FrozenTime|null $data_lancamento
- * @property \Cake\I18n\FrozenDate|null $data_expedicao
- * @property int|null $capas
- * @property string|null $ocorrencia
- * @property string|null $solicitante
- * @property string|null $responsavel_remessa
- * @property string|null $responsavel_expedicao
- * @property string|null $responsavel_coleta
- * @property string|null $observacao
- * @property \Cake\I18n\Time|null $hora
+ * @property \Cake\I18n\FrozenTime|null $data_conferencia
  * @property int $atividade_id
- * @property int $servico_id
  * @property int $status_atividade_id
  *
  * @property \App\Model\Entity\Atividade $atividade
- * @property \App\Model\Entity\Servico $servico
  * @property \App\Model\Entity\StatusAtividade $status_atividade
  */
-class Expedicao extends Entity
+class Conferencia extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -41,15 +30,7 @@ class Expedicao extends Entity
      */
     protected $_accessible = [
         'funcionario' => true,
-        'data_lancamento' => true,
-        'data_expedicao' => true,
-        'capas' => true,
-        'solicitante' => true,
-        'responsavel_remessa' => true,
-        'responsavel_expedicao' => true,
-        'responsavel_coleta' => true,
-        'observacao' => true,
-        'hora' => true,
+        'data_conferencia' => true,
         'atividade_id' => true,
         'status_atividade_id' => true,
         'atividade' => true,

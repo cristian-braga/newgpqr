@@ -89,7 +89,7 @@ class ExpedicaoController extends AppController
             $expedicoes = [];
 
             for ($i = 0; $i < count($expedicao_ids); $i++) {
-                $expedicao = $this->Expedicao->get($expedicao_ids[$i], ['contain' => ['Atividade']]);
+                $expedicao = $this->Expedicao->get($expedicao_ids[$i]);
 
                 $dados_expedicao = [
                     'capas' => $capas[$i],
@@ -98,7 +98,6 @@ class ExpedicaoController extends AppController
                     'data_expedicao' => $datas_expedicoes[$i],
                     'hora' => $horas[$i],
                     'responsavel_coleta' => $responsaveis_coletas[$i],
-                    'ocorrencia' => $expedicao->atividade->remessa_atividade,
                     'data_lancamento' => date('Y-m-d H:i:s'),
                     'responsavel_expedicao' => 'CristianExp',
                     'funcionario' => 'CristianExp',
@@ -128,7 +127,9 @@ class ExpedicaoController extends AppController
                 'Atividade' => ['Servico'],
                 'StatusAtividade'
             ],
-            'conditions' => ['Expedicao.status_atividade_id' => 10],
+            'conditions' => [
+                'Expedicao.status_atividade_id IN' => [10, 12]
+            ],
             'order' => ['data_expedicao' => 'desc']
         ];
         
