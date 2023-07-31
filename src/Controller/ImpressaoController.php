@@ -9,7 +9,10 @@ class ImpressaoController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Impressao.status_atividade_id' => 3],
             'sortableFields' => ['Atividade.data_cadastro'],
             'order' => ['Atividade.data_cadastro' => 'desc']
@@ -28,22 +31,36 @@ class ImpressaoController extends AppController
     public function edit($id = null)
     {
         $impressao = $this->Impressao->get($id, [
-            'contain' => [],
+            'contain' => ['Atividade' => ['Servico']],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $impressao = $this->Impressao->patchEntity($impressao, $this->request->getData());
-            if ($this->Impressao->save($impressao)) {
-                $this->Flash->success(__('The impressao has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $atividade = $this->Atividade->patchEntity($impressao, $this->request->getData('Atividade'));
+
+            if ($this->Atividade->save($atividade)) {
+                $impressao = $this->Impressao->patchEntity($impressao, $this->request->getData());
+
+                if ($this->Impressao->save($impressao)) {
+                    $this->Flash->success(__('The impressao has been saved.'));
+    
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The impressao could not be saved. Please, try again.'));
+                }
+            } else {
+                $this->Flash->error(__('The impressao could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The impressao could not be saved. Please, try again.'));
         }
-        $atividade = $this->Impressao->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Impressao->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Impressao->StatusAtividade->find('list', ['limit' => 200])->all();
-        $impressora = $this->Impressao->Impressora->find('list', ['limit' => 200])->all();
-        $this->set(compact('impressao', 'atividade', 'servico', 'statusAtividade', 'impressora'));
+
+        $servico = $this->Impressao->Atividade->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->where(['ativo' => 'Sim'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
+
+        $impressora = $this->Impressao->Impressora->find('list', ['keyField' => 'id', 'valueField' => 'nome_impressora'])->all();
+
+        $this->set(compact('impressao', 'servico', 'impressora'));
     }
 
     public function delete($id = null)
@@ -66,7 +83,10 @@ class ImpressaoController extends AppController
             $servicos = [];
     
             foreach ($selecionados as $id) {
-                $query = $this->Impressao->get($id, ['contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora']]);
+                $query = $this->Impressao->get($id, [
+                    'contain' => ['Atividade' => ['Servico'], 'StatusAtividade', 'Impressora']
+                ]);
+
                 $servicos[] = $query;
             }
         }
@@ -106,7 +126,6 @@ class ImpressaoController extends AppController
         $novo_envelopamento = [
             'funcionario' => 'CristianImp',
             'atividade_id' => $registroImpressao->atividade_id,
-            'servico_id' => $registroImpressao->servico_id,
             'status_atividade_id' => 5
         ];
 
@@ -119,7 +138,11 @@ class ImpressaoController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade', 'Impressora'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade',
+                'Impressora'
+            ],
             'conditions' => ['Impressao.status_atividade_id' => 4],
             'order' => ['data_impressao' => 'desc']
         ];

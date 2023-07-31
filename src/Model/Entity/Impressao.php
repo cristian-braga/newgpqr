@@ -36,11 +36,9 @@ class Impressao extends Entity
         'funcionario' => true,
         'data_impressao' => true,
         'atividade_id' => true,
-        'servico_id' => true,
         'status_atividade_id' => true,
         'impressora_id' => true,
         'atividade' => true,
-        'servico' => true,
         'status_atividade' => true,
         'impressora' => true,
     ];

@@ -16,7 +16,7 @@
         <tbody class="align-middle">
             <?php foreach ($envelopamento as $envelopamento) : ?>
                 <tr>
-                    <td><?= $this->Html->link($envelopamento->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $envelopamento->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                    <td><?= $this->Html->link($envelopamento->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $envelopamento->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                     <td><?= h($envelopamento->data_envelopamento) ?></td>
                     <td><?= h($envelopamento->funcionario) ?></td>
                     <td><?= h($envelopamento->atividade->remessa_atividade) ?></td>
@@ -25,7 +25,7 @@
                     <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $envelopamento->servico->nome_servico)]) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $envelopamento->atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -9,7 +9,10 @@ class EnvelopamentoController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Envelopamento.status_atividade_id' => 5],
             'order' => ['data_cadastro' => 'desc']
         ];
@@ -83,7 +86,6 @@ class EnvelopamentoController extends AppController
         $nova_triagem = [
             'funcionario' => 'CristianEnv',
             'atividade_id' => $registroEnvelopamento->atividade_id,
-            'servico_id' => $registroEnvelopamento->servico_id,
             'status_atividade_id' => 7
         ];
 
@@ -96,7 +98,10 @@ class EnvelopamentoController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Envelopamento.status_atividade_id' => 6],
             'order' => ['data_envelopamento' => 'desc']
         ];

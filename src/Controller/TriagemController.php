@@ -9,7 +9,10 @@ class TriagemController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Triagem.status_atividade_id' => 7],
             'order' => ['data_cadastro' => 'desc']
         ];
@@ -82,7 +85,6 @@ class TriagemController extends AppController
         $nova_expedicao = [
             'funcionario' => 'CristianTri',
             'atividade_id' => $registroTriagem->atividade_id,
-            'servico_id' => $registroTriagem->servico_id,
             'status_atividade_id' => 9
         ];
 
@@ -95,7 +97,10 @@ class TriagemController extends AppController
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => ['Atividade', 'Servico', 'StatusAtividade'],
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
             'conditions' => ['Triagem.status_atividade_id' => 8],
             'order' => ['data_triagem' => 'desc']
         ];

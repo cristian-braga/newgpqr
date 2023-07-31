@@ -24,6 +24,7 @@ use Cake\ORM\Entity;
  * @property string|null $descricao_sistema_servico
  * @property string|null $valor_servico
  * @property int|null $folha_rosto
+ * @property string|null $ativo
  *
  * @property \App\Model\Entity\Atividade[] $atividade
  * @property \App\Model\Entity\Digitalizacao[] $digitalizacao
@@ -59,6 +60,7 @@ class Servico extends Entity
         'descricao_sistema_servico' => true,
         'valor_servico' => true,
         'folha_rosto' => true,
+        'ativo' => true,
         'atividade' => true,
         'digitalizacao' => true,
         'envelopamento' => true,

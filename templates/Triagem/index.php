@@ -22,7 +22,7 @@
                 <?php foreach ($triagem as $triagem) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $triagem->id ?>"></td>
-                        <td><?= $this->Html->link($triagem->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $triagem->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($triagem->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $triagem->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($triagem->atividade->data_cadastro) ?></td>
                         <td><?= h($triagem->atividade->remessa_atividade) ?></td>
                         <td><?= h($triagem->atividade->job) ?></td>
@@ -32,7 +32,7 @@
                         <td><?= h($triagem->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $triagem->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $triagem->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $triagem->id)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $triagem->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $triagem->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

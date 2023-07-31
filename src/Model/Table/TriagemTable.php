@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Triagem Model
  *
  * @property \App\Model\Table\AtividadeTable&\Cake\ORM\Association\BelongsTo $Atividade
- * @property \App\Model\Table\ServicoTable&\Cake\ORM\Association\BelongsTo $Servico
  * @property \App\Model\Table\StatusAtividadeTable&\Cake\ORM\Association\BelongsTo $StatusAtividade
  *
  * @method \App\Model\Entity\Triagem newEmptyEntity()
@@ -49,10 +48,6 @@ class TriagemTable extends Table
             'foreignKey' => 'atividade_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Servico', [
-            'foreignKey' => 'servico_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('StatusAtividade', [
             'foreignKey' => 'status_atividade_id',
             'joinType' => 'INNER',
@@ -82,10 +77,6 @@ class TriagemTable extends Table
             ->notEmptyString('atividade_id');
 
         $validator
-            ->integer('servico_id')
-            ->notEmptyString('servico_id');
-
-        $validator
             ->integer('status_atividade_id')
             ->notEmptyString('status_atividade_id');
 
@@ -102,7 +93,6 @@ class TriagemTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('atividade_id', 'Atividade'), ['errorField' => 'atividade_id']);
-        $rules->add($rules->existsIn('servico_id', 'Servico'), ['errorField' => 'servico_id']);
         $rules->add($rules->existsIn('status_atividade_id', 'StatusAtividade'), ['errorField' => 'status_atividade_id']);
 
         return $rules;

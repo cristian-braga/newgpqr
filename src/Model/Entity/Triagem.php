@@ -34,10 +34,8 @@ class Triagem extends Entity
         'funcionario' => true,
         'data_triagem' => true,
         'atividade_id' => true,
-        'servico_id' => true,
         'status_atividade_id' => true,
         'atividade' => true,
-        'servico' => true,
         'status_atividade' => true,
     ];
 }
