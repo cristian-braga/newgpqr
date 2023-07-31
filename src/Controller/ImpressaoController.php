@@ -109,7 +109,7 @@ class ImpressaoController extends AppController
                 
                 $this->Impressao->save($registroImpressao);
 
-                $this->novoEnvelopamento($registroImpressao); 
+                $this->novaConferencia($registroImpressao); 
             }
     
             $this->Flash->success('Registro(s) lançado(s) com sucesso!');
@@ -118,19 +118,19 @@ class ImpressaoController extends AppController
         }
     }
 
-    public function novoEnvelopamento($registroImpressao)
+    public function novaConferencia($registroImpressao)
     {
-        $envelopamentoTable = $this->getTableLocator()->get('Envelopamento');
-        $envelopamento = $envelopamentoTable->newEmptyEntity();
+        $conferenciaTable = $this->getTableLocator()->get('Conferencia');
+        $conferencia = $conferenciaTable->newEmptyEntity();
 
-        $novo_envelopamento = [
+        $nova_conferencia = [
             'funcionario' => 'CristianImp',
             'atividade_id' => $registroImpressao->atividade_id,
-            'status_atividade_id' => 5
+            'status_atividade_id' => 13
         ];
 
-        $envelopamento = $envelopamentoTable->patchEntity($envelopamento, $novo_envelopamento);
-        $envelopamentoTable->save($envelopamento); 
+        $conferencia = $conferenciaTable->patchEntity($conferencia, $nova_conferencia);
+        $conferenciaTable->save($conferencia); 
     }
 
     // TELA DE SERVIÇOS IMPRESSOS

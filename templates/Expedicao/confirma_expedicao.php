@@ -1,28 +1,59 @@
-<div class="expedicao form content">
-    <?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'atualizaExpedicao']]) ?>
-    <legend><?= __('Lançar Expedição') ?></legend>
-    <?php foreach ($servicos as $servico): ?>
-        <fieldset>
-            <?php
-                echo $this->Form->control('expedicao_id', ['type' => 'hidden', 'name' => 'expedicao_id[]', 'value' => $servico->id]);
-                echo $this->Form->control('Serviço', ['value' => $servico->servico->nome_servico, 'disabled']);
-                echo $this->Form->control('quantidade_documentos', ['value' => $servico->atividade->quantidade_documentos, 'disabled']);
-                echo $this->Form->control('data_postagem', ['value' => $servico->atividade->data_postagem, 'disabled']);
-                echo $this->Form->control('remessa_atividade', ['type' => 'number', 'value' => $servico->atividade->remessa_atividade, 'disabled']);
-                echo $this->Form->control('capas', ['name' => 'capas[]', 'type' => 'number']);
-                echo $this->Form->control('solicitante', ['name' => 'solicitante[]']);
-                echo $this->Form->control('responsavel_remessa', ['name' => 'responsavel_remessa[]']);
-            ?>
-        </fieldset>
-        <hr>
+<h3 class="text-center mt-2 mb-4">LANÇAR EXPEDIÇÃO</h3>
+<?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'atualizaExpedicao'], 'class' => 'mx-auto p-3 form', 'style' => 'width: 80%']) ?>
+    <?php foreach ($servicos as $servico) : ?>
+        <div class="row g-3">
+            <?= $this->Form->control('expedicao_id', ['type' => 'hidden', 'name' => 'expedicao_id[]', 'value' => $servico->id]) ?>
+            <div class="col-md-3">
+                <label class="form-label">Serviço</label>
+                <?= $this->Form->control('servico_id', ['type' => 'text', 'class' => 'form-control', 'value' => $servico->atividade->servico->nome_servico, 'disabled', 'label' => false]) ?>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Remessa/OCR</label>
+                <?= $this->Form->control('remessa_atividade', ['class' => 'form-control', 'value' => $servico->atividade->remessa_atividade, 'disabled', 'label' => false]) ?>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Documentos</label>
+                <?= $this->Form->control('quantidade_documentos', ['class' => 'form-control', 'value' => $servico->atividade->quantidade_documentos, 'disabled', 'label' => false]) ?>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Postagem</label>
+                <?= $this->Form->control('data_postagem', ['class' => 'form-control', 'value' => $servico->atividade->data_postagem, 'disabled', 'label' => false]) ?>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Capas</label>
+                <?= $this->Form->control('capas[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'N° de capas', 'required', 'label' => false]) ?>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Solicitante</label>
+                <?= $this->Form->control('solicitante[]', ['class' => 'form-control', 'placeholder' => 'Nome do solicitante', 'required', 'label' => false]) ?>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Responsável</label>
+                <?= $this->Form->control('responsavel_remessa[]', ['class' => 'form-control', 'placeholder' => 'Nome do responsável', 'required', 'label' => false]) ?>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label">Observação</label>
+                <?= $this->Form->control('observacao[]', ['class' => 'form-control', 'placeholder' => 'Se houver, digite uma observação', 'label' => false]) ?>
+            </div>
+        </div>
+        <hr class="my-5">
     <?php endforeach; ?>
-    <fieldset>
-        <?php
-            echo $this->Form->control('data_expedicao', ['name' => 'data_expedicao[]', 'type' => 'date', 'value' => date('Y-m-d')]);
-            echo $this->Form->control('hora', ['name' => 'hora[]', 'type' => 'time', 'value' => date('H:i:s')]);
-            echo $this->Form->control('responsavel_coleta', ['name' => 'responsavel_coleta[]']);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+    <div class="row g-3">
+        <div class="col-md-3">
+            <label class="form-label">Expedição</label>
+            <?= $this->Form->control('data_expedicao[]', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Hora</label>
+            <?= $this->Form->control('hora[]', ['type' => 'time', 'class' => 'form-control', 'value' => date('H:i:s'), 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Responsável pela Coleta</label>
+            <?= $this->Form->control('responsavel_coleta[]', ['class' => 'form-control', 'required', 'label' => false]) ?>
+        </div>
+    </div>
+    <div class="mt-5">
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+    </div>
+<?= $this->Form->end() ?>
