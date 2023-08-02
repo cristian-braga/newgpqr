@@ -36,6 +36,15 @@
 
             <li>
                 <?= $this->Html->link(
+                    '<i class="fa-solid fa-file-circle-check"></i>
+                        <span>CONFERÊNCIA</span>',
+                    ['controller' => 'Conferencia', 'action' => 'index'],
+                    ['class' => 'nav-link', 'escape' => false]
+                ) ?>
+            </li>
+
+            <li>
+                <?= $this->Html->link(
                     '<i class="fa fa-envelope"></i>
                         <span>ENVELOPAMENTO</span>',
                     ['controller' => 'Envelopamento', 'action' => 'index'],
