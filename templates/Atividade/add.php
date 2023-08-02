@@ -45,29 +45,29 @@
     btn_add.addEventListener('click', function() {
         if (x < campos_max) {
             const novo_campo = document.createElement('div');
-            novo_campo.innerHTML = '\
-                <div class="col-md-2">\
-                    <?= $this->Form->control('servico_id[]', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>\
-                </div>\
-                <div class="col-md-1">\
-                    <?= $this->Form->control('job[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Job', 'label' => false]) ?>\
-                </div>\
-                <div class="col-md-2">\
-                    <?= $this->Form->control('remessa_atividade[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'N° da Remessa/OCR', 'label' => false]) ?>\
-                </div>\
-                <div class="col-md-2">\
-                    <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>\
-                </div>\
-                <div class="col-md-2">\
-                    <?= $this->Form->select('recibo_postagem[]', [0, 1, 2, 3], ['class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>\
-                </div>\
-                <div class="col-md-2">\
-                    <?= $this->Form->control('data_postagem[]', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>\
-                </div>\
-                <div class="col-md-1">\
-                    <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>\
-                </div>\
-            ';
+            novo_campo.innerHTML = `
+                <div class="col-md-2">
+                    <?= $this->Form->control('servico_id[]', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+                </div>
+                <div class="col-md-1">
+                    <?= $this->Form->control('job[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Job', 'label' => false]) ?>
+                </div>
+                <div class="col-md-2">
+                    <?= $this->Form->control('remessa_atividade[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'N° da Remessa/OCR', 'label' => false]) ?>
+                </div>
+                <div class="col-md-2">
+                    <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>
+                </div>
+                <div class="col-md-2">
+                    <?= $this->Form->select('recibo_postagem[]', [0, 1, 2, 3], ['class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+                </div>
+                <div class="col-md-2">
+                    <?= $this->Form->control('data_postagem[]', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>
+                </div>
+            `;
 
             novo_campo.classList.add('row', 'mt-4');
 

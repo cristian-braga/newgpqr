@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use function PHPUnit\Framework\containsOnly;
+
 class TriagemController extends AppController
 {
     public function index()
@@ -14,7 +16,8 @@ class TriagemController extends AppController
                 'StatusAtividade'
             ],
             'conditions' => ['Triagem.status_atividade_id' => 7],
-            'order' => ['data_cadastro' => 'desc']
+            'sortableFields' => ['Atividade.data_cadastro'],
+            'order' => ['Atividade.data_cadastro' => 'desc']
         ];
 
         $triagem = $this->paginate($this->Triagem);
@@ -61,12 +64,12 @@ class TriagemController extends AppController
             $dados = $this->request->getData('selecionados');
 
             for ($i = 0; $i < count($dados); $i++) {
-                $registroTriagem = $this->Triagem->get($dados[$i]);
+                $registroTriagem = $this->Triagem->get($dados[$i], ['contain' => ['Atividade' => ['Servico']]]);
 
                 $registroTriagem->funcionario = 'CristianTri';
                 $registroTriagem->data_triagem = date('Y-m-d H:i:s');
                 $registroTriagem->status_atividade_id = 8;
-                
+
                 $this->Triagem->save($registroTriagem);
 
                 $this->novaExpedicao($registroTriagem);
@@ -81,15 +84,22 @@ class TriagemController extends AppController
     {
         $expedicaoTable = $this->getTableLocator()->get('Expedicao');
         $expedicao = $expedicaoTable->newEmptyEntity();
+                
+        $entrega_servico = $registroTriagem->atividade->servico->entrega_servico;
 
         $nova_expedicao = [
             'funcionario' => 'CristianTri',
-            'atividade_id' => $registroTriagem->atividade_id,
-            'status_atividade_id' => 9
+            'atividade_id' => $registroTriagem->atividade_id
         ];
 
+        if ($entrega_servico == 'Correios') {
+            $nova_expedicao['status_atividade_id'] = 9;
+        } else {
+            $nova_expedicao['status_atividade_id'] = 11;
+        }
+
         $expedicao = $expedicaoTable->patchEntity($expedicao, $nova_expedicao);
-        $expedicaoTable->save($expedicao); 
+        $expedicaoTable->save($expedicao);
     }
 
     // TELA DE SERVIÇOS TRIADOS

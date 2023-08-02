@@ -14,7 +14,8 @@ class ExpedicaoController extends AppController
                 'StatusAtividade'
             ],
             'conditions' => ['Expedicao.status_atividade_id' => 9],
-            'order' => ['data_cadastro' => 'desc']
+            'sortableFields' => ['Atividade.data_cadastro'],
+            'order' => ['Atividade.data_cadastro' => 'desc']
         ];
         
         $expedicao = $this->paginate($this->Expedicao);
@@ -62,9 +63,7 @@ class ExpedicaoController extends AppController
             $servicos = [];
     
             foreach ($selecionados as $id) {
-                $query = $this->Expedicao->get($id, [
-                    'contain' => ['Atividade' => ['Servico']]
-                ]);
+                $query = $this->Expedicao->get($id, ['contain' => ['Atividade' => ['Servico']]]);
 
                 $servicos[] = $query;
             }
@@ -82,27 +81,33 @@ class ExpedicaoController extends AppController
             $capas = $dados['capas'];
             $solicitantes = $dados['solicitante'];
             $responsaveis_remessas = $dados['responsavel_remessa'];
-            $datas_expedicoes = $dados['data_expedicao'];
-            $horas = $dados['hora'];
-            $responsaveis_coletas = $dados['responsavel_coleta'];
+            $observacoes = $dados['observacao'];
 
             $expedicoes = [];
 
             for ($i = 0; $i < count($expedicao_ids); $i++) {
-                $expedicao = $this->Expedicao->get($expedicao_ids[$i]);
+                $expedicao = $this->Expedicao->get($expedicao_ids[$i], ['contain' => ['Atividade' => ['Servico']]]);
+
+                $entrega_servico = $expedicao->atividade->servico->entrega_servico;
 
                 $dados_expedicao = [
+                    'funcionario' => 'CristianExp',
+                    'data_lancamento' => date('Y-m-d H:i:s'),
+                    'data_expedicao' => $dados['data_expedicao'],
                     'capas' => $capas[$i],
                     'solicitante' => $solicitantes[$i],
                     'responsavel_remessa' => $responsaveis_remessas[$i],
-                    'data_expedicao' => $datas_expedicoes[$i],
-                    'hora' => $horas[$i],
-                    'responsavel_coleta' => $responsaveis_coletas[$i],
-                    'data_lancamento' => date('Y-m-d H:i:s'),
                     'responsavel_expedicao' => 'CristianExp',
-                    'funcionario' => 'CristianExp',
-                    'status_atividade_id' => 10
+                    'responsavel_coleta' => $dados['responsavel_coleta'],
+                    'observacao' => $observacoes[$i],
+                    'hora' => $dados['hora']
                 ];
+
+                if ($entrega_servico == 'Correios') {
+                    $dados_expedicao['status_atividade_id'] = 10;
+                } else {
+                    $dados_expedicao['status_atividade_id'] = 12;
+                }
 
                 $expedicao = $this->Expedicao->patchEntity($expedicao, $dados_expedicao);
 
@@ -116,6 +121,25 @@ class ExpedicaoController extends AppController
             }
             $this->Flash->error(__('Falha ao lançar registro(s). Tente novamente.'));
         }
+    }
+
+    // TELA DE SERVIÇOS AGUARDANDO LIBERAÇÃO
+    public function aguardandoLiberacao()
+    {
+        $this->paginate = [
+            'limit' => 20,
+            'contain' => [
+                'Atividade' => ['Servico'],
+                'StatusAtividade'
+            ],
+            'conditions' => ['Expedicao.status_atividade_id' => 11],
+            'sortableFields' => ['Atividade.data_cadastro'],
+            'order' => ['Atividade.data_cadastro' => 'desc']
+        ];
+        
+        $expedicao = $this->paginate($this->Expedicao);
+
+        $this->set(compact('expedicao'));
     }
 
     // TELA DE SERVIÇOS EXPEDIDOS
