@@ -8,12 +8,12 @@
                 <tr>
                     <th></th>
                     <th>Serviço</th>
-                    <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
-                    <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
-                    <th><?= $this->Paginator->sort('job') ?></th>
-                    <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
-                    <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
-                    <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
+                    <th>Cadastro</th>
+                    <th>Remessa/OCR</th>
+                    <th>Job</th>
+                    <th>Documentos</th>
+                    <th>Postagem</th>
+                    <th>Recibos</th>
                     <th>Etapa</th>
                     <th>Ações</th>
                 </tr>

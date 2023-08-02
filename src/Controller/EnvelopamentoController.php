@@ -14,7 +14,8 @@ class EnvelopamentoController extends AppController
                 'StatusAtividade'
             ],
             'conditions' => ['Envelopamento.status_atividade_id' => 5],
-            'order' => ['data_cadastro' => 'desc']
+            'sortableFields' => ['Atividade.data_cadastro'],
+            'order' => ['Atividade.data_cadastro' => 'desc']
         ];
         
         $envelopamento = $this->paginate($this->Envelopamento);

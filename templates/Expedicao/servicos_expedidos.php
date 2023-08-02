@@ -3,12 +3,12 @@
     <table class="table table-borderless table-hover table-striped text-center">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
+                <th>Serviço</th>
                 <th><?= $this->Paginator->sort('data_expedicao', ['label' => 'Data Expedição']) ?></th>
-                <th><?= $this->Paginator->sort('funcionario', ['label' => 'Responsável']) ?></th>
-                <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
-                <th><?= $this->Paginator->sort('job') ?></th>
-                <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
+                <th>Responsável</th>
+                <th>Remessa/OCR</th>
+                <th>Job</th>
+                <th>Documentos</th>
                 <th>Etapa</th>
                 <th>Ações</th>
             </tr>

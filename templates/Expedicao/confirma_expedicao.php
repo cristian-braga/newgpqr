@@ -21,15 +21,15 @@
             </div>
             <div class="col-md-3">
                 <label class="form-label">Capas</label>
-                <?= $this->Form->control('capas[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'N° de capas', 'required', 'label' => false]) ?>
+                <?= $this->Form->control('capas[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'N° de capas', 'label' => false]) ?>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Solicitante</label>
-                <?= $this->Form->control('solicitante[]', ['class' => 'form-control', 'placeholder' => 'Nome do solicitante', 'required', 'label' => false]) ?>
+                <?= $this->Form->control('solicitante[]', ['class' => 'form-control', 'placeholder' => 'Nome do solicitante', 'label' => false]) ?>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Responsável</label>
-                <?= $this->Form->control('responsavel_remessa[]', ['class' => 'form-control', 'placeholder' => 'Nome do responsável', 'required', 'label' => false]) ?>
+                <?= $this->Form->control('responsavel_remessa[]', ['class' => 'form-control', 'placeholder' => 'Nome do responsável', 'label' => false]) ?>
             </div>
             <div class="col-md-12">
                 <label class="form-label">Observação</label>
@@ -41,15 +41,15 @@
     <div class="row g-3">
         <div class="col-md-3">
             <label class="form-label">Expedição</label>
-            <?= $this->Form->control('data_expedicao[]', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
+            <?= $this->Form->control('data_expedicao', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
             <label class="form-label">Hora</label>
-            <?= $this->Form->control('hora[]', ['type' => 'time', 'class' => 'form-control', 'value' => date('H:i:s'), 'required', 'label' => false]) ?>
+            <?= $this->Form->control('hora', ['type' => 'time', 'class' => 'form-control', 'value' => date('H:i:s'), 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-4">
             <label class="form-label">Responsável pela Coleta</label>
-            <?= $this->Form->control('responsavel_coleta[]', ['class' => 'form-control', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('responsavel_coleta', ['class' => 'form-control', 'required', 'label' => false]) ?>
         </div>
     </div>
     <div class="mt-5">
