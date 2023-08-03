@@ -16,7 +16,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa-solid fa-file-arrow-down"></i>
                         <span>ATIVIDADE</span>',
@@ -25,7 +25,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-print"></i>
                         <span>IMPRESSÃO</span>',
@@ -34,7 +34,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa-solid fa-file-circle-check"></i>
                         <span>CONFERÊNCIA</span>',
@@ -43,7 +43,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-envelope"></i>
                         <span>ENVELOPAMENTO</span>',
@@ -52,7 +52,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-check-square"></i>
                         <span>TRIAGEM</span>',
@@ -61,7 +61,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-truck"></i>
                         <span>EXPEDIÇÃO</span>',
