@@ -1,6 +1,6 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">EXPEDIÇÃO</h2>
 <?= $this->Html->link(__('Serviços Expedidos'), ['action' => 'servicosExpedidos'], ['class' => 'btn btn-secondary float-end']) ?>
-<?= $this->Html->link(__('Aguardando Liberação'), ['action' => 'aguardandoLiberacao'], ['class' => 'btn btn-secondary float-end mb-4 me-1']) ?>
+<?= $this->Html->link(__('Aguardando Liberação'), ['action' => 'aguardandoLiberacao'], ['class' => 'btn btn-secondary float-end mb-4 me-2']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'confirmaExpedicao']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">

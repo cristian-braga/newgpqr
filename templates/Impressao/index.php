@@ -22,7 +22,7 @@
                 <?php foreach ($impressao as $impressao) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
-                        <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade_id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($impressao->atividade->data_cadastro) ?></td>
                         <td><?= h($impressao->atividade->remessa_atividade) ?></td>
                         <td><?= h($impressao->atividade->job) ?></td>
@@ -31,7 +31,7 @@
                         <td><?= h($impressao->atividade->recibo_postagem) ?></td>
                         <td><?= h($impressao->status_atividade->status_atual) ?></td>
                         <td>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $impressao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
@@ -41,7 +41,7 @@
     </div>
 <?= $this->Form->end() ?>
 <?= $this->element('pagination'); ?>
-<div class="table-responsive table-gpqr">
+<div class="table-responsive table-gpqr mx-auto" style="width: 50%;">
     <table class="table table-borderless table-hover table-striped text-center">
         <thead>
             <tr>

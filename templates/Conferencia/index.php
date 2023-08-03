@@ -7,13 +7,13 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
-                    <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
-                    <th><?= $this->Paginator->sort('remessa_atividade', ['label' => 'Remessa/OCR']) ?></th>
-                    <th><?= $this->Paginator->sort('job') ?></th>
-                    <th><?= $this->Paginator->sort('quantidade_documentos', ['label' => 'Documentos']) ?></th>
-                    <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
-                    <th><?= $this->Paginator->sort('recibo_postagem', ['label' => 'Recibos']) ?></th>
+                    <th>Serviço</th>
+                    <th>Cadastro</th>
+                    <th>Remessa/OCR</th>
+                    <th>Job</th>
+                    <th>Documentos</th>
+                    <th>Postagem</th>
+                    <th>Recibos</th>
                     <th>Etapa</th>
                     <th>Ações</th>
                 </tr>
@@ -22,7 +22,7 @@
                 <?php foreach ($conferencia as $conferencia) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $conferencia->id ?>" class="btn-shadow"></td>
-                        <td><?= $this->Html->link($conferencia->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $conferencia->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($conferencia->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $conferencia->atividade_id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($conferencia->atividade->data_cadastro) ?></td>
                         <td><?= h($conferencia->atividade->remessa_atividade) ?></td>
                         <td><?= h($conferencia->atividade->job) ?></td>
@@ -31,7 +31,7 @@
                         <td><?= h($conferencia->atividade->recibo_postagem) ?></td>
                         <td><?= h($conferencia->status_atividade->status_atual) ?></td>
                         <td>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $conferencia->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $conferencia->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>

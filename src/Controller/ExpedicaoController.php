@@ -104,9 +104,9 @@ class ExpedicaoController extends AppController
                 ];
 
                 if ($entrega_servico == 'Correios') {
-                    $dados_expedicao['status_atividade_id'] = 10;
+                    $dados_expedicao['status_atividade_id'] = 10;  // Expedido
                 } else {
-                    $dados_expedicao['status_atividade_id'] = 12;
+                    $dados_expedicao['status_atividade_id'] = 12;  // Liberado
                 }
 
                 $expedicao = $this->Expedicao->patchEntity($expedicao, $dados_expedicao);
