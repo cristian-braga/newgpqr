@@ -14,7 +14,8 @@ class ConferenciaController extends AppController
                 'StatusAtividade'
             ],
             'conditions' => ['Conferencia.status_atividade_id' => 13],
-            'order' => ['data_cadastro' => 'desc']
+            'sortableFields' => ['Atividade.data_cadastro'],
+            'order' => ['Atividade.data_cadastro' => 'desc']
         ];
 
         $conferencia = $this->paginate($this->Conferencia);
@@ -22,23 +23,38 @@ class ConferenciaController extends AppController
         $this->set(compact('conferencia'));
     }
 
-    public function edit($id = null)
+    public function editAtividade($id = null)
     {
-        $conferencia = $this->Conferencia->get($id, [
-            'contain' => [],
-        ]);
+        $atividadeController = new AtividadeController();
+        $atividadeTable = $this->getTableLocator()->get('Atividade');
+        $atividade = $atividadeTable->get($id);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conferencia = $this->Conferencia->patchEntity($conferencia, $this->request->getData());
-            if ($this->Conferencia->save($conferencia)) {
-                $this->Flash->success(__('The conferencia has been saved.'));
+            $dados = $this->request->getData();
+
+            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+
+            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
+            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
+
+            $atividade = $atividadeTable->patchEntity($atividade, $dados);
+
+            if ($atividadeTable->save($atividade)) {
+                $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The conferencia could not be saved. Please, try again.'));
+            
+            $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
-        $atividade = $this->Conferencia->Atividade->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Conferencia->StatusAtividade->find('list', ['limit' => 200])->all();
-        $this->set(compact('conferencia', 'atividade', 'statusAtividade'));
+
+        $servico = $atividadeTable->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->where(['ativo' => 'Sim'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
+
+        $this->set(compact('atividade', 'servico'));
     }
 
     public function delete($id = null)
@@ -64,7 +80,7 @@ class ConferenciaController extends AppController
 
                 $registroConferencia->funcionario = 'CristianConf';
                 $registroConferencia->data_conferencia = date('Y-m-d H:i:s');
-                $registroConferencia->status_atividade_id = 14;
+                $registroConferencia->status_atividade_id = 14;  // Conferido
                 
                 $this->Conferencia->save($registroConferencia); 
 
@@ -85,7 +101,7 @@ class ConferenciaController extends AppController
         $novo_envelopamento = [
             'funcionario' => 'CristianImp',
             'atividade_id' => $registroConferencia->atividade_id,
-            'status_atividade_id' => 5
+            'status_atividade_id' => 5  // Aguardando Envelopamento
         ];
 
         $envelopamento = $envelopamentoTable->patchEntity($envelopamento, $novo_envelopamento);

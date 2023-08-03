@@ -35,38 +35,64 @@ class ImpressaoController extends AppController
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $atividade = $this->Atividade->patchEntity($impressao, $this->request->getData('Atividade'));
+            $impressao = $this->Impressao->patchEntity($impressao, $this->request->getData());
 
-            if ($this->Atividade->save($atividade)) {
-                $impressao = $this->Impressao->patchEntity($impressao, $this->request->getData());
+            if ($this->Impressao->save($impressao)) {
+                $this->Flash->success(__('Impressão editada com sucesso!'));
 
-                if ($this->Impressao->save($impressao)) {
-                    $this->Flash->success(__('The impressao has been saved.'));
-    
-                    return $this->redirect(['action' => 'index']);
-                } else {
-                    $this->Flash->error(__('The impressao could not be saved. Please, try again.'));
-                }
-            } else {
-                $this->Flash->error(__('The impressao could not be saved. Please, try again.'));
+                return $this->redirect(['action' => 'servicosImpressos']);
             }
+
+            $this->Flash->error(__('Falha ao editar impressão. Tente novamente.'));
         }
 
-        $servico = $this->Impressao->Atividade->Servico
+        $impressora = $this->Impressao->Impressora
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_impressora'])
+            ->where(['id IN' => [1, 2, 3]])
+            ->all();
+
+        $this->set(compact('impressao', 'impressora'));
+    }
+
+    public function editAtividade($id = null)
+    {
+        $atividadeController = new AtividadeController();
+        $atividadeTable = $this->getTableLocator()->get('Atividade');
+        $atividade = $atividadeTable->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $dados = $this->request->getData();
+
+            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+
+            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
+            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
+
+            $atividade = $atividadeTable->patchEntity($atividade, $dados);
+
+            if ($atividadeTable->save($atividade)) {
+                $this->Flash->success(__('Atividade editada com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            
+            $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
+        }
+
+        $servico = $atividadeTable->Servico
             ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
             ->where(['ativo' => 'Sim'])
             ->order(['nome_servico' => 'asc'])
             ->all();
 
-        $impressora = $this->Impressao->Impressora->find('list', ['keyField' => 'id', 'valueField' => 'nome_impressora'])->all();
-
-        $this->set(compact('impressao', 'servico', 'impressora'));
+        $this->set(compact('atividade', 'servico'));
     }
 
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $impressao = $this->Impressao->get($id);
+        
         if ($this->Impressao->delete($impressao)) {
             $this->Flash->success(__('Registro excluído com sucesso!'));
         } else {
@@ -91,7 +117,12 @@ class ImpressaoController extends AppController
             }
         }
 
-        $this->set(compact('servicos'));
+        $impressora = $this->Impressao->Impressora
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_impressora'])
+            ->where(['id IN' => [1, 2, 3]])
+            ->all();
+
+        $this->set(compact('servicos', 'impressora'));
     }
 
     public function atualizaImpressao()
@@ -104,7 +135,7 @@ class ImpressaoController extends AppController
 
                 $registroImpressao->funcionario = 'CristianImp';
                 $registroImpressao->data_impressao = date('Y-m-d H:i:s');
-                $registroImpressao->status_atividade_id = 4;
+                $registroImpressao->status_atividade_id = 4;  // Impresso
                 $registroImpressao->impressora_id = $dados['impressora'][$i];
                 
                 $this->Impressao->save($registroImpressao);
@@ -126,7 +157,7 @@ class ImpressaoController extends AppController
         $nova_conferencia = [
             'funcionario' => 'CristianImp',
             'atividade_id' => $registroImpressao->atividade_id,
-            'status_atividade_id' => 13
+            'status_atividade_id' => 13  // Aguardando Conferência
         ];
 
         $conferencia = $conferenciaTable->patchEntity($conferencia, $nova_conferencia);

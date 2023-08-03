@@ -1,5 +1,5 @@
 <h3 class="text-center mt-2 mb-4">CONFIRMAR ATIVIDADE</h3>
-<?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'atualizaAtividade']]) ?>
+<?= $this->Form->create(null, ['url' => ['controller' => 'Atividade', 'action' => 'atualizaAtividade'], 'class' => 'mx-auto', 'style' => 'width: 80%']) ?>
     <div class="table-responsive table-gpqr mb-4">
         <table class="table table-borderless table-hover table-striped text-center">
             <thead>

@@ -63,7 +63,7 @@ class AtividadeController extends AppController
                     'quantidade_paginas' => $folhas_paginas['paginas'],
                     'recibo_postagem' => $recibos[$i],
                     'servico_id' => $servico_ids[$i],
-                    'status_atividade_id' => 1
+                    'status_atividade_id' => 1  // Aguardando Confirmação
                 ];
 
                 $atividade = $this->Atividade->patchEntity($atividade, $nova_atividade);
@@ -76,6 +76,7 @@ class AtividadeController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('Falha ao cadastrar atividade(s). Tente novamente.'));
         }
 
@@ -103,11 +104,13 @@ class AtividadeController extends AppController
             $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
 
             $atividade = $this->Atividade->patchEntity($atividade, $dados);
+
             if ($this->Atividade->save($atividade)) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
@@ -124,6 +127,7 @@ class AtividadeController extends AppController
     {
         $this->request->allowMethod(['get', 'post', 'delete']);
         $atividade = $this->Atividade->get($id);
+
         if ($this->Atividade->delete($atividade)) {
             $this->Flash->success(__('Atividade excluída com sucesso!'));
         } else {
@@ -133,7 +137,8 @@ class AtividadeController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function calculaFolhasPaginas($servico_id, $documentos) {
+    public function calculaFolhasPaginas($servico_id, $documentos)
+    {
         $servico = $this->Atividade->Servico->get($servico_id);
         $tipo_env = $servico->envelopamento_servico;
 
@@ -197,7 +202,7 @@ class AtividadeController extends AppController
             for ($i = 0; $i < count($dados['servico_id']); $i++) {
                 $registroAtividade = $this->Atividade->get($dados['servico_id'][$i]);
 
-                $registroAtividade->status_atividade_id = 2;
+                $registroAtividade->status_atividade_id = 2;  // Confirmado
 
                 $this->Atividade->save($registroAtividade);
 
@@ -205,6 +210,7 @@ class AtividadeController extends AppController
             }
     
             $this->Flash->success('Atividade(s) lançada(s) com sucesso!');
+            
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -218,7 +224,7 @@ class AtividadeController extends AppController
             $nova_impressao = [
                 'funcionario' => 'Cristian',
                 'atividade_id' => $registroAtividade->id,
-                'status_atividade_id' => 3,
+                'status_atividade_id' => 3,  // Aguardando Impressão
                 'impressora_id' => 5
             ];
 
@@ -231,7 +237,7 @@ class AtividadeController extends AppController
             $nova_triagem = [
                 'funcionario' => 'Cristian',
                 'atividade_id' => $registroAtividade->id,
-                'status_atividade_id' => 7
+                'status_atividade_id' => 7  // Aguardando Triagem
             ];
 
             $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);

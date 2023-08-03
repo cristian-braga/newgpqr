@@ -66,7 +66,7 @@ class EnvelopamentoController extends AppController
 
                 $registroEnvelopamento->funcionario = 'CristianEnv';
                 $registroEnvelopamento->data_envelopamento = date('Y-m-d H:i:s');
-                $registroEnvelopamento->status_atividade_id = 6;
+                $registroEnvelopamento->status_atividade_id = 6;  // Envelopado
                 
                 $this->Envelopamento->save($registroEnvelopamento); 
 
@@ -87,7 +87,7 @@ class EnvelopamentoController extends AppController
         $nova_triagem = [
             'funcionario' => 'CristianEnv',
             'atividade_id' => $registroEnvelopamento->atividade_id,
-            'status_atividade_id' => 7
+            'status_atividade_id' => 7  // Aguardando Triagem
         ];
 
         $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);

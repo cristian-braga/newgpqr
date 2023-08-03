@@ -68,7 +68,7 @@ class TriagemController extends AppController
 
                 $registroTriagem->funcionario = 'CristianTri';
                 $registroTriagem->data_triagem = date('Y-m-d H:i:s');
-                $registroTriagem->status_atividade_id = 8;
+                $registroTriagem->status_atividade_id = 8;  // Triado
 
                 $this->Triagem->save($registroTriagem);
 
@@ -93,9 +93,9 @@ class TriagemController extends AppController
         ];
 
         if ($entrega_servico == 'Correios') {
-            $nova_expedicao['status_atividade_id'] = 9;
+            $nova_expedicao['status_atividade_id'] = 9;  // Aguardando Expedição
         } else {
-            $nova_expedicao['status_atividade_id'] = 11;
+            $nova_expedicao['status_atividade_id'] = 11;  // Aguardando Liberação
         }
 
         $expedicao = $expedicaoTable->patchEntity($expedicao, $nova_expedicao);
