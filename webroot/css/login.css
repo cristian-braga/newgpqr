@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('../img/logo_prodemge_login.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.login {
+  height: 500px;
+  width: 400px;
+  padding: 60px 40px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 32px 0 rgba(48, 51, 88, 0.603);
+}
+
+.login h2 {
+  font-family: 'Play', sans-serif;
+  margin-bottom: 40px;
+  color: #000;
+  text-align: center;
+  font-size: 3.1rem;
+  font-weight: 700;
+}
+
+.login p {
+  margin-bottom: 20px;
+}
+
+.login .dados-usuario {
+  position: relative;
+  border-bottom: 1px solid #8c2a1f;
+  margin-bottom: 30px;
+}
+
+.login .dados-usuario input {
+  width: 100%;
+  padding: 10px 0 5px 0;
+  font-size: 16px;
+  color: #000;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.login .dados-usuario label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #8c2a1f;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login .dados-usuario input:focus ~ label,
+.login .dados-usuario input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #8c2a1f;
+  font-size: 14px;
+}
+
+.login form button {
+  background-color: #8c2a1f;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 30px;
+  border-radius: 4px;
+  transition: .5s;
+}
+
+.login button:hover {
+  background: #000;
+  color: #fff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+  transition: background-color 5000s;
+}
