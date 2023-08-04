@@ -84,11 +84,11 @@ class DemandasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $demanda = $this->Demandas->patchEntity($demanda, $this->request->getData());
             if ($this->Demandas->save($demanda)) {
-                $this->Flash->success(__('The demanda has been saved.'));
+                $this->Flash->success(__('Demanda salva com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The demanda could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro ao salvar demanda. Por favor, tente novamente.'));
         }
         $this->set(compact('demanda'));
     }
@@ -105,9 +105,9 @@ class DemandasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $demanda = $this->Demandas->get($id);
         if ($this->Demandas->delete($demanda)) {
-            $this->Flash->success(__('The demanda has been deleted.'));
+            $this->Flash->success(__('Demanda deletada com sucesso!'));
         } else {
-            $this->Flash->error(__('The demanda could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao deletar demanda. Por favor, tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -128,12 +128,14 @@ class DemandasController extends AppController
             $this->Demandas->patchEntity($demanda, $data);
 
             if ($this->Demandas->save($demanda)) {
-                $this->Flash->success(__('Designado como Responsável'));
+                $this->Flash->success(__('Designado como Responsável!'));
                 return $this->redirect(['action' => 'index']);
             }
-            else {
+            else{
                 $data['status'] = 'Em aberto';
             }
+           
+            
         }
 
         $this->set(compact('demanda', 'demanda_responsavel'));
@@ -149,7 +151,7 @@ class DemandasController extends AppController
             $this->Demandas->patchEntity($demanda, $data);
 
             if ($this->Demandas->save($demanda)) {
-                $this->Flash->success(__('Demanda dispensada com sucesso.'));
+                $this->Flash->success(__('Demanda dispensada com sucesso!'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('Não foi possível dispensar a demanda. Por favor, tente novamente.'));
@@ -178,7 +180,7 @@ class DemandasController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Demanda não pode ser finalizada :('));
+            $this->Flash->error(__('Não foi possível finalizar a demanda. Por favor, tente novamente.'));
         }
         $this->set(compact('demanda'));
     }

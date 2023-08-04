@@ -58,6 +58,10 @@
                     <td><?= h($demanda->data_termino) ?> </td>
                     <td><?= h($demanda->demanda_prioridade) ?></td>
                     <td><?= h($demanda->status) ?></td>
+                    <!-- <?php if($demanda->status = 'Em desenvolvimento') 
+                        echo '<td style="background-color: #0DCAF0"> </td>';
+                        else 
+                         '<td style="background-color: none"> </td>' ?>; -->
                     <?php if(!$demanda->demanda_responsavel): ?>
                     <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary '], ['confirm' => __('Tem certeza que quer aceitar essa demanda?', $demanda->id)]) ?>
                     </td>
