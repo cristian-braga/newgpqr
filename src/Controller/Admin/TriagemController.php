@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
-use function PHPUnit\Framework\containsOnly;
+use App\Controller\AppController;
 
 class TriagemController extends AppController
 {
@@ -47,7 +47,7 @@ class TriagemController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
         $triagem = $this->Triagem->get($id);
         if ($this->Triagem->delete($triagem)) {
             $this->Flash->success(__('Registro excluído com sucesso!'));

@@ -1,9 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
+use App\Controller\AppController;
 use Cake\I18n\FrozenTime;
 
 /**

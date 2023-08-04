@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
+
+use App\Controller\AppController;
 
 class ImpressaoController extends AppController
 {
@@ -90,7 +92,7 @@ class ImpressaoController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
         $impressao = $this->Impressao->get($id);
         
         if ($this->Impressao->delete($impressao)) {

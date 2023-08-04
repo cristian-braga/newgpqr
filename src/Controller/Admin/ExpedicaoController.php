@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
+
+use App\Controller\AppController;
 
 class ExpedicaoController extends AppController
 {
@@ -45,7 +47,7 @@ class ExpedicaoController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
         $expedicao = $this->Expedicao->get($id);
         if ($this->Expedicao->delete($expedicao)) {
             $this->Flash->success(__('Registro excluído com sucesso!'));

@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
+
+use App\Controller\AppController;
 
 class EnvelopamentoController extends AppController
 {
@@ -45,7 +47,7 @@ class EnvelopamentoController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
         $envelopamento = $this->Envelopamento->get($id);
         if ($this->Envelopamento->delete($envelopamento)) {
             $this->Flash->success(__('Registro excluído com sucesso!'));
