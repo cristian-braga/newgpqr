@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,9 +15,11 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -42,12 +45,67 @@ class AppController extends Controller
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
+
         $this->loadComponent('Flash');
+
+        // $this->loadComponent('Auth', [
+        //     'loginRedirect' => ['controller' => 'Menu', 'action' => 'index'],
+        //     'logoutRedirect' => ['controller' => 'Usuarios', 'action' => 'login'],
+        //     'authError' => false,
+        //     'authenticate' => [
+        //         'ProdemgeLdap' => [
+        //             'fields' => [
+        //                 'username' => 'username',
+        //                 'password' => 'password'
+        //             ],
+        //             'port' => \Cake\Core\Configure::read('Ldap.port'),
+        //             'host' => \Cake\Core\Configure::read('Ldap.host'),
+        //             'domain' => \Cake\Core\Configure::read('Ldap.domain'),
+        //             'baseDN' => function ($username, $domain) {
+        //                 $baseDN = \Cake\Core\Configure::read('Ldap.baseDN');
+        //                 return $baseDN;
+        //             },
+        //             'bindDN' => function ($username, $domain) {
+        //                 if (strpos($username, $domain) !== false) {
+        //                     $bindDN = $username;
+        //                 } else {
+        //                     $bindDN = $username . '@' . $domain;
+        //                 }
+        //                 return $bindDN;
+        //             },
+        //             'search' => function ($username) {
+        //                 $search = '(&(objectClass=user)(objectCategory=person)(samaccountname=' . $username . '))';
+        //                 return $search;
+        //             },
+        //             'logErrors' => true,
+        //             'options' => \Cake\Core\Configure::read('Ldap.options'),
+        //             'flash' => [
+        //                 'key' => 'ldap',
+        //                 'element' => 'Flash/error',
+        //             ]
+        //         ]
+        //     ]
+        // ]);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    public function beforeRender(EventInterface $event)
+    {
+        $prefix = null;
+
+        if ($this->request->getParam('prefix') != null) {
+            $prefix = $this->request->getParam('prefix');
+        }
+
+        if ($prefix == 'Admin') {
+            if (($this->request->getParam('action') != null) && ($this->request->getParam('action') == 'login')) {
+                $this->viewBuilder()->setLayout('login');
+            }
+        }
     }
 }
