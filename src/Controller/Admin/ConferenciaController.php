@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
+
+use App\Controller\AppController;
 
 class ConferenciaController extends AppController
 {
@@ -59,7 +61,7 @@ class ConferenciaController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
         $conferencia = $this->Conferencia->get($id);
         if ($this->Conferencia->delete($conferencia)) {
             $this->Flash->success(__('Registro excluído com sucesso!'));
