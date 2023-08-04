@@ -51,14 +51,18 @@ class DemandasController extends AppController
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
             $dados['status'] = 'Em aberto';
-            $demanda = $this->Demandas->patchEntity($demanda, $dados);
             $demanda->data_abertura = FrozenTime::now();
+
+            $demanda = $this->Demandas->patchEntity($demanda, $dados);
+            
             if ($this->Demandas->save($demanda)) {
                 $this->Flash->success(__('The demanda has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The demanda could not be saved. Please, try again.'));
+            else {
+                $this->Flash->error(__('Demanda não pode ser salva.'));
+            }
         }
 
         $this->set(compact('demanda'));
@@ -154,19 +158,41 @@ class DemandasController extends AppController
         $this->set(compact('demanda'));
     }
 
-    // public function relatorio($id = null) {
+    public function relatorio($id = null) {
 
-    //     $demanda = $this->Demandas->get($id, []);
-        
-    //     if($this->request->is('post')) {
-    //         $data = $this->request->getData();
-    //         $this->Demandas->patchEntity($demanda, $data);
+        $demanda = $this->Demandas->get($id);
 
-    //     if($this->Demandas->save($demanda)) {
-    //         return $this->redirect(['controller' => 'DemandasLog', 'action' => 'index']);
-    //     }
+        $this->set(compact('demanda'));
+
+    }
+
+    public function salvarLog($id = null) {
+
+        $demanda = $this->Demandas->get($id);
         
-    //     }
-        
-    // }
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $demanda = $this->Demandas->patchEntity($demanda, $this->request->getData());
+            $demanda->data_termino = FrozenTime::now(); 
+            if ($this->Demandas->save($demanda)) {
+                $this->Flash->success(__('Finalizada! :)'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Demanda não pode ser finalizada :('));
+        }
+        $this->set(compact('demanda'));
+    }
+
+    public function reabrirDemanda($id = null) {
+
+        $demanda = $this->Demandas->get($id);
+        $this->set(compact('demanda'));
+
+    }
 }
+
+
+// $data = ['data_abertura' => null];
+// $data = ['demanda_tipo' => null];
+// $data = ['demanda_status' => null];
+// $data = ['data_abertura' => null];
