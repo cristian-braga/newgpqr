@@ -25,7 +25,7 @@
                     echo $this->Form->label('Título');
                     echo $this->Form->text('demanda_resumo', ['type' => 'text', 'class' => 'form-control']);
                     echo $this->Form->label('Descrição');
-                    echo $this->Form->textarea('demanda_descricao', ['type' => 'textarea', 'class' => 'form-control']);
+                    echo $this->Form->textarea('demanda_descricao', ['class' => 'form-control']);
                     echo $this->Form->label('Prioridade');
                     echo $this->Form->select('demanda_prioridade', ['Alto'=>'Alto', 'Médio'=>'Médio', 'Baixo'=>'Baixo'], ['empty' => '-- Selecione --', 'name' => 'demanda_prioridade']);
                     echo $this->Form->label('Tipo');

@@ -99,6 +99,14 @@ class DemandasTable extends Table
             ->maxLength('demanda_solicitante', 45)
             ->allowEmptyString('demanda_solicitante');
 
+        $validator
+            ->scalar('demanda_log')
+            ->allowEmptyString('demanda_log');
+        
+        $validator 
+            ->scalar('reabertura')
+            ->maxLength('reabertura', 100);
+
         return $validator;
     }
 }
