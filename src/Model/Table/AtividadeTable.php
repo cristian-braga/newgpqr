@@ -54,6 +54,9 @@ class AtividadeTable extends Table
         $this->belongsTo('StatusAtividade', [
             'foreignKey' => 'status_atividade_id',
         ]);
+        $this->hasMany('Conferencia', [
+            'foreignKey' => 'atividade_id',
+        ]);
         $this->hasMany('Envelopamento', [
             'foreignKey' => 'atividade_id',
         ]);

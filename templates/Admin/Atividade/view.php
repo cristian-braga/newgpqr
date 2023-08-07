@@ -1,201 +1,196 @@
-<div class="conteudo view">
-    <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($atividade->servico->nome_servico) ?></h3>
+<div class="conteudo" style="width: 65%;">
+    <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($nome_servico) ?></h3>
     <table class="table table-borderless table-striped mb-4">
         <tr>
-            <th><?= __('Data de cadastro:') ?></th>
+            <th>Data de cadastro:</th>
             <td><?= h($atividade->data_cadastro) ?></td>
         </tr>
         <tr>
-            <th><?= __('Responsável:') ?></th>
+            <th>Responsável:</th>
             <td><?= h($atividade->funcionario) ?></td>
         </tr>
         <tr>
-            <th><?= __('Remessa/OCR:') ?></th>
+            <th>Remessa/OCR:</th>
             <td><?= h($atividade->remessa_atividade) ?></td>
         </tr>
         <tr>
-            <th><?= __('Job:') ?></th>
+            <th>Job:</th>
             <td><?= h($atividade->job) ?></td>
         </tr>
         <tr>
-            <th><?= __('Quantidade de documentos:') ?></th>
+            <th>Quantidade de documentos:</th>
             <td><?= $this->Number->format($atividade->quantidade_documentos) ?></td>
         </tr>
         <tr>
-            <th><?= __('Data de postagem:') ?></th>
+            <th>Data de postagem:</th>
             <td><?= h($atividade->data_postagem) ?></td>
         </tr>
         <tr>
-            <th><?= __('Recibo(s) de postagem:') ?></th>
+            <th>Recibo(s) de postagem:</th>
             <td><?= h($atividade->recibo_postagem) ?></td>
         </tr>
         <tr>
-            <th><?= __('Status atual:') ?></th>
+            <th>Status:</th>
             <td><?= h($atividade->status_atividade->status_atual) ?></td>
         </tr>
         <tr>
-            <th><?= __('Folhas de rosto:') ?></th>
+            <th>Folhas de rosto:</th>
             <td><?= $this->Number->format($atividade->servico->folha_rosto) ?></td>
         </tr>
         <tr>
-            <th><?= __('Quantidade de folhas:') ?></th>
+            <th>Quantidade de folhas:</th>
             <td><?= $this->Number->format($atividade->quantidade_folhas) ?></td>
         </tr>
         <tr>
-            <th><?= __('Quantidade de paginas:') ?></th>
+            <th>Quantidade de paginas:</th>
             <td><?= $this->Number->format($atividade->quantidade_paginas) ?></td>
         </tr>
         <tr>
-            <th><?= __('Cadastro Atividade:') ?></th>
+            <th>Cadastro Atividade:</th>
             <td><?= h($atividade->data_atividade) ?></td>
         </tr>
     </table>
+    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow mb-3']) ?>
+    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $nome_servico)]) ?>
 </div>
 
-<?php if (!empty($atividade->envelopamento)) : ?>
-    <h4><?= __('Related Envelopamento') ?></h4>
-    <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-striped">
+<div class="conteudo" style="width: 75%;">
+    <?php if (!empty($atividade->impressao)) : ?>
+        <h4 class="text-center text-danger-emphasis mt-2 mb-4">IMPRESSÃO</h4>
+        <div class="table-responsive">
+            <table class="table table-borderless table-striped text-center">
+                <tr>
+                    <th>Responsável</th>
+                    <th>Data da impressão</th>
+                    <th>Impressora</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                <?php foreach ($atividade->impressao as $impressao) : ?>
+                    <tr class="align-middle">
+                        <td><?= h($impressao->funcionario) ?></td>
+                        <td><?= h($impressao->data_impressao) ?></td>
+                        <td><?= h($impressao->impressora->nome_impressora) ?></td>
+                        <td><?= h($impressao->status_atividade->status_atual) ?></td>
+                        <td>
+                            <?= $this->Html->link(__('Editar'), ['controller' => 'Impressao', 'action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Impressao', 'action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a impressão do serviço:  {0}?', $nome_servico)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>
+    
+<div class="conteudo" style="width: 65%;">
+    <?php if (!empty($atividade->conferencia)) : ?>
+        <h4 class="text-center text-danger-emphasis mt-2 mb-4">CONFERÊNCIA</h4>
+        <table class="table table-borderless table-striped text-center">
             <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Funcionario') ?></th>
-                <th><?= __('Data Envelopamento') ?></th>
-                <th><?= __('Atividade Id') ?></th>
-                <th><?= __('Servico Id') ?></th>
-                <th><?= __('Status Atividade Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Responsável</th>
+                <th>Data da conferência</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            <?php foreach ($atividade->conferencia as $conferencia) : ?>
+                <tr class="align-middle">
+                    <td><?= h($conferencia->funcionario) ?></td>
+                    <td><?= h($conferencia->data_conferencia) ?></td>
+                    <td><?= h($conferencia->status_atividade->status_atual) ?></td>
+                    <td>
+                        <?= $this->Html->link(__('Editar'), ['controller' => 'Conferencia', 'action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Conferencia', 'action' => 'delete', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a conferência do serviço:  {0}?', $nome_servico)]) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+</div>
+    
+<div class="conteudo" style="width: 65%;">
+    <?php if (!empty($atividade->envelopamento)) : ?>
+        <h4 class="text-center text-danger-emphasis mt-2 mb-4">ENVELOPAMENTO</h4>
+        <table class="table table-borderless table-striped text-center">
+            <tr>
+                <th>Responsável</th>
+                <th>Data do envelopamento</th>
+                <th>Status</th>
+                <th>Ações</th>
             </tr>
             <?php foreach ($atividade->envelopamento as $envelopamento) : ?>
-                <tr>
-                    <td><?= h($envelopamento->id) ?></td>
+                <tr class="align-middle">
                     <td><?= h($envelopamento->funcionario) ?></td>
                     <td><?= h($envelopamento->data_envelopamento) ?></td>
-                    <td><?= h($envelopamento->atividade_id) ?></td>
-                    <td><?= h($envelopamento->servico_id) ?></td>
-                    <td><?= h($envelopamento->status_atividade_id) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller' => 'Envelopamento', 'action' => 'view', $envelopamento->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['controller' => 'Envelopamento', 'action' => 'edit', $envelopamento->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Envelopamento', 'action' => 'delete', $envelopamento->id], ['confirm' => __('Are you sure you want to delete # {0}?', $envelopamento->id)]) ?>
+                    <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
+                    <td>
+                        <?= $this->Html->link(__('Editar'), ['controller' => 'Envelopamento', 'action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Envelopamento', 'action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o envelopamento do serviço:  {0}?', $nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
+</div>
 
-<?php if (!empty($atividade->expedicao)) : ?>
-    <h4><?= __('Related Expedicao') ?></h4>
-    <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-striped">
+<div class="conteudo" style="width: 65%;">
+    <?php if (!empty($atividade->triagem)) : ?>
+        <h4 class="text-center text-danger-emphasis mt-2 mb-4">TRIAGEM</h4>
+        <table class="table table-borderless table-striped text-center">
             <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Funcionario') ?></th>
-                <th><?= __('Data Lancamento') ?></th>
-                <th><?= __('Data Expedicao') ?></th>
-                <th><?= __('Capas') ?></th>
-                <th><?= __('Ocorrencia') ?></th>
-                <th><?= __('Solicitante') ?></th>
-                <th><?= __('Responsavel Remessa') ?></th>
-                <th><?= __('Responsavel Expedicao') ?></th>
-                <th><?= __('Responsavel Coleta') ?></th>
-                <th><?= __('Observacao') ?></th>
-                <th><?= __('Hora') ?></th>
-                <th><?= __('Atividade Id') ?></th>
-                <th><?= __('Servico Id') ?></th>
-                <th><?= __('Status Atividade Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($atividade->expedicao as $expedicao) : ?>
-                <tr>
-                    <td><?= h($expedicao->id) ?></td>
-                    <td><?= h($expedicao->funcionario) ?></td>
-                    <td><?= h($expedicao->data_lancamento) ?></td>
-                    <td><?= h($expedicao->data_expedicao) ?></td>
-                    <td><?= h($expedicao->capas) ?></td>
-                    <td><?= h($expedicao->ocorrencia) ?></td>
-                    <td><?= h($expedicao->solicitante) ?></td>
-                    <td><?= h($expedicao->responsavel_remessa) ?></td>
-                    <td><?= h($expedicao->responsavel_expedicao) ?></td>
-                    <td><?= h($expedicao->responsavel_coleta) ?></td>
-                    <td><?= h($expedicao->observacao) ?></td>
-                    <td><?= h($expedicao->hora) ?></td>
-                    <td><?= h($expedicao->atividade_id) ?></td>
-                    <td><?= h($expedicao->servico_id) ?></td>
-                    <td><?= h($expedicao->status_atividade_id) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller' => 'Expedicao', 'action' => 'view', $expedicao->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['controller' => 'Expedicao', 'action' => 'edit', $expedicao->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Expedicao', 'action' => 'delete', $expedicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $expedicao->id)]) ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-<?php endif; ?>
-
-<?php if (!empty($atividade->impressao)) : ?>
-    <h4><?= __('Related Impressao') ?></h4>
-    <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-striped">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Funcionario') ?></th>
-                <th><?= __('Data Impressao') ?></th>
-                <th><?= __('Atividade Id') ?></th>
-                <th><?= __('Servico Id') ?></th>
-                <th><?= __('Status Atividade Id') ?></th>
-                <th><?= __('Impressora Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($atividade->impressao as $impressao) : ?>
-                <tr>
-                    <td><?= h($impressao->id) ?></td>
-                    <td><?= h($impressao->funcionario) ?></td>
-                    <td><?= h($impressao->data_impressao) ?></td>
-                    <td><?= h($impressao->atividade_id) ?></td>
-                    <td><?= h($impressao->servico_id) ?></td>
-                    <td><?= h($impressao->status_atividade_id) ?></td>
-                    <td><?= h($impressao->impressora_id) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller' => 'Impressao', 'action' => 'view', $impressao->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['controller' => 'Impressao', 'action' => 'edit', $impressao->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Impressao', 'action' => 'delete', $impressao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $impressao->id)]) ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-<?php endif; ?>
-
-<?php if (!empty($atividade->triagem)) : ?>
-    <h4><?= __('Related Triagem') ?></h4>
-    <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-striped">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Funcionario') ?></th>
-                <th><?= __('Data Triagem') ?></th>
-                <th><?= __('Atividade Id') ?></th>
-                <th><?= __('Servico Id') ?></th>
-                <th><?= __('Status Atividade Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Responsável</th>
+                <th>Data da triagem</th>
+                <th>Status</th>
+                <th>Ações</th>
             </tr>
             <?php foreach ($atividade->triagem as $triagem) : ?>
-                <tr>
-                    <td><?= h($triagem->id) ?></td>
+                <tr class="align-middle">
                     <td><?= h($triagem->funcionario) ?></td>
                     <td><?= h($triagem->data_triagem) ?></td>
-                    <td><?= h($triagem->atividade_id) ?></td>
-                    <td><?= h($triagem->servico_id) ?></td>
-                    <td><?= h($triagem->status_atividade_id) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller' => 'Triagem', 'action' => 'view', $triagem->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['controller' => 'Triagem', 'action' => 'edit', $triagem->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Triagem', 'action' => 'delete', $triagem->id], ['confirm' => __('Are you sure you want to delete # {0}?', $triagem->id)]) ?>
+                    <td><?= h($triagem->status_atividade->status_atual) ?></td>
+                    <td>
+                        <?= $this->Html->link(__('Editar'), ['controller' => 'Triagem', 'action' => 'edit', $triagem->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Triagem', 'action' => 'delete', $triagem->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a triagem do serviço:  {0}?', $nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
+</div>
+
+<div class="conteudo">
+    <?php if (!empty($atividade->expedicao)) : ?>
+        <h4 class="text-center text-danger-emphasis mt-2 mb-4">EXPEDIÇÃO</h4>
+        <div class="table-responsive">
+            <table class="table table-borderless table-striped text-center">
+                <tr>
+                    <th>Responsável</th>
+                    <th>Data da Expedição</th>
+                    <th>Capas</th>
+                    <th>Solicitante</th>
+                    <th>Responsável Remessa</th>
+                    <th>Responsável Coleta</th>
+                    <th>Hora</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                <?php foreach ($atividade->expedicao as $expedicao) : ?>
+                    <tr class="align-middle">
+                        <td><?= h($expedicao->funcionario) ?></td>
+                        <td><?= h($expedicao->data_lancamento) ?></td>
+                        <td><?= h($expedicao->capas) ?></td>
+                        <td><?= h($expedicao->solicitante) ?></td>
+                        <td><?= h($expedicao->responsavel_remessa) ?></td>
+                        <td><?= h($expedicao->responsavel_coleta) ?></td>
+                        <td><?= h($expedicao->hora) ?></td>
+                        <td><?= h($expedicao->status_atividade->status_atual) ?></td>
+                        <td>
+                            <?= $this->Html->link(__('Editar'), ['controller' => 'Expedicao', 'action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Expedicao', 'action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a expedição do serviço:  {0}?', $nome_servico)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>

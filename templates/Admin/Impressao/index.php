@@ -45,14 +45,14 @@
     <table class="table table-borderless table-hover table-striped text-center">
         <thead>
             <tr>
-                <th><?= $nuv_1->nome_impressora ?></th>
-                <th><?= $nuv_2->nome_impressora ?></th>
+                <th><?= $nuv_1['nome'] ?></th>
+                <th><?= $nuv_2['nome'] ?></th>
             </tr>
         </thead>
         <tbody class="align-middle">
             <tr>
-                <td><?= $nuv_1->total_documentos ?></td>
-                <td><?= $nuv_2->total_documentos ?></td>
+                <td><?= $nuv_1['total'] ?></td>
+                <td><?= $nuv_2['total'] ?></td>
             </tr>
         </tbody>
     </table>
