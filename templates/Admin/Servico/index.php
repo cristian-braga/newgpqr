@@ -1,72 +1,32 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\Servico> $servico
- */
-?>
-<div class="servico index content">
-    <?= $this->Html->link(__('New Servico'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Servico') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
+<h2 class="text-center text-gpqr mt-2 mb-4">Serviço</h2>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
+<div class="table-responsive table-gpqr">
+    <table class="table table-borderless table-hover table-striped text-center">
+        <thead>
+            <tr>
+                <th>Serviço</th>
+                <th>Descrição</th>
+                <th>Responsável</th>
+                <th>Cliente</th>
+                <th>Sistema</th>
+                <th class="col-2">Ações</th>
+            </tr>
+        </thead>
+        <tbody class="align-middle">
+            <?php foreach ($servico as $servico) : ?>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('nome_servico') ?></th>
-                    <th><?= $this->Paginator->sort('descricao_servico') ?></th>
-                    <th><?= $this->Paginator->sort('cliente_responsavel_servico') ?></th>
-                    <th><?= $this->Paginator->sort('cliente_servico') ?></th>
-                    <th><?= $this->Paginator->sort('correios_servico') ?></th>
-                    <th><?= $this->Paginator->sort('impressa_servico') ?></th>
-                    <th><?= $this->Paginator->sort('tipo_impressao_servico') ?></th>
-                    <th><?= $this->Paginator->sort('tipo_preparo_servico') ?></th>
-                    <th><?= $this->Paginator->sort('envelopamento_servico') ?></th>
-                    <th><?= $this->Paginator->sort('separador_servico') ?></th>
-                    <th><?= $this->Paginator->sort('entrega_servico') ?></th>
-                    <th><?= $this->Paginator->sort('cod_sistema_servico') ?></th>
-                    <th><?= $this->Paginator->sort('descricao_sistema_servico') ?></th>
-                    <th><?= $this->Paginator->sort('valor_servico') ?></th>
-                    <th><?= $this->Paginator->sort('folha_rosto') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($servico as $servico): ?>
-                <tr>
-                    <td><?= $this->Number->format($servico->id) ?></td>
-                    <td><?= h($servico->nome_servico) ?></td>
+                    <td><?= $this->Html->link($servico->nome_servico, ['action' => 'view', $servico->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                     <td><?= h($servico->descricao_servico) ?></td>
                     <td><?= h($servico->cliente_responsavel_servico) ?></td>
                     <td><?= h($servico->cliente_servico) ?></td>
-                    <td><?= h($servico->correios_servico) ?></td>
-                    <td><?= h($servico->impressa_servico) ?></td>
-                    <td><?= h($servico->tipo_impressao_servico) ?></td>
-                    <td><?= h($servico->tipo_preparo_servico) ?></td>
-                    <td><?= h($servico->envelopamento_servico) ?></td>
-                    <td><?= h($servico->separador_servico) ?></td>
-                    <td><?= h($servico->entrega_servico) ?></td>
-                    <td><?= h($servico->cod_sistema_servico) ?></td>
                     <td><?= h($servico->descricao_sistema_servico) ?></td>
-                    <td><?= $servico->valor_servico === null ? '' : $this->Number->format($servico->valor_servico) ?></td>
-                    <td><?= $servico->folha_rosto === null ? '' : $this->Number->format($servico->folha_rosto) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $servico->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $servico->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $servico->id], ['confirm' => __('Are you sure you want to delete # {0}?', $servico->id)]) ?>
+                    <td>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $servico->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $servico->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço: {0}?', $servico->id)]) ?>
                     </td>
                 </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
+<?= $this->element('pagination') ?>
