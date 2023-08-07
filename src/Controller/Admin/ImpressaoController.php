@@ -22,10 +22,14 @@ class ImpressaoController extends AppController
 
         $impressao = $this->paginate($this->Impressao);
 
+        // CONSULTA NA ImpressaoTable DOS VALORES PARA O CÁLCULO DO BALANCEAMENTO DAS IMPRESSORAS
         $balanco = $this->Impressao->dadosImpressoras()->toArray();
 
-        $nuv_1 = $balanco[0];
-        $nuv_2 = $balanco[1];
+        $nuv_1['nome'] = $balanco[0]->nome_impressora;
+        $nuv_1['total'] = $balanco[0]->total_paginas + $balanco[0]->total_recibo + $balanco[0]->total_folha_rosto;
+
+        $nuv_2['nome'] = $balanco[1]->nome_impressora;
+        $nuv_2['total'] = $balanco[1]->total_paginas + $balanco[1]->total_recibo + $balanco[1]->total_folha_rosto;
 
         $this->set(compact('impressao', 'nuv_1', 'nuv_2'));
     }

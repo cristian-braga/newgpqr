@@ -77,15 +77,6 @@ th {
     padding: 0.5rem 0;
 }
 
-/* View action */
-.view.content .text {
-    margin-top: 1.2rem;
-}
-
-.related {
-    margin-top: 2rem;
-}
-
 /* Flash messages */
 .message {
     padding: 1rem;

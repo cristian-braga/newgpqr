@@ -113,12 +113,16 @@ class ImpressaoTable extends Table
         $query = $this->find();
         $query->select([
                 'nome_impressora' => 'Impressora.nome_impressora',
-                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+                'total_paginas' => $query->func()->sum('Atividade.quantidade_paginas'),
+                'total_recibo' => $query->func()->sum('Atividade.recibo_postagem'),
+                'total_folha_rosto' => $query->func()->sum('Servico.folha_rosto')
             ])
             ->innerJoinWith('Impressora')
             ->innerJoinWith('Atividade')
+            ->innerJoinWith('Atividade.Servico')
             ->where([
-                'Impressora.id IN' => [1, 2]
+                'Impressora.id IN' => [1, 2],
+                'MONTH(Impressao.data_impressao)' => date('m')
             ])
             ->group('Impressora.nome_impressora')
             ->orderAsc('Impressora.nome_impressora')

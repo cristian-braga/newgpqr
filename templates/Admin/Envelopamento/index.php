@@ -31,7 +31,7 @@
                         <td><?= h($envelopamento->atividade->recibo_postagem) ?></td>
                         <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
                         <td>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $envelopamento->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $envelopamento->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>

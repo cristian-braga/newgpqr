@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-12">
                 <label class="form-label">Observação</label>
-                <?= $this->Form->control('observacao[]', ['class' => 'form-control', 'placeholder' => 'Se houver, digite uma observação', 'label' => false]) ?>
+                <?= $this->Form->textarea('observacao[]', ['rows' => '1', 'class' => 'form-control', 'placeholder' => 'Se houver, digite uma observação', 'label' => false]) ?>
             </div>
         </div>
         <hr class="my-5">
