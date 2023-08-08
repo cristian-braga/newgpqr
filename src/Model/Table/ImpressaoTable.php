@@ -122,10 +122,31 @@ class ImpressaoTable extends Table
             ->innerJoinWith('Atividade.Servico')
             ->where([
                 'Impressora.id IN' => [1, 2],
-                'MONTH(Impressao.data_impressao)' => date('m')
+                'MONTH(Impressao.data_impressao)' => date('m'),
+                'YEAR(Impressao.data_impressao)' => date('Y')
             ])
             ->group('Impressora.nome_impressora')
             ->orderAsc('Impressora.nome_impressora')
+            ->all();
+
+        return $query;
+    }
+
+    public function dadosImpressoes()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome' => 'Impressao.funcionario',
+                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+            ])
+            ->innerJoinWith('Atividade')
+            ->where([
+                'Impressao.status_atividade_id' => 4,
+                'MONTH(Impressao.data_impressao)' => date('m'),
+                'YEAR(Impressao.data_impressao)' => date('Y')
+            ])
+            ->group('nome')
+            ->orderDesc('total_documentos')
             ->all();
 
         return $query;
