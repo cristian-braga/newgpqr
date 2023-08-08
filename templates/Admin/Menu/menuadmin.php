@@ -59,7 +59,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6">
 			<?= $this->Html->link(
 				'<i class="fa fa-book fa-3x" aria-hidden="true"></i><h5>REUNIÕES</h5>',
-				['controller' => 'Atas', 'action' => 'index'],
+				['controller' => 'Reunioes', 'action' => 'index'],
 				['class' => 'menu-gpqr', 'escape' => false]
 			) ?>
 		</div>
