@@ -22,16 +22,33 @@ class ImpressaoController extends AppController
 
         $impressao = $this->paginate($this->Impressao);
 
-        // CONSULTA NA ImpressaoTable DOS VALORES PARA O CÁLCULO DO BALANCEAMENTO DAS IMPRESSORAS
-        $balanco = $this->Impressao->dadosImpressoras()->toArray();
+        // -------------------------------- BALANÇO DAS IMPRESSORAS ----------------------------------
+        // Consulta na ImpressaoTable dos valores para o cálculo do balanceamento
+        $balanco_mensal = $this->Impressao->dadosImpressoras()->toArray();
 
-        $nuv_1['nome'] = $balanco[0]->nome_impressora;
-        $nuv_1['total'] = $balanco[0]->total_paginas + $balanco[0]->total_recibo + $balanco[0]->total_folha_rosto;
+        $nuv_1['nome'] = 'Nuvera 1 - Z8PB';
+        if (isset($balanco_mensal[0])) {
+            $nuv_1['total_mes'] = $balanco_mensal[0]->total_paginas + $balanco_mensal[0]->total_recibo + $balanco_mensal[0]->total_folha_rosto;
+        } else {
+            $nuv_1['total_mes'] = 0;
+        }
 
-        $nuv_2['nome'] = $balanco[1]->nome_impressora;
-        $nuv_2['total'] = $balanco[1]->total_paginas + $balanco[1]->total_recibo + $balanco[1]->total_folha_rosto;
+        $nuv_2['nome'] = 'Nuvera 2 - Z7PK';
+        if (isset($balanco_mensal[1])) {
+            $nuv_2['total_mes'] = $balanco_mensal[1]->total_paginas + $balanco_mensal[1]->total_recibo + $balanco_mensal[1]->total_folha_rosto;
+        } else {
+            $nuv_2['total_mes'] = 0;
+        }
 
-        $this->set(compact('impressao', 'nuv_1', 'nuv_2'));
+        $total = $nuv_1['total_mes'] + $nuv_2['total_mes'];
+        $nuv_1['participacao'] = round(($nuv_1['total_mes'] / $total) * 100);
+        $nuv_2['participacao'] = round(($nuv_2['total_mes'] / $total) * 100);
+        // ------------------------------------------------------------------------------------------
+
+        // Consulta na ImpressaoTable dos valores para o ranking
+        $ranking_mensal = $this->Impressao->dadosImpressoes()->toArray();
+
+        $this->set(compact('impressao', 'balanco_mensal', 'nuv_1', 'nuv_2', 'ranking_mensal'));
     }
 
     public function edit($id = null)

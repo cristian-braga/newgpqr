@@ -1,6 +1,6 @@
 <div class="conteudo" style="width: 65%;">
     <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($nome_servico) ?></h3>
-    <table class="table table-borderless table-striped mb-4">
+    <table class="table table-borderless table-striped mb-4 align-middle">
         <tr>
             <th>Data de cadastro:</th>
             <td><?= h($atividade->data_cadastro) ?></td>
@@ -54,11 +54,11 @@
     <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $nome_servico)]) ?>
 </div>
 
-<div class="conteudo" style="width: 75%;">
-    <?php if (!empty($atividade->impressao)) : ?>
+<?php if (!empty($atividade->impressao)) : ?>
+    <div class="conteudo" style="width: 65%;">
         <h4 class="text-center text-danger-emphasis mt-2 mb-4">IMPRESSÃO</h4>
         <div class="table-responsive">
-            <table class="table table-borderless table-striped text-center">
+            <table class="table table-borderless table-striped text-center align-middle">
                 <tr>
                     <th>Responsável</th>
                     <th>Data da impressão</th>
@@ -67,7 +67,7 @@
                     <th>Ações</th>
                 </tr>
                 <?php foreach ($atividade->impressao as $impressao) : ?>
-                    <tr class="align-middle">
+                    <tr>
                         <td><?= h($impressao->funcionario) ?></td>
                         <td><?= h($impressao->data_impressao) ?></td>
                         <td><?= h($impressao->impressora->nome_impressora) ?></td>
@@ -80,13 +80,13 @@
                 <?php endforeach; ?>
             </table>
         </div>
-    <?php endif; ?>
-</div>
+    </div>
+<?php endif; ?>
     
-<div class="conteudo" style="width: 65%;">
-    <?php if (!empty($atividade->conferencia)) : ?>
+<?php if (!empty($atividade->conferencia)) : ?>
+    <div class="conteudo" style="width: 65%;">
         <h4 class="text-center text-danger-emphasis mt-2 mb-4">CONFERÊNCIA</h4>
-        <table class="table table-borderless table-striped text-center">
+        <table class="table table-borderless table-striped text-center align-middle">
             <tr>
                 <th>Responsável</th>
                 <th>Data da conferência</th>
@@ -94,7 +94,7 @@
                 <th>Ações</th>
             </tr>
             <?php foreach ($atividade->conferencia as $conferencia) : ?>
-                <tr class="align-middle">
+                <tr>
                     <td><?= h($conferencia->funcionario) ?></td>
                     <td><?= h($conferencia->data_conferencia) ?></td>
                     <td><?= h($conferencia->status_atividade->status_atual) ?></td>
@@ -105,13 +105,13 @@
                 </tr>
             <?php endforeach; ?>
         </table>
-    <?php endif; ?>
-</div>
+    </div>
+<?php endif; ?>
     
-<div class="conteudo" style="width: 65%;">
-    <?php if (!empty($atividade->envelopamento)) : ?>
+<?php if (!empty($atividade->envelopamento)) : ?>
+    <div class="conteudo" style="width: 65%;">
         <h4 class="text-center text-danger-emphasis mt-2 mb-4">ENVELOPAMENTO</h4>
-        <table class="table table-borderless table-striped text-center">
+        <table class="table table-borderless table-striped text-center align-middle">
             <tr>
                 <th>Responsável</th>
                 <th>Data do envelopamento</th>
@@ -119,7 +119,7 @@
                 <th>Ações</th>
             </tr>
             <?php foreach ($atividade->envelopamento as $envelopamento) : ?>
-                <tr class="align-middle">
+                <tr>
                     <td><?= h($envelopamento->funcionario) ?></td>
                     <td><?= h($envelopamento->data_envelopamento) ?></td>
                     <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
@@ -130,13 +130,13 @@
                 </tr>
             <?php endforeach; ?>
         </table>
-    <?php endif; ?>
-</div>
+    </div>
+<?php endif; ?>
 
-<div class="conteudo" style="width: 65%;">
-    <?php if (!empty($atividade->triagem)) : ?>
+<?php if (!empty($atividade->triagem)) : ?>
+    <div class="conteudo" style="width: 65%;">
         <h4 class="text-center text-danger-emphasis mt-2 mb-4">TRIAGEM</h4>
-        <table class="table table-borderless table-striped text-center">
+        <table class="table table-borderless table-striped text-center align-middle">
             <tr>
                 <th>Responsável</th>
                 <th>Data da triagem</th>
@@ -144,7 +144,7 @@
                 <th>Ações</th>
             </tr>
             <?php foreach ($atividade->triagem as $triagem) : ?>
-                <tr class="align-middle">
+                <tr>
                     <td><?= h($triagem->funcionario) ?></td>
                     <td><?= h($triagem->data_triagem) ?></td>
                     <td><?= h($triagem->status_atividade->status_atual) ?></td>
@@ -155,14 +155,14 @@
                 </tr>
             <?php endforeach; ?>
         </table>
-    <?php endif; ?>
-</div>
+    </div>
+<?php endif; ?>
 
-<div class="conteudo">
-    <?php if (!empty($atividade->expedicao)) : ?>
+<?php if (!empty($atividade->expedicao)) : ?>
+    <div class="conteudo">
         <h4 class="text-center text-danger-emphasis mt-2 mb-4">EXPEDIÇÃO</h4>
         <div class="table-responsive">
-            <table class="table table-borderless table-striped text-center">
+            <table class="table table-borderless table-striped text-center align-middle">
                 <tr>
                     <th>Responsável</th>
                     <th>Data da Expedição</th>
@@ -175,7 +175,7 @@
                     <th>Ações</th>
                 </tr>
                 <?php foreach ($atividade->expedicao as $expedicao) : ?>
-                    <tr class="align-middle">
+                    <tr>
                         <td><?= h($expedicao->funcionario) ?></td>
                         <td><?= h($expedicao->data_lancamento) ?></td>
                         <td><?= h($expedicao->capas) ?></td>
@@ -192,5 +192,5 @@
                 <?php endforeach; ?>
             </table>
         </div>
-    <?php endif; ?>
-</div>
+    </div>
+<?php endif; ?>
