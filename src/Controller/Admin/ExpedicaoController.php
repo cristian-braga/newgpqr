@@ -28,21 +28,56 @@ class ExpedicaoController extends AppController
     public function edit($id = null)
     {
         $expedicao = $this->Expedicao->get($id, [
-            'contain' => [],
+            'contain' => ['Atividade' => ['Servico']],
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $expedicao = $this->Expedicao->patchEntity($expedicao, $this->request->getData());
+
             if ($this->Expedicao->save($expedicao)) {
-                $this->Flash->success(__('The expedicao has been saved.'));
+                $this->Flash->success(__('Expedição editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The expedicao could not be saved. Please, try again.'));
+            
+            $this->Flash->error(__('Falha ao editar expedição. Tente novamente.'));
         }
-        $atividade = $this->Expedicao->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Expedicao->Atividade->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Expedicao->StatusAtividade->find('list', ['limit' => 200])->all();
-        $this->set(compact('expedicao', 'atividade', 'servico', 'statusAtividade'));
+
+        $this->set(compact('expedicao'));
+    }
+
+    public function editAtividade($id = null)
+    {
+        $atividadeController = new AtividadeController();
+        $atividadeTable = $this->getTableLocator()->get('Atividade');
+        $atividade = $atividadeTable->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $dados = $this->request->getData();
+
+            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+
+            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
+            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
+
+            $atividade = $atividadeTable->patchEntity($atividade, $dados);
+
+            if ($atividadeTable->save($atividade)) {
+                $this->Flash->success(__('Atividade editada com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            
+            $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
+        }
+
+        $servico = $atividadeTable->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->where(['ativo' => 'Sim'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
+
+        $this->set(compact('atividade', 'servico'));
     }
 
     public function delete($id = null)

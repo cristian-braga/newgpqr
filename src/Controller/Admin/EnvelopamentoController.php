@@ -45,6 +45,40 @@ class EnvelopamentoController extends AppController
         $this->set(compact('envelopamento', 'atividade', 'servico', 'statusAtividade'));
     }
 
+    public function editAtividade($id = null)
+    {
+        $atividadeController = new AtividadeController();
+        $atividadeTable = $this->getTableLocator()->get('Atividade');
+        $atividade = $atividadeTable->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $dados = $this->request->getData();
+
+            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+
+            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
+            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
+
+            $atividade = $atividadeTable->patchEntity($atividade, $dados);
+
+            if ($atividadeTable->save($atividade)) {
+                $this->Flash->success(__('Atividade editada com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            
+            $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
+        }
+
+        $servico = $atividadeTable->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->where(['ativo' => 'Sim'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
+
+        $this->set(compact('atividade', 'servico'));
+    }
+
     public function delete($id = null)
     {
         $this->request->allowMethod(['get', 'post', 'delete']);

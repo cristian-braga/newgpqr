@@ -3,7 +3,7 @@
 <?= $this->Form->create(null, ['url' => ['controller' => 'Impressao', 'action' => 'selecionaImpressora']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-hover table-striped text-center">
+        <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
                     <th></th>
@@ -18,7 +18,7 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody class="align-middle">
+            <tbody>
                 <?php foreach ($impressao as $impressao) : ?>
                     <tr>
                         <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
@@ -29,7 +29,7 @@
                         <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
                         <td><?= h($impressao->atividade->data_postagem) ?></td>
                         <td><?= h($impressao->atividade->recibo_postagem) ?></td>
-                        <td><?= h($impressao->status_atividade->status_atual) ?></td>
+                        <td class="bg-warning-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $impressao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
@@ -40,20 +40,62 @@
         </table>
     </div>
 <?= $this->Form->end() ?>
-<?= $this->element('pagination'); ?>
+<?= $this->element('pagination') ?>
+<h4 class="text-center text-gpqr mt-5 mb-4">BALANÇO DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto" style="width: 50%;">
-    <table class="table table-borderless table-hover table-striped text-center">
+    <table class="table table-borderless text-center">
         <thead>
             <tr>
-                <th><?= $nuv_1->nome_impressora ?></th>
-                <th><?= $nuv_2->nome_impressora ?></th>
+                <th class="bg-body-secondary"><?= $nuv_1['nome'] ?></th>
+                <th class="bg-body-secondary"><?= $nuv_2['nome'] ?></th>
             </tr>
         </thead>
-        <tbody class="align-middle">
+        <tbody>
             <tr>
-                <td><?= $nuv_1->total_documentos ?></td>
-                <td><?= $nuv_2->total_documentos ?></td>
+                <td class="p-3"><?= $this->Number->format($nuv_1['total_mes']) ?></td>
+                <td class="p-3"><?= $this->Number->format($nuv_2['total_mes']) ?></td>
             </tr>
+            <?php 
+                if ($nuv_1['participacao'] > $nuv_2['participacao']) {
+                    $classe_1 = "bg-success-subtle";
+                    $classe_2 = "bg-danger-subtle";
+                    $impressora = $nuv_2['nome'];
+                } else {
+                    $classe_1 = "bg-danger-subtle";
+                    $classe_2 = "bg-success-subtle";
+                    $impressora = $nuv_1['nome'];
+                }
+            ?>
+            <tr>
+                <td class="<?= $classe_1 ?>"><b><?= $nuv_1['participacao'] ?>%</b></td>
+                <td class="<?= $classe_2 ?>"><b><?= $nuv_2['participacao'] ?>%</b></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h6 class="pt-3">Imprima serviços na <b><?= $impressora ?></b> para equilibrar a quantidade de impressões</h6>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h4 class="text-center text-gpqr mt-5 mb-4">RANKING DE IMPRESSÕES</h4>
+<div class="table-responsive table-gpqr mx-auto mb-5" style="width: 35%;">
+    <table class="table table-borderless table-hover text-center align-middle">
+        <thead>
+            <tr>
+                <th class="bg-body-secondary">Posição</th>
+                <th class="bg-body-secondary">Funcionário</th>
+                <th class="bg-body-secondary">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($ranking_mensal as $posicao => $funcionario) : ?>
+                <tr>
+                    <th><?= $posicao + 1 ?>°</th>
+                    <td><?= $funcionario->nome ?></td>
+                    <td><?= $this->Number->format($funcionario->total_documentos) ?></td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

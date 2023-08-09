@@ -31,7 +31,7 @@
                         <td><?= h($triagem->atividade->recibo_postagem) ?></td>
                         <td><?= h($triagem->status_atividade->status_atual) ?></td>
                         <td>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $triagem->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $triagem->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $triagem->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $triagem->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>

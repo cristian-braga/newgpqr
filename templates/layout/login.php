@@ -13,9 +13,7 @@ $cakeDescription = 'Sistema GIM';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-
-    <?= $this->Html->css(['cake', 'style', 'fontawesome/all', 'bootstrap.min', 'buttons']) ?>
+    <?= $this->Html->css('login') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -23,14 +21,7 @@ $cakeDescription = 'Sistema GIM';
 </head>
 
 <body>
-    <?= $this->element('header') ?>
-    <section class="conteudo">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
-    </section>
-    <?= $this->element('footer') ?>
-
-    <?= $this->Html->script('bootstrap.bundle.min') ?>
+    <?= $this->fetch('content') ?>
 </body>
 
 </html>

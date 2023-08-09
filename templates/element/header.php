@@ -83,7 +83,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-sign-out" aria-hidden="true"></i>
                         <span>SAIR</span>',
-                    ['controller' => 'users', 'action' => 'logout'],
+                    ['controller' => 'Users', 'action' => 'logout'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>

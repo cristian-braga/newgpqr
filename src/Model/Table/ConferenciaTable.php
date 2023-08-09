@@ -14,19 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\AtividadeTable&\Cake\ORM\Association\BelongsTo $Atividade
  * @property \App\Model\Table\StatusAtividadeTable&\Cake\ORM\Association\BelongsTo $StatusAtividade
  *
- * @method \App\Model\Entity\Conferencium newEmptyEntity()
- * @method \App\Model\Entity\Conferencium newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Conferencium[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Conferencium get($primaryKey, $options = [])
- * @method \App\Model\Entity\Conferencium findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Conferencium patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Conferencium[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Conferencium|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Conferencium saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Conferencium[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Conferencium[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Conferencium[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Conferencium[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Conferencia newEmptyEntity()
+ * @method \App\Model\Entity\Conferencia newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\Conferencia[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Conferencia get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Conferencia findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Conferencia patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Conferencia[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Conferencia|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Conferencia saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Conferencia[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Conferencia[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Conferencia[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Conferencia[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class ConferenciaTable extends Table
 {
