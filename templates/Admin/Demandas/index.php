@@ -1,9 +1,10 @@
 <div class="demandas index content">
-    <?= $this->Form->postLink(__('Cadastrar Demanda'), ['action' => 'add'], ['class' => 'btn btn-success float-end']) ?>
-    <!-- padrão cakePHP de criar link -->
-    <h2><?= __('Demandas') ?></h2>
-    <div class="table-responsive table-gpqr mt-4 my-4">
-        <table class="table table-borderless text-center mt-3">
+    <h2 class="text-center text-gpqr mt-2 mb-4">DEMANDAS</h2>
+    <?= $this->Html->link(__('Cadastrar Demanda'), ['action' => 'add'], ['class' => 'btn btn-secondary float-end mb-4 me-2']) ?>
+
+
+    <div class="table-responsive table-gpqr">
+        <table class="table table-borderless table-hover table-striped text-center mt-3">
             <thead>
                 <tr>
                     <!-- gera ordenação dos resultados da tabela (no padrão cakePHP) -->
@@ -15,42 +16,52 @@
                     <th><?= $this->Paginator->sort('status', ['label' => 'Status']) ?></th>
                     <th><?= __('Responsável') ?></th>
                     <th><?= __('Solicitante') ?> </th>
-                    <th class="actions"><?= __('Ações') ?></th>
+                    <th><?= __('Ações') ?></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <!-- inicialização do loop foreach para percorrer cada elemento registrado na tabela Demandas -->
                 <?php foreach ($demandas as $demanda): ?>
                 <tr>
                     <td>
-                       <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                            data-bs-target="#modal-<?= h($demanda->id) ?>">
+                        <button type="submit" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal-<?= h($demanda->id) ?>" >
                             Detalhes
                         </button>
-                        <div class="modal fade" id="modal-<?= h($demanda->id) ?>" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal-<?= h($demanda->id) ?>" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog"
+                            data-bs-backdrop="false">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header bg-body-secondary">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Demanda
-                                            <?= h($demanda->id) ?> - <?= h($demanda->demanda_resumo) ?></h1>
+                                            <?= h($demanda->id) ?> - <?= h($demanda->demanda_resumo) ?> </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <h4>Descrição:</h4>
-                                          <h6><?= h($demanda->demanda_descricao) ?> </h6>
-                                        <h4>Responsável: </h4>
-                                            <h6><?= h($demanda->demanda_responsavel) ?> </h6>
-
-                                    </div>
-                                    <div class="modal-footer">
+                                        <div class="container text-center">
+                                        <div class="row row-cols-2">
+                                            <div class="col"><h5>Descrição</h5></div>
+                                            <div class="col"><h5>Responsável</h5></div>
+                                
+                                            <div class="col"><?= h($demanda->demanda_descricao) ?></div>
+                                            <?php if(!$demanda->demanda_responsavel) :?>
+                                            <div class="col"> - </div>
+                                            <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
+                                            <div class="col"><?= h($demanda->demanda_responsavel) ?></div>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="modal-footer bg-body-secondary">
+
+                                    </div>
                             </div>
                         </div>
+                </div>
                         <?php if(isset($demanda['demanda_responsavel'])): ?>
-                            <?= $this->Form->postLink(__('Relatórios'), ['action' => 'relatorio', $demanda->id], ['class' => 'btn btn-outline-success float-end']) ?>
+                        <?= $this->Form->postLink(__('Relatórios'), ['action' => 'relatorio', $demanda->id], ['class' => 'btn btn-outline-success']) ?>
                         <?php endif; ?>
                     </td>
                     <td><?= h($demanda->demanda_tipo) ?></td>
@@ -58,11 +69,7 @@
                     <td><?= h($demanda->data_termino) ?> </td>
                     <td><?= h($demanda->demanda_prioridade) ?></td>
                     <td><?= h($demanda->status) ?></td>
-                    <!-- <?php if($demanda->status = 'Em desenvolvimento') 
-                        echo '<td style="background-color: #0DCAF0"> </td>';
-                        else 
-                         '<td style="background-color: none"> </td>' ?>; -->
-                    <?php if(!$demanda->demanda_responsavel): ?>
+                    <!-- <?php if(!$demanda->demanda_responsavel): ?>
                     <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary '], ['confirm' => __('Tem certeza que quer aceitar essa demanda?', $demanda->id)]) ?>
                     </td>
                     <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
@@ -70,15 +77,19 @@
                     </td>
                     <?php else : ?>
                     <td><?= h($demanda->demanda_responsavel) ?></td>
+                    <?php endif; ?> -->
+                    <?php if(!$demanda['demanda_responsavel']) : ?>
+                        <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary'], ['confirm' => __('Tem certeza que deseja aceitar essa demanda {0}', $demanda->id)]); ?> </td>
+                    <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
+                        <td> <?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?></td>
+                    <?php else : ?> 
+                        <td> <?= h($demanda->demanda_responsavel) ?> </td>
                     <?php endif; ?>
                     <td>Pega quem ta logado</td>
                     <td class="actions">
-                        <?php if($demanda->demanda_log == '') : ?>
-                        <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107;"></i>' . __('')), ['action' => 'edit', $demanda->id], ['escape' => false, 'class' => 'p-2 ']); ?>
+                        <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107"></i>' . __('')), ['action' => 'edit', $demanda->id], ['escape' => false, 'class' => 'p-2']); ?>
                         <?= $this->Form->postLink(__('<i class="fa-regular fa-trash-can fa-lg" style="color: #dc3545;"></i>' . __('')), ['action' => 'delete', $demanda->id], ['escape' => false, 'class' => 'p-2'], ['confirm' => __('Tem certeza que quer deletar essa demanda # {0}?', $demanda->id)]) ?>
-                        <?php elseif($demanda->demanda_log != "") : ?>
-                            <?= $this->Form->postButton(__('Reabrir'), ['action' => 'reabrirDemanda', $demanda->id], ['class' => 'btn btn-outline-danger btn-sm'], ['confirm' => __('Tem certeza que deseja reabrir essa demanda # {0}?', $demanda->id)]) ?> <!-- precisa alterar o banco -->
-                        <?php endif; ?>
+
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -99,40 +110,3 @@
     </div>
 
 </div>
-
-<?php 
-     function Modal($id, $responsavel)
-     {
-         echo '
-             <div class="modal fade" id="Modal-' . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog modal-lg">
-                     <div class="modal-content" >
-                         <div class="modal-header">
-                             <h4 class="modal-title" id="exampleModalLabel">' . $responsavel . '</h4>
-                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                 <span aria-hidden="true">&times;</span>
-                             </button>
-                         </div>
- 
-                         <div class="modal-body">
-                             <b>Pauta:</b> <br> 
-                         </div>
-                             
-                         <div class="modal-body">
-                             <b>Participantes:</b> <br> 
-                         </div>
- 
-                         <div class="modal-body">
-                             <b>Súmula:</b> <br> 
-                         </div>
- 
-                         <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         ';
-     }
-
-?>
