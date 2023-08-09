@@ -28,21 +28,22 @@ class EnvelopamentoController extends AppController
     public function edit($id = null)
     {
         $envelopamento = $this->Envelopamento->get($id, [
-            'contain' => [],
+            'contain' => ['Atividade' => ['Servico']],
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $envelopamento = $this->Envelopamento->patchEntity($envelopamento, $this->request->getData());
-            if ($this->Envelopamento->save($envelopamento)) {
-                $this->Flash->success(__('The envelopamento has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+            if ($this->Envelopamento->save($envelopamento)) {
+                $this->Flash->success(__('Envelopamento editado com sucesso!'));
+
+                return $this->redirect(['action' => 'servicosEnvelopados']);
             }
-            $this->Flash->error(__('The envelopamento could not be saved. Please, try again.'));
+
+            $this->Flash->error(__('Falha ao editar envelopamento. Tente novamente.'));
         }
-        $atividade = $this->Envelopamento->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Envelopamento->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Envelopamento->StatusAtividade->find('list', ['limit' => 200])->all();
-        $this->set(compact('envelopamento', 'atividade', 'servico', 'statusAtividade'));
+
+        $this->set(compact('envelopamento'));
     }
 
     public function editAtividade($id = null)

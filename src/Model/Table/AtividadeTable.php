@@ -54,20 +54,25 @@ class AtividadeTable extends Table
         $this->belongsTo('StatusAtividade', [
             'foreignKey' => 'status_atividade_id',
         ]);
+        $this->hasMany('Impressao', [
+            'foreignKey' => 'atividade_id',
+            'dependent' => true
+        ]);
         $this->hasMany('Conferencia', [
             'foreignKey' => 'atividade_id',
+            'dependent' => true
         ]);
         $this->hasMany('Envelopamento', [
             'foreignKey' => 'atividade_id',
-        ]);
-        $this->hasMany('Expedicao', [
-            'foreignKey' => 'atividade_id',
-        ]);
-        $this->hasMany('Impressao', [
-            'foreignKey' => 'atividade_id',
+            'dependent' => true
         ]);
         $this->hasMany('Triagem', [
             'foreignKey' => 'atividade_id',
+            'dependent' => true
+        ]);
+        $this->hasMany('Expedicao', [
+            'foreignKey' => 'atividade_id',
+            'dependent' => true
         ]);
     }
 
