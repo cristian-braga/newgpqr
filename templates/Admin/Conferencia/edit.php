@@ -35,7 +35,7 @@
         </div>
         <div class="col-12 mt-5">
             <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
-            <?= $this->Html->link(__('Cancelar'), ['action' => 'servicosImpressos'], ['class' => 'btn btn-secondary']) ?>
+            <?= $this->Html->link(__('Cancelar'), ['action' => 'servicosConferidos'], ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
 <?= $this->Form->end() ?>

@@ -183,8 +183,8 @@ class AtividadeController extends AppController
 
         $folhas_paginas = [];
 
-        $folhas_paginas['folhas'] = $folhas;
-        $folhas_paginas['paginas'] = $paginas;
+        $folhas_paginas['folhas'] = intval($folhas);
+        $folhas_paginas['paginas'] = intval($paginas);
 
         return $folhas_paginas;
     }
@@ -216,7 +216,7 @@ class AtividadeController extends AppController
 
                 $this->Atividade->save($registroAtividade);
 
-                $this->salvaOutraTabela($dados['impresso'][$i], $registroAtividade);               
+                $this->salvaProximaEtapa($dados['impresso'][$i], $registroAtividade);               
             }
     
             $this->Flash->success('Atividade(s) lançada(s) com sucesso!');
@@ -225,7 +225,7 @@ class AtividadeController extends AppController
         }
     }
 
-    public function salvaOutraTabela($dados_impresso, $registroAtividade)
+    public function salvaProximaEtapa($dados_impresso, $registroAtividade)
     {
         if ($dados_impresso == 1) {
             $impressaoTable = $this->getTableLocator()->get('Impressao');

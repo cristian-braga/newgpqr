@@ -1,6 +1,6 @@
 <h3 class="text-center mt-2 mb-4">SERVIÇOS EXPEDIDOS</h3>
 <div class="table-responsive table-gpqr">
-    <table class="table table-borderless table-hover table-striped text-center">
+    <table class="table table-borderless table-striped text-center">
         <thead>
             <tr>
                 <th>Serviço</th>
@@ -22,7 +22,7 @@
                     <td><?= h($expedicao->atividade->remessa_atividade) ?></td>
                     <td><?= h($expedicao->atividade->job) ?></td>
                     <td><?= $this->Number->format($expedicao->atividade->quantidade_documentos) ?></td>
-                    <td><?= h($expedicao->status_atividade->status_atual) ?></td>
+                    <td class="bg-success-subtle"><b><?= h($expedicao->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                         <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $expedicao->atividade->servico->nome_servico)]) ?>
