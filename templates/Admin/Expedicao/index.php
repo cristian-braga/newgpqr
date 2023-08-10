@@ -4,7 +4,7 @@
 <?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'confirmaExpedicao']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-hover table-striped text-center">
+        <table class="table table-borderless table-striped text-center">
             <thead>
                 <tr>
                     <th></th>
@@ -30,7 +30,7 @@
                         <td><?= $this->Number->format($expedicao->atividade->quantidade_documentos) ?></td>
                         <td><?= h($expedicao->atividade->data_postagem) ?></td>
                         <td><?= h($expedicao->atividade->recibo_postagem) ?></td>
-                        <td><?= h($expedicao->status_atividade->status_atual) ?></td>
+                        <td class="bg-warning-subtle"><b><?= h($expedicao->status_atividade->status_atual) ?></b></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $expedicao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $expedicao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $expedicao->atividade->servico->nome_servico)]) ?>
@@ -50,9 +50,9 @@
     checkboxes.forEach(function(checkbox) {
         checkbox.addEventListener('click', function() {
             if (document.querySelector('input[type="checkbox"]:checked')) {
-                botao.style.visibility = 'visible'; // Mostra o botão quando algum checkbox é selecionado
+                botao.style.visibility = 'visible';  // Mostra o botão quando algum checkbox é selecionado
             } else {
-                botao.style.visibility = 'hidden'; // Esconde o botão quando nenhum checkbox é selecionado
+                botao.style.visibility = 'hidden';  // Esconde o botão quando nenhum checkbox é selecionado
             }
         });
     });

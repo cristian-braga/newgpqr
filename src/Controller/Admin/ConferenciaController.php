@@ -99,7 +99,9 @@ class ConferenciaController extends AppController
             $dados = $this->request->getData('selecionados');
 
             for ($i = 0; $i < count($dados); $i++) {
-                $registroConferencia = $this->Conferencia->get($dados[$i]);
+                $registroConferencia = $this->Conferencia->get($dados[$i], [
+                    'contain' => ['Atividade' => ['Servico']],
+                ]);
 
                 $registroConferencia->funcionario = 'CristianConf';
                 $registroConferencia->data_conferencia = date('Y-m-d H:i:s');
@@ -118,17 +120,33 @@ class ConferenciaController extends AppController
 
     public function novoEnvelopamento($registroConferencia)
     {
-        $envelopamentoTable = $this->getTableLocator()->get('Envelopamento');
-        $envelopamento = $envelopamentoTable->newEmptyEntity();
+        $tipo_env = $registroConferencia->atividade->servico->envelopamento_servico;
 
-        $novo_envelopamento = [
-            'funcionario' => 'CristianImp',
-            'atividade_id' => $registroConferencia->atividade_id,
-            'status_atividade_id' => 5  // Aguardando Envelopamento
-        ];
+        if ($tipo_env == 'A4' || $tipo_env == 'A5') {
+            $envelopamentoTable = $this->getTableLocator()->get('Envelopamento');
+            $envelopamento = $envelopamentoTable->newEmptyEntity();
+    
+            $novo_envelopamento = [
+                'funcionario' => 'CristianImp',
+                'atividade_id' => $registroConferencia->atividade_id,
+                'status_atividade_id' => 5  // Aguardando Envelopamento
+            ];
+    
+            $envelopamento = $envelopamentoTable->patchEntity($envelopamento, $novo_envelopamento);
+            $envelopamentoTable->save($envelopamento); 
+        } else {
+            $triagemTable = $this->getTableLocator()->get('Triagem');
+            $triagem = $triagemTable->newEmptyEntity();
 
-        $envelopamento = $envelopamentoTable->patchEntity($envelopamento, $novo_envelopamento);
-        $envelopamentoTable->save($envelopamento); 
+            $nova_triagem = [
+                'funcionario' => 'Cristian',
+                'atividade_id' => $registroConferencia->atividade_id,
+                'status_atividade_id' => 7  // Aguardando Triagem
+            ];
+
+            $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);
+            $triagemTable->save($triagem);
+        }
     }
 
     // TELA DE SERVIÇOS CONFERIDOS
