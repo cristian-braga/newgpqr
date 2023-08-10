@@ -40,23 +40,22 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="container text-center">
-                                        <div class="row row-cols-2">
+                                        <div class="container">
+                                        <div class="col-md-12">
                                             <div class="col"><h5>Descrição</h5></div>
-                                            <div class="col"><h5>Responsável</h5></div>
-                                
                                             <div class="col"><?= h($demanda->demanda_descricao) ?></div>
+                                        </div>
+                                            <div class="col-md-12">
+                                            <div class="col"><h5>Responsável</h5></div>
                                             <?php if(!$demanda->demanda_responsavel) :?>
                                             <div class="col"> - </div>
                                             <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
                                             <div class="col"><?= h($demanda->demanda_responsavel) ?></div>
                                             <?php endif; ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer bg-body-secondary">
-
-                                    </div>
                             </div>
                         </div>
                 </div>
@@ -69,19 +68,12 @@
                     <td><?= h($demanda->data_termino) ?> </td>
                     <td><?= h($demanda->demanda_prioridade) ?></td>
                     <td><?= h($demanda->status) ?></td>
-                    <!-- <?php if(!$demanda->demanda_responsavel): ?>
-                    <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary '], ['confirm' => __('Tem certeza que quer aceitar essa demanda?', $demanda->id)]) ?>
-                    </td>
-                    <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
-                    <td> <?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger '], ['confirm' => __('Tem certeza que quer dispensar essa demanda?', $demanda->id)]); ?>
-                    </td>
-                    <?php else : ?>
-                    <td><?= h($demanda->demanda_responsavel) ?></td>
-                    <?php endif; ?> -->
                     <?php if(!$demanda['demanda_responsavel']) : ?>
                         <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary'], ['confirm' => __('Tem certeza que deseja aceitar essa demanda {0}', $demanda->id)]); ?> </td>
                     <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
                         <td> <?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?></td>
+                    <?php elseif($demanda->status = 'Finalizada') : ?>
+                        <td><?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger disabled'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?></td>
                     <?php else : ?> 
                         <td> <?= h($demanda->demanda_responsavel) ?> </td>
                     <?php endif; ?>
