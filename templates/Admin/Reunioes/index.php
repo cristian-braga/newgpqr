@@ -39,19 +39,23 @@
                     <td><?= h($reunioes->horario_reuniao) ?></td>
                     <td><?= h($reunioes->responsavel) ?></td>
                     <td>
-                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-<?= h($reunioes->id) ?>">
+                        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-<?= h($reunioes->id) ?>">
                             Detalhes
                         </button>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $reunioes->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
                         <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $reunioes->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Você tem certeza que deseja excluir?')]) ?>
                         <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $reunioes->id], ['class' => 'btn btn-outline-success btn-sm', 'target' => '_blank']) ?>
                     </td>
-                    <?php criaModal($reunioes->id, $reunioes->tema_abordado, $reunioes->pauta, $reunioes->participantes, $reunioes->sumula); ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+
+<!-- Modal fora da tabela -->
+<?php foreach ($queryReunioes as $reunioes) : ?>
+    <?php criaModal($reunioes->id, $reunioes->tema_abordado, $reunioes->pauta, $reunioes->participantes, $reunioes->sumula); ?>
+<?php endforeach; ?>
 
 <?= $this->element('pagination') ?>
 
@@ -63,10 +67,8 @@ function criaModal($id, $tema_abordado, $pauta, $participantes, $sumula)
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" >
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel">' . $tema_abordado . '</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h1 class="modal-title fs-4" id="exampleModalLabel">' . $tema_abordado . '</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
@@ -82,7 +84,7 @@ function criaModal($id, $tema_abordado, $pauta, $participantes, $sumula)
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>
