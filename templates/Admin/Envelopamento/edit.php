@@ -1,39 +1,41 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Envelopamento $envelopamento
- * @var string[]|\Cake\Collection\CollectionInterface $atividade
- * @var string[]|\Cake\Collection\CollectionInterface $servico
- * @var string[]|\Cake\Collection\CollectionInterface $statusAtividade
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $envelopamento->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $envelopamento->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Envelopamento'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<h3 class="text-center mt-2 mb-4">EDITAR ENVELOPAMENTO</h3>
+<?= $this->Form->create($envelopamento, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Serviço</label>
+            <?= $this->Form->control('servico', ['class' => 'form-control', 'value' => $envelopamento->atividade->servico->nome_servico, 'disabled', 'label' => false]) ?>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="envelopamento form content">
-            <?= $this->Form->create($envelopamento) ?>
-            <fieldset>
-                <legend><?= __('Edit Envelopamento') ?></legend>
-                <?php
-                    echo $this->Form->control('funcionario');
-                    echo $this->Form->control('data_envelopamento', ['empty' => true]);
-                    echo $this->Form->control('atividade_id', ['options' => $atividade]);
-                    echo $this->Form->control('servico_id', ['options' => $servico]);
-                    echo $this->Form->control('status_atividade_id', ['options' => $statusAtividade]);
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="col-md-6">
+            <label class="form-label">Cadastro</label>
+            <?= $this->Form->control('data_cadastro', ['class' => 'form-control', 'value' => $envelopamento->atividade->data_cadastro, 'disabled', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Remessa/OCR</label>
+            <?= $this->Form->control('remessa_atividade', ['class' => 'form-control', 'maxlenght' => 11, 'value' => $envelopamento->atividade->remessa_atividade, 'disabled', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Job</label>
+            <?= $this->Form->control('job', ['class' => 'form-control', 'maxlenght' => 10, 'value' => $envelopamento->atividade->job, 'disabled', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Documentos</label>
+            <?= $this->Form->control('quantidade_documentos', ['class' => 'form-control', 'value' => $envelopamento->atividade->quantidade_documentos, 'disabled', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Postagem</label>
+            <?= $this->Form->control('data_postagem', ['class' => 'form-control', 'value' => $envelopamento->atividade->data_postagem, 'disabled', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Recibo(s) Postagem</label>
+            <?= $this->Form->control('recibo_postagem', ['class' => 'form-control', 'value' => $envelopamento->atividade->recibo_postagem, 'disabled', 'label' => false]) ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Responsável</label>
+            <?= $this->Form->control('funcionario', ['class' => 'form-control', 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-12 mt-5">
+            <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+            <?= $this->Html->link(__('Cancelar'), ['action' => 'servicosImpressos'], ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
-</div>
+<?= $this->Form->end() ?>

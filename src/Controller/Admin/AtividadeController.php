@@ -144,7 +144,7 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao excluir atividade. Tente novamente.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());  // Redireciona para a página solicitante
     }
 
     public function calculaFolhasPaginas($servico_id, $documentos)

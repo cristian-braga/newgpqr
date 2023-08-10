@@ -25,6 +25,27 @@ class ConferenciaController extends AppController
         $this->set(compact('conferencia'));
     }
 
+    public function edit($id = null)
+    {
+        $conferencia = $this->Conferencia->get($id, [
+            'contain' => ['Atividade' => ['Servico']],
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $conferencia = $this->Conferencia->patchEntity($conferencia, $this->request->getData());
+
+            if ($this->Conferencia->save($conferencia)) {
+                $this->Flash->success(__('Conferência editada com sucesso!'));
+
+                return $this->redirect(['action' => 'servicosConferidos']);
+            }
+
+            $this->Flash->error(__('Falha ao editar conferência. Tente novamente.'));
+        }
+
+        $this->set(compact('conferencia'));
+    }
+
     public function editAtividade($id = null)
     {
         $atividadeController = new AtividadeController();

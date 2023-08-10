@@ -41,8 +41,14 @@ class ImpressaoController extends AppController
         }
 
         $total = $nuv_1['total_mes'] + $nuv_2['total_mes'];
-        $nuv_1['participacao'] = round(($nuv_1['total_mes'] / $total) * 100);
-        $nuv_2['participacao'] = round(($nuv_2['total_mes'] / $total) * 100);
+
+        if ($total != 0) {
+            $nuv_1['participacao'] = round(($nuv_1['total_mes'] / $total) * 100);
+            $nuv_2['participacao'] = round(($nuv_2['total_mes'] / $total) * 100);
+        } else {
+            $nuv_1['participacao'] = 0;
+            $nuv_2['participacao'] = 0;
+        }
         // ------------------------------------------------------------------------------------------
 
         // Consulta na ImpressaoTable dos valores para o ranking

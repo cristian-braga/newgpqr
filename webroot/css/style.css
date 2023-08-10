@@ -27,6 +27,10 @@ h6 {
     font-family: "Raleway", sans-serif;
 }
 
+label {
+    font-family: "Poppins", sans-serif;
+}
+
 .conteudo {
     padding: 1rem;
     background: #fff;

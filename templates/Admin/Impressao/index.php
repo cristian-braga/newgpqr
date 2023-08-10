@@ -32,7 +32,7 @@
                         <td class="bg-warning-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $impressao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -41,7 +41,7 @@
     </div>
 <?= $this->Form->end() ?>
 <?= $this->element('pagination') ?>
-<h4 class="text-center text-gpqr mt-5 mb-4">BALANÇO DE IMPRESSÕES</h4>
+<h4 class="text-center text-gpqr mt-5 mb-4">BALANÇO MENSAL DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto" style="width: 50%;">
     <table class="table table-borderless text-center">
         <thead>
@@ -55,15 +55,18 @@
                 <td class="p-3"><?= $this->Number->format($nuv_1['total_mes']) ?></td>
                 <td class="p-3"><?= $this->Number->format($nuv_2['total_mes']) ?></td>
             </tr>
-            <?php 
-                if ($nuv_1['participacao'] > $nuv_2['participacao']) {
+            <?php
+                if ($nuv_1['participacao'] == $nuv_2['participacao']) {
+                    $classe_1 = $classe_2 = "bg-success-subtle";
+                    $texto = "A quantidade de impressões está equilibrada";
+                } elseif ($nuv_1['participacao'] > $nuv_2['participacao']) {
                     $classe_1 = "bg-success-subtle";
                     $classe_2 = "bg-danger-subtle";
-                    $impressora = $nuv_2['nome'];
+                    $texto = "Imprima serviços na <b>" . $nuv_2['nome'] . "</b> para equilibrar a quantidade de impressões";
                 } else {
                     $classe_1 = "bg-danger-subtle";
                     $classe_2 = "bg-success-subtle";
-                    $impressora = $nuv_1['nome'];
+                    $texto = "Imprima serviços na <b>" . $nuv_1['nome'] . "</b> para equilibrar a quantidade de impressões";
                 }
             ?>
             <tr>
@@ -72,13 +75,13 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <h6 class="pt-3">Imprima serviços na <b><?= $impressora ?></b> para equilibrar a quantidade de impressões</h6>
+                    <h6 class="pt-3"><?= $texto ?></h6>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-<h4 class="text-center text-gpqr mt-5 mb-4">RANKING DE IMPRESSÕES</h4>
+<h4 class="text-center text-gpqr mt-5 mb-4">RANKING MENSAL DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 35%;">
     <table class="table table-borderless table-hover text-center align-middle">
         <thead>

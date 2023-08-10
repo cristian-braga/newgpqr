@@ -28,21 +28,22 @@ class TriagemController extends AppController
     public function edit($id = null)
     {
         $triagem = $this->Triagem->get($id, [
-            'contain' => [],
+            'contain' => ['Atividade' => ['Servico']],
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $triagem = $this->Triagem->patchEntity($triagem, $this->request->getData());
-            if ($this->Triagem->save($triagem)) {
-                $this->Flash->success(__('The triagem has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+            if ($this->Triagem->save($triagem)) {
+                $this->Flash->success(__('Triagem editada com sucesso!'));
+
+                return $this->redirect(['action' => 'servicosTriados']);
             }
-            $this->Flash->error(__('The triagem could not be saved. Please, try again.'));
+
+            $this->Flash->error(__('Falha ao editar triagem. Tente novamente.'));
         }
-        $atividade = $this->Triagem->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Triagem->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Triagem->StatusAtividade->find('list', ['limit' => 200])->all();
-        $this->set(compact('triagem', 'atividade', 'servico', 'statusAtividade'));
+
+        $this->set(compact('triagem'));
     }
 
     public function editAtividade($id = null)
