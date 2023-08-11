@@ -13,7 +13,7 @@
             <?= $this->Html->link(
                 '<i class="fa fa-address-book fa-3x" aria-hidden="true"></i>
                 <h5>ADMINISTRATIVO</h5>',
-                ['controller' => 'Menu', 'action' => 'menuadmin'],
+                ['controller' => 'Menu', 'action' => 'menuAdmin'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>

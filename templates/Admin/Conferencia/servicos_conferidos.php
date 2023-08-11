@@ -1,6 +1,6 @@
 <h3 class="text-center mt-2 mb-4">SERVIÇOS CONFERIDOS</h3>
 <div class="table-responsive table-gpqr">
-    <table class="table table-borderless table-hover table-striped text-center">
+    <table class="table table-borderless table-striped text-center">
         <thead>
             <tr>
                 <th>Serviço</th>
@@ -22,7 +22,7 @@
                     <td><?= h($conferencia->atividade->remessa_atividade) ?></td>
                     <td><?= h($conferencia->atividade->job) ?></td>
                     <td><?= $this->Number->format($conferencia->atividade->quantidade_documentos) ?></td>
-                    <td><?= h($conferencia->status_atividade->status_atual) ?></td>
+                    <td class="bg-success-subtle"><b><?= h($conferencia->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                         <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $conferencia->atividade->servico->nome_servico)]) ?>
