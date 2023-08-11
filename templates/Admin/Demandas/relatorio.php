@@ -19,7 +19,7 @@
             <tbody>
                 <tr>
                     <td><?= h($demanda->demanda_responsavel) ?></td>
-                    <td><?= h($demanda->demanda_log) ?></td>
+                    <td> <?= h($demanda->demanda_log) ?></td>
                     <td><?= h($demanda->data_termino) ?></td>
                 </tr>
             </tbody>
