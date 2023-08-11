@@ -24,7 +24,7 @@
     </section>
     <?= $this->element('footer') ?>
 
-    <?= $this->Html->script('bootstrap.bundle.min') ?>
+    <?= $this->Html->script(['bootstrap.bundle.min', 'script']) ?>
 </body>
 
 </html>
