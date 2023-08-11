@@ -117,20 +117,6 @@ class ImpressaoController extends AppController
         $this->set(compact('atividade', 'servico'));
     }
 
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['get', 'post', 'delete']);
-        $impressao = $this->Impressao->get($id);
-        
-        if ($this->Impressao->delete($impressao)) {
-            $this->Flash->success(__('Registro excluído com sucesso!'));
-        } else {
-            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-
     public function selecionaImpressora()
     {
         if ($this->request->is('post')) {
@@ -210,5 +196,28 @@ class ImpressaoController extends AppController
         $impressao = $this->paginate($this->Impressao);
 
         $this->set(compact('impressao'));
+    }
+
+    /* Esse método altera os campos 'data_impressao', 'status_atividade_id', 'impressora_id' para que o serviço seja
+    novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($id = null)
+    {
+        $impressao = $this->Impressao->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $dados['data_impressao'] = NULL;
+            $dados['status_atividade_id'] = 3;  // Aguardando Impressão
+            $dados['impressora_id'] = 5;  // Não Impresso
+
+            $impressao = $this->Impressao->patchEntity($impressao, $dados);
+
+            if ($this->Impressao->save($impressao)) {
+                $this->Flash->success(__('Registro alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar registro. Tente novamente.'));
+        }
     }
 }
