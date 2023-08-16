@@ -57,11 +57,41 @@ class PermissoesTable extends Table
             ->notEmptyString('matricula');
 
         $validator
+            ->scalar('funcionario')
+            ->maxLength('funcionario', 45)
+            ->requirePresence('funcionario', 'create')
+            ->notEmptyString('funcionario');
+
+        $validator
             ->scalar('permissao')
             ->maxLength('permissao', 45)
             ->requirePresence('permissao', 'create')
             ->notEmptyString('permissao');
 
         return $validator;
+    }
+
+    public function obterAdmins()
+    {
+        $query = $this->find()
+            ->where([
+                'permissao' => 'Administrador'
+            ])
+            ->orderAsc('funcionario')
+            ->all();
+        
+        return $query;
+    }
+
+    public function obterFuncionarios()
+    {
+        $query = $this->find()
+            ->where([
+                'permissao' => 'Funcionário'
+            ])
+            ->orderAsc('funcionario')
+            ->all();
+        
+        return $query;
     }
 }

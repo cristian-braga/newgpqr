@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $matricula
+ * @property string $funcionario
  * @property string $permissao
  */
 class Permissoes extends Entity
@@ -25,6 +26,7 @@ class Permissoes extends Entity
      */
     protected $_accessible = [
         'matricula' => true,
-        'permissao' => true,
+        'funcionario' => true,
+        'permissao' => true
     ];
 }
