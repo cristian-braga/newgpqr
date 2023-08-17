@@ -1,6 +1,6 @@
 <h3 class="text-center mt-2 mb-4">SERVIÇOS IMPRESSOS</h3>
 <div class="table-responsive table-gpqr">
-    <table class="table table-borderless table-striped text-center">
+    <table class="table table-borderless table-striped text-center align-middle">
         <thead>
             <tr>
                 <th>Serviço</th>
@@ -14,7 +14,7 @@
                 <th>Ações</th>
             </tr>
         </thead>
-        <tbody class="align-middle">
+        <tbody>
             <?php foreach ($impressao as $impressao) : ?>
                 <tr>
                     <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
@@ -27,7 +27,7 @@
                     <td class="bg-success-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Voltar Etapa'), ['action' => 'voltarEtapa', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja que o serviço: {0} volte para a etapa anterior?', $impressao->atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
