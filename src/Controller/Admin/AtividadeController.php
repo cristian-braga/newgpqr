@@ -4,9 +4,18 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class AtividadeController extends AppController
 {
+    protected $AtividadeService;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+    }
+
     public function index()
     {
         $this->paginate = [
@@ -59,7 +68,7 @@ class AtividadeController extends AppController
             for ($i = 0; $i < count($servico_ids); $i++) {
                 $atividade = $this->Atividade->newEmptyEntity();
 
-                $folhas_paginas = $this->calculaFolhasPaginas($servico_ids[$i], intval($documentos[$i]));
+                $folhas_paginas = $this->AtividadeService->calculaFolhasPaginas($servico_ids[$i], intval($documentos[$i]));
 
                 $nova_atividade = [
                     'job' => $jobs[$i],
@@ -90,32 +99,19 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao cadastrar atividade(s). Tente novamente.'));
         }
 
-        $servico = $this->Atividade->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
+        $this->set(compact('atividade', 'servicos'));
     }
 
     public function edit($id = null)
     {
-        $atividade = $this->Atividade->get($id, [
-            'contain' => [],
-        ]);
-
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $this->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $this->Atividade->patchEntity($atividade, $dados);
-
-            if ($this->Atividade->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
@@ -124,13 +120,9 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $this->Atividade->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
+        $this->set(compact('atividade', 'servicos'));
     }
 
     public function delete($id = null)
@@ -145,48 +137,6 @@ class AtividadeController extends AppController
         }
 
         return $this->redirect($this->referer());  // Redireciona para a página solicitante
-    }
-
-    public function calculaFolhasPaginas($servico_id, $documentos)
-    {
-        $servico = $this->Atividade->Servico->get($servico_id);
-        $tipo_env = $servico->envelopamento_servico;
-
-        switch ($tipo_env) {
-            case 'A4':
-            case 'Sem Envelopamento':
-            case 'Sem Envelopamento FV':
-                $folhas = $documentos;
-                $paginas = $folhas * 2;
-                break;
-            case 'CD':
-            case 'Encadernação':
-                $folhas = 0;
-                $paginas = 0;
-                break;
-            case 'A5':
-                if ($documentos % 2 == 1) {
-                    $folhas = ($documentos + 1) / 2;
-                } else {
-                    $folhas = $documentos / 2;
-                }
-                $paginas = $folhas * 2;
-                break;
-            case 'Etiqueta':
-                $folhas = ceil($documentos / 21);
-                $paginas = $folhas;
-                break;
-            case 'Sem Envelopamento F':
-                $folhas = $documentos;
-                $paginas = $folhas;
-        }
-
-        $folhas_paginas = [];
-
-        $folhas_paginas['folhas'] = intval($folhas);
-        $folhas_paginas['paginas'] = intval($paginas);
-
-        return $folhas_paginas;
     }
 
     public function confirmaAtividade()
