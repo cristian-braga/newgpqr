@@ -3,7 +3,7 @@
         <img src="https://github.com/ricardodev10.png" alt="">
         <div>
             <p class="text-light mb-0">Ricardo</p>
-            <span class="text-danger">Desenvolvedor</span>
+            <span class="text-danger">Administrador</span>
         </div>
     </div>
     <div class="collapse navbar-collapse justify-content-center">
