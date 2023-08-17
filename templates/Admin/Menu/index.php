@@ -3,7 +3,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa fa-user-secret fa-3x" aria-hidden="true"></i>
-                <h5>ADMIN</h5>',
+                <h5>PERMISSÕES</h5>',
                 ['controller' => 'Permissoes', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
@@ -20,6 +20,15 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
+                '<i class="fa-solid fa-file-arrow-down fa-3x" aria-hidden="true"></i>
+                <h5>ATIVIDADE</h5>',
+                ['controller' => 'Atividade', 'action' => 'index'],
+                ['class' => 'menu-gpqr', 'escape' => false]
+            ) ?>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <?= $this->Html->link(
                 '<i class="fa fa-print fa-3x" aria-hidden="true"></i>
                 <h5>IMPRESSÃO</h5>',
                 ['controller' => 'Impressao', 'action' => 'index'],
@@ -29,7 +38,8 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
-                '<i class="fa-solid fa-file-circle-check fa-3x" aria-hidden="true"></i><h5>CONFERÊNCIA</h5>',
+                '<i class="fa-solid fa-file-circle-check fa-3x" aria-hidden="true"></i>
+                <h5>CONFERÊNCIA</h5>',
                 ['controller' => 'Conferencia', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>

@@ -9,62 +9,43 @@ class PermissoesController extends AppController
 {
     public function index()
     {
-        $permissoes = $this->paginate($this->Permissoes);
+        $queryAdmins = $this->Permissoes->obterAdmins();
+
+        $queryFuncionarios = $this->Permissoes->obterFuncionarios();
 
         $opcoes = [
             'Administrador' => 'Administrador',
-            'Digitalização' => 'Digitalização',
-            'Atividade' => 'Atividade',
-            'Impressão' => 'Impressão',
-            'Conferência' => 'Conferência',
-            'Envelopamento' => 'Envelopamento',
-            'Triagem' => 'Triagem',
-            'Expedição' => 'Expedição'
+            'Funcionário' => 'Funcionário'
         ];
 
-        $this->set(compact('permissoes', 'opcoes'));
+        $this->set(compact('opcoes', 'queryAdmins', 'queryFuncionarios'));
     }
 
     public function add()
     {
-        $permisso = $this->Permissoes->newEmptyEntity();
+        $permissao = $this->Permissoes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $permisso = $this->Permissoes->patchEntity($permisso, $this->request->getData());
-            if ($this->Permissoes->save($permisso)) {
-                $this->Flash->success(__('The permisso has been saved.'));
+            $permissao = $this->Permissoes->patchEntity($permissao, $this->request->getData());
+
+            if ($this->Permissoes->save($permissao)) {
+                $this->Flash->success(__('Permissão concedida com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The permisso could not be saved. Please, try again.'));
+            
+            $this->Flash->error(__('Falha ao cadastrar permissão. Tente novamente.'));
         }
-        $this->set(compact('permisso'));
-    }
-
-    public function edit($id = null)
-    {
-        $permisso = $this->Permissoes->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $permisso = $this->Permissoes->patchEntity($permisso, $this->request->getData());
-            if ($this->Permissoes->save($permisso)) {
-                $this->Flash->success(__('The permisso has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The permisso could not be saved. Please, try again.'));
-        }
-        $this->set(compact('permisso'));
     }
 
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $permisso = $this->Permissoes->get($id);
+
         if ($this->Permissoes->delete($permisso)) {
-            $this->Flash->success(__('The permisso has been deleted.'));
+            $this->Flash->success(__('Permissão removida com sucesso!'));
         } else {
-            $this->Flash->error(__('The permisso could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao remover permissão. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

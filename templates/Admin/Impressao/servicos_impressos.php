@@ -1,6 +1,6 @@
 <h3 class="text-center mt-2 mb-4">SERVIÇOS IMPRESSOS</h3>
 <div class="table-responsive table-gpqr">
-    <table class="table table-borderless table-striped text-center">
+    <table class="table table-borderless table-striped text-center align-middle">
         <thead>
             <tr>
                 <th>Serviço</th>
@@ -14,7 +14,7 @@
                 <th>Ações</th>
             </tr>
         </thead>
-        <tbody class="align-middle">
+        <tbody>
             <?php foreach ($impressao as $impressao) : ?>
                 <tr>
                     <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
