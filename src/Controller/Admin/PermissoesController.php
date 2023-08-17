@@ -37,31 +37,15 @@ class PermissoesController extends AppController
         }
     }
 
-    public function edit($id = null)
-    {
-        $permisso = $this->Permissoes->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $permisso = $this->Permissoes->patchEntity($permisso, $this->request->getData());
-            if ($this->Permissoes->save($permisso)) {
-                $this->Flash->success(__('The permisso has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The permisso could not be saved. Please, try again.'));
-        }
-        $this->set(compact('permisso'));
-    }
-
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $permisso = $this->Permissoes->get($id);
+
         if ($this->Permissoes->delete($permisso)) {
-            $this->Flash->success(__('The permisso has been deleted.'));
+            $this->Flash->success(__('Permissão removida com sucesso!'));
         } else {
-            $this->Flash->error(__('The permisso could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao remover permissão. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
