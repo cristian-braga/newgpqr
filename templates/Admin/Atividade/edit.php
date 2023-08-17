@@ -3,7 +3,7 @@
     <div class="row g-3">
         <div class="col-md-6">
             <label class="form-label">Serviço</label>
-            <?= $this->Form->control('servico_id', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('servico_id', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-6">
             <label class="form-label">Cadastro</label>
