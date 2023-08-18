@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-2">
             <label class="form-label">Serviço</label>
-            <?= $this->Form->control('servico_id[]', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-1">
             <label class="form-label">Job</label>
@@ -47,7 +47,7 @@
             const novo_campo = document.createElement('div');
             novo_campo.innerHTML = `
                 <div class="col-md-2">
-                    <?= $this->Form->control('servico_id[]', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+                    <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
                 </div>
                 <div class="col-md-1">
                     <?= $this->Form->control('job[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Job', 'label' => false]) ?>
