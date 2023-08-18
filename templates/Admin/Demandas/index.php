@@ -66,6 +66,7 @@
     <td><?= h($demanda->demanda_prioridade) ?></td>
     <td><?= h($demanda->status) ?></td>
 
+
     <?php if(!$demanda['demanda_responsavel']) : ?>
     <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary'], ['confirm' => __('Tem certeza que deseja aceitar essa demanda {0}', $demanda->id)]); ?>
     </td>
@@ -90,16 +91,4 @@
     </table>
 </div>
 <!-- Paginação do CakePHP, utilizado para gerar páginas caso, por exemplo, uma tabela seja extensa e a página tenha um limite -->
-<div class="paginator">
-    <ul class="pagination">
-        <?= $this->Paginator->first('<< ' . __('first')) ?>
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
-        <?= $this->Paginator->last(__('last') . ' >>') ?>
-    </ul>
-    <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
-    </p>
-</div>
-
-</div>
+<?= $this->element('pagination') ?>

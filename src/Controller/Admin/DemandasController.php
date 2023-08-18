@@ -21,6 +21,10 @@ class DemandasController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 20,
+        ];
+
         $demandas = $this->paginate($this->Demandas);
 
         $this->set(compact('demandas'));
@@ -136,7 +140,7 @@ class DemandasController extends AppController
             }
              else {
                 $data['status'] = 'Em aberto';
-             }
+            }
         }
 
         $this->set(compact('demanda', 'demanda_responsavel'));
