@@ -64,9 +64,19 @@ class AtividadeService
         return $folhas_paginas;
     }
 
+    // Método necessário para buscar os dados e preencher os inputs no edit com os valores do banco
+    public function buscaRegistro($id)
+    {
+        $atividade = $this->AtividadeTable->get($id, [
+            'contain' => [],
+        ]);
+
+        return $atividade;
+    }
+
     public function edit($id, $dados)
     {
-        $atividade = $this->AtividadeTable->get($id);
+        $atividade = $this->buscaRegistro($id);
 
         $folhas_paginas = $this->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
 

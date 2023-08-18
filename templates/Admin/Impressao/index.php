@@ -19,23 +19,27 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($impressao as $impressao) : ?>
-                    <tr>
-                        <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
-                        <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade_id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
-                        <td><?= h($impressao->atividade->data_cadastro) ?></td>
-                        <td><?= h($impressao->atividade->remessa_atividade) ?></td>
-                        <td><?= h($impressao->atividade->job) ?></td>
-                        <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
-                        <td><?= h($impressao->atividade->data_postagem) ?></td>
-                        <td><?= h($impressao->atividade->recibo_postagem) ?></td>
-                        <td class="bg-warning-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
-                        <td>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $impressao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+                <?php if (!$impressao->isEmpty()) : ?>
+                    <?php foreach ($impressao as $impressao) : ?>
+                        <tr>
+                            <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
+                            <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade_id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                            <td><?= h($impressao->atividade->data_cadastro) ?></td>
+                            <td><?= h($impressao->atividade->remessa_atividade) ?></td>
+                            <td><?= h($impressao->atividade->job) ?></td>
+                            <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
+                            <td><?= h($impressao->atividade->data_postagem) ?></td>
+                            <td><?= h($impressao->atividade->recibo_postagem) ?></td>
+                            <td class="bg-warning-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
+                            <td>
+                                <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $impressao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                                <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <td colspan="10">Ainda não existem lançamentos</td>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

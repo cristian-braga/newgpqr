@@ -4,9 +4,18 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class TriagemController extends AppController
 {
+    protected $AtividadeService;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+    }
+
     public function index()
     {
         $this->paginate = [
@@ -48,36 +57,25 @@ class TriagemController extends AppController
 
     public function editAtividade($id = null)
     {
-        $atividadeController = new AtividadeController();
-        $atividadeTable = $this->getTableLocator()->get('Atividade');
-        $atividade = $atividadeTable->get($id);
+        $atividade = $this->AtividadeService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $atividadeTable->patchEntity($atividade, $dados);
-
-            if ($atividadeTable->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $atividadeTable->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
+        $this->set(compact('atividade', 'servicos'));
     }
 
     public function delete($id = null)
@@ -153,5 +151,27 @@ class TriagemController extends AppController
         $triagem = $this->paginate($this->Triagem);
 
         $this->set(compact('triagem'));
+    }
+
+    /* Esse método altera os campos 'data_triagem' e 'status_atividade_id' para que o serviço seja
+    novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($id = null)
+    {
+        $triagem = $this->Triagem->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $dados['data_triagem'] = null;
+            $dados['status_atividade_id'] = 7;  // Aguardando Triagem
+
+            $triagem = $this->Triagem->patchEntity($triagem, $dados);
+
+            if ($this->Triagem->save($triagem)) {
+                $this->Flash->success(__('Registro alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar registro. Tente novamente.'));
+        }
     }
 }
