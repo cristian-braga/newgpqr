@@ -25,7 +25,7 @@
                     <td class="bg-success-subtle"><b><?= h($expedicao->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $expedicao->atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'voltarEtapa', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Triagem/Liberação". Deseja continuar?', $expedicao->atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

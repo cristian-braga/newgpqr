@@ -106,6 +106,8 @@ class AtividadeController extends AppController
 
     public function edit($id = null)
     {
+        $atividade = $this->AtividadeService->buscaRegistro($id);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
@@ -136,7 +138,7 @@ class AtividadeController extends AppController
             $this->Flash->error(__('Falha ao excluir atividade. Tente novamente.'));
         }
 
-        return $this->redirect($this->referer());  // Redireciona para a página solicitante
+        return $this->redirect($this->referer());  // Redireciona para a página que fez a requisição
     }
 
     public function confirmaAtividade()

@@ -4,9 +4,18 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class ImpressaoController extends AppController
 {
+    protected $AtividadeService;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+    }
+    
     public function index()
     {
         $this->paginate = [
@@ -85,36 +94,25 @@ class ImpressaoController extends AppController
 
     public function editAtividade($id = null)
     {
-        $atividadeController = new AtividadeController();
-        $atividadeTable = $this->getTableLocator()->get('Atividade');
-        $atividade = $atividadeTable->get($id);
+        $atividade = $this->AtividadeService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $atividadeTable->patchEntity($atividade, $dados);
-
-            if ($atividadeTable->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $atividadeTable->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
+        $this->set(compact('atividade', 'servicos'));
     }
 
     public function selecionaImpressora()
@@ -205,7 +203,7 @@ class ImpressaoController extends AppController
         $impressao = $this->Impressao->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $dados['data_impressao'] = NULL;
+            $dados['data_impressao'] = null;
             $dados['status_atividade_id'] = 3;  // Aguardando Impressão
             $dados['impressora_id'] = 5;  // Não Impresso
 
