@@ -25,7 +25,7 @@
                     <td class="bg-success-subtle"><b><?= h($conferencia->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $conferencia->atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'voltarEtapa', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Conferência". Deseja continuar?', $conferencia->atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

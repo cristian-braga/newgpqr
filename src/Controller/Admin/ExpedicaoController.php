@@ -4,9 +4,18 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class ExpedicaoController extends AppController
 {
+    protected $AtividadeService;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+    }
+
     public function index()
     {
         $this->paginate = [
@@ -48,36 +57,25 @@ class ExpedicaoController extends AppController
 
     public function editAtividade($id = null)
     {
-        $atividadeController = new AtividadeController();
-        $atividadeTable = $this->getTableLocator()->get('Atividade');
-        $atividade = $atividadeTable->get($id);
+        $atividade = $this->AtividadeService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $atividadeTable->patchEntity($atividade, $dados);
-
-            if ($atividadeTable->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $atividadeTable->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
+        $this->set(compact('atividade', 'servicos'));
     }
 
     public function delete($id = null)
@@ -197,5 +195,40 @@ class ExpedicaoController extends AppController
         $expedicao = $this->paginate($this->Expedicao);
 
         $this->set(compact('expedicao'));
+    }
+
+    /* Esse método altera os campos 'data_expedicao', 'data_lancamento', 'capas', 'solicitante', 'responsavel_remessa', 'responsavel_expedicao', 'responsavel_coleta',
+    'observacao', 'hora' e 'status_atividade_id' para que o serviço seja novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($id = null)
+    {
+        $expedicao = $this->Expedicao->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $dados['data_expedicao'] = null;
+            $dados['data_lancamento'] = null;
+            $dados['capas'] = null;
+            $dados['solicitante'] = null;
+            $dados['responsavel_remessa'] = null;
+            $dados['responsavel_expedicao'] = null;
+            $dados['responsavel_coleta'] = null;
+            $dados['observacao'] = null;
+            $dados['hora'] = null;
+
+            if ($dados['status_atividade_id'] = 10) {
+                $dados['status_atividade_id'] = 9;  // Aguardando Expedição
+            } else {
+                $dados['status_atividade_id'] = 11;  // Aguardando Liberação
+            }
+
+            $expedicao = $this->Expedicao->patchEntity($expedicao, $dados);
+
+            if ($this->Expedicao->save($expedicao)) {
+                $this->Flash->success(__('Registro alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar registro. Tente novamente.'));
+        }
     }
 }

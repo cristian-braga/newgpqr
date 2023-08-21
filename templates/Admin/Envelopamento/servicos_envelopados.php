@@ -25,7 +25,7 @@
                     <td class="bg-success-subtle"><b><?= h($envelopamento->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $envelopamento->atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'voltarEtapa', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Envelopamento". Deseja continuar?', $envelopamento->atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
