@@ -21,6 +21,7 @@ class DigitalizacaoController extends AppController
     public function index()
     {
         $this->paginate = [
+            'limit' => 20,
             'contain' => ['Servico'],
         ];
         $digitalizacao = $this->paginate($this->Digitalizacao);
@@ -52,6 +53,12 @@ class DigitalizacaoController extends AppController
     public function add()
     {
         $digitalizacao = $this->Digitalizacao->newEmptyEntity();
+
+        $servicos = $this->Digitalizacao->Servico
+         ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+         ->order(['nome_servico' => 'asc'])
+         ->all();
+         
         if ($this->request->is('post')) {
             $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $this->request->getData());
             if ($this->Digitalizacao->save($digitalizacao)) {
@@ -62,10 +69,6 @@ class DigitalizacaoController extends AppController
             $this->Flash->error(__('The digitalizacao could not be saved. Please, try again.'));
         }
 
-        $servicos = $this->Digitalizacao->Servico
-        ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-        ->order(['nome_servico' => 'asc'])
-        ->all();
 
         $this->set(compact('digitalizacao', 'servicos'));
     }

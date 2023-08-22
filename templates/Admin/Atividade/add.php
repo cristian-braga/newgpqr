@@ -76,8 +76,8 @@
         }
     });
 
-    function del_campo(btn_del) {
-        const div_col = btn_del.parentNode;
+    function del_campo(btnDel) {
+        const div_col = btnDel.parentNode;
         form.removeChild(div_col.parentNode);
         x--;
     }
