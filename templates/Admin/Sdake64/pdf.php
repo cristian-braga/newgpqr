@@ -23,7 +23,7 @@ $html = '
   <!--<th colspan="3" style="text-align: center;">PROTOCOLO</th>-->
 </tr>
 <tr>
-  <td colspan="12" style="font-size: 14px;text-align: center;padding: 9px;">COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          Rua da Bahia, 2277 - Lourdes - Belo Horizonte - MG - CEP: 30.160-012<br>                                                 TEL:(31) 3339-1600 -                                              Expedição de serviços: 3339-1142</td>
+  <td colspan="12" style="font-size: 14px;text-align: center;padding: 9px;">COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          Rua da Bahia, 2277 - Savassi - Belo Horizonte - MG - CEP: 30.160-019<br>                                                 TEL:(31) 3339-1600 -                                              Expedição de serviços: 3339-1142</td>
   <!--<td colspan="3" rowspan="2"></td>-->
 </tr>
 <tr>
@@ -131,7 +131,7 @@ $mpdf->allow_charset_conversion = true;
 
 $mpdf->WriteHTML($html);
 
-$mpdf->Output('Ata_de_reuniao.pdf', \Mpdf\Output\Destination::INLINE);
+$mpdf->Output('Sdake64.pdf', \Mpdf\Output\Destination::INLINE);
 // imprime  \Mpdf\Output\Destination::DOWNLOAD
 
 return $response;

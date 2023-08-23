@@ -2,35 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
-/**
- * Sdake64 Controller
- *
- * @property \App\Model\Table\Sdake64Table $Sdake64
- * @method \App\Model\Entity\Sdake64[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+use App\Controller\AppController;
+
 class Sdake64Controller extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
         $sdake64 = $this->paginate($this->Sdake64);
 
         $this->set(compact('sdake64'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Sdake64 id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $sdake64 = $this->Sdake64->get($id, [
@@ -39,12 +22,6 @@ class Sdake64Controller extends AppController
 
         $this->set(compact('sdake64'));
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $sdake64 = $this->Sdake64->newEmptyEntity();
@@ -73,14 +50,6 @@ class Sdake64Controller extends AppController
         }
         $this->set(compact('sdake64'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Sdake64 id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $sdake64 = $this->Sdake64->get($id, [
@@ -111,14 +80,6 @@ class Sdake64Controller extends AppController
         }
         $this->set(compact('sdake64'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Sdake64 id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

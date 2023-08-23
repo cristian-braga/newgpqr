@@ -85,7 +85,7 @@
             <?= $this->Html->link(
                 '<i class="fa fa-newspaper fa-3x" aria-hidden="true"></i>
                 <h5>REMESSAS</h5>',
-                ['controller' => 'Remessas', 'action' => 'index'],
+                ['controller' => 'Menu', 'action' => 'menuremessas'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>

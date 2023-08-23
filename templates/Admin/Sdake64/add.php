@@ -1,12 +1,4 @@
 
-<?php
-
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Sdake64 $sdake64
- */
-?>
-
 <style>
     .btn-secondary{
         margin-left: 15px;
