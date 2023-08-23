@@ -22,6 +22,7 @@ class CdController extends AppController
             $data = $this->request->getData();
             $cd = $this->Cd->patchEntity($cd, $data);
             $data['funcionario'] = 'Itallo';
+            $cd = $this->Cd->patchEntity($cd, $data);
             if ($this->Cd->save($cd)) {
                 $this->Flash->success(__('The cd has been saved.'));
 

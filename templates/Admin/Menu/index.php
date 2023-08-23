@@ -94,7 +94,7 @@
             <?= $this->Html->link(
                 '<i class="fa fa-upload fa-3x" aria-hidden="true"></i>
                 <h5>RELATÓRIOS</h5>',
-                ['controller' => 'Relatorios', 'action' => 'index'],
+                ['controller' => 'Menu', 'action' => 'menurelatorios'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>

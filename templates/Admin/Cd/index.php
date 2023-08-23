@@ -10,7 +10,6 @@
                     <th><?= $this->Paginator->sort('cliente') ?></th>
                     <th><?= $this->Paginator->sort('descricao') ?></th>
                     <th><?= $this->Paginator->sort('quantidade') ?></th>
-
                     <th><?= $this->Paginator->sort('observacao') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>

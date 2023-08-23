@@ -31,11 +31,10 @@
             <label class="form-label">Observação Email:</label>
             <?php echo $this->Form->control('observacao', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Observacao', 'label' => false]); ?>
         </div>
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
             <label class="form-label">Observação Email:</label>
             <?php echo $this->Form->control('funcionario', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Observacao', 'label' => false]); ?>
-        </div>
-        <div class="form-group col-md-10"></div>
+        </div> -->
         <div class="col-md-2" style="margin-top: 15px;">
             <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
             <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:15px;']) ?>
