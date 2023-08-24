@@ -5,7 +5,7 @@
             <tr>
                 <th>Serviço</th>
                 <th><?= $this->Paginator->sort('data_impressao', ['label' => 'Data Impressão']) ?></th>
-                <th>Responsável</th>
+                <th><?= $this->Paginator->sort('funcionario', ['label' => 'Responsável']) ?></th>
                 <th>Remessa/OCR</th>
                 <th>Job</th>
                 <th>Documentos</th>
@@ -27,7 +27,7 @@
                     <td class="bg-success-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'voltarEtapa', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Impressão". Deseja continuar?', $impressao->atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['action' => 'voltarEtapa', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Impressão". Deseja continuar?', $impressao->atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -51,8 +51,6 @@ class AtividadeController extends AppController
 
     public function add()
     {
-        $atividade = $this->Atividade->newEmptyEntity();
-
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
 
@@ -101,7 +99,7 @@ class AtividadeController extends AppController
 
         $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servicos'));
+        $this->set(compact('servicos'));
     }
 
     public function edit($id = null)
@@ -162,48 +160,18 @@ class AtividadeController extends AppController
             $dados = $this->request->getData();
 
             for ($i = 0; $i < count($dados['servico_id']); $i++) {
-                $registroAtividade = $this->Atividade->get($dados['servico_id'][$i]);
+                if ($dados['impresso'][$i] == 1) {
+                    $status = 3;  // Aguardando Impressão
+                } else {
+                    $status = 7;  // Aguardando Triagem
+                }
 
-                $registroAtividade->status_atividade_id = 2;  // Confirmado
-
-                $this->Atividade->save($registroAtividade);
-
-                $this->salvaProximaEtapa($dados['impresso'][$i], $registroAtividade);               
+                $this->AtividadeService->atualizaStatus($dados['servico_id'][$i], $status);
             }
     
             $this->Flash->success('Atividade(s) lançada(s) com sucesso!');
             
             return $this->redirect(['action' => 'index']);
-        }
-    }
-
-    public function salvaProximaEtapa($dados_impresso, $registroAtividade)
-    {
-        if ($dados_impresso == 1) {
-            $impressaoTable = $this->getTableLocator()->get('Impressao');
-            $impressao = $impressaoTable->newEmptyEntity();
-
-            $nova_impressao = [
-                'funcionario' => 'Cristian',
-                'atividade_id' => $registroAtividade->id,
-                'status_atividade_id' => 3,  // Aguardando Impressão
-                'impressora_id' => 5
-            ];
-
-            $impressao = $impressaoTable->patchEntity($impressao, $nova_impressao);
-            $impressaoTable->save($impressao);
-        } else {
-            $triagemTable = $this->getTableLocator()->get('Triagem');
-            $triagem = $triagemTable->newEmptyEntity();
-
-            $nova_triagem = [
-                'funcionario' => 'Cristian',
-                'atividade_id' => $registroAtividade->id,
-                'status_atividade_id' => 7  // Aguardando Triagem
-            ];
-
-            $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);
-            $triagemTable->save($triagem);
         }
     }
 }

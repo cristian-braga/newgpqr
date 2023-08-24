@@ -68,7 +68,7 @@ class AtividadeService
     public function buscaRegistro($id)
     {
         $atividade = $this->AtividadeTable->get($id, [
-            'contain' => [],
+            'contain' => ['Servico'],
         ]);
 
         return $atividade;
@@ -84,6 +84,19 @@ class AtividadeService
         $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
 
         $this->AtividadeTable->patchEntity($atividade, $dados);
+
+        $this->AtividadeTable->save($atividade);
+
+        return true;
+    }
+
+    public function atualizaStatus($id, $status)
+    {
+        $atividade = $this->buscaRegistro($id);
+
+        $novo_status['status_atividade_id'] = $status;
+
+        $this->AtividadeTable->patchEntity($atividade, $novo_status);
 
         $this->AtividadeTable->save($atividade);
 
