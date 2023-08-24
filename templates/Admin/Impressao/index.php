@@ -7,33 +7,33 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Serviço</th>
-                    <th>Cadastro</th>
+                    <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
+                    <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
                     <th>Remessa/OCR</th>
                     <th>Job</th>
                     <th>Documentos</th>
-                    <th>Postagem</th>
+                    <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                     <th>Recibos</th>
                     <th>Etapa</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (!$impressao->isEmpty()) : ?>
-                    <?php foreach ($impressao as $impressao) : ?>
+                <?php if (!$atividade->isEmpty()) : ?>
+                    <?php foreach ($atividade as $atividade) : ?>
                         <tr>
-                            <td><input type="checkbox" name="selecionados[]" value="<?= $impressao->id ?>"></td>
-                            <td><?= $this->Html->link($impressao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $impressao->atividade_id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
-                            <td><?= h($impressao->atividade->data_cadastro) ?></td>
-                            <td><?= h($impressao->atividade->remessa_atividade) ?></td>
-                            <td><?= h($impressao->atividade->job) ?></td>
-                            <td><?= $this->Number->format($impressao->atividade->quantidade_documentos) ?></td>
-                            <td><?= h($impressao->atividade->data_postagem) ?></td>
-                            <td><?= h($impressao->atividade->recibo_postagem) ?></td>
-                            <td class="bg-warning-subtle"><b><?= h($impressao->status_atividade->status_atual) ?></b></td>
+                            <td><input type="checkbox" name="selecionados[]" value="<?= $atividade->id ?>" class="btn-shadow"></td>
+                            <td><?= $this->Html->link($atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                            <td><?= h($atividade->data_cadastro) ?></td>
+                            <td><?= h($atividade->remessa_atividade) ?></td>
+                            <td><?= h($atividade->job) ?></td>
+                            <td><?= $this->Number->format($atividade->quantidade_documentos) ?></td>
+                            <td><?= h($atividade->data_postagem) ?></td>
+                            <td><?= h($atividade->recibo_postagem) ?></td>
+                            <td class="bg-warning-subtle"><b><?= h($atividade->status_atividade->status_atual) ?></b></td>
                             <td>
-                                <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $impressao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                                <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $impressao->atividade->servico->nome_servico)]) ?>
+                                <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                                <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow','confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $atividade->servico->nome_servico)]) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -9,30 +9,28 @@ use App\Controller\Service\AtividadeService;
 class ImpressaoController extends AppController
 {
     protected $AtividadeService;
+    protected $AtividadeTable;
 
     public function initialize(): void
     {
         parent::initialize();
         $this->AtividadeService = new AtividadeService();
+        $this->AtividadeTable = $this->getTableLocator()->get('Atividade');
     }
     
     public function index()
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => [
-                'Atividade' => ['Servico'],
-                'StatusAtividade'
-            ],
-            'conditions' => ['Impressao.status_atividade_id' => 3],
-            'sortableFields' => ['Atividade.data_cadastro'],
-            'order' => ['Atividade.data_cadastro' => 'desc']
+            'contain' => ['Servico', 'StatusAtividade'],
+            'conditions' => ['status_atividade_id' => 3],
+            'order' => ['data_cadastro' => 'desc']
         ];
 
-        $impressao = $this->paginate($this->Impressao);
+        $atividade = $this->paginate($this->AtividadeTable);
 
         // -------------------------------- BALANÇO DAS IMPRESSORAS ----------------------------------
-        // Consulta na ImpressaoTable dos valores para o cálculo do balanceamento
+        // Método na ImpressaoTable dos valores para o cálculo do balanceamento
         $balanco_mensal = $this->Impressao->dadosImpressoras()->toArray();
 
         $nuv_1['nome'] = 'Nuvera 1 - Z8PB';
@@ -60,10 +58,47 @@ class ImpressaoController extends AppController
         }
         // ------------------------------------------------------------------------------------------
 
-        // Consulta na ImpressaoTable dos valores para o ranking
+        // Método na ImpressaoTable dos valores para o ranking
         $ranking_mensal = $this->Impressao->dadosImpressoes()->toArray();
 
-        $this->set(compact('impressao', 'balanco_mensal', 'nuv_1', 'nuv_2', 'ranking_mensal'));
+        $this->set(compact('atividade', 'balanco_mensal', 'nuv_1', 'nuv_2', 'ranking_mensal'));
+    }
+
+    public function add()
+    {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData();
+
+            $servico_ids = $dados['servico_id'];
+            $impressoras = $dados['impressora'];
+
+            $impressoes = [];
+
+            for ($i = 0; $i < count($servico_ids); $i++) {
+                $impressao = $this->Impressao->newEmptyEntity();
+
+                $nova_impressao = [
+                    'funcionario' => 'CristianImp',
+                    'data_impressao' => date('Y-m-d H:i:s'),
+                    'atividade_id' => $servico_ids[$i],
+                    'status_atividade_id' => 4,  // Impresso
+                    'impressora_id' => $impressoras[$i]
+                ];
+    
+                $impressao = $this->Impressao->patchEntity($impressao, $nova_impressao);
+
+                $impressoes[] = $impressao;
+
+                $this->AtividadeService->atualizaStatus($servico_ids[$i], 13);  // Aguardando Conferência
+            }
+
+            if ($this->Impressao->saveMany($impressoes)) {
+                $this->Flash->success(__('Registro(s) lançado(s) com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Falha ao lançar registro(s). Tente novamente.'));
+        }
     }
 
     public function edit($id = null)
@@ -122,59 +157,20 @@ class ImpressaoController extends AppController
             $servicos = [];
     
             foreach ($selecionados as $id) {
-                $query = $this->Impressao->get($id, [
-                    'contain' => ['Atividade' => ['Servico'], 'StatusAtividade', 'Impressora']
+                $query = $this->AtividadeTable->get($id, [
+                    'contain' => ['Servico', 'StatusAtividade']
                 ]);
 
                 $servicos[] = $query;
             }
         }
 
-        $impressora = $this->Impressao->Impressora
+        $impressoras = $this->Impressao->Impressora
             ->find('list', ['keyField' => 'id', 'valueField' => 'nome_impressora'])
             ->where(['id IN' => [1, 2, 3]])
             ->all();
 
-        $this->set(compact('servicos', 'impressora'));
-    }
-
-    public function atualizaImpressao()
-    {
-        if ($this->request->is('post')) {
-            $dados = $this->request->getData();
-
-            for ($i = 0; $i < count($dados['servico_id']); $i++) {
-                $registroImpressao = $this->Impressao->get($dados['servico_id'][$i]);
-
-                $registroImpressao->funcionario = 'CristianImp';
-                $registroImpressao->data_impressao = date('Y-m-d H:i:s');
-                $registroImpressao->status_atividade_id = 4;  // Impresso
-                $registroImpressao->impressora_id = $dados['impressora'][$i];
-                
-                $this->Impressao->save($registroImpressao);
-
-                $this->novaConferencia($registroImpressao); 
-            }
-    
-            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
-
-            return $this->redirect(['action' => 'index']);
-        }
-    }
-
-    public function novaConferencia($registroImpressao)
-    {
-        $conferenciaTable = $this->getTableLocator()->get('Conferencia');
-        $conferencia = $conferenciaTable->newEmptyEntity();
-
-        $nova_conferencia = [
-            'funcionario' => 'CristianImp',
-            'atividade_id' => $registroImpressao->atividade_id,
-            'status_atividade_id' => 13  // Aguardando Conferência
-        ];
-
-        $conferencia = $conferenciaTable->patchEntity($conferencia, $nova_conferencia);
-        $conferenciaTable->save($conferencia); 
+        $this->set(compact('servicos', 'impressoras'));
     }
 
     // TELA DE SERVIÇOS IMPRESSOS
@@ -196,20 +192,20 @@ class ImpressaoController extends AppController
         $this->set(compact('impressao'));
     }
 
-    /* Esse método altera os campos 'data_impressao', 'status_atividade_id', 'impressora_id' para que o serviço seja
+    /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
     novamente acessível na index e possa ser refeito */
-    public function voltarEtapa($id = null)
+    public function voltarEtapa($atividade_id)
     {
-        $impressao = $this->Impressao->get($id);
-
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $dados['data_impressao'] = null;
-            $dados['status_atividade_id'] = 3;  // Aguardando Impressão
-            $dados['impressora_id'] = 5;  // Não Impresso
+            $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 3);  // Aguardando Impressão
 
-            $impressao = $this->Impressao->patchEntity($impressao, $dados);
+            if ($sucesso) {
+                $impressao = $this->Impressao->find()
+                    ->where(['atividade_id' => $atividade_id])
+                    ->first();
 
-            if ($this->Impressao->save($impressao)) {
+                $this->Impressao->delete($impressao);
+
                 $this->Flash->success(__('Registro alterado com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);

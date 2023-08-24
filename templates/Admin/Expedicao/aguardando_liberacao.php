@@ -18,21 +18,21 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!$expedicao->isEmpty()) : ?>
-                    <?php foreach ($expedicao as $expedicao) : ?>
+                <?php if (!$atividade->isEmpty()) : ?>
+                    <?php foreach ($atividade as $atividade) : ?>
                         <tr>
-                            <td><input type="checkbox" name="selecionados[]" value="<?= $expedicao->id ?>"></td>
-                            <td><?= $this->Html->link($expedicao->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $expedicao->atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
-                            <td><?= h($expedicao->atividade->data_cadastro) ?></td>
-                            <td><?= h($expedicao->atividade->remessa_atividade) ?></td>
-                            <td><?= h($expedicao->atividade->job) ?></td>
-                            <td><?= $this->Number->format($expedicao->atividade->quantidade_documentos) ?></td>
-                            <td><?= h($expedicao->atividade->data_postagem) ?></td>
-                            <td><?= h($expedicao->atividade->recibo_postagem) ?></td>
-                            <td class="bg-warning-subtle"><b><?= h($expedicao->status_atividade->status_atual) ?></b></td>
+                            <td><input type="checkbox" name="selecionados[]" value="<?= $atividade->id ?>" class="btn-shadow"></td>
+                            <td><?= $this->Html->link($atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $atividade->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                            <td><?= h($atividade->data_cadastro) ?></td>
+                            <td><?= h($atividade->remessa_atividade) ?></td>
+                            <td><?= h($atividade->job) ?></td>
+                            <td><?= $this->Number->format($atividade->quantidade_documentos) ?></td>
+                            <td><?= h($atividade->data_postagem) ?></td>
+                            <td><?= h($atividade->recibo_postagem) ?></td>
+                            <td class="bg-warning-subtle"><b><?= h($atividade->status_atividade->status_atual) ?></b></td>
                             <td>
-                                <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $expedicao->atividade_id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                                <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $expedicao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $expedicao->atividade->servico->nome_servico)]) ?>
+                                <?= $this->Html->link(__('Editar'), ['action' => 'editAtividade', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                                <?= $this->Html->link(__('Excluir'), ['controller' => 'Atividade', 'action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $atividade->servico->nome_servico)]) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
