@@ -133,4 +133,13 @@ class ExpedicaoTable extends Table
 
         return $rules;
     }
+
+    public function existeDado($atividade_id)
+    {
+        $query = $this->find()
+            ->where(['atividade_id' => $atividade_id])
+            ->first();
+
+        return $query;
+    }
 }

@@ -40,8 +40,6 @@ class ConferenciaController extends AppController
             $conferencias = [];
 
             for ($i = 0; $i < count($dados); $i++) {
-                $conferencia = $this->Conferencia->newEmptyEntity();
-
                 $nova_conferencia = [
                     'funcionario' => 'CristianConf',
                     'data_conferencia' => date('Y-m-d H:i:s'),
@@ -49,7 +47,14 @@ class ConferenciaController extends AppController
                     'status_atividade_id' => 14  // Conferido
                 ];
 
-                $conferencia = $this->Conferencia->patchEntity($conferencia, $nova_conferencia);
+                $existe_registro = $this->Conferencia->existeDado($dados[$i]);
+
+                if (!$existe_registro) {
+                    $conferencia = $this->Conferencia->newEmptyEntity();
+                    $conferencia = $this->Conferencia->patchEntity($conferencia, $nova_conferencia);
+                } else {
+                    $conferencia = $this->Conferencia->patchEntity($existe_registro, $nova_conferencia);
+                }
                 
                 $conferencias[] = $conferencia;
 
@@ -146,9 +151,7 @@ class ConferenciaController extends AppController
             $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 13);  // Aguardando Conferência
 
             if ($sucesso) {
-                $conferencia = $this->Conferencia->find()
-                    ->where(['atividade_id' => $atividade_id])
-                    ->first();
+                $conferencia = $this->Conferencia->existeDado($atividade_id);
 
                 $this->Conferencia->delete($conferencia);
 

@@ -40,8 +40,6 @@ class TriagemController extends AppController
             $triagens = [];
 
             for ($i = 0; $i < count($dados); $i++) {
-                $triagem = $this->Triagem->newEmptyEntity();
-
                 $nova_triagem = [
                     'funcionario' => 'CristianTri',
                     'data_triagem' => date('Y-m-d H:i:s'),
@@ -49,7 +47,14 @@ class TriagemController extends AppController
                     'status_atividade_id' => 8  // Triado
                 ];
 
-                $triagem = $this->Triagem->patchEntity($triagem, $nova_triagem);
+                $existe_registro = $this->Triagem->existeDado($dados[$i]);
+
+                if (!$existe_registro) {
+                    $triagem = $this->Triagem->newEmptyEntity();
+                    $triagem = $this->Triagem->patchEntity($triagem, $nova_triagem);
+                } else {
+                    $triagem = $this->Triagem->patchEntity($existe_registro, $nova_triagem);
+                }
                 
                 $triagens[] = $triagem;
 
@@ -146,9 +151,7 @@ class TriagemController extends AppController
             $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 7);  // Aguardando Triagem
 
             if ($sucesso) {
-                $triagem = $this->Triagem->find()
-                    ->where(['atividade_id' => $atividade_id])
-                    ->first();
+                $triagem = $this->Triagem->existeDado($atividade_id);
 
                 $this->Triagem->delete($triagem);
 

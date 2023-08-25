@@ -46,8 +46,6 @@ class ExpedicaoController extends AppController
             $expedicoes = [];
 
             for ($i = 0; $i < count($servico_ids); $i++) {
-                $expedicao = $this->Expedicao->newEmptyEntity();
-
                 $atividade = $this->AtividadeService->buscaRegistro($servico_ids[$i]);
 
                 $status_atual = $atividade->status_atividade_id;
@@ -73,7 +71,14 @@ class ExpedicaoController extends AppController
                     'status_atividade_id' => $status
                 ];
 
-                $expedicao = $this->Expedicao->patchEntity($expedicao, $dados_expedicao);
+                $existe_registro = $this->Expedicao->existeDado($servico_ids[$i]);
+
+                if (!$existe_registro) {
+                    $expedicao = $this->Expedicao->newEmptyEntity();
+                    $expedicao = $this->Expedicao->patchEntity($expedicao, $dados_expedicao);
+                } else {
+                    $expedicao = $this->Expedicao->patchEntity($existe_registro, $dados_expedicao);
+                }
 
                 $expedicoes[] = $expedicao;
 
@@ -204,9 +209,7 @@ class ExpedicaoController extends AppController
             $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, $status);
 
             if ($sucesso) {
-                $expedicao = $this->Expedicao->find()
-                    ->where(['atividade_id' => $atividade_id])
-                    ->first();
+                $expedicao = $this->Expedicao->existeDado($atividade_id);
 
                 $this->Expedicao->delete($expedicao);
 
