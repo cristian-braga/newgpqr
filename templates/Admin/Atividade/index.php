@@ -12,7 +12,7 @@
                     <th>Remessa/OCR</th>
                     <th>Job</th>
                     <th>Documentos</th>
-                    <th>Postagem</th>
+                    <th><?= $this->Paginator->sort('data_postagem', ['label' => 'Postagem']) ?></th>
                     <th>Recibos</th>
                     <th>Etapa</th>
                     <th>Ações</th>

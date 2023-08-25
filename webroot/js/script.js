@@ -14,3 +14,15 @@ function lancar() {
 }
 
 lancar();
+
+function desabilitaBotao() {
+    let botoes = document.querySelectorAll('button[type="submit"]');
+
+    document.addEventListener('submit', function() {
+        botoes.forEach(function(botao) {
+            botao.disabled = true;
+        });
+    });
+}
+
+desabilitaBotao();

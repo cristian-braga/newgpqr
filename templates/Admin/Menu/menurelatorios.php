@@ -45,7 +45,7 @@
             <?php echo $this->Html->link(
                 '<i class="fa-solid fa-car fa-3x spin" aria-hidden="true"></i>
                 <h5>Relatório Multas</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'RelatorioMultas', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
@@ -77,7 +77,7 @@
             <?php echo $this->Html->link(
                 '<i class="fa-solid fa-rotate-left fa-3x spin" aria-hidden="true"></i>
                 <h5>Devolução Correios</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'Devolucao', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
@@ -89,4 +89,3 @@
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
-        

@@ -1,5 +1,5 @@
 <h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
-<?= $this->Form->create(null, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
+<?= $this->Form->create($atividade, ['id' => 'form', 'class' => 'mx-auto p-3']) ?>
     <div class="row">
         <div class="col-md-2">
             <label class="form-label">Serviço</label>
@@ -66,7 +66,8 @@
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>
-                </div> `;
+                </div>
+            `;
 
             novo_campo.classList.add('row', 'mt-4');
 

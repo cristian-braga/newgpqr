@@ -57,7 +57,7 @@ class Sdake64Table extends Table
         $validator
             ->integer('paginas')
             ->requirePresence('paginas', 'create')
-            ->notEmptyString('paginas');
+            ->allowEmptyString('paginas');
 
         $validator
             ->scalar('job')
