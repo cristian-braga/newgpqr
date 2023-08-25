@@ -75,8 +75,6 @@ class ImpressaoController extends AppController
             $impressoes = [];
 
             for ($i = 0; $i < count($servico_ids); $i++) {
-                $impressao = $this->Impressao->newEmptyEntity();
-
                 $nova_impressao = [
                     'funcionario' => 'CristianImp',
                     'data_impressao' => date('Y-m-d H:i:s'),
@@ -84,8 +82,15 @@ class ImpressaoController extends AppController
                     'status_atividade_id' => 4,  // Impresso
                     'impressora_id' => $impressoras[$i]
                 ];
-    
-                $impressao = $this->Impressao->patchEntity($impressao, $nova_impressao);
+
+                $existe_registro = $this->Impressao->existeDado($servico_ids[$i]);
+
+                if (!$existe_registro) {
+                    $impressao = $this->Impressao->newEmptyEntity();
+                    $impressao = $this->Impressao->patchEntity($impressao, $nova_impressao);
+                } else {
+                    $impressao = $this->Impressao->patchEntity($existe_registro, $nova_impressao);
+                }
 
                 $impressoes[] = $impressao;
 
@@ -200,9 +205,7 @@ class ImpressaoController extends AppController
             $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 3);  // Aguardando Impressão
 
             if ($sucesso) {
-                $impressao = $this->Impressao->find()
-                    ->where(['atividade_id' => $atividade_id])
-                    ->first();
+                $impressao = $this->Impressao->existeDado($atividade_id);
 
                 $this->Impressao->delete($impressao);
 

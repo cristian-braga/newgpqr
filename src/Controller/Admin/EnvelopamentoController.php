@@ -40,8 +40,6 @@ class EnvelopamentoController extends AppController
             $envelopamentos = [];
 
             for ($i = 0; $i < count($dados); $i++) {
-                $envelopamento = $this->Envelopamento->newEmptyEntity();
-
                 $novo_envelopamento = [
                     'funcionario' => 'CristianEnv',
                     'data_envelopamento' => date('Y-m-d H:i:s'),
@@ -49,7 +47,14 @@ class EnvelopamentoController extends AppController
                     'status_atividade_id' => 6  // Envelopado
                 ];
 
-                $envelopamento = $this->Envelopamento->patchEntity($envelopamento, $novo_envelopamento);
+                $existe_registro = $this->Envelopamento->existeDado($dados[$i]);
+
+                if (!$existe_registro) {
+                    $envelopamento = $this->Envelopamento->newEmptyEntity();
+                    $envelopamento = $this->Envelopamento->patchEntity($envelopamento, $novo_envelopamento);
+                } else {
+                    $envelopamento = $this->Envelopamento->patchEntity($existe_registro, $novo_envelopamento);
+                }
                 
                 $envelopamentos[] = $envelopamento;
 
@@ -135,9 +140,7 @@ class EnvelopamentoController extends AppController
             $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 5);  // Aguardando Envelopamento
 
             if ($sucesso) {
-                $envelopamento = $this->Envelopamento->find()
-                    ->where(['atividade_id' => $atividade_id])
-                    ->first();
+                $envelopamento = $this->Envelopamento->existeDado($atividade_id);
 
                 $this->Envelopamento->delete($envelopamento);
 
