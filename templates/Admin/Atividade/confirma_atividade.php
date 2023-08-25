@@ -32,6 +32,6 @@
             </tbody>
         </table>
     </div>
-    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary mb-4']) ?>
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary mb-4']) ?>
 <?= $this->Form->end() ?>

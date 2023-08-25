@@ -51,7 +51,7 @@
         </tr>
     </table>
     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow mb-3']) ?>
-    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $nome_servico)]) ?>
+    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $nome_servico)]) ?>
 </div>
 
 <?php if (!empty($atividade->impressao)) : ?>
@@ -74,7 +74,7 @@
                         <td><?= h($impressao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['controller' => 'Impressao', 'action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Impressao', 'action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a impressão do serviço:  {0}?', $nome_servico)]) ?>
+                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Impressao', 'action' => 'voltarEtapa', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Impressão". Deseja continuar?', $nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -100,7 +100,7 @@
                     <td><?= h($conferencia->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Conferencia', 'action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Conferencia', 'action' => 'delete', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a conferência do serviço:  {0}?', $nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Conferencia', 'action' => 'voltarEtapa', $conferencia->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Conferência". Deseja continuar?', $nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -125,7 +125,7 @@
                     <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Envelopamento', 'action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Envelopamento', 'action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o envelopamento do serviço:  {0}?', $nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Envelopamento', 'action' => 'voltarEtapa', $envelopamento->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Envelopamento". Deseja continuar?', $nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -150,7 +150,7 @@
                     <td><?= h($triagem->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Triagem', 'action' => 'edit', $triagem->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Triagem', 'action' => 'delete', $triagem->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a triagem do serviço:  {0}?', $nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Triagem', 'action' => 'voltarEtapa', $triagem->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Triagem". Deseja continuar?', $nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -186,7 +186,7 @@
                         <td><?= h($expedicao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['controller' => 'Expedicao', 'action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Expedicao', 'action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a expedição do serviço:  {0}?', $nome_servico)]) ?>
+                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Expedicao', 'action' => 'voltarEtapa', $expedicao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Expedição/Liberação". Deseja continuar?', $nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

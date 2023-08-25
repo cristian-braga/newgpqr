@@ -1,5 +1,5 @@
 <h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
-<?= $this->Form->create($atividade, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
+<?= $this->Form->create(null, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
     <div class="row">
         <div class="col-md-2">
             <label class="form-label">Serviço</label>
