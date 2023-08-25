@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\I18n\FrozenTime;
+use DateTime;
 
 /**
  * Demandas Controller
@@ -55,7 +56,7 @@ class DemandasController extends AppController
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
             $dados['status'] = 'Em aberto';
-            $demanda->data_abertura = FrozenTime::now();
+            $demanda->data_abertura = new DateTime();
 
             $demanda = $this->Demandas->patchEntity($demanda, $dados);
             
@@ -185,7 +186,7 @@ class DemandasController extends AppController
         
         if ($this->request->is(['patch', 'post', 'put'])) {
             $demanda = $this->Demandas->patchEntity($demanda, $this->request->getData());
-            $demanda->data_termino = FrozenTime::now(); 
+            $demanda->data_termino = new DateTime(); 
             $demanda->status = 'Finalizada';
             if ($this->Demandas->save($demanda)) {
                 $this->Flash->success(__('Demanda finalizada! :)'));

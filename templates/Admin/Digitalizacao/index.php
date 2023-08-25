@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var iterable<\App\Model\Entity\Digitalizacao> $digitalizacao
@@ -19,21 +20,18 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($digitalizacao as $dtg): ?>
-                <tr>
-                    <td><?= $this->Number->format($dtg->quantidade_documentos) ?></td>
-                    <td><?= h($dtg->periodo) ?></td>
-                    <td><?= $dtg->has('servico') ? $this->Html->link($dtg->servico->id, ['controller' => 'Servico', 'action' => 'view', $dtg->servico->id]) : '' ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107"></i>' . __('')), ['action' => 'edit', $dtg->id], ['escape' => false, 'class' => 'p-2']); ?>
-                        <?= $this->Form->postLink(__('<i class="fa-regular fa-trash-can fa-lg" style="color: #dc3545;"></i>' . __('')), ['action' => 'delete', $dtg->id], ['escape' => false, 'class' => 'p-2'], ['confirm' => __('Tem certeza que quer deletar essa Digitalizacao # {0}?', $dtg->id)]) ?>
-                    </td>
-                </tr>
+                <?php foreach ($digitalizacao as $dtg) : ?>
+                    <tr>
+                        <td><?= $this->Number->format($dtg->quantidade_documentos) ?></td>
+                        <td><?= h($dtg->periodo) ?></td>
+                        <td><?= $this->Html->link($dtg->servico->nome_servico, ['controller' => 'Servico', $dtg->servico->id]) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107"></i>' . __('')), ['action' => 'edit', $dtg->id], ['escape' => false, 'class' => 'p-2']); ?>
+                            <?= $this->Form->postLink(__('<i class="fa-regular fa-trash-can fa-lg" style="color: #dc3545;"></i>' . __('')), ['action' => 'delete', $dtg->id], ['escape' => false, 'class' => 'p-2'], ['confirm' => __('Tem certeza que quer deletar essa Digitalizacao # {0}?', $dtg->id)]) ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
     <?= $this->element('pagination') ?>
-
-
-

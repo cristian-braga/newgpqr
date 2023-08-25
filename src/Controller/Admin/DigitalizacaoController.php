@@ -1,23 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
-/**
- * Digitalizacao Controller
- *
- * @property \App\Model\Table\DigitalizacaoTable $Digitalizacao
- * @method \App\Model\Entity\Digitalizacao[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
 class DigitalizacaoController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
+
     public function index()
     {
         $this->paginate = [
@@ -29,13 +20,6 @@ class DigitalizacaoController extends AppController
         $this->set(compact('digitalizacao'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Digitalizacao id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $digitalizacao = $this->Digitalizacao->get($id, [
@@ -45,28 +29,50 @@ class DigitalizacaoController extends AppController
         $this->set(compact('digitalizacao'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
+
         $digitalizacao = $this->Digitalizacao->newEmptyEntity();
 
         $servicos = $this->Digitalizacao->Servico
-         ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-         ->order(['nome_servico' => 'asc'])
-         ->all();
-         
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
+
         if ($this->request->is('post')) {
-            $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $this->request->getData());
-            if ($this->Digitalizacao->save($digitalizacao)) {
+
+            $data = $this->request->getData();
+
+            $servico_ids = $data['servico_id'];
+            $quantDOM = $data['quantidade_documentos'];
+            $periodo = $data['periodo'];
+
+            $digitalizacoesEnviar = [];
+
+            for ($i = 0; $i < count($servico_ids); $i++) {
+
+                $digitalizacao = $this->Digitalizacao->newEmptyEntity();
+
+                $digitalizacoes = [
+                    'servico_id' => $servico_ids[$i],
+                    'quantidade_documentos' => $quantDOM[$i],
+                    'periodo' => $periodo[$i]
+                ];
+
+                $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $digitalizacoes);
+
+                $digitalizacoesEnviar[] = $digitalizacao;
+            }
+
+            if ($this->Digitalizacao->saveMany($digitalizacoesEnviar)) {
+
                 $this->Flash->success(__('The digitalizacao has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } else {
+
+                $this->Flash->error(__('The digitalizacao could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The digitalizacao could not be saved. Please, try again.'));
         }
 
 
@@ -80,6 +86,7 @@ class DigitalizacaoController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
     public function edit($id = null)
     {
         $digitalizacao = $this->Digitalizacao->get($id, [
