@@ -1,20 +1,13 @@
-<?php
 
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\Digitalizacao> $digitalizacao
- */
-?>
 <h2 class="text-center text-gpqr mt-2 mb-4">Digitalização</h2>
-<?= $this->Form->create($digitalizacao, ['id' => 'form', 'class' => 'mx-auto p-3 form ']) ?>
-
 <div class="row">
     <div class="col-md-3">
         <label class="form-label">Serviço</label>
-        <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+        <?= $this->Form->create(null, ['type' => 'get']) ?>
+        <?= $this->Form->control('servico_id', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+        <?= $this->Form->submit('Filtrar'); ?>
+        <?= $this->Form->end() ?>
     </div>
-    <?= $this->Form->end(); ?>
-    
     <div class="digitalizacao index content">
         <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-end mb-4']) ?>
         <div class="table-responsive table-gpqr">

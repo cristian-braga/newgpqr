@@ -15,9 +15,25 @@ class DigitalizacaoController extends AppController
             'limit' => 20,
             'contain' => ['Servico'],
         ];
+
+
+        $servicos = $this->Digitalizacao->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->order(['nome_servico' => 'asc'])
+            ->all();
+        
+        if($this->request->is('get')) {
+            $filtroServico = $this->request->getData('nome_servico');
+
+        if(!empty($filtroServico)) {
+            $servicos = $this->paginate['nome_servico'] = $filtroServico;
+        }
+
         $digitalizacao = $this->paginate($this->Digitalizacao);
 
-        $this->set(compact('digitalizacao'));
+        }
+        
+        $this->set(compact('digitalizacao', 'servicos'));
     }
 
     public function view($id = null)
