@@ -10,9 +10,14 @@ class CdController extends AppController
 {
     public function index()
     {
+        $this->paginate = [ 'limit' => 15,
+            'order' => ['dataAtual' => 'asc'],
+
+        ];
         $cd = $this->paginate($this->Cd);
 
         $this->set(compact('cd'));
+
     }
 
     public function add()

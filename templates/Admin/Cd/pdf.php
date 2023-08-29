@@ -90,7 +90,7 @@ $html = '<head>
     <td colspan="5"></td>
   </tr>
 </table>
-<span style="font-size: 10px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SITE: http://www.prodemge.mg.gov.br&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-MAIL: atendimento@prodemge.gov.br &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMEIRA VIA - CLIENTE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEGUNDA VIA - GIM    </span>
+<span style="font-size: 10px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SITE: http://www.prodemge.mg.gov.br&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-MAIL: atendimento@prodemge.gov.br &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMEIRA VIA - CLIENTE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEGUNDA VIA - GIM    </span><br><br><br><br><br><br>
 
   </body>';
 // pega o conteudo do buffer, insere na variavel e limpa a memória
@@ -100,7 +100,12 @@ $mpdf->allow_charset_conversion = true;
 
 $mpdf->WriteHTML($html);
 
-$mpdf->Output('Cd.pdf', \Mpdf\Output\Destination::INLINE);
+for ($i = 0; $i < 1; $i++) {
+  $mpdf->WriteHTML($html);
+}
+
+
+$mpdf->Output('Saalm.pdf', \Mpdf\Output\Destination::INLINE);
 // imprime  \Mpdf\Output\Destination::DOWNLOAD
 
 return $response;

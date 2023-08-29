@@ -1,27 +1,24 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class Sdake64Controller extends AppController
 {
     public function index()
     {
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['dataAtual' => 'asc']
+        ];
+
         $sdake64 = $this->paginate($this->Sdake64);
-
         $this->set(compact('sdake64'));
     }
-    public function view($id = null)
-    {
-        $sdake64 = $this->Sdake64->get($id, [
-            'contain' => [],
-        ]);
 
-        $this->set(compact('sdake64'));
-    }
     public function add()
     {
         $sdake64 = $this->Sdake64->newEmptyEntity();
@@ -48,6 +45,7 @@ class Sdake64Controller extends AppController
         }
         $this->set(compact('sdake64'));
     }
+
     public function edit($id = null)
     {
         $sdake64 = $this->Sdake64->get($id, [
@@ -78,6 +76,7 @@ class Sdake64Controller extends AppController
         }
         $this->set(compact('sdake64'));
     }
+    
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

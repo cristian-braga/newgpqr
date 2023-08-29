@@ -5,13 +5,13 @@
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('dataAtual') ?></th>
-                    <th><?= $this->Paginator->sort('ocorrencia') ?></th>
-                    <th><?= $this->Paginator->sort('cliente') ?></th>
-                    <th><?= $this->Paginator->sort('descricao') ?></th>
-                    <th><?= $this->Paginator->sort('quantidade') ?></th>
-                    <th><?= $this->Paginator->sort('observacao') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th>Data</th>
+                    <th>Ocorrência</th>
+                    <th>Cliente</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Observação</th>
+                    <th class="actions">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +24,9 @@
                         <td><?= $this->Number->format($cd->quantidade) ?></td>
                         <td><?= h($cd->observacao) ?></td>
                         <td>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cd->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cd->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $cd->id)]) ?>
-                            <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $cd->id],['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cd->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                            <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $cd->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $cd->id)]) ?>
+                            <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $cd->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
