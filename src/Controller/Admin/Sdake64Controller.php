@@ -1,60 +1,32 @@
 <?php
-
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
-/**
- * Sdake64 Controller
- *
- * @property \App\Model\Table\Sdake64Table $Sdake64
- * @method \App\Model\Entity\Sdake64[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
+
 class Sdake64Controller extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['dataAtual' => 'asc']
+        ];
+
         $sdake64 = $this->paginate($this->Sdake64);
-
         $this->set(compact('sdake64'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Sdake64 id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $sdake64 = $this->Sdake64->get($id, [
-            'contain' => [],
-        ]);
-
-        $this->set(compact('sdake64'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $sdake64 = $this->Sdake64->newEmptyEntity();
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
-
+            error_reporting(0);
             $data['funcionario'] = 'Itallo';
-            $data['sistema'] = 'Sdake64';
-
             $data['total']  = $data['copias']  * $data['paginas'];
             $data['total1'] = $data['copias1'] * $data['paginas1'];
             $data['total2'] = $data['copias2'] * $data['paginas2'];
@@ -74,13 +46,6 @@ class Sdake64Controller extends AppController
         $this->set(compact('sdake64'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Sdake64 id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $sdake64 = $this->Sdake64->get($id, [
@@ -90,14 +55,14 @@ class Sdake64Controller extends AppController
             $sdake64 = $this->Sdake64->patchEntity($sdake64, $this->request->getData());
             $data = $this->request->getData();
 
+            error_reporting(0);
             $data['funcionario'] = 'Itallo';
-            $data['sistema'] = 'Sdake64';
-
             $data['total']  = $data['copias']  * $data['paginas'];
             $data['total1'] = $data['copias1'] * $data['paginas1'];
             $data['total2'] = $data['copias2'] * $data['paginas2'];
             $data['total3'] = $data['copias3'] * $data['paginas3'];
             $data['total4'] = $data['copias4'] * $data['paginas4'];
+            
 
             $data['totaltudo'] = $data['total'] + $data['total1'] + $data['total2'] + $data['total3'] + $data['total4'];
 
@@ -111,14 +76,7 @@ class Sdake64Controller extends AppController
         }
         $this->set(compact('sdake64'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Sdake64 id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+    
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
