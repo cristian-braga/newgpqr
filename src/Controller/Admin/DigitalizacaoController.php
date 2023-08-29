@@ -11,30 +11,36 @@ class DigitalizacaoController extends AppController
 
     public function index()
     {
-        $this->paginate = [
-            'limit' => 20,
-            'contain' => ['Servico'],
-        ];
+        $selectServico = filter_input(INPUT_GET, 'servico_id', FILTER_DEFAULT); // pega valor do meu select
+
+        if(isset($selectServico)) {
+            $this->paginate = [
+                'limit' => 20,
+                'contain' => ['Servico'],
+                'conditions' => ['Servico.id' => $selectServico]
+            ];
+        }
+        else {
+            $this->paginate = [
+                'limit' => 20,
+                'contain' => ['Servico'],
+            ];
+        }
 
 
         $servicos = $this->Digitalizacao->Servico
             ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
             ->order(['nome_servico' => 'asc'])
-            ->all();
+            ->all(); // consultar o banco de dados 
+
         
-        if($this->request->is('get')) {
-            $filtroServico = $this->request->getData('nome_servico');
-
-        if(!empty($filtroServico)) {
-            $servicos = $this->paginate['nome_servico'] = $filtroServico;
-        }
-
         $digitalizacao = $this->paginate($this->Digitalizacao);
 
-        }
         
+
         $this->set(compact('digitalizacao', 'servicos'));
     }
+        
 
     public function view($id = null)
     {
