@@ -73,6 +73,11 @@ class TriagemTable extends Table
             ->allowEmptyDateTime('data_triagem');
 
         $validator
+            ->date('data_cadastro')
+            ->requirePresence('data_cadastro', 'create')
+            ->notEmptyDate('data_cadastro');
+
+        $validator
             ->integer('atividade_id')
             ->notEmptyString('atividade_id');
 

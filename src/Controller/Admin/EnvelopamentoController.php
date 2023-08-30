@@ -43,6 +43,7 @@ class EnvelopamentoController extends AppController
                 $novo_envelopamento = [
                     'funcionario' => 'CristianEnv',
                     'data_envelopamento' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],
                     'status_atividade_id' => 6  // Envelopado
                 ];

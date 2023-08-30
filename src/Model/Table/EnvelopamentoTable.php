@@ -73,6 +73,11 @@ class EnvelopamentoTable extends Table
             ->allowEmptyDateTime('data_envelopamento');
 
         $validator
+            ->date('data_cadastro')
+            ->requirePresence('data_cadastro', 'create')
+            ->notEmptyDate('data_cadastro');
+
+        $validator
             ->integer('atividade_id')
             ->notEmptyString('atividade_id');
 
