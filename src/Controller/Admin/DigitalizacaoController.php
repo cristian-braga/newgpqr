@@ -45,7 +45,7 @@ class DigitalizacaoController extends AppController
     public function view($id = null)
     {
         $digitalizacao = $this->Digitalizacao->get($id, [
-            'contain' => ['Servico', 'StatusDigitalizacao'],
+            'contain' => ['Servico'],
         ]);
 
         $this->set(compact('digitalizacao'));
