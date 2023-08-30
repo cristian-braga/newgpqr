@@ -111,4 +111,20 @@ class ConferenciaTable extends Table
 
         return $query;
     }
+
+    public function servicos()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+            ->select([
+                'id' => 'Servico.id',
+                'servicos' => 'Servico.nome_servico'
+            ])
+            ->innerJoinWith('Atividade')
+            ->innerJoinWith('Atividade.Servico')
+            ->group('Servico.nome_servico')
+            ->orderAsc('Servico.nome_servico')
+            ->all();
+
+        return $query;
+    }
 }

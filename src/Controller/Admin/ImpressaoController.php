@@ -58,6 +58,7 @@ class ImpressaoController extends AppController
         }
         // ------------------------------------------------------------------------------------------
 
+        // -------------------------------- RANKING DE IMPRESSÕES ----------------------------------
         // Método na ImpressaoTable dos valores para o ranking
         $ranking_mensal = $this->Impressao->dadosImpressoes()->toArray();
 
@@ -182,6 +183,10 @@ class ImpressaoController extends AppController
     // TELA DE SERVIÇOS IMPRESSOS
     public function servicosImpressos()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -193,9 +198,31 @@ class ImpressaoController extends AppController
             'order' => ['data_impressao' => 'desc']
         ];
 
-        $impressao = $this->paginate($this->Impressao);
+        $query = $this->Impressao->find();
 
-        $this->set(compact('impressao'));
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Impressao.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Impressao.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Impressao->servicos()->toArray();
+
+        $impressao = $this->paginate($query);
+
+        $this->set(compact('impressao', 'servicos'));
     }
 
     /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
