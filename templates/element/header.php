@@ -8,10 +8,11 @@
     </div>
     <div class="collapse navbar-collapse justify-content-center">
         <ul class="navbar-nav navbar-ul-gpqr">
+
             <li>
                 <?= $this->Html->link(
                     '<i class="fa fa-home" aria-hidden="true"></i><span>MENU</span>',
-                    ['controller' => 'Menu', 'action' => 'index'],
+                    ['controller' => 'Menu', 'action' => '/index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>

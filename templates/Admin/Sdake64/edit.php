@@ -5,9 +5,7 @@
  * @var \App\Model\Entity\Sdake64 $sdake64
  */
 ?>
-
 <h3 class="text-center mt-2 mb-4">EDITAR SDAKE64</h3>
-<hr>
 
 <?= $this->Form->create($sdake64,['class' => 'mx-auto p-3 form', 'style' => 'width: 90%']) ?>
     <div class="row g-3">
@@ -20,7 +18,7 @@
     </div>
     <div class="row g-3">
         <div class="col-md-2">
-            <label class="form-label">Veículos com Averbação Incluída</label>
+            <label class="form-label" style="margin-bottom: 32px;">Veículos com Averbação Incluída</label>
             <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Cópias', 'label' => false]); ?>
             <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control mt-2', 'maxlenght' => 4, 'placeholder' => 'Páginas', 'label' => false]); ?>
         </div>

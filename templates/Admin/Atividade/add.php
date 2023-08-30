@@ -66,8 +66,7 @@
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>
-                </div>
-            `;
+                </div> `;
 
             novo_campo.classList.add('row', 'mt-4');
 
