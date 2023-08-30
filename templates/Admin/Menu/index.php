@@ -94,7 +94,7 @@
             <?= $this->Html->link(
                 '<i class="fa fa-newspaper fa-3x" aria-hidden="true"></i>
                 <h5>REMESSAS</h5>',
-                ['controller' => 'Remessas', 'action' => 'index'],
+                ['controller' => 'Menu', 'action' => 'menuremessas'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
@@ -103,7 +103,7 @@
             <?= $this->Html->link(
                 '<i class="fa fa-upload fa-3x" aria-hidden="true"></i>
                 <h5>RELATÓRIOS</h5>',
-                ['controller' => 'Relatorios', 'action' => 'index'],
+                ['controller' => 'Menu', 'action' => 'menurelatorios'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
