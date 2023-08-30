@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $funcionario
  * @property \Cake\I18n\FrozenTime|null $data_conferencia
+ * @property \Cake\I18n\FrozenTime|null $data_cadastro
  * @property int $atividade_id
  * @property int $status_atividade_id
  *
@@ -31,6 +32,7 @@ class Conferencia extends Entity
     protected $_accessible = [
         'funcionario' => true,
         'data_conferencia' => true,
+        'data_cadastro' => true,
         'atividade_id' => true,
         'status_atividade_id' => true,
         'atividade' => true,

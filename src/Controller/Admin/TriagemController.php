@@ -43,6 +43,7 @@ class TriagemController extends AppController
                 $nova_triagem = [
                     'funcionario' => 'CristianTri',
                     'data_triagem' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],
                     'status_atividade_id' => 8  // Triado
                 ];

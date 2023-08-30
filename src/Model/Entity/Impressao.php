@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $funcionario
  * @property \Cake\I18n\FrozenTime|null $data_impressao
+ * @property \Cake\I18n\FrozenTime|null $data_cadastro
  * @property int $atividade_id
  * @property int $servico_id
  * @property int $status_atividade_id
@@ -35,6 +36,7 @@ class Impressao extends Entity
     protected $_accessible = [
         'funcionario' => true,
         'data_impressao' => true,
+        'data_cadastro' => true,
         'atividade_id' => true,
         'status_atividade_id' => true,
         'impressora_id' => true,

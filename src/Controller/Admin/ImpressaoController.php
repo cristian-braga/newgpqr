@@ -78,6 +78,7 @@ class ImpressaoController extends AppController
                 $nova_impressao = [
                     'funcionario' => 'CristianImp',
                     'data_impressao' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $servico_ids[$i],
                     'status_atividade_id' => 4,  // Impresso
                     'impressora_id' => $impressoras[$i]

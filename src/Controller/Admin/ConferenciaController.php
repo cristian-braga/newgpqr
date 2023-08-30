@@ -43,6 +43,7 @@ class ConferenciaController extends AppController
                 $nova_conferencia = [
                     'funcionario' => 'CristianConf',
                     'data_conferencia' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],
                     'status_atividade_id' => 14  // Conferido
                 ];
