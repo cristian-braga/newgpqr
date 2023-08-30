@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Digitalizacao Model
  *
  * @property \App\Model\Table\ServicoTable&\Cake\ORM\Association\BelongsTo $Servico
- * @property \App\Model\Table\StatusDigitalizacaoTable&\Cake\ORM\Association\BelongsTo $StatusDigitalizacao
  *
  * @method \App\Model\Entity\Digitalizacao newEmptyEntity()
  * @method \App\Model\Entity\Digitalizacao newEntity(array $data, array $options = [])
