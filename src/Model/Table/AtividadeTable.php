@@ -17,6 +17,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\ExpedicaoTable&\Cake\ORM\Association\HasMany $Expedicao
  * @property \App\Model\Table\ImpressaoTable&\Cake\ORM\Association\HasMany $Impressao
  * @property \App\Model\Table\TriagemTable&\Cake\ORM\Association\HasMany $Triagem
+ * @property \App\Model\Table\ServicosAnulados&\Cake\ORM\Association\HasMany $ServicosAnulados
  *
  * @method \App\Model\Entity\Atividade newEmptyEntity()
  * @method \App\Model\Entity\Atividade newEntity(array $data, array $options = [])
@@ -71,6 +72,10 @@ class AtividadeTable extends Table
             'dependent' => true
         ]);
         $this->hasMany('Expedicao', [
+            'foreignKey' => 'atividade_id',
+            'dependent' => true
+        ]);
+        $this->hasMany('ServicosAnulados', [
             'foreignKey' => 'atividade_id',
             'dependent' => true
         ]);

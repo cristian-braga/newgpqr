@@ -74,6 +74,15 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
+                '<i class="fa fa-file-excel fa-3x" aria-hidden="true"></i>
+                <h5>SERVIÇOS ANULADOS</h5>',
+                ['controller' => 'ServicosAnulados', 'action' => 'index'],
+                ['class' => 'menu-gpqr', 'escape' => false]
+            ) ?>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <?= $this->Html->link(
                 '<i class="fa fa-cloud-upload fa-3x" aria-hidden="true"></i>
                 <h5>DIGITALIZAÇÃO</h5>',
                 ['controller' => 'Digitalizacao', 'action' => 'index'],
