@@ -17,7 +17,7 @@ class AtividadeService
         $servicos = $this->AtividadeTable->Servico
             ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
             ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
+            ->orderAsc('nome_servico')
             ->all();
 
         return $servicos;

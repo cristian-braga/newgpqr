@@ -44,9 +44,21 @@ class AtividadeController extends AppController
             ]
         ]);
 
-        $nome_servico = $atividade->servico->nome_servico;
+        $etapas = [
+            'Impressão' => 'Impressão',
+            'Conferência' => 'Conferência',
+            'Envelopamento' => 'Envelopamento',
+            'Triagem' => 'Triagem',
+            'Expedição' => 'Expedição'
+        ];
 
-        $this->set(compact('atividade', 'nome_servico'));
+        $erros = $this->Atividade->StatusAtividade
+            ->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])
+            ->where(['StatusAtividade.id IN' => [15, 16, 17]])
+            ->orderDesc('status_atual')
+            ->all();
+
+        $this->set(compact('atividade', 'etapas', 'erros'));
     }
 
     public function add()

@@ -28,6 +28,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Expedicao[] $expedicao
  * @property \App\Model\Entity\Impressao[] $impressao
  * @property \App\Model\Entity\Triagem[] $triagem
+ * @property \App\Model\Entity\ServicosAnulados[] $servicos_anulados
  */
 class Atividade extends Entity
 {
@@ -59,5 +60,6 @@ class Atividade extends Entity
         'expedicao' => true,
         'impressao' => true,
         'triagem' => true,
+        'servicos_anulados' => true
     ];
 }
