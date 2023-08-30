@@ -3,20 +3,21 @@
         <img src="https://github.com/ricardodev10.png" alt="">
         <div>
             <p class="text-light mb-0">Ricardo</p>
-            <span class="text-danger">Desenvolvedor</span>
+            <span class="text-danger">Administrador</span>
         </div>
     </div>
     <div class="collapse navbar-collapse justify-content-center">
         <ul class="navbar-nav navbar-ul-gpqr">
+
             <li>
                 <?= $this->Html->link(
                     '<i class="fa fa-home" aria-hidden="true"></i><span>MENU</span>',
-                    ['controller' => 'Menu', 'action' => 'index'],
+                    ['controller' => 'Menu', 'action' => '/index'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa-solid fa-file-arrow-down"></i>
                         <span>ATIVIDADE</span>',
@@ -25,7 +26,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-print"></i>
                         <span>IMPRESSÃO</span>',
@@ -34,7 +35,16 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
+                <?= $this->Html->link(
+                    '<i class="fa-solid fa-file-circle-check"></i>
+                        <span>CONFERÊNCIA</span>',
+                    ['controller' => 'Conferencia', 'action' => 'index'],
+                    ['class' => 'nav-link', 'escape' => false]
+                ) ?>
+            </li>
+
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-envelope"></i>
                         <span>ENVELOPAMENTO</span>',
@@ -43,7 +53,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-check-square"></i>
                         <span>TRIAGEM</span>',
@@ -52,7 +62,7 @@
                 ) ?>
             </li>
 
-            <li>
+            <li class="d-none d-xl-block">
                 <?= $this->Html->link(
                     '<i class="fa fa-truck"></i>
                         <span>EXPEDIÇÃO</span>',
@@ -74,7 +84,7 @@
                 <?= $this->Html->link(
                     '<i class="fa fa-sign-out" aria-hidden="true"></i>
                         <span>SAIR</span>',
-                    ['controller' => 'users', 'action' => 'logout'],
+                    ['controller' => 'Users', 'action' => 'logout'],
                     ['class' => 'nav-link', 'escape' => false]
                 ) ?>
             </li>

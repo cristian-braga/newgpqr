@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $funcionario
  * @property \Cake\I18n\FrozenTime|null $data_envelopamento
+ * @property \Cake\I18n\FrozenTime|null $data_cadastro
  * @property int $atividade_id
  * @property int $servico_id
  * @property int $status_atividade_id
@@ -33,11 +34,10 @@ class Envelopamento extends Entity
     protected $_accessible = [
         'funcionario' => true,
         'data_envelopamento' => true,
+        'data_cadastro' => true,
         'atividade_id' => true,
-        'servico_id' => true,
         'status_atividade_id' => true,
         'atividade' => true,
-        'servico' => true,
         'status_atividade' => true,
     ];
 }

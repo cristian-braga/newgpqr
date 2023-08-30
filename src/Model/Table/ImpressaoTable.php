@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Impressao Model
  *
  * @property \App\Model\Table\AtividadeTable&\Cake\ORM\Association\BelongsTo $Atividade
- * @property \App\Model\Table\ServicoTable&\Cake\ORM\Association\BelongsTo $Servico
  * @property \App\Model\Table\StatusAtividadeTable&\Cake\ORM\Association\BelongsTo $StatusAtividade
  * @property \App\Model\Table\ImpressoraTable&\Cake\ORM\Association\BelongsTo $Impressora
  *
@@ -50,10 +49,6 @@ class ImpressaoTable extends Table
             'foreignKey' => 'atividade_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Servico', [
-            'foreignKey' => 'servico_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('StatusAtividade', [
             'foreignKey' => 'status_atividade_id',
             'joinType' => 'INNER',
@@ -83,12 +78,13 @@ class ImpressaoTable extends Table
             ->allowEmptyDateTime('data_impressao');
 
         $validator
-            ->integer('atividade_id')
-            ->notEmptyString('atividade_id');
+            ->date('data_cadastro')
+            ->requirePresence('data_cadastro', 'create')
+            ->notEmptyDate('data_cadastro');
 
         $validator
-            ->integer('servico_id')
-            ->notEmptyString('servico_id');
+            ->integer('atividade_id')
+            ->notEmptyString('atividade_id');
 
         $validator
             ->integer('status_atividade_id')
@@ -111,10 +107,78 @@ class ImpressaoTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('atividade_id', 'Atividade'), ['errorField' => 'atividade_id']);
-        $rules->add($rules->existsIn('servico_id', 'Servico'), ['errorField' => 'servico_id']);
         $rules->add($rules->existsIn('status_atividade_id', 'StatusAtividade'), ['errorField' => 'status_atividade_id']);
         $rules->add($rules->existsIn('impressora_id', 'Impressora'), ['errorField' => 'impressora_id']);
 
         return $rules;
+    }
+
+    public function existeDado($atividade_id)
+    {
+        $query = $this->find()
+            ->where(['atividade_id' => $atividade_id])
+            ->first();
+
+        return $query;
+    }
+
+    public function servicos()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+            ->select([
+                'id' => 'Servico.id',
+                'servicos' => 'Servico.nome_servico'
+            ])
+            ->innerJoinWith('Atividade')
+            ->innerJoinWith('Atividade.Servico')
+            ->group('Servico.nome_servico')
+            ->orderAsc('Servico.nome_servico')
+            ->all();
+
+        return $query;
+    }
+
+    public function dadosImpressoras()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome_impressora' => 'Impressora.nome_impressora',
+                'total_paginas' => $query->func()->sum('Atividade.quantidade_paginas'),
+                'total_recibo' => $query->func()->sum('Atividade.recibo_postagem'),
+                'total_folha_rosto' => $query->func()->sum('Servico.folha_rosto')
+            ])
+            ->innerJoinWith('Impressora')
+            ->innerJoinWith('Atividade')
+            ->innerJoinWith('Atividade.Servico')
+            ->where([
+                'Impressora.id IN' => [1, 2],
+                'MONTH(Impressao.data_impressao)' => date('m'),
+                'YEAR(Impressao.data_impressao)' => date('Y')
+            ])
+            ->group('Impressora.nome_impressora')
+            ->orderAsc('Impressora.nome_impressora')
+            ->all();
+
+        return $query;
+    }
+
+    public function dadosImpressoes()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome' => 'Impressao.funcionario',
+                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+            ])
+            ->innerJoinWith('Atividade')
+            ->where([
+                'Impressao.status_atividade_id' => 4,
+                'MONTH(Impressao.data_impressao)' => date('m'),
+                'YEAR(Impressao.data_impressao)' => date('Y')
+            ])
+            ->group('nome')
+            ->orderDesc('total_documentos')
+            ->all();
+
+        return $query;
     }
 }

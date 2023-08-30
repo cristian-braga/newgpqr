@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Triagem Model
  *
  * @property \App\Model\Table\AtividadeTable&\Cake\ORM\Association\BelongsTo $Atividade
- * @property \App\Model\Table\ServicoTable&\Cake\ORM\Association\BelongsTo $Servico
  * @property \App\Model\Table\StatusAtividadeTable&\Cake\ORM\Association\BelongsTo $StatusAtividade
  *
  * @method \App\Model\Entity\Triagem newEmptyEntity()
@@ -49,10 +48,6 @@ class TriagemTable extends Table
             'foreignKey' => 'atividade_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Servico', [
-            'foreignKey' => 'servico_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('StatusAtividade', [
             'foreignKey' => 'status_atividade_id',
             'joinType' => 'INNER',
@@ -78,12 +73,13 @@ class TriagemTable extends Table
             ->allowEmptyDateTime('data_triagem');
 
         $validator
-            ->integer('atividade_id')
-            ->notEmptyString('atividade_id');
+            ->date('data_cadastro')
+            ->requirePresence('data_cadastro', 'create')
+            ->notEmptyDate('data_cadastro');
 
         $validator
-            ->integer('servico_id')
-            ->notEmptyString('servico_id');
+            ->integer('atividade_id')
+            ->notEmptyString('atividade_id');
 
         $validator
             ->integer('status_atividade_id')
@@ -102,9 +98,33 @@ class TriagemTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('atividade_id', 'Atividade'), ['errorField' => 'atividade_id']);
-        $rules->add($rules->existsIn('servico_id', 'Servico'), ['errorField' => 'servico_id']);
         $rules->add($rules->existsIn('status_atividade_id', 'StatusAtividade'), ['errorField' => 'status_atividade_id']);
 
         return $rules;
+    }
+
+    public function existeDado($atividade_id)
+    {
+        $query = $this->find()
+            ->where(['atividade_id' => $atividade_id])
+            ->first();
+
+        return $query;
+    }
+
+    public function servicos()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+            ->select([
+                'id' => 'Servico.id',
+                'servicos' => 'Servico.nome_servico'
+            ])
+            ->innerJoinWith('Atividade')
+            ->innerJoinWith('Atividade.Servico')
+            ->group('Servico.nome_servico')
+            ->orderAsc('Servico.nome_servico')
+            ->all();
+
+        return $query;
     }
 }

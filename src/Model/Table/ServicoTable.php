@@ -149,6 +149,11 @@ class ServicoTable extends Table
             ->integer('folha_rosto')
             ->allowEmptyString('folha_rosto');
 
+        $validator
+            ->scalar('ativo')
+            ->maxLength('ativo', 45)
+            ->allowEmptyString('ativo');
+
         return $validator;
     }
 }

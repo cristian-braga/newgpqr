@@ -41,5 +41,7 @@ class Demanda extends Entity
         'demanda_tipo' => true,
         'demanda_responsavel' => true,
         'demanda_solicitante' => true,
+        'demanda_log' => true,
+        'reabertura' => true
     ];
 }

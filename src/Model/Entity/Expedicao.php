@@ -44,7 +44,6 @@ class Expedicao extends Entity
         'data_lancamento' => true,
         'data_expedicao' => true,
         'capas' => true,
-        'ocorrencia' => true,
         'solicitante' => true,
         'responsavel_remessa' => true,
         'responsavel_expedicao' => true,
@@ -52,10 +51,8 @@ class Expedicao extends Entity
         'observacao' => true,
         'hora' => true,
         'atividade_id' => true,
-        'servico_id' => true,
         'status_atividade_id' => true,
         'atividade' => true,
-        'servico' => true,
         'status_atividade' => true,
     ];
 }

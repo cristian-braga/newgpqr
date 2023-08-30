@@ -37,36 +37,6 @@
 }
 
 /*==============================================
-    BUTTON GPQR SUCCESS    
-    =============================================*/
-.btn-gpqr-success {
-    background-image: linear-gradient(
-        to right,
-        #0ba360,
-        #3cba92,
-        #30dd8a,
-        #2bb673
-    );
-
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
-    border: none;
-    background-size: 300% 100%;
-    height: 38px;
-}
-
-.btn-gpqr-success:hover {
-    color: #fff;
-    filter: brightness(1.1);
-}
-
-.btn-gpqr-success:focus {
-    outline: none;
-}
-
-/*==============================================
     BUTTON GPQR VIEW     
     =============================================*/
 
