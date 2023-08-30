@@ -129,6 +129,10 @@ class ConferenciaController extends AppController
     // TELA DE SERVIÇOS CONFERIDOS
     public function servicosConferidos()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -138,10 +142,32 @@ class ConferenciaController extends AppController
             'conditions' => ['Conferencia.status_atividade_id' => 14],
             'order' => ['data_conferencia' => 'desc']
         ];
-        
-        $conferencia = $this->paginate($this->Conferencia);
 
-        $this->set(compact('conferencia'));
+        $query = $this->Conferencia->find();
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Conferencia.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Conferencia.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Conferencia->servicos()->toArray();
+        
+        $conferencia = $this->paginate($query);
+
+        $this->set(compact('conferencia', 'servicos'));
     }
 
     /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja

@@ -118,6 +118,10 @@ class EnvelopamentoController extends AppController
     // TELA DE SERVIÇOS ENVELOPADOS
     public function servicosEnvelopados()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -127,10 +131,32 @@ class EnvelopamentoController extends AppController
             'conditions' => ['Envelopamento.status_atividade_id' => 6],
             'order' => ['data_envelopamento' => 'desc']
         ];
-        
-        $envelopamento = $this->paginate($this->Envelopamento);
 
-        $this->set(compact('envelopamento'));
+        $query = $this->Envelopamento->find();
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Envelopamento.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Envelopamento.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Envelopamento->servicos()->toArray();
+        
+        $envelopamento = $this->paginate($query);
+
+        $this->set(compact('envelopamento', 'servicos'));
     }
 
     /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
