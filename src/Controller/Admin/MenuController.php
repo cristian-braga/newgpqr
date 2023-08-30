@@ -60,7 +60,7 @@ class MenuController extends AppController
     {
     }
 
-    public function menuadmin()
+    public function menuAdmin()
     {
     }
 
@@ -73,6 +73,14 @@ class MenuController extends AppController
     }
 
     public function menurotulos()
+    {
+    }
+    
+    public function menupmmg()
+    {
+    }
+
+    public function menuinternos()
     {
     }
 }

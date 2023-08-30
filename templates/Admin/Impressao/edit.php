@@ -33,6 +33,10 @@
             <label class="form-label">Impressora</label>
             <?= $this->Form->control('impressora_id', ['options' => $impressora, 'class' => 'form-select', 'required', 'label' => false]) ?>
         </div>
+        <div class="col-md-6">
+            <label class="form-label">Responsável</label>
+            <?= $this->Form->control('funcionario', ['class' => 'form-control', 'required', 'label' => false]) ?>
+        </div>
         <div class="col-12 mt-5">
             <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
             <?= $this->Html->link(__('Cancelar'), ['action' => 'servicosImpressos'], ['class' => 'btn btn-secondary']) ?>

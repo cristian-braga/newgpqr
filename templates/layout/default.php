@@ -1,16 +1,10 @@
-<?php
-$cakeDescription = 'Sistema GIM';
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
+    <title>Sistema GIM</title>
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
@@ -30,7 +24,7 @@ $cakeDescription = 'Sistema GIM';
     </section>
     <?= $this->element('footer') ?>
 
-    <?= $this->Html->script('bootstrap.bundle.min') ?>
+    <?= $this->Html->script(['bootstrap.bundle.min', 'script']) ?>
 </body>
 
 </html>

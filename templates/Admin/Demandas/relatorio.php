@@ -14,18 +14,13 @@
                     <th>Desenvolvedor</th>
                     <th>Relatório da Demanda</th>
                     <th>Data término</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><?= h($demanda->demanda_responsavel) ?></td>
-                    <td><?= h($demanda->demanda_log) ?></td>
+                    <td> <?= h($demanda->demanda_log) ?></td>
                     <td><?= h($demanda->data_termino) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107;"></i>' . __('')), ['action' => 'edit', $demanda->id], ['escape' => false, 'class' => 'p-2 ']); ?>
-                        <?= $this->Form->postLink(__('<i class="fa-regular fa-trash-can fa-lg" style="color: #dc3545;"></i>' . __('')), ['action' => 'delete', $demanda->id], ['escape' => false, 'class' => 'p-2'], ['confirm' => __('Tem certeza que quer deletar essa demanda # {0}?', $demanda->id)]) ?>
-                    </td>
                 </tr>
             </tbody>
         </table>

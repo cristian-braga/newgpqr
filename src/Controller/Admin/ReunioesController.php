@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
@@ -102,6 +103,9 @@ class ReunioesController extends AppController
             'contain' => [],
         ]);
 
-        $this->set('atas', $reunioes);
+        // Converte a string para um objeto DateTime
+        $reunioes->horario_reuniao = new \DateTime($reunioes->horario_reuniao);
+
+        $this->set(compact('reunioes'));
     }
 }

@@ -1,5 +1,5 @@
 <div class="conteudo" style="width: 65%;">
-    <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($nome_servico) ?></h3>
+    <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($atividade->servico->nome_servico) ?></h3>
     <table class="table table-borderless table-striped mb-4 align-middle">
         <tr>
             <th>Data de cadastro:</th>
@@ -30,7 +30,7 @@
             <td><?= h($atividade->recibo_postagem) ?></td>
         </tr>
         <tr>
-            <th>Status:</th>
+            <th>Status atual:</th>
             <td><?= h($atividade->status_atividade->status_atual) ?></td>
         </tr>
         <tr>
@@ -51,7 +51,7 @@
         </tr>
     </table>
     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow mb-3']) ?>
-    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $nome_servico)]) ?>
+    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $atividade->servico->nome_servico)]) ?>
 </div>
 
 <?php if (!empty($atividade->impressao)) : ?>
@@ -74,7 +74,7 @@
                         <td><?= h($impressao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['controller' => 'Impressao', 'action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Impressao', 'action' => 'delete', $impressao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a impressão do serviço:  {0}?', $nome_servico)]) ?>
+                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Impressao', 'action' => 'voltarEtapa', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Impressão". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -100,7 +100,7 @@
                     <td><?= h($conferencia->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Conferencia', 'action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Conferencia', 'action' => 'delete', $conferencia->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a conferência do serviço:  {0}?', $nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Conferencia', 'action' => 'voltarEtapa', $conferencia->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Conferência". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -125,7 +125,7 @@
                     <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Envelopamento', 'action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Envelopamento', 'action' => 'delete', $envelopamento->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o envelopamento do serviço:  {0}?', $nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Envelopamento', 'action' => 'voltarEtapa', $envelopamento->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Envelopamento". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -150,7 +150,7 @@
                     <td><?= h($triagem->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Triagem', 'action' => 'edit', $triagem->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Triagem', 'action' => 'delete', $triagem->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a triagem do serviço:  {0}?', $nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Triagem', 'action' => 'voltarEtapa', $triagem->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Triagem". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -166,9 +166,11 @@
                 <tr>
                     <th>Responsável</th>
                     <th>Data da Expedição</th>
-                    <th>Capas</th>
-                    <th>Solicitante</th>
-                    <th>Responsável Remessa</th>
+                    <?php if ($atividade->expedicao[0]->capas) : ?>
+                        <th>Capas</th>
+                        <th>Solicitante</th>
+                        <th>Responsável Remessa</th>
+                    <?php endif; ?>
                     <th>Responsável Coleta</th>
                     <th>Hora</th>
                     <th>Status</th>
@@ -178,15 +180,17 @@
                     <tr>
                         <td><?= h($expedicao->funcionario) ?></td>
                         <td><?= h($expedicao->data_lancamento) ?></td>
-                        <td><?= h($expedicao->capas) ?></td>
-                        <td><?= h($expedicao->solicitante) ?></td>
-                        <td><?= h($expedicao->responsavel_remessa) ?></td>
+                        <?php if ($expedicao->capas) : ?>
+                            <td><?= h($expedicao->capas) ?></td>
+                            <td><?= h($expedicao->solicitante) ?></td>
+                            <td><?= h($expedicao->responsavel_remessa) ?></td>
+                        <?php endif; ?>
                         <td><?= h($expedicao->responsavel_coleta) ?></td>
                         <td><?= h($expedicao->hora) ?></td>
                         <td><?= h($expedicao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['controller' => 'Expedicao', 'action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['controller' => 'Expedicao', 'action' => 'delete', $expedicao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir a expedição do serviço:  {0}?', $nome_servico)]) ?>
+                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Expedicao', 'action' => 'voltarEtapa', $expedicao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Expedição/Liberação". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -194,3 +198,39 @@
         </div>
     </div>
 <?php endif; ?>
+
+<div class="d-flex flex-column mt-5 mb-3">
+    <p class="text-center">Caso tenha ocorrido algum problema com o serviço, clique no botão abaixo:</p>
+    <?= $this->Form->button('Reportar Erro', ['type' => 'button',  'class' => 'btn btn-secondary mb-4 mx-auto', 'data-bs-toggle' => 'modal', 'data-bs-target' => '#erroModal']) ?>
+</div>
+<div class="modal fade" id="erroModal" tabindex="-1" aria-labelledby="erroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4" id="erroModalLabel">REPORTAR ERRO</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <?= $this->Form->create(null, ['url' => ['controller' => 'ServicosAnulados', 'action' => 'add'], 'class' => 'p-4']) ?>
+                <div class="row g-4">
+                    <div class="col-6">
+                        <label class="form-label">Etapa do erro</label>
+                        <?= $this->Form->control('etapa', ['options' => $etapas, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Tipo do erro</label>
+                        <?= $this->Form->control('status_atividade_id', ['options' => $erros, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Descrição</label>
+                        <?= $this->Form->textarea('observacao', ['class' => 'form-control', 'placeholder' => 'Descreva brevemente o problema ocorrido...', 'rows' => '3', 'required', 'label' => false]) ?>
+                    </div>
+                </div>
+                <input type="hidden" name="atividade_id" value="<?= $atividade->id ?>">
+                <input type="hidden" name="status_anterior" value="<?= $atividade->status_atividade_id ?>">
+                <div class="mt-5">
+                    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+                </div>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+</div>

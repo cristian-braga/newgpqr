@@ -1,9 +1,9 @@
 <h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
-<?= $this->Form->create($atividade, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
+<?= $this->Form->create(null, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
     <div class="row">
         <div class="col-md-2">
             <label class="form-label">Serviço</label>
-            <?= $this->Form->control('servico_id[]', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-1">
             <label class="form-label">Job</label>
@@ -47,7 +47,7 @@
             const novo_campo = document.createElement('div');
             novo_campo.innerHTML = `
                 <div class="col-md-2">
-                    <?= $this->Form->control('servico_id[]', ['options' => $servico, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+                    <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
                 </div>
                 <div class="col-md-1">
                     <?= $this->Form->control('job[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Job', 'label' => false]) ?>
@@ -66,8 +66,7 @@
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>
-                </div>
-            `;
+                </div> `;
 
             novo_campo.classList.add('row', 'mt-4');
 
@@ -76,8 +75,8 @@
         }
     });
 
-    function del_campo(btn_del) {
-        const div_col = btn_del.parentNode;
+    function del_campo(btnDel) {
+        const div_col = btnDel.parentNode;
         form.removeChild(div_col.parentNode);
         x--;
     }
