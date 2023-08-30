@@ -43,6 +43,7 @@ class TriagemController extends AppController
                 $nova_triagem = [
                     'funcionario' => 'CristianTri',
                     'data_triagem' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],
                     'status_atividade_id' => 8  // Triado
                 ];
@@ -128,6 +129,10 @@ class TriagemController extends AppController
     // TELA DE SERVIÇOS TRIADOS
     public function servicosTriados()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -138,9 +143,31 @@ class TriagemController extends AppController
             'order' => ['data_triagem' => 'desc']
         ];
 
-        $triagem = $this->paginate($this->Triagem);
+        $query = $this->Triagem->find();
 
-        $this->set(compact('triagem'));
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Triagem.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Triagem.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Triagem->servicos()->toArray();
+
+        $triagem = $this->paginate($query);
+
+        $this->set(compact('triagem', 'servicos'));
     }
 
     /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
