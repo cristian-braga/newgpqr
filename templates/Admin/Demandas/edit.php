@@ -1,41 +1,30 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Demanda $demanda
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $demanda->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $demanda->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Demandas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="demandas form content">
-            <?= $this->Form->create($demanda) ?>
-            <fieldset>
-                <legend>Editar Demanda</legend>
-                <?php
-                    echo $this->Form->label('Título');
-                    echo $this->Form->text('demanda_resumo', ['type' => 'text', 'class' => 'form-control']);
-                    echo $this->Form->label('Descrição');
-                    echo $this->Form->textarea('demanda_descricao', ['class' => 'form-control']);
-                    echo $this->Form->label('Prioridade');
-                    echo $this->Form->select('demanda_prioridade', ['Alto'=>'Alto', 'Médio'=>'Médio', 'Baixo'=>'Baixo'], ['empty' => '-- Selecione --', 'name' => 'demanda_prioridade']);
-                    echo $this->Form->label('Tipo');
-                    echo $this->Form->select('demanda_tipo', ['Erro'=>'Erro', 'Melhoria'=>'Melhoria', 'Criação'=>'Criação'], ['empty' => '-- Selecione --', 'name' => 'demanda_prioridade']);
-                    
-
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+<h3 class="text-center mt-2 mb-4">EDITAR DEMANDA</h3>
+<?= $this->Form->create($demanda, ['class' => 'mx-auto p-3 form', 'style' => 'width: 50%']) ?>
+<div class="row g-3">
+    <div class="col-md-12">
+        <label class="form-label">Título</label>
+        <?= $this->Form->control('demanda_resumo', ['type' => 'text', 'class' => 'form-control', 'required', 'label' => false]) ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Prioridade</label>
+        <?= $this->Form->select('demanda_prioridade', ['Urgente' => 'Urgente', 'Alto' => 'Alto', 'Médio' => 'Médio', 'Baixo' => 'Baixo'], ['class' => 'form-select', 'required', 'label' => false]) ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Tipo</label>
+        <?= $this->Form->select('demanda_tipo', ['Criação' => 'Criação', 'Melhoria' => 'Melhoria', 'Erro' => 'Erro'], ['class' => 'form-select', 'required', 'label' => false]) ?>
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">Descrição</label>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" id="demanda_descricao" name="demanda_descricao"
+                style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Digite...</label>
         </div>
     </div>
+    <div class="col-12 mt-5">
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary float-end']) ?>
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary float-end mb-3']) ?>
+
+    </div>
 </div>
+<?= $this->Form->end() ?>

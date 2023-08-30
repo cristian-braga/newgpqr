@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\I18n\FrozenTime;
+use DateTime;
 
 /**
  * Demandas Controller
@@ -21,6 +22,10 @@ class DemandasController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 20,
+        ];
+
         $demandas = $this->paginate($this->Demandas);
 
         $this->set(compact('demandas'));
@@ -51,7 +56,7 @@ class DemandasController extends AppController
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
             $dados['status'] = 'Em aberto';
-            $demanda->data_abertura = FrozenTime::now();
+            $demanda->data_abertura = new DateTime();
 
             $demanda = $this->Demandas->patchEntity($demanda, $dados);
             
@@ -121,9 +126,12 @@ class DemandasController extends AppController
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
-            $data['status'] = 'Em desenvolvimento';
             $responsavel = "testeLaura";
-            $data['demanda_responsavel'] = $responsavel;
+            $data = [
+                'status' => 'Em desenvolvimento',
+                'demanda_responsavel' => $responsavel
+            ];
+            
 
             $this->Demandas->patchEntity($demanda, $data);
 
@@ -131,11 +139,9 @@ class DemandasController extends AppController
                 $this->Flash->success(__('Designado como Responsável!'));
                 return $this->redirect(['action' => 'index']);
             }
-            else{
+             else {
                 $data['status'] = 'Em aberto';
             }
-           
-            
         }
 
         $this->set(compact('demanda', 'demanda_responsavel'));
@@ -147,7 +153,12 @@ class DemandasController extends AppController
 
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-            $data = ['demanda_responsavel' => null];
+            $data = [
+                'demanda_responsavel' => null,
+                'data_termino' => null,
+                'status' => 'Em aberto'
+            ];
+            
             $this->Demandas->patchEntity($demanda, $data);
 
             if ($this->Demandas->save($demanda)) {
@@ -157,13 +168,14 @@ class DemandasController extends AppController
                 $this->Flash->error(__('Não foi possível dispensar a demanda. Por favor, tente novamente.'));
             }
         }
-        $this->set(compact('demanda'));
+        $this->set(compact('demanda', 'demanda_responsavel', 'data_termino', 'status'));
     }
 
     public function relatorio($id = null) {
 
         $demanda = $this->Demandas->get($id);
 
+        
         $this->set(compact('demanda'));
 
     }
@@ -174,9 +186,10 @@ class DemandasController extends AppController
         
         if ($this->request->is(['patch', 'post', 'put'])) {
             $demanda = $this->Demandas->patchEntity($demanda, $this->request->getData());
-            $demanda->data_termino = FrozenTime::now(); 
+            $demanda->data_termino = new DateTime(); 
+            $demanda->status = 'Finalizada';
             if ($this->Demandas->save($demanda)) {
-                $this->Flash->success(__('Finalizada! :)'));
+                $this->Flash->success(__('Demanda finalizada! :)'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -187,14 +200,14 @@ class DemandasController extends AppController
 
     public function reabrirDemanda($id = null) {
 
-        $demanda = $this->Demandas->get($id);
-        $this->set(compact('demanda'));
+    $demanda = $this->Demandas->get($id);
+    $data = $this->request->getData();
+
+    $data['data_abertura'] = ';-;';
+    
+    $this->Demandas->patchEntity($demanda, $data);
+
 
     }
 }
 
-
-// $data = ['data_abertura' => null];
-// $data = ['demanda_tipo' => null];
-// $data = ['demanda_status' => null];
-// $data = ['data_abertura' => null];

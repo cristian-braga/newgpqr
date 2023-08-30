@@ -34,7 +34,7 @@ $html = '
         </thead>
         <tbody>
             <tr>
-                <td style="text-align: center;">' . $reunioes['tema_abordado'] . '</td>
+                <td style="text-align: center;">' . $reunioes->tema_abordado . '</td>
             </tr>
         </tbody>
     </table><br>
@@ -49,9 +49,9 @@ $html = '
         </thead>
         <tbody>
             <tr>
-                <td style="text-align: center;">' . $reunioes['local_reuniao'] . '</td>
-                <td style="text-align: center;">' . $reunioes['data_reuniao'] . '</td>
-                <td style="text-align: center;">' . $reunioes['horario_reuniao']->format('H:i') . '</td>
+                <td style="text-align: center;">' . $reunioes->local_reuniao . '</td>
+                <td style="text-align: center;">' . $reunioes->data_reuniao . '</td>
+                <td style="text-align: center;">' . $reunioes->horario_reuniao->format('H:i') . '</td>
             </tr>
         </tbody>
     </table><br>
@@ -65,8 +65,8 @@ $html = '
         </thead>
         <tbody>
             <tr>
-                <td style="text-align: center;">' . $reunioes['pauta'] . '</td>
-                <td style="text-align: center;">' . $reunioes['responsavel'] . '</td>
+                <td style="text-align: center;">' . $reunioes->pauta . '</td>
+                <td style="text-align: center;">' . $reunioes->responsavel . '</td>
             </tr>
         </tbody>
     </table><br>
@@ -79,7 +79,7 @@ $html = '
         </thead>
         <tbody>
             <tr>
-                <td style="text-align: center;">' . $reunioes['participantes'] . '</td>
+                <td style="text-align: center;">' . $reunioes->participantes . '</td>
             </tr>
         </tbody>
     </table><br><br>   
@@ -92,11 +92,12 @@ $html = '
         </thead>
         <tbody>
             <tr>
-                <td style="height: 400px; vertical-align: text-top;">' . $reunioes['sumula'] . '</td>
+                <td style="height: 400px; vertical-align: text-top;">' . $reunioes->sumula . '</td>
             </tr>
         </tbody>
     </table>
 </body>';
+
 // pega o conteudo do buffer, insere na variavel e limpa a memória
 ob_end_clean();
 
@@ -104,14 +105,10 @@ $mpdf->allow_charset_conversion = true;
 
 $mpdf->WriteHTML($html);
 
-$pdfContent = $mpdf->Output('', \Mpdf\Output\Destination::STRING_RETURN);
-
-$response = $response->withStringBody($pdfContent);
+$mpdf->Output('Ata_de_reuniao.pdf', \Mpdf\Output\Destination::INLINE);
+// imprime  \Mpdf\Output\Destination::DOWNLOAD
 
 return $response;
-
-// $mpdf->Output('Ata_de_reuniao.pdf', \Mpdf\Output\Destination::INLINE);
-// imprime  \Mpdf\Output\Destination::DOWNLOAD
 
 exit();
 // finaliza o codigo

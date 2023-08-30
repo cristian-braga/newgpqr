@@ -78,6 +78,11 @@ class ImpressaoTable extends Table
             ->allowEmptyDateTime('data_impressao');
 
         $validator
+            ->date('data_cadastro')
+            ->requirePresence('data_cadastro', 'create')
+            ->notEmptyDate('data_cadastro');
+
+        $validator
             ->integer('atividade_id')
             ->notEmptyString('atividade_id');
 
@@ -106,6 +111,31 @@ class ImpressaoTable extends Table
         $rules->add($rules->existsIn('impressora_id', 'Impressora'), ['errorField' => 'impressora_id']);
 
         return $rules;
+    }
+
+    public function existeDado($atividade_id)
+    {
+        $query = $this->find()
+            ->where(['atividade_id' => $atividade_id])
+            ->first();
+
+        return $query;
+    }
+
+    public function servicos()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+            ->select([
+                'id' => 'Servico.id',
+                'servicos' => 'Servico.nome_servico'
+            ])
+            ->innerJoinWith('Atividade')
+            ->innerJoinWith('Atividade.Servico')
+            ->group('Servico.nome_servico')
+            ->orderAsc('Servico.nome_servico')
+            ->all();
+
+        return $query;
     }
 
     public function dadosImpressoras()

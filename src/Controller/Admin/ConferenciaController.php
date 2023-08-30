@@ -4,115 +4,135 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class ConferenciaController extends AppController
 {
+    protected $AtividadeService;
+    protected $AtividadeTable;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+        $this->AtividadeTable = $this->getTableLocator()->get('Atividade');
+    }
+    
     public function index()
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => [
-                'Atividade' => ['Servico'],
-                'StatusAtividade'
-            ],
-            'conditions' => ['Conferencia.status_atividade_id' => 13],
-            'sortableFields' => ['Atividade.data_cadastro'],
-            'order' => ['Atividade.data_cadastro' => 'desc']
+            'contain' => ['Servico', 'StatusAtividade'],
+            'conditions' => ['status_atividade_id' => 13],
+            'order' => ['data_cadastro' => 'desc']
         ];
 
-        $conferencia = $this->paginate($this->Conferencia);
+        $atividade = $this->paginate($this->AtividadeTable);
+
+        $this->set(compact('atividade'));
+    }
+
+    public function add()
+    {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData('selecionados');
+
+            $conferencias = [];
+
+            for ($i = 0; $i < count($dados); $i++) {
+                $nova_conferencia = [
+                    'funcionario' => 'CristianConf',
+                    'data_conferencia' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
+                    'atividade_id' => $dados[$i],
+                    'status_atividade_id' => 14  // Conferido
+                ];
+
+                $existe_registro = $this->Conferencia->existeDado($dados[$i]);
+
+                if (!$existe_registro) {
+                    $conferencia = $this->Conferencia->newEmptyEntity();
+                    $conferencia = $this->Conferencia->patchEntity($conferencia, $nova_conferencia);
+                } else {
+                    $conferencia = $this->Conferencia->patchEntity($existe_registro, $nova_conferencia);
+                }
+                
+                $conferencias[] = $conferencia;
+
+                // Busca o campo 'envelopamento_servico' do registro na tabela 'atividade' antes de atualizar o 'status_atividade_id'
+                $atividade = $this->AtividadeService->buscaRegistro($dados[$i]);
+
+                $tipo_env = $atividade->servico->envelopamento_servico;
+
+                if ($tipo_env == 'A4' || $tipo_env == 'A5') {
+                    $status = 5;  // Aguardando Envelopamento
+                } else {
+                    $status = 7;  // Aguardando Triagem
+                }
+
+                $this->AtividadeService->atualizaStatus($dados[$i], $status);
+            }
+
+            if ($this->Conferencia->saveMany($conferencias)) {
+                $this->Flash->success(__('Registro(s) lançado(s) com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Falha ao lançar registro(s). Tente novamente.'));
+        }
+    }
+
+    public function edit($id = null)
+    {
+        $conferencia = $this->Conferencia->get($id, [
+            'contain' => ['Atividade' => ['Servico']],
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $conferencia = $this->Conferencia->patchEntity($conferencia, $this->request->getData());
+
+            if ($this->Conferencia->save($conferencia)) {
+                $this->Flash->success(__('Conferência editada com sucesso!'));
+
+                return $this->redirect(['action' => 'servicosConferidos']);
+            }
+
+            $this->Flash->error(__('Falha ao editar conferência. Tente novamente.'));
+        }
 
         $this->set(compact('conferencia'));
     }
 
     public function editAtividade($id = null)
     {
-        $atividadeController = new AtividadeController();
-        $atividadeTable = $this->getTableLocator()->get('Atividade');
-        $atividade = $atividadeTable->get($id);
+        $atividade = $this->AtividadeService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $atividadeTable->patchEntity($atividade, $dados);
-
-            if ($atividadeTable->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $atividadeTable->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
-    }
-
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['get', 'post', 'delete']);
-        $conferencia = $this->Conferencia->get($id);
-        if ($this->Conferencia->delete($conferencia)) {
-            $this->Flash->success(__('Registro excluído com sucesso!'));
-        } else {
-            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-
-    public function atualizaConferencia()
-    {
-        if ($this->request->is('post')) {
-            $dados = $this->request->getData('selecionados');
-
-            for ($i = 0; $i < count($dados); $i++) {
-                $registroConferencia = $this->Conferencia->get($dados[$i]);
-
-                $registroConferencia->funcionario = 'CristianConf';
-                $registroConferencia->data_conferencia = date('Y-m-d H:i:s');
-                $registroConferencia->status_atividade_id = 14;  // Conferido
-                
-                $this->Conferencia->save($registroConferencia); 
-
-                $this->novoEnvelopamento($registroConferencia);
-            }
-    
-            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
-
-            return $this->redirect(['action' => 'index']);
-        }
-    }
-
-    public function novoEnvelopamento($registroConferencia)
-    {
-        $envelopamentoTable = $this->getTableLocator()->get('Envelopamento');
-        $envelopamento = $envelopamentoTable->newEmptyEntity();
-
-        $novo_envelopamento = [
-            'funcionario' => 'CristianImp',
-            'atividade_id' => $registroConferencia->atividade_id,
-            'status_atividade_id' => 5  // Aguardando Envelopamento
-        ];
-
-        $envelopamento = $envelopamentoTable->patchEntity($envelopamento, $novo_envelopamento);
-        $envelopamentoTable->save($envelopamento); 
+        $this->set(compact('atividade', 'servicos'));
     }
 
     // TELA DE SERVIÇOS CONFERIDOS
     public function servicosConferidos()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -122,9 +142,52 @@ class ConferenciaController extends AppController
             'conditions' => ['Conferencia.status_atividade_id' => 14],
             'order' => ['data_conferencia' => 'desc']
         ];
-        
-        $conferencia = $this->paginate($this->Conferencia);
 
-        $this->set(compact('conferencia'));
+        $query = $this->Conferencia->find();
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Conferencia.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Conferencia.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Conferencia->servicos()->toArray();
+        
+        $conferencia = $this->paginate($query);
+
+        $this->set(compact('conferencia', 'servicos'));
+    }
+
+    /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
+    novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($atividade_id)
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 13);  // Aguardando Conferência
+
+            if ($sucesso) {
+                $conferencia = $this->Conferencia->existeDado($atividade_id);
+
+                $this->Conferencia->delete($conferencia);
+
+                $this->Flash->success(__('Registro alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar registro. Tente novamente.'));
+        }
     }
 }
