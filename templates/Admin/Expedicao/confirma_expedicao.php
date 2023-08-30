@@ -1,23 +1,23 @@
 <h3 class="text-center mt-2 mb-4">LANÇAR EXPEDIÇÃO</h3>
-<?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'atualizaExpedicao'], 'class' => 'mx-auto p-3 form', 'style' => 'width: 80%']) ?>
+<?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'add'], 'class' => 'mx-auto p-3 form', 'style' => 'width: 80%']) ?>
     <?php foreach ($servicos as $servico) : ?>
         <div class="row g-3">
-            <?= $this->Form->control('expedicao_id', ['type' => 'hidden', 'name' => 'expedicao_id[]', 'value' => $servico->id]) ?>
+            <?= $this->Form->control('servico_id[]', ['type' => 'hidden', 'value' => $servico->id]) ?>
             <div class="col-md-3">
                 <label class="form-label">Serviço</label>
-                <?= $this->Form->control('servico_id', ['type' => 'text', 'class' => 'form-control', 'value' => $servico->atividade->servico->nome_servico, 'disabled', 'label' => false]) ?>
+                <?= $this->Form->control('atividade_id', ['type' => 'text', 'class' => 'form-control', 'value' => $servico->servico->nome_servico, 'disabled', 'label' => false]) ?>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Remessa/OCR</label>
-                <?= $this->Form->control('remessa_atividade', ['class' => 'form-control', 'value' => $servico->atividade->remessa_atividade, 'disabled', 'label' => false]) ?>
+                <?= $this->Form->control('remessa_atividade', ['class' => 'form-control', 'value' => $servico->remessa_atividade, 'disabled', 'label' => false]) ?>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Documentos</label>
-                <?= $this->Form->control('quantidade_documentos', ['class' => 'form-control', 'value' => $servico->atividade->quantidade_documentos, 'disabled', 'label' => false]) ?>
+                <?= $this->Form->control('quantidade_documentos', ['class' => 'form-control', 'value' => $servico->quantidade_documentos, 'disabled', 'label' => false]) ?>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Postagem</label>
-                <?= $this->Form->control('data_postagem', ['class' => 'form-control', 'value' => $servico->atividade->data_postagem, 'disabled', 'label' => false]) ?>
+                <?= $this->Form->control('data_postagem', ['class' => 'form-control', 'value' => $servico->data_postagem, 'disabled', 'label' => false]) ?>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Capas</label>

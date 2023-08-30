@@ -1,16 +1,10 @@
-<?php
-$cakeDescription = 'Sistema GIM';
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
+    <title>Sistema GIM</title>
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('login') ?>

@@ -4,141 +4,135 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class TriagemController extends AppController
 {
+    protected $AtividadeService;
+    protected $AtividadeTable;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+        $this->AtividadeTable = $this->getTableLocator()->get('Atividade');
+    }
+    
     public function index()
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => [
-                'Atividade' => ['Servico'],
-                'StatusAtividade'
-            ],
-            'conditions' => ['Triagem.status_atividade_id' => 7],
-            'sortableFields' => ['Atividade.data_cadastro'],
-            'order' => ['Atividade.data_cadastro' => 'desc']
+            'contain' => ['Servico', 'StatusAtividade'],
+            'conditions' => ['status_atividade_id' => 7],
+            'order' => ['data_cadastro' => 'desc']
         ];
 
-        $triagem = $this->paginate($this->Triagem);
+        $atividade = $this->paginate($this->AtividadeTable);
 
-        $this->set(compact('triagem'));
+        $this->set(compact('atividade'));
+    }
+
+    public function add()
+    {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData('selecionados');
+
+            $triagens = [];
+
+            for ($i = 0; $i < count($dados); $i++) {
+                $nova_triagem = [
+                    'funcionario' => 'CristianTri',
+                    'data_triagem' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
+                    'atividade_id' => $dados[$i],
+                    'status_atividade_id' => 8  // Triado
+                ];
+
+                $existe_registro = $this->Triagem->existeDado($dados[$i]);
+
+                if (!$existe_registro) {
+                    $triagem = $this->Triagem->newEmptyEntity();
+                    $triagem = $this->Triagem->patchEntity($triagem, $nova_triagem);
+                } else {
+                    $triagem = $this->Triagem->patchEntity($existe_registro, $nova_triagem);
+                }
+                
+                $triagens[] = $triagem;
+
+                // Busca o campo 'entrega_servico' do registro na tabela 'atividade' antes de atualizar o 'status_atividade_id'
+                $atividade = $this->AtividadeService->buscaRegistro($dados[$i]);
+
+                $entrega_servico = $atividade->servico->entrega_servico;
+
+                if ($entrega_servico == 'Correios') {
+                    $status = 9;  // Aguardando Expedição
+                } else {
+                    $status = 11;  // Aguardando Liberação
+                }
+
+                $this->AtividadeService->atualizaStatus($dados[$i], $status);
+            }
+
+            if ($this->Triagem->saveMany($triagens)) {
+                $this->Flash->success(__('Registro(s) lançado(s) com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Falha ao lançar registro(s). Tente novamente.'));
+        }
     }
 
     public function edit($id = null)
     {
         $triagem = $this->Triagem->get($id, [
-            'contain' => [],
+            'contain' => ['Atividade' => ['Servico']],
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $triagem = $this->Triagem->patchEntity($triagem, $this->request->getData());
-            if ($this->Triagem->save($triagem)) {
-                $this->Flash->success(__('The triagem has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+            if ($this->Triagem->save($triagem)) {
+                $this->Flash->success(__('Triagem editada com sucesso!'));
+
+                return $this->redirect(['action' => 'servicosTriados']);
             }
-            $this->Flash->error(__('The triagem could not be saved. Please, try again.'));
+
+            $this->Flash->error(__('Falha ao editar triagem. Tente novamente.'));
         }
-        $atividade = $this->Triagem->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Triagem->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Triagem->StatusAtividade->find('list', ['limit' => 200])->all();
-        $this->set(compact('triagem', 'atividade', 'servico', 'statusAtividade'));
+
+        $this->set(compact('triagem'));
     }
 
     public function editAtividade($id = null)
     {
-        $atividadeController = new AtividadeController();
-        $atividadeTable = $this->getTableLocator()->get('Atividade');
-        $atividade = $atividadeTable->get($id);
+        $atividade = $this->AtividadeService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $atividadeTable->patchEntity($atividade, $dados);
-
-            if ($atividadeTable->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $atividadeTable->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
-    }
-
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['get', 'post', 'delete']);
-        $triagem = $this->Triagem->get($id);
-        if ($this->Triagem->delete($triagem)) {
-            $this->Flash->success(__('Registro excluído com sucesso!'));
-        } else {
-            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-
-    public function atualizaTriagem()
-    {
-        if ($this->request->is('post')) {
-            $dados = $this->request->getData('selecionados');
-
-            for ($i = 0; $i < count($dados); $i++) {
-                $registroTriagem = $this->Triagem->get($dados[$i], ['contain' => ['Atividade' => ['Servico']]]);
-
-                $registroTriagem->funcionario = 'CristianTri';
-                $registroTriagem->data_triagem = date('Y-m-d H:i:s');
-                $registroTriagem->status_atividade_id = 8;  // Triado
-
-                $this->Triagem->save($registroTriagem);
-
-                $this->novaExpedicao($registroTriagem);
-            }
-    
-            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
-            return $this->redirect(['action' => 'index']);
-        }
-    }
-
-    public function novaExpedicao($registroTriagem)
-    {
-        $expedicaoTable = $this->getTableLocator()->get('Expedicao');
-        $expedicao = $expedicaoTable->newEmptyEntity();
-                
-        $entrega_servico = $registroTriagem->atividade->servico->entrega_servico;
-
-        $nova_expedicao = [
-            'funcionario' => 'CristianTri',
-            'atividade_id' => $registroTriagem->atividade_id
-        ];
-
-        if ($entrega_servico == 'Correios') {
-            $nova_expedicao['status_atividade_id'] = 9;  // Aguardando Expedição
-        } else {
-            $nova_expedicao['status_atividade_id'] = 11;  // Aguardando Liberação
-        }
-
-        $expedicao = $expedicaoTable->patchEntity($expedicao, $nova_expedicao);
-        $expedicaoTable->save($expedicao);
+        $this->set(compact('atividade', 'servicos'));
     }
 
     // TELA DE SERVIÇOS TRIADOS
     public function servicosTriados()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -149,8 +143,51 @@ class TriagemController extends AppController
             'order' => ['data_triagem' => 'desc']
         ];
 
-        $triagem = $this->paginate($this->Triagem);
+        $query = $this->Triagem->find();
 
-        $this->set(compact('triagem'));
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Triagem.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Triagem.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Triagem->servicos()->toArray();
+
+        $triagem = $this->paginate($query);
+
+        $this->set(compact('triagem', 'servicos'));
+    }
+
+    /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
+    novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($atividade_id)
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 7);  // Aguardando Triagem
+
+            if ($sucesso) {
+                $triagem = $this->Triagem->existeDado($atividade_id);
+
+                $this->Triagem->delete($triagem);
+
+                $this->Flash->success(__('Registro alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar registro. Tente novamente.'));
+        }
     }
 }

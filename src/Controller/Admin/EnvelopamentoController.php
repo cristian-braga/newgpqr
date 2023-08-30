@@ -4,135 +4,124 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\AtividadeService;
 
 class EnvelopamentoController extends AppController
 {
+    protected $AtividadeService;
+    protected $AtividadeTable;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->AtividadeService = new AtividadeService();
+        $this->AtividadeTable = $this->getTableLocator()->get('Atividade');
+    }
+    
     public function index()
     {
         $this->paginate = [
             'limit' => 20,
-            'contain' => [
-                'Atividade' => ['Servico'],
-                'StatusAtividade'
-            ],
-            'conditions' => ['Envelopamento.status_atividade_id' => 5],
-            'sortableFields' => ['Atividade.data_cadastro'],
-            'order' => ['Atividade.data_cadastro' => 'desc']
+            'contain' => ['Servico', 'StatusAtividade'],
+            'conditions' => ['status_atividade_id' => 5],
+            'order' => ['data_cadastro' => 'desc']
         ];
-        
-        $envelopamento = $this->paginate($this->Envelopamento);
 
-        $this->set(compact('envelopamento'));
+        $atividade = $this->paginate($this->AtividadeTable);
+
+        $this->set(compact('atividade'));
+    }
+
+    public function add()
+    {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData('selecionados');
+
+            $envelopamentos = [];
+
+            for ($i = 0; $i < count($dados); $i++) {
+                $novo_envelopamento = [
+                    'funcionario' => 'CristianEnv',
+                    'data_envelopamento' => date('Y-m-d H:i:s'),
+                    'data_cadastro' => date('Y-m-d'),
+                    'atividade_id' => $dados[$i],
+                    'status_atividade_id' => 6  // Envelopado
+                ];
+
+                $existe_registro = $this->Envelopamento->existeDado($dados[$i]);
+
+                if (!$existe_registro) {
+                    $envelopamento = $this->Envelopamento->newEmptyEntity();
+                    $envelopamento = $this->Envelopamento->patchEntity($envelopamento, $novo_envelopamento);
+                } else {
+                    $envelopamento = $this->Envelopamento->patchEntity($existe_registro, $novo_envelopamento);
+                }
+                
+                $envelopamentos[] = $envelopamento;
+
+                $this->AtividadeService->atualizaStatus($dados[$i], 7);  // Aguardando Triagem
+            }
+
+            if ($this->Envelopamento->saveMany($envelopamentos)) {
+                $this->Flash->success(__('Registro(s) lançado(s) com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Falha ao lançar registro(s). Tente novamente.'));
+        }
     }
 
     public function edit($id = null)
     {
         $envelopamento = $this->Envelopamento->get($id, [
-            'contain' => [],
+            'contain' => ['Atividade' => ['Servico']],
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $envelopamento = $this->Envelopamento->patchEntity($envelopamento, $this->request->getData());
-            if ($this->Envelopamento->save($envelopamento)) {
-                $this->Flash->success(__('The envelopamento has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+            if ($this->Envelopamento->save($envelopamento)) {
+                $this->Flash->success(__('Envelopamento editado com sucesso!'));
+
+                return $this->redirect(['action' => 'servicosEnvelopados']);
             }
-            $this->Flash->error(__('The envelopamento could not be saved. Please, try again.'));
+
+            $this->Flash->error(__('Falha ao editar envelopamento. Tente novamente.'));
         }
-        $atividade = $this->Envelopamento->Atividade->find('list', ['limit' => 200])->all();
-        $servico = $this->Envelopamento->Servico->find('list', ['limit' => 200])->all();
-        $statusAtividade = $this->Envelopamento->StatusAtividade->find('list', ['limit' => 200])->all();
-        $this->set(compact('envelopamento', 'atividade', 'servico', 'statusAtividade'));
+
+        $this->set(compact('envelopamento'));
     }
 
     public function editAtividade($id = null)
     {
-        $atividadeController = new AtividadeController();
-        $atividadeTable = $this->getTableLocator()->get('Atividade');
-        $atividade = $atividadeTable->get($id);
+        $atividade = $this->AtividadeService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $folhas_paginas = $atividadeController->calculaFolhasPaginas($dados['servico_id'], intval($dados['quantidade_documentos']));
+            $edicaoSucesso = $this->AtividadeService->edit($id, $dados);
 
-            $dados['quantidade_folhas'] = $folhas_paginas['folhas'];
-            $dados['quantidade_paginas'] = $folhas_paginas['paginas'];
-
-            $atividade = $atividadeTable->patchEntity($atividade, $dados);
-
-            if ($atividadeTable->save($atividade)) {
+            if ($edicaoSucesso) {
                 $this->Flash->success(__('Atividade editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error(__('Falha ao editar atividade. Tente novamente.'));
         }
 
-        $servico = $atividadeTable->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->where(['ativo' => 'Sim'])
-            ->order(['nome_servico' => 'asc'])
-            ->all();
+        $servicos = $this->AtividadeService->servicos_opcoes();
 
-        $this->set(compact('atividade', 'servico'));
-    }
-
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['get', 'post', 'delete']);
-        $envelopamento = $this->Envelopamento->get($id);
-        if ($this->Envelopamento->delete($envelopamento)) {
-            $this->Flash->success(__('Registro excluído com sucesso!'));
-        } else {
-            $this->Flash->error(__('Falha ao excluir registro. Tente novamente.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-
-    public function atualizaEnvelopamento()
-    {
-        if ($this->request->is('post')) {
-            $dados = $this->request->getData('selecionados');
-
-            for ($i = 0; $i < count($dados); $i++) {
-                $registroEnvelopamento = $this->Envelopamento->get($dados[$i]);
-
-                $registroEnvelopamento->funcionario = 'CristianEnv';
-                $registroEnvelopamento->data_envelopamento = date('Y-m-d H:i:s');
-                $registroEnvelopamento->status_atividade_id = 6;  // Envelopado
-                
-                $this->Envelopamento->save($registroEnvelopamento); 
-
-                $this->novaTriagem($registroEnvelopamento);
-            }
-    
-            $this->Flash->success('Registro(s) lançado(s) com sucesso!');
-
-            return $this->redirect(['action' => 'index']);
-        }
-    }
-
-    public function novaTriagem($registroEnvelopamento)
-    {
-        $triagemTable = $this->getTableLocator()->get('Triagem');
-        $triagem = $triagemTable->newEmptyEntity();
-
-        $nova_triagem = [
-            'funcionario' => 'CristianEnv',
-            'atividade_id' => $registroEnvelopamento->atividade_id,
-            'status_atividade_id' => 7  // Aguardando Triagem
-        ];
-
-        $triagem = $triagemTable->patchEntity($triagem, $nova_triagem);
-        $triagemTable->save($triagem); 
+        $this->set(compact('atividade', 'servicos'));
     }
 
     // TELA DE SERVIÇOS ENVELOPADOS
     public function servicosEnvelopados()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -142,9 +131,52 @@ class EnvelopamentoController extends AppController
             'conditions' => ['Envelopamento.status_atividade_id' => 6],
             'order' => ['data_envelopamento' => 'desc']
         ];
-        
-        $envelopamento = $this->paginate($this->Envelopamento);
 
-        $this->set(compact('envelopamento'));
+        $query = $this->Envelopamento->find();
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Envelopamento.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Envelopamento.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Envelopamento->servicos()->toArray();
+        
+        $envelopamento = $this->paginate($query);
+
+        $this->set(compact('envelopamento', 'servicos'));
+    }
+
+    /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja
+    novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($atividade_id)
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $sucesso = $this->AtividadeService->atualizaStatus($atividade_id, 5);  // Aguardando Envelopamento
+
+            if ($sucesso) {
+                $envelopamento = $this->Envelopamento->existeDado($atividade_id);
+
+                $this->Envelopamento->delete($envelopamento);
+
+                $this->Flash->success(__('Registro alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar registro. Tente novamente.'));
+        }
     }
 }
