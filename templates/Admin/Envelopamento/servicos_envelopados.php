@@ -3,15 +3,15 @@
     <?= $this->Form->create(null, ['type' => 'get']) ?>
         <div class="row g-3">
             <div class="col-md-2">
-                <label class="form-label">Serviço</label>
+                <label class="form-label">Serviço:</label>
                 <?= $this->Form->control('servico', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'label' => false]) ?>
             </div>
             <div class="col-md-2">
-                <label class="form-label">Data inicial</label>
+                <label class="form-label">Data inicial:</label>
                 <?= $this->Form->control('data_inicio', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
             </div>
             <div class="col-md-2">
-                <label class="form-label">Data final</label>
+                <label class="form-label">Data final:</label>
                 <?= $this->Form->control('data_fim', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
             </div>
             <div class="col-md-2" style="margin-top: 3.2rem;">
