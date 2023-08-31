@@ -6,21 +6,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Envelopamento Entity
+ * ServicosAnulados Entity
  *
  * @property int $id
  * @property string $funcionario
- * @property \Cake\I18n\FrozenTime|null $data_envelopamento
- * @property \Cake\I18n\FrozenTime|null $data_cadastro
+ * @property \Cake\I18n\FrozenTime $data_cadastro
+ * @property string $etapa
+ * @property string $observacao
  * @property int $atividade_id
- * @property int $servico_id
  * @property int $status_atividade_id
  *
  * @property \App\Model\Entity\Atividade $atividade
- * @property \App\Model\Entity\Servico $servico
  * @property \App\Model\Entity\StatusAtividade $status_atividade
  */
-class Envelopamento extends Entity
+class ServicosAnulados extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -33,11 +32,13 @@ class Envelopamento extends Entity
      */
     protected $_accessible = [
         'funcionario' => true,
-        'data_envelopamento' => true,
         'data_cadastro' => true,
+        'etapa' => true,
+        'observacao' => true,
         'atividade_id' => true,
         'status_atividade_id' => true,
         'atividade' => true,
         'status_atividade' => true,
+        'status_anterior' => true
     ];
 }

@@ -174,6 +174,10 @@ class ExpedicaoController extends AppController
     // TELA DE SERVIÇOS EXPEDIDOS
     public function servicosExpedidos()
     {
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+        $servico = $this->request->getQuery('servico');
+
         $this->paginate = [
             'limit' => 20,
             'contain' => [
@@ -185,10 +189,32 @@ class ExpedicaoController extends AppController
             ],
             'order' => ['data_expedicao' => 'desc']
         ];
-        
-        $expedicao = $this->paginate($this->Expedicao);
 
-        $this->set(compact('expedicao'));
+        $query = $this->Expedicao->find();
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Expedicao.data_expedicao >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Expedicao.data_expedicao <=' => $data_fim
+            ]);
+        }
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        $servicos = $this->Expedicao->servicos()->toArray();
+        
+        $expedicao = $this->paginate($query);
+
+        $this->set(compact('expedicao', 'servicos'));
     }
 
     /* Esse método altera o campo 'status_atividade_id' na tabela 'atividade' para que o serviço seja

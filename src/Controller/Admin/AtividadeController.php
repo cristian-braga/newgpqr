@@ -39,14 +39,35 @@ class AtividadeController extends AppController
                 'Envelopamento' => ['StatusAtividade'],
                 'Triagem' => ['StatusAtividade'],
                 'Expedicao' => ['StatusAtividade'],
+                'ServicosAnulados',
                 'Servico',
                 'StatusAtividade'
             ]
         ]);
 
-        $nome_servico = $atividade->servico->nome_servico;
+        $status = $atividade->status_atividade_id;
 
-        $this->set(compact('atividade', 'nome_servico'));
+        if (in_array($status, [15, 16, 17])) {
+            $servico_com_erro = true;
+        } else {
+            $servico_com_erro = false;
+        }
+
+        $etapas = [
+            'Impressão' => 'Impressão',
+            'Conferência' => 'Conferência',
+            'Envelopamento' => 'Envelopamento',
+            'Triagem' => 'Triagem',
+            'Expedição' => 'Expedição'
+        ];
+
+        $erros = $this->Atividade->StatusAtividade
+            ->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])
+            ->where(['StatusAtividade.id IN' => [15, 16, 17]])
+            ->orderDesc('status_atual')
+            ->all();
+
+        $this->set(compact('atividade', 'servico_com_erro', 'etapas', 'erros'));
     }
 
     public function add()

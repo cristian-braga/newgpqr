@@ -1,4 +1,26 @@
 <h3 class="text-center mt-2 mb-4">SERVIÇOS CONFERIDOS</h3>
+<div class="conteudo mt-5">
+    <?= $this->Form->create(null, ['type' => 'get']) ?>
+        <div class="row g-3">
+            <div class="col-md-2">
+                <label class="form-label">Serviço</label>
+                <?= $this->Form->control('servico', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'label' => false]) ?>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Data inicial</label>
+                <?= $this->Form->control('data_inicio', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Data final</label>
+                <?= $this->Form->control('data_fim', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            </div>
+            <div class="col-md-2" style="margin-top: 3.2rem;">
+                <?= $this->Form->button(__('Buscar'), ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+                <?= $this->Html->link(__('Limpar'), ['action' => 'servicosConferidos'], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+            </div>
+        </div>
+    <?= $this->Form->end() ?>
+</div>
 <div class="table-responsive table-gpqr">
     <table class="table table-borderless table-striped text-center align-middle">
         <thead>

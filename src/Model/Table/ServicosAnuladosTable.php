@@ -7,28 +7,29 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Mpdf\Tag\Select;
 
 /**
- * Envelopamento Model
+ * ServicosAnulados Model
  *
  * @property \App\Model\Table\AtividadeTable&\Cake\ORM\Association\BelongsTo $Atividade
  * @property \App\Model\Table\StatusAtividadeTable&\Cake\ORM\Association\BelongsTo $StatusAtividade
  *
- * @method \App\Model\Entity\Envelopamento newEmptyEntity()
- * @method \App\Model\Entity\Envelopamento newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Envelopamento[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Envelopamento get($primaryKey, $options = [])
- * @method \App\Model\Entity\Envelopamento findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Envelopamento patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Envelopamento[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Envelopamento|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Envelopamento saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Envelopamento[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Envelopamento[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Envelopamento[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Envelopamento[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado newEmptyEntity()
+ * @method \App\Model\Entity\ServicosAnulado newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\ServicosAnulado[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\ServicosAnulado get($primaryKey, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\ServicosAnulado[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\ServicosAnulado|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ServicosAnulado[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class EnvelopamentoTable extends Table
+class ServicosAnuladosTable extends Table
 {
     /**
      * Initialize method
@@ -40,7 +41,7 @@ class EnvelopamentoTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('envelopamento');
+        $this->setTable('servicos_anulados');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -69,13 +70,20 @@ class EnvelopamentoTable extends Table
             ->notEmptyString('funcionario');
 
         $validator
-            ->dateTime('data_envelopamento')
-            ->allowEmptyDateTime('data_envelopamento');
-
-        $validator
             ->date('data_cadastro')
             ->requirePresence('data_cadastro', 'create')
             ->notEmptyDate('data_cadastro');
+
+        $validator
+            ->scalar('etapa')
+            ->maxLength('etapa', 45)
+            ->requirePresence('etapa', 'create')
+            ->notEmptyString('etapa');
+
+        $validator
+            ->scalar('observacao')
+            ->requirePresence('observacao', 'create')
+            ->notEmptyString('observacao');
 
         $validator
             ->integer('atividade_id')
@@ -84,6 +92,10 @@ class EnvelopamentoTable extends Table
         $validator
             ->integer('status_atividade_id')
             ->notEmptyString('status_atividade_id');
+
+        $validator
+            ->integer('status_anterior')
+            ->notEmptyString('status_anterior');
 
         return $validator;
     }
@@ -123,6 +135,20 @@ class EnvelopamentoTable extends Table
             ->innerJoinWith('Atividade.Servico')
             ->group('Servico.nome_servico')
             ->orderAsc('Servico.nome_servico')
+            ->all();
+
+        return $query;
+    }
+
+    public function tipos_erros()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])
+            ->select([
+                'id' => 'StatusAtividade.id',
+                'status_atual' => 'StatusAtividade.status_atual'
+            ])
+            ->innerJoinWith('StatusAtividade')
+            ->orderDesc('StatusAtividade.status_atual')
             ->all();
 
         return $query;

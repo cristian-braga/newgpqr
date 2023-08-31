@@ -77,7 +77,7 @@
                         <?= $this->Form->control('permissao', ['options' => $opcoes, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
                     </div>
                 </div>
-                <div class="mt-5 mb-4">
+                <div class="mt-5">
                     <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
                 </div>
             <?= $this->Form->end() ?>

@@ -59,7 +59,6 @@ class DemandasTable extends Table
 
         $validator
             ->scalar('demanda_descricao')
-            ->maxLength('demanda_descricao', 150)
             ->notEmptyString('demanda_descricao') 
             ->allowEmptyString('demanda_descricao');
 
