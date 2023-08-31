@@ -3,20 +3,24 @@
     <?= $this->Form->create(null, ['type' => 'get']) ?>
         <div class="row g-3">
             <div class="col-md-2">
-                <label class="form-label">Serviço</label>
+                <label class="form-label">Serviço:</label>
                 <?= $this->Form->control('servico', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'label' => false]) ?>
             </div>
+            <div class="col-md-3">
+                <label class="form-label">Tipo do erro:</label>
+                <?= $this->Form->control('tipo_erro', ['options' => $erros, 'class' => 'form-select', 'empty' => '-- Selecione --', 'label' => false]) ?>
+            </div>
             <div class="col-md-2">
-                <label class="form-label">Data inicial</label>
+                <label class="form-label">Data inicial:</label>
                 <?= $this->Form->control('data_inicio', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
             </div>
             <div class="col-md-2">
-                <label class="form-label">Data final</label>
+                <label class="form-label">Data final:</label>
                 <?= $this->Form->control('data_fim', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
             </div>
             <div class="col-md-2" style="margin-top: 3.2rem;">
-                <?= $this->Form->button(__('Buscar'), ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
-                <?= $this->Html->link(__('Limpar'), ['action' => 'index'], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+                <?= $this->Form->button(__('Buscar'), ['class' => 'btn btn-outline-dark btn-sm btn-shadow']) ?>
+                <?= $this->Html->link(__('Limpar'), ['action' => 'index'], ['class' => 'btn btn-outline-dark btn-sm btn-shadow']) ?>
             </div>
         </div>
     <?= $this->Form->end() ?>
@@ -39,7 +43,7 @@
             <?php if (!$servicosAnulados->isEmpty()) : ?>
                 <?php foreach ($servicosAnulados as $servicoAnulado) : ?>
                     <tr>
-                        <td><?= $this->Html->link($servicoAnulado->atividade->servico->nome_servico, ['controller' => 'servicosAnulados', 'action' => 'view', $servicoAnulado->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                        <td><?= $this->Html->link($servicoAnulado->atividade->servico->nome_servico, ['controller' => 'Atividade', 'action' => 'view', $servicoAnulado->atividade_id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
                         <td><?= h($servicoAnulado->data_cadastro) ?></td>
                         <td><?= h($servicoAnulado->funcionario) ?></td>
                         <td><?= h($servicoAnulado->atividade->remessa_atividade) ?></td>

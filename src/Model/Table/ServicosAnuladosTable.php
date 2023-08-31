@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Mpdf\Tag\Select;
 
 /**
  * ServicosAnulados Model
@@ -134,6 +135,20 @@ class ServicosAnuladosTable extends Table
             ->innerJoinWith('Atividade.Servico')
             ->group('Servico.nome_servico')
             ->orderAsc('Servico.nome_servico')
+            ->all();
+
+        return $query;
+    }
+
+    public function tipos_erros()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'status_atual'])
+            ->select([
+                'id' => 'StatusAtividade.id',
+                'status_atual' => 'StatusAtividade.status_atual'
+            ])
+            ->innerJoinWith('StatusAtividade')
+            ->orderDesc('StatusAtividade.status_atual')
             ->all();
 
         return $query;
