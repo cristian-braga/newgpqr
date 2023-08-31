@@ -1,17 +1,18 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">Digitalização</h2>
-<div class="row">
-    <?= $this->Form->create(null, ['type' => 'get', 'class' => 'row']) ?>
 
-    <div class="col-md-3">
-        <label class="form-label">Serviço</label>
-        <?= $this->Form->control('servico_id', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
-    </div>
-    <div class="col-md-3">
-        <?= $this->Form->submit(__('Filtrar'), ['class' => 'btn btn-secondary']) ?>
-        <?= $this->Html->link(__('Limpar'), ['action' => 'index'], ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
+<div class="conteudo mt-5">
+    <?= $this->Form->create(null, ['type' => 'get']) ?>
+        <div class="row g-3">
+            <div class="col-md-2">
+                <label class="form-label">Serviço:</label>
+                <?= $this->Form->control('servico', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+            </div>
+            <div class="col-md-2" style="margin-top: 3.2rem;">
+                <?= $this->Form->button(__('Buscar'), ['class' => 'btn btn-outline-dark btn-sm btn-shadow']) ?>
+                <?= $this->Html->link(__('Limpar'), ['action' => 'index'], ['class' => 'btn btn-outline-dark btn-sm btn-shadow']) ?>
+            </div>
+        </div>
     <?= $this->Form->end() ?>
-</div>
 
 <div class="digitalizacao index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-end mb-4']) ?>
@@ -27,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($digitalizacao as $dtg) : ?>
+                <?php foreach ($servicosExist as $dtg) : ?>
                 <tr>
                     <td><?= $this->Html->link($dtg->servico->nome_servico, ['action' => 'view', $dtg->id], ['class' => 'custom-btn btn-gpqr-view']) ?>
                     </td>

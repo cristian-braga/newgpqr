@@ -11,34 +11,30 @@ class DigitalizacaoController extends AppController
 
     public function index()
     {
-        $selectServico = filter_input(INPUT_GET, 'servico_id', FILTER_DEFAULT); // pega valor do meu select
+        $servico = $this->request->getQuery('servico');
 
-        if(isset($selectServico)) {
-            $this->paginate = [
+        $this->paginate = [
                 'limit' => 20,
-                'contain' => ['Servico'],
-                'conditions' => ['Servico.id' => $selectServico]
+                'contain' => ['Servico']
+                
             ];
-        }
-        else {
-            $this->paginate = [
-                'limit' => 20,
-                'contain' => ['Servico'],
-            ];
-        }
+        
+       $query =  $this->Digitalizacao->find();
 
-
-        $servicos = $this->Digitalizacao->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->order(['nome_servico' => 'asc'])
-            ->all(); // consultar o banco de dados 
+       if(isset($servico) && $servico != '') {
+            $query->where([
+                'Digitalizacao.servico_id =' => $servico
+            ]);
+       }
+            
+       $servicos = $this->Digitalizacao->selectServicos()->toArray();
 
         
-        $digitalizacao = $this->paginate($this->Digitalizacao);
+        $servicosExist = $this->paginate($query);
 
         
 
-        $this->set(compact('digitalizacao', 'servicos'));
+        $this->set(compact( 'servico', 'servicosExist', 'servicos'));
     }
         
 
@@ -91,6 +87,7 @@ class DigitalizacaoController extends AppController
                 $this->Flash->success(__('The digitalizacao has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+                
             } else {
 
                 $this->Flash->error(__('The digitalizacao could not be saved. Please, try again.'));

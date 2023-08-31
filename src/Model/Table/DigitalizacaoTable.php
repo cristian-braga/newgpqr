@@ -94,4 +94,18 @@ class DigitalizacaoTable extends Table
 
         return $rules;
     }
+
+public function selectServicos() {
+    $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+    ->select([
+        'id' => 'Servico.id',
+        'servicos' => 'Servico.nome_servico'
+    ])
+    ->innerJoinWith('Servico')
+    ->group('Servico.nome_servico')
+    ->all();
+
+    return $query;
+}
+
 }

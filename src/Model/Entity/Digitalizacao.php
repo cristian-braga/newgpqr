@@ -16,7 +16,6 @@ use Cake\ORM\Entity;
  * @property int $servico_id
  *
  * @property \App\Model\Entity\Servico $servico
- * @property \App\Model\Entity\StatusDigitalizacao $status_digitalizacao
  */
 class Digitalizacao extends Entity
 {
