@@ -3,7 +3,7 @@
     <table class="table table-borderless table-striped mb-4 align-middle">
         <tr>
             <th>Data de cadastro:</th>
-            <td><?= h($atividade->data_cadastro) ?></td>
+            <td><?= h($atividade->data_atividade) ?></td>
         </tr>
         <tr>
             <th>Responsável:</th>
@@ -30,10 +30,6 @@
             <td><?= h($atividade->recibo_postagem) ?></td>
         </tr>
         <tr>
-            <th>Status atual:</th>
-            <td><?= h($atividade->status_atividade->status_atual) ?></td>
-        </tr>
-        <tr>
             <th>Folhas de rosto:</th>
             <td><?= $this->Number->format($atividade->servico->folha_rosto) ?></td>
         </tr>
@@ -45,10 +41,27 @@
             <th>Quantidade de paginas:</th>
             <td><?= $this->Number->format($atividade->quantidade_paginas) ?></td>
         </tr>
-        <tr>
-            <th>Cadastro Atividade:</th>
-            <td><?= h($atividade->data_atividade) ?></td>
-        </tr>
+        <?php if ($servico_com_erro) : ?>
+            <tr>
+                <th>Status atual:</th>
+                <td class="text-danger"><b><?= h($atividade->status_atividade->status_atual) ?></b></td>
+            </tr>
+            <tr>
+                <th>Etapa do erro:</th>
+                <td><?= h($atividade->servicos_anulados[0]->etapa) ?></td>
+            </tr>
+            <tr>
+                <th colspan="2">Descrição do erro:</th>
+            </tr>
+            <tr>
+                <td colspan="2"><?= h($atividade->servicos_anulados[0]->observacao) ?></td>
+            </tr>
+        <?php else: ?>
+            <tr>
+                <th>Status atual:</th>
+                <td><?= h($atividade->status_atividade->status_atual) ?></td>
+            </tr>
+        <?php endif; ?>
     </table>
     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow mb-3']) ?>
     <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $atividade->servico->nome_servico)]) ?>
