@@ -9,6 +9,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <?= $this->Html->css(['cake', 'style', 'fontawesome/all', 'bootstrap.min', 'buttons']) ?>
 
     <?= $this->fetch('meta') ?>
