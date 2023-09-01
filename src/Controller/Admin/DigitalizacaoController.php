@@ -12,6 +12,7 @@ class DigitalizacaoController extends AppController
     public function index()
     {
         $servico = $this->request->getQuery('servico');
+        $periodo = $this->request->getQuery('periodo');
 
         $this->paginate = [
                 'limit' => 20,
@@ -26,15 +27,22 @@ class DigitalizacaoController extends AppController
                 'Digitalizacao.servico_id =' => $servico
             ]);
        }
-            
+
+       if(isset($periodo) && $periodo != '') {
+        $query->where([
+            'Digitalizacao.periodo' => $periodo
+        ]);
+       }
+        
+       $periodos = $this->Digitalizacao->periodoFiltro()->toArray();
        $servicos = $this->Digitalizacao->selectServicos()->toArray();
 
         
         $servicosExist = $this->paginate($query);
-
+        $dataExist = $this->paginate($query);
         
 
-        $this->set(compact( 'servico', 'servicosExist', 'servicos'));
+        $this->set(compact( 'servico', 'servicosExist', 'servicos', 'dataExist', 'periodo', 'periodos'));
     }
         
 
@@ -84,27 +92,19 @@ class DigitalizacaoController extends AppController
 
             if ($this->Digitalizacao->saveMany($digitalizacoesEnviar)) {
 
-                $this->Flash->success(__('The digitalizacao has been saved.'));
+                $this->Flash->success(__('Digitalização cadastrada com sucesso!.'));
 
                 return $this->redirect(['action' => 'index']);
                 
             } else {
 
-                $this->Flash->error(__('The digitalizacao could not be saved. Please, try again.'));
+                $this->Flash->error(__('Falha ao salvar digitalização.'));
             }
         }
 
 
         $this->set(compact('digitalizacao', 'servicos'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Digitalizacao id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
 
     public function edit($id = null)
     {
@@ -114,31 +114,24 @@ class DigitalizacaoController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $this->request->getData());
             if ($this->Digitalizacao->save($digitalizacao)) {
-                $this->Flash->success(__('The digitalizacao has been saved.'));
+                $this->Flash->success(__('Digitalização editada com sucesso!.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The digitalizacao could not be saved. Please, try again.'));
+            $this->Flash->error(__('Falha ao editar digitalização.'));
         }
         $servico = $this->Digitalizacao->Servico->find('list', ['limit' => 200])->all();
         $this->set(compact('digitalizacao', 'servico'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Digitalizacao id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $digitalizacao = $this->Digitalizacao->get($id);
         if ($this->Digitalizacao->delete($digitalizacao)) {
-            $this->Flash->success(__('The digitalizacao has been deleted.'));
+            $this->Flash->success(__('Digitalização deletada com sucesso!.'));
         } else {
-            $this->Flash->error(__('The digitalizacao could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Falha ao deletar digitalização.'));
         }
 
         return $this->redirect(['action' => 'index']);

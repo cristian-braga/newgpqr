@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -27,6 +28,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Digitalizacao[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Digitalizacao[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
+
 class DigitalizacaoTable extends Table
 {
     /**
@@ -49,12 +51,6 @@ class DigitalizacaoTable extends Table
         ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -71,7 +67,7 @@ class DigitalizacaoTable extends Table
             ->allowEmptyString('quantidade_documentos');
 
         $validator
-            ->date('periodo')
+            ->scalar('periodo')
             ->allowEmptyDate('periodo');
 
         $validator
@@ -81,13 +77,6 @@ class DigitalizacaoTable extends Table
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('servico_id', 'Servico'), ['errorField' => 'servico_id']);
@@ -95,17 +84,31 @@ class DigitalizacaoTable extends Table
         return $rules;
     }
 
-public function selectServicos() {
-    $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
-    ->select([
-        'id' => 'Servico.id',
-        'servicos' => 'Servico.nome_servico'
-    ])
-    ->innerJoinWith('Servico')
-    ->group('Servico.nome_servico')
-    ->all();
+    // funçoes para os filtros da Digitalizacao
 
-    return $query;
-}
+    public function selectServicos()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+            ->select([
+                'id' => 'Servico.id',
+                'servicos' => 'Servico.nome_servico'
+            ])
+            ->innerJoinWith('Servico')
+            ->group('Servico.nome_servico')
+            ->all();
 
-}
+        return $query;
+    }
+
+    public function periodoFiltro() {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'periodo'])
+        ->select([
+            'id' => 'Digitalizacao.id',
+            'digitalizacao' => 'Digitalizacao.periodo'
+        ])
+        ->group('Digitalizacao.periodo')
+        ->all();
+
+        return $query;
+    }
+} 
