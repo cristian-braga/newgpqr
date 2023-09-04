@@ -27,7 +27,7 @@
                     <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviços']) ?></th>
 
                     <th><?= $this->Paginator->sort('quantidade_documentos') ?></th>
-                    <th><?= $this->Paginator->sort('periodo') ?></th>
+                    <th><?= $this->Paginator->sort('período do documento') ?></th>
                     <th><?= __('Actions') ?></th>
                 </tr>
             </thead>
