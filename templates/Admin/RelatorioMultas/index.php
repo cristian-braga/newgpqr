@@ -1,9 +1,13 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIO MULTAS</h2>
+<div class="d-flex mb-5">
+    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar'], ['class' => 'btn btn-secondary mx-auto']) ?>
+</div>
 
 <div id="chart" class="table-gpqr mx-auto mb-5" style="width: 55%;"></div>
 
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 55%;">
-    <table class="table table-hover text-center align-middle">
+    <table class="table text-center align-middle">
+        <caption class="ms-2">Quantitativo de Multas</caption>
         <thead>
             <tr class="table-secondary">
                 <th>Referência</th>
@@ -38,8 +42,6 @@
     const anoRetrasado = String(anoAtual - 2);
 
     const dados = <?= json_encode($relatorio_multas) ?>;
-
-    console.log(dados)
 
     google.charts.load('current', {
         'packages': ['corechart'],
