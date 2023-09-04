@@ -1,66 +1,92 @@
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-var data = new Date();
-var anoAtual = String(data.getFullYear());
-var anoPass = String(data.getFullYear() - 1);
-var anoRet = String(data.getFullYear() - 2);
+<h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIO MULTAS</h2>
 
-google.charts.load('current', {
-    'packages': ['bar']
-});
-google.charts.setOnLoadCallback(drawChart);
+<div id="chart" class="table-gpqr mx-auto mb-5" style="width: 55%;"></div>
 
-function drawChart() {
-    
-    var data2 = google.visualization.arrayToDataTable([
-        ['', anoRet, anoPass, anoAtual],
-        <?php foreach ($relatorioMultas as $multas) : ?>['<?php echo $multas['mes_atual'] ?>',
-            '<?php echo $multas['ano_retrasado'] ?>', '<?php echo $multas['ano_passado'] ?>',
-            '<?php echo $multas['ano_atual'] ?>'],
-        <?php endforeach; ?>
-    ]);
-
-    var options2 = {
-        chart: {
-            title: 'Quantitativo de Multas - Mensal',
-            subtitle: '',
-        },
-        bar: {
-            groupWidth: "60%"
-        },
-        colors: ['#AFABAB', '#27333F', '#8C2A1F']
-    };
-    
-    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-    chart.draw(data2, google.charts.Bar.convertOptions(options2));
-}
-</script>
-
-<div class="container">
-    <h2 class="text-gpqr mt-2 mb-4">Relatórios Multas</h2>
-    <div id="columnchart_material" style="width: 1000px; height: 250px; border: solid black 1px;"></div><br><br>
-    <div class="table-reponsive">
-        <?php $dataAno = date('Y');
-        $dataAno1 = date('Y', strtotime('-1 year'));
-        $dataAno2 = date('Y', strtotime('-2 year'));
-        $dataAno3 = date('Y', strtotime('-3 year'));
-        ?>
-        <table class="table table-borderless table-bordered  table-hover table-striped text-center align-middle"
-            style="width: 1000px;">
-            <tr>
-                <th>Serviço</th>
-                <th><?php echo $dataAno2 ?></th>
-                <th><?php echo $dataAno1 ?></th>
-                <th><?php echo $dataAno ?></th>
+<div class="table-responsive table-gpqr mx-auto mb-5" style="width: 55%;">
+    <table class="table table-hover text-center align-middle">
+        <thead>
+            <tr class="table-secondary">
+                <th>Referência</th>
+                <th><?= date('Y') - 2 ?></th>
+                <th><?= date('Y') - 1 ?></th>
+                <th><?= date('Y') ?></th>
             </tr>
-            <?php foreach ($relatorioMultas as $multas) : ?>
-            <tr>
-                <td><?= h($multas['mes_atual']) ?></td>
-                <td><?= $this->Number->format($multas['ano_retrasado']) ?></td>
-                <td><?= $this->Number->format($multas['ano_passado']) ?></td>
-                <td><?= $this->Number->format($multas['ano_atual']) ?></td>
-            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($relatorio_multas as $multas) : ?>
+                <tr>
+                    <td><b><?= h($multas['mes']) ?></b></td>
+                    <td><?= $this->Number->format($multas['ano_retrasado']) ?></td>
+                    <td><?= $this->Number->format($multas['ano_passado']) ?></td>
+                    <td><?= $this->Number->format($multas['ano_atual']) ?></td>
+                </tr>
             <?php endforeach; ?>
-        </table>
-    </div>
+            <tr class="table-secondary">
+                <th>Total</th>
+                <th><?= $this->Number->format($ano_retrasado) ?></th>
+                <th><?= $this->Number->format($ano_passado) ?></th>
+                <th><?= $this->Number->format($ano_atual) ?></th>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<script>
+    const dataAtual = new Date();
+    const anoAtual = String(dataAtual.getFullYear());
+    const anoPassado = String(anoAtual - 1);
+    const anoRetrasado = String(anoAtual - 2);
+
+    const dados = <?= json_encode($relatorio_multas) ?>;
+
+    console.log(dados)
+
+    google.charts.load('current', {
+        'packages': ['corechart'],
+        'language': 'pt-br'
+    });
+
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    function drawVisualization() {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', anoRetrasado);
+        data.addColumn('number', anoPassado);
+        data.addColumn('number', anoAtual);
+
+        dados.forEach(function(novoDado) {
+            data.addRows([
+                [novoDado.mes, parseFloat(novoDado.ano_retrasado), parseFloat(novoDado.ano_passado), parseFloat(novoDado.ano_atual)]
+            ]);
+        });
+
+        const options = {
+            colors: ['#AFABAB', '#27333F', '#8C2A1F'],
+            title: 'Quantitativo de Multas',
+            vAxis: {
+                title: '',
+                groupingSymbol: '.',
+            },
+            hAxis: {
+                title: '',
+            },
+            animation: {
+                easing: 'inAndOut',
+                duration: 800,
+                startup: true,
+            },
+            backgroundColor: {
+                stroke: '#27333F',
+                strokeWidth: '2'
+            },
+            seriesType: 'bars',
+            bar: {
+                groupWidth: "75%"
+            }
+        };
+
+        const chart = new google.visualization.ComboChart(document.getElementById('chart'));
+        chart.draw(data, options);
+    }
+</script>
