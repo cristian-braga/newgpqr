@@ -30,8 +30,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa-solid fa-envelope fa-3x" aria-hidden="true"></i>
-                <h5>SERVIÇOS ENVELOPADOS</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                <h5>ENVELOPAMENTO</h5>',
+                ['controller' => 'RelatorioEnvelopamento', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
