@@ -98,6 +98,7 @@ ob_end_clean();
 
 $mpdf->allow_charset_conversion = true;
 
+// duplicar o pdf
 $mpdf->WriteHTML($html);
 
 for ($i = 0; $i < 1; $i++) {

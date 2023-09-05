@@ -1,4 +1,5 @@
 <h3 class="text-center mt-4 mb-4">EDITAR</h3>
+<hr>
 <?= $this->Form->create($sdake75,['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
     <div class="row g-3">
         <div class="col-md-6">
@@ -7,7 +8,6 @@
                 <label><b>SDAKE75</b></label>
             </div>
         </div>
-
 
         <div class="row g-3">
             <div class="col-md-6">

@@ -60,11 +60,11 @@ class Sdake75Controller extends AppController
             $sdake75 = $this->Sdake75->patchEntity($sdake75, $data);
 
             if ($this->Sdake75->save($sdake75)) {
-                $this->Flash->success(__('O sdake75 foi salvo.'));
+                $this->Flash->success(__('O serviço foi editado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O sdake75 não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não foi editado. Por favor, tente novamente.'));
         }
         $this->set(compact('sdake75'));
     }
@@ -75,9 +75,9 @@ class Sdake75Controller extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $sdake75 = $this->Sdake75->get($id);
         if ($this->Sdake75->delete($sdake75)) {
-            $this->Flash->success(__('O sdake75 foi excluído.'));
+            $this->Flash->success(__('O serviço foi excluído.'));
         } else {
-            $this->Flash->error(__('O sdake75 não foi excluído. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não foi excluído. Por favor, tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
