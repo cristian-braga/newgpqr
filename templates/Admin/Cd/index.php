@@ -26,7 +26,7 @@
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cd->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $cd->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $cd->id)]) ?>
-                            <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $cd->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $cd->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
