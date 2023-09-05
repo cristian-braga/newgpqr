@@ -8,7 +8,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Datasource\ConnectionManager;
 
-class RelatorioMultasTable extends Table
+class RelatorioImpressaoTable extends Table
 {
     /**
      * Initialize method
@@ -20,7 +20,7 @@ class RelatorioMultasTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('expedicao');
+        $this->setTable('impressao');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -34,13 +34,13 @@ class RelatorioMultasTable extends Table
         ]);
     }
 
-    public function queryMultas()
+    public function queryImpressao($ano)
     {
         $connection = ConnectionManager::get('default');
 
         $query = $connection->execute(
             "SELECT
-            CASE MONTH(data_expedicao)
+            CASE MONTH(data_impressao)
                 WHEN 1 THEN 'Janeiro'
                 WHEN 2 THEN 'Fevereiro'
                 WHEN 3 THEN 'Março'
@@ -54,15 +54,15 @@ class RelatorioMultasTable extends Table
                 WHEN 11 THEN 'Novembro'
                 WHEN 12 THEN 'Dezembro'
             END as mes,
-            SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) - 2 THEN quantidade_documentos ELSE 0 END) AS ano_retrasado,
-            SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) - 1 THEN quantidade_documentos ELSE 0 END) AS ano_passado,
-            SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) THEN quantidade_documentos ELSE 0 END) AS ano_atual
-            FROM expedicao
-                INNER JOIN atividade ON expedicao.atividade_id = atividade.id
+            SUM(CASE WHEN impressao_servico = 'A4' THEN quantidade_documentos ELSE 0 END) AS total_A4,
+            SUM(CASE WHEN impressao_servico = 'A5' THEN quantidade_documentos ELSE 0 END) AS total_A5,
+            SUM(quantidade_documentos) AS total_mes
+            FROM impressao
+                INNER JOIN atividade ON impressao.atividade_id = atividade.id
                 INNER JOIN servico ON atividade.servico_id = servico.id
-            WHERE descricao_servico LIKE 'Multas%'
-            GROUP BY mes, MONTH(data_expedicao)
-            ORDER BY MONTH(data_expedicao) ASC;"
+            WHERE YEAR(data_impressao) = {$ano}
+            GROUP BY mes, MONTH(data_impressao)
+            ORDER BY MONTH(data_impressao) ASC;"
         )->fetchAll('assoc');
 
         return $query;
