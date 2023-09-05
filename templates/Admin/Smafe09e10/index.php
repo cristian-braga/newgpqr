@@ -1,7 +1,7 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">Etiquetas</h2>
 <div class="smafe09e10 index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
-    <div class="table-responsive">
+    <div class="table-responsive table-gpqr" style="margin-top: 1%;">
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
