@@ -1,10 +1,3 @@
-<?php
-
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Sdake64 $sdake64
- */
-?>
 <h3 class="text-center mt-2 mb-4">EDITAR SDAKE64</h3>
 
 <?= $this->Form->create($sdake64,['class' => 'mx-auto p-3 form', 'style' => 'width: 90%']) ?>
