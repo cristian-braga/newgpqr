@@ -65,11 +65,11 @@ class Sdake64Controller extends AppController
 
             $sdake64 = $this->Sdake64->patchEntity($sdake64, $data);
             if ($this->Sdake64->save($sdake64)) {
-                $this->Flash->success(__('O sdake64 foi salvo.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O sdake64 não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('sdake64'));
     }
@@ -79,9 +79,9 @@ class Sdake64Controller extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $sdake64 = $this->Sdake64->get($id);
         if ($this->Sdake64->delete($sdake64)) {
-            $this->Flash->success(__('O sdake64 foi excluido.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('O sdake64 não foi excluido. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

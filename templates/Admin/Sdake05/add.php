@@ -1,9 +1,13 @@
             <h3 class="text-center mt-2 mb-4">Cadastrar</h3>
             <?= $this->Form->create($sdake05) ?>
             <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="form-label">Sistema:</label>
+                    <p><b>SDAKE05</b></p>
+                </div>
                 <div class="form-group col-md-2">
                     <label class="form-label">Cópias</label>
-                    <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Cópias', 'label' => false]);?>
+                    <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Cópias', 'label' => false]); ?>
                 </div>
                 <div class="form-group col-md-2">
                     <label class="form-label">Páginas</label>

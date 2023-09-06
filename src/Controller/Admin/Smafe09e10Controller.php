@@ -14,7 +14,6 @@
         $this->set(compact('smafe09e10'));
     }
 
-
     public function add()
     {
         $smafe09e10 = $this->Smafe09e10->newEmptyEntity();
@@ -23,7 +22,6 @@
             $data = $this->request->getData();
             $data['funcionario'] = 'Pagodeiro';
     
-
             $smafe09e10 = $this->Smafe09e10->patchEntity($smafe09e10, $data);
             if ($this->Smafe09e10->save($smafe09e10)) {
                 $this->Flash->success(__('Salvo com sucesso.'));
