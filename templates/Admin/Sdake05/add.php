@@ -18,8 +18,8 @@
                     <?php echo $this->Form->control('data_cadastro', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]); ?>
                 </div>
                 <div class="form-group" style="margin-top: 1%;">
-                <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
-<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:15px;']) ?>
-<?= $this->Form->end() ?>
-            </div>
+                    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+                    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:1%;']) ?>
+                    <?= $this->Form->end() ?>
+                </div>
             </div>
