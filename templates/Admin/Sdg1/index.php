@@ -29,5 +29,5 @@
             </tbody>
         </table>
     </div>
-    <?= $this->element('pagination') ?>
 </div>
+<?= $this->element('pagination') ?>
