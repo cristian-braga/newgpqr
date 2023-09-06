@@ -22,7 +22,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-tag fa-3x" aria-hidden="true"></i>
                 <h5>SMAFE 009/010</h5>',
-                ['controller' => 'Smafe009/010', 'action' => 'index'],
+                ['controller' => 'Smafe09e10', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>

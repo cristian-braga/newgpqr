@@ -9,14 +9,14 @@
             ) ?>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <!-- <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa-regular fa-folder-open fa-3x" aria-hidden="true"></i>
                 <h5>SS13E05</h5>',
                 ['controller' => 'Ss13e05', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
-        </div>
+        </div> -->
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
