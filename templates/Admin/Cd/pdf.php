@@ -106,7 +106,7 @@ for ($i = 0; $i < 1; $i++) {
 }
 
 
-$mpdf->Output('Saalm.pdf', \Mpdf\Output\Destination::INLINE);
+$mpdf->Output('Cd.pdf', \Mpdf\Output\Destination::INLINE);
 // imprime  \Mpdf\Output\Destination::DOWNLOAD
 
 return $response;

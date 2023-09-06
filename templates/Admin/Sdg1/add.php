@@ -2,7 +2,6 @@
 <hr>
 <?= $this->Form->create($sdg1) ?>
 <div class="row">
-
         <div class="form-group col-md-12">
             <label class="form-label">Sistema:</label>
             <p><b>SDG1M001</b></p>
@@ -31,4 +30,3 @@
         </div>
     </div>
 </div>
-<?= $this->Form->end() ?>
