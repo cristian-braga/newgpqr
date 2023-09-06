@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-3">
         <label class="form-label">Período</label>
-        <?= $this->Form->control('periodo[]', ['type' => 'date', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'xx/xx/xxxx', 'label' => false]) ?>
+        <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'maxlenght' => 11, 'label' => false]) ?>
     </div>
 </div>
 <div class="mt-5">

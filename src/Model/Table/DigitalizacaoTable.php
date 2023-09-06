@@ -111,4 +111,17 @@ class DigitalizacaoTable extends Table
 
         return $query;
     }
+
+    public function funcionarioFiltro() {
+        
+        $query = $this->find('list', ['keyfield' => 'id', 'valueField' => 'funcionario']) 
+        ->select([
+            'id' => 'Digitalizacao.id',
+            'digitalizacao' => 'Digitalizacao.funcionario'
+        ])
+        ->group('Digitalizacao.funcionario')
+        ->all();
+
+        return $query;
+    }
 } 

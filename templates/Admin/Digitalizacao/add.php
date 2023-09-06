@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-3">
         <label class="form-label">Período</label>
-        <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'xx/xx/xxxx', 'label' => false]) ?>
+        <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'maxlenght' => 11, 'label' => false]) ?>
     </div>
 </div>
 <div id="btn_add" class="col-md-12 mt-4">
@@ -45,7 +45,7 @@
                        <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Quantidade', 'label' => false]) ?>
                     </div>
                     <div class="col-md-3">
-                        <?= $this->Form->control('periodo[]', ['type' => 'date', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'xx/xx/xxxx', 'label' => false]) ?>
+                        <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'xx/xx/xxxx', 'label' => false]) ?>
                     </div>
                     <div class="col-md-1">
                         <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>

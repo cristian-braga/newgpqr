@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
-
 class DigitalizacaoController extends AppController
 {
 
@@ -13,6 +12,7 @@ class DigitalizacaoController extends AppController
     {
         $servico = $this->request->getQuery('servico');
         $periodo = $this->request->getQuery('periodo');
+        $funcionario = $this->request->getQuery('funcionario');
 
         $this->paginate = [
                 'limit' => 20,
@@ -33,16 +33,24 @@ class DigitalizacaoController extends AppController
             'Digitalizacao.periodo' => $periodo
         ]);
        }
+
+       if(isset($funcionario) && $funcionario != '') {
+            $query->where([
+                'Digitalizacao.funcionario' => $funcionario
+            ]);
+       }
         
        $periodos = $this->Digitalizacao->periodoFiltro()->toArray();
        $servicos = $this->Digitalizacao->selectServicos()->toArray();
+       $funcionarios = $this->Digitalizacao->funcionarioFiltro()->toArray();
 
         
         $servicosExist = $this->paginate($query);
         $dataExist = $this->paginate($query);
+        $funcExist = $this->paginate($query);
         
 
-        $this->set(compact( 'servico', 'servicosExist', 'servicos', 'dataExist', 'periodo', 'periodos'));
+        $this->set(compact( 'servico', 'servicosExist', 'servicos', 'dataExist', 'periodo', 'periodos', 'funcionarios', 'funcExist', 'funcionario'));
     }
         
 
@@ -72,6 +80,9 @@ class DigitalizacaoController extends AppController
             $servico_ids = $data['servico_id'];
             $quantDOM = $data['quantidade_documentos'];
             $periodo = $data['periodo'];
+            $funcionario = "LauraTeste";
+            $data['funcionario'] = $funcionario;
+            
 
             $digitalizacoesEnviar = [];
 
@@ -79,10 +90,13 @@ class DigitalizacaoController extends AppController
 
                 $digitalizacao = $this->Digitalizacao->newEmptyEntity();
 
+
                 $digitalizacoes = [
                     'servico_id' => $servico_ids[$i],
                     'quantidade_documentos' => $quantDOM[$i],
-                    'periodo' => $periodo[$i]
+                    'periodo' => $periodo[$i],
+                     'funcionario' => $funcionario,
+                    'data_digitalizacao' => date('Y-m-d')
                 ];
 
                 $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $digitalizacoes);
@@ -136,4 +150,5 @@ class DigitalizacaoController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
 }
