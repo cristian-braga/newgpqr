@@ -209,6 +209,17 @@ $mpdf->Output('SDG1M001.pdf',\Mpdf\Output\Destination::INLINE);
 
 exit();
 // finaliza o codigo
-
-
 ?>
+$html = '
+TESTANDO 123 TESTANDO
+';
+
+// pega o conteudo do buffer, insere na variavel e limpa a memória
+ob_end_clean();
+$mpdf->allow_charset_conversion = true;
+$mpdf->WriteHTML($html);
+$mpdf->Output('Sdake64.pdf', \Mpdf\Output\Destination::INLINE);
+// imprime  \Mpdf\Output\Destination::DOWNLOAD
+return $response;
+exit();
+// finaliza o codigo

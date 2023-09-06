@@ -12,7 +12,7 @@
 
         $this->set(compact('sdg1'));
     }
-
+      
     public function pdf($id = null)
     {
         $sdg1 = $this->Sdg1->get($id, [
@@ -31,6 +31,7 @@
             $data['funcionario'] = 'Itallo';
             $data['capa'] = $data['copias'];
             $data['total']  = $data['copias']  * $data['paginas'];
+            $data['capa'] = $data['copias'];
             $sdg1 = $this->Sdg1->patchEntity($sdg1, $data);
             if ($this->Sdg1->save($sdg1)) {
                 $this->Flash->success(__('Salvo com sucesso.'));
@@ -76,5 +77,13 @@
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    public function pdf($id = null)
+    {
+        $sdg1 = $this->Sdg1->get($id, [
+            'contain' => [],
+        ]);
+
+        $this->set(compact('sdg1'));
     }
 }
