@@ -78,12 +78,4 @@
 
         return $this->redirect(['action' => 'index']);
     }
-    public function pdf($id = null)
-    {
-        $sdg1 = $this->Sdg1->get($id, [
-            'contain' => [],
-        ]);
-
-        $this->set(compact('sdg1'));
-    }
 }

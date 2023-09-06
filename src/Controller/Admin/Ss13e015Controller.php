@@ -3,78 +3,76 @@
 
     use App\Controller\AppController;
 
-    class Sdake05Controller extends AppController
-{
+    class Ss13e015Controller extends AppController
+    {
     public function index()
     {
-        $sdake05 = $this->paginate($this->Sdake05);
+        $ss13e015 = $this->paginate($this->Ss13e015);
 
-        $this->set(compact('sdake05'));
+        $this->set(compact('ss13e015'));
     }
 
     public function add()
     {
-        $sdake05 = $this->Sdake05->newEmptyEntity();
+        $ss13e015 = $this->Ss13e015->newEmptyEntity();
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
             $data['funcionario'] = 'Itallo';
-            $data['capa'] = $data['copias'];
             $data['total']  = $data['copias']  * $data['paginas'];
 
-            $sdake05 = $this->Sdake05->patchEntity($sdake05, $data);
-            if ($this->Sdake05->save($sdake05)) {
+            $ss13e015 = $this->Ss13e015->patchEntity($ss13e015, $data);
+            if ($this->Ss13e015->save($ss13e015)) {
                 $this->Flash->success(__('Salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
         }
-        $this->set(compact('sdake05'));
+        $this->set(compact('ss13e015'));
     }
 
     public function edit($id = null)
     {
-        $sdake05 = $this->Sdake05->get($id, [
+        $ss13e015 = $this->Ss13e015->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $sdake05 = $this->Sdake05->patchEntity($sdake05, $this->request->getData());
+            $ss13e015 = $this->Ss13e015->patchEntity($ss13e015, $this->request->getData());
             $data = $this->request->getData();
             $data['funcionario'] = 'Itallo';
-            $data['capa'] = $data['copias'];
             $data['total']  = $data['copias']  * $data['paginas'];
 
-            $sdake05 = $this->Sdake05->patchEntity($sdake05, $data);
-            if ($this->Sdake05->save($sdake05)) {
-                $this->Flash->success(__('O sdake05 foi salvo.'));
+            $ss13e015 = $this->Ss13e015->patchEntity($ss13e015, $data);
+            if ($this->Ss13e015->save($ss13e015)) {
+                $this->Flash->success(__('O Serviço foi salvo.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O sdake05 não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('O Serviço não foi salvo. Por favor, tente novamente.'));
         }
-        $this->set(compact('sdake05'));
+        $this->set(compact('ss13e015'));
     }
 
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $sdake05 = $this->Sdake05->get($id);
-        if ($this->Sdake05->delete($sdake05)) {
-            $this->Flash->success(__('Excluído com sucesso.'));
+        $ss13e015 = $this->Ss13e015->get($id);
+        if ($this->Ss13e015->delete($ss13e015)) {
+            $this->Flash->success(__('The ss13e015 has been deleted.'));
         } else {
-            $this->Flash->error(__('Não foi possível excluir. Por favor, tente novamente.'));
+            $this->Flash->error(__('The ss13e015 could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
     public function pdf($id = null)
     {
-        $sdake05 = $this->Sdake05->get($id, [
+        $ss13e015 = $this->Ss13e015->get($id, [
             'contain' => [],
         ]);
 
-        $this->set(compact('sdake05'));
+        $this->set(compact('ss13e015'));
     }
 }

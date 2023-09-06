@@ -25,7 +25,6 @@ class Sdake64Controller extends AppController
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
-            error_reporting(0);
             $data['funcionario'] = 'Itallo';
             $data['total']  = $data['copias']  * $data['paginas'];
             $data['total1'] = $data['copias1'] * $data['paginas1'];
@@ -54,8 +53,6 @@ class Sdake64Controller extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $sdake64 = $this->Sdake64->patchEntity($sdake64, $this->request->getData());
             $data = $this->request->getData();
-
-            error_reporting(0);
             $data['funcionario'] = 'Itallo';
             $data['total']  = $data['copias']  * $data['paginas'];
             $data['total1'] = $data['copias1'] * $data['paginas1'];
