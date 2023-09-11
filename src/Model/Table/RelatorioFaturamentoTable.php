@@ -8,7 +8,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Datasource\ConnectionManager;
 
-class RelatorioImpressaoTable extends Table
+class RelatorioFaturamentoTable extends Table
 {
     /**
      * Initialize method
@@ -20,7 +20,7 @@ class RelatorioImpressaoTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('impressao');
+        $this->setTable('expedicao');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -34,33 +34,26 @@ class RelatorioImpressaoTable extends Table
         ]);
     }
 
-    public function queryImpressao($ano)
+    public function queryFaturamento()
     {
         $connection = ConnectionManager::get('default');
 
         $query = $connection->execute(
             "SELECT
-            CASE MONTH(data_impressao)
-                WHEN 1 THEN 'Janeiro'
-                WHEN 2 THEN 'Fevereiro'
-                WHEN 3 THEN 'Março'
-                WHEN 4 THEN 'Abril'
-                WHEN 5 THEN 'Maio'
-                WHEN 6 THEN 'Junho'
-                WHEN 7 THEN 'Julho'
-                WHEN 8 THEN 'Agosto'
-                WHEN 9 THEN 'Setembro'
-                WHEN 10 THEN 'Outubro'
-                WHEN 11 THEN 'Novembro'
-                WHEN 12 THEN 'Dezembro'
-            END as mes,
-            SUM(quantidade_documentos) + SUM(folha_rosto) + SUM(recibo_postagem) AS total_mes
-            FROM impressao
-                INNER JOIN atividade ON impressao.atividade_id = atividade.id
+                cliente_servico AS cliente_servico,
+                nome_servico AS nome_servico,
+                descricao_servico AS descricao_servico,
+                impressao_servico AS impressao_servico,
+                tipo_preparo_servico AS tipo_preparo_servico,
+                SUM(quantidade_documentos) AS total_docs,
+                SUM(quantidade_folhas) AS total_folhas
+            FROM expedicao
+                INNER JOIN atividade ON expedicao.atividade_id = atividade.id
                 INNER JOIN servico ON atividade.servico_id = servico.id
-            WHERE YEAR(data_impressao) = {$ano}
-            GROUP BY mes
-            ORDER BY MONTH(data_impressao) ASC;"
+            WHERE
+                cliente_servico LIKE 'DEER%'
+            GROUP BY nome_servico
+            ORDER BY cliente_servico ASC, nome_servico ASC"
         )->fetchAll('assoc');
 
         return $query;

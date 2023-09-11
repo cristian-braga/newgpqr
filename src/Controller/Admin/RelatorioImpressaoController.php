@@ -19,15 +19,13 @@ class RelatorioImpressaoController extends AppController
 
         $relatorio_impressao = $this->RelatorioImpressao->queryImpressao($ano);
 
-        $totalA4 = $totalA5 = $total = 0;
+        $total = 0;
 
-        foreach ($relatorio_impressao as $item) {
-            $totalA4 += $item['total_A4'];
-            $totalA5 += $item['total_A5'];
-            $total += $item['total_mes'];
+        foreach ($relatorio_impressao as $impressao) {
+            $total += $impressao['total_mes'];
         }
 
-        $this->set(compact('relatorio_impressao', 'totalA4', 'totalA5', 'total', 'ano'));
+        $this->set(compact('relatorio_impressao', 'total', 'ano'));
     }
 
     public function exportar()
@@ -36,51 +34,43 @@ class RelatorioImpressaoController extends AppController
 
         $relatorio_impressao = $this->RelatorioImpressao->queryImpressao($ano);
 
-        $totalA4 = $totalA5 = $total = 0;
+        $total = 0;
 
-        foreach ($relatorio_impressao as $item) {
-            $totalA4 += $item['total_A4'];
-            $totalA5 += $item['total_A5'];
-            $total += $item['total_mes'];
+        foreach ($relatorio_impressao as $impressao) {
+            $total += $impressao['total_mes'];
         }
 
         $html = '
         <meta charset="UTF-8">
-        <body style="font-family: Arial; font-size: 14pt;">
-            <table border="1" style="width: 55%; text-align: center;">
+        <body style="font-family: Arial; font-size: 14pt; text-align: center; vertical-align: middle;">
+            <table border="1" style="width: 50%;">
                 <thead>
                     <tr>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;" colspan="4">
+                        <th colspan="2" style="background-color: #27333F; color: #FFF; border-color: #808080;">
                             <img src="https://www.geo.prodemge.gov.br/assets/images/logo.png" height="30" width="138"><br><br>
                             COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>GIM - GERÊNCIA DE IMPRESSÃO DIGITAL<br><br>
                         </th>
                     </tr>
                     <tr>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;" colspan="4">RELATÓRIO impressao ' . $ano . '</th>
+                        <th colspan="2" style="background-color: #27333F; color: #FFF; border-color: #808080;">RELATÓRIO IMPRESSÃO ' . $ano . '</th>
                     </tr>
                     <tr>
                         <th style="background-color: #DEDCDC;">Referência</th>
-                        <th style="background-color: #DEDCDC;">A4</th>
-                        <th style="background-color: #DEDCDC;">A5</th>
                         <th style="background-color: #DEDCDC;">Mensal</th>
                     </tr>
                 </thead>
                 <tbody>';
                 foreach ($relatorio_impressao as $impressao) {
                     $html .= '
-                    <tr style="text-align: center;">
+                    <tr>
                         <td style="background-color: #F8F8FF;"><b>' . h($impressao['mes']) . '</b></td>
-                        <td>' . number_format(floatval($impressao['total_A4']), 0, ',', '.') . '</td>
-                        <td>' . number_format(floatval($impressao['total_A5']), 0, ',', '.') . '</td>
                         <td>' . number_format(floatval($impressao['total_mes']), 0, ',', '.') . '</td>
                     </tr>';
                 }
                 $html .= '
-                    <tr style="text-align: center; font-weight: bold;">
-                        <td style="background-color: #DEDCDC;">Total</td>
-                        <td style="background-color: #DEDCDC;">' . number_format($totalA4, 0, ',', '.') . '</td>
-                        <td style="background-color: #DEDCDC;">' . number_format($totalA5, 0, ',', '.') . '</td>
-                        <td style="background-color: #DEDCDC;">' . number_format($total, 0, ',', '.') . '</td>
+                    <tr>
+                        <th style="background-color: #DEDCDC;">Total</th>
+                        <th style="background-color: #DEDCDC;">' . number_format($total, 0, ',', '.') . '</th>
                     </tr>
                 </tbody>
             </table>
