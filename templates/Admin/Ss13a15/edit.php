@@ -1,39 +1,26 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Ss13a15 $ss13a15
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $ss13a15->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $ss13a15->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Ss13a15'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="ss13a15 form content">
-            <?= $this->Form->create($ss13a15) ?>
-            <fieldset>
-                <legend><?= __('Edit Ss13a15') ?></legend>
-                <?php
-                    echo $this->Form->control('copias');
-                    echo $this->Form->control('capas');
-                    echo $this->Form->control('paginas');
-                    echo $this->Form->control('total');
-                    echo $this->Form->control('job');
-                    echo $this->Form->control('referencia');
-                    echo $this->Form->control('data', ['empty' => true]);
-                    echo $this->Form->control('funcionario');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+<h3 class="text-center mt-2 mb-4">Editar</h3>
+<?= $this->Form->create($ss13a15, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
+<div class="row g-3">
+    <div class="form-group col-md-6"><label class="form-label">Job</label>
+        <?php echo $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Somente números', 'label' => false]); ?>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="form-label">Data</label>
+        <?= $this->Form->control('data', ['type' => 'date', 'class' => 'form-control', 'required', 'label' => false]) ?>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="form-label">Data</label>
+        <?= $this->Form->control('referencia', ['type' => 'month', 'class' => 'form-control', 'required', 'label' => false]) ?>
+    </div>
+    <div class="form-group col-md-6"><label class="form-label">Cópias</label>
+        <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Cópias', 'label' => false]); ?>
+    </div>
+    <div class="form-group col-md-6"><label class="form-label">Páginas</label>
+        <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Páginas', 'label' => false]); ?>
     </div>
 </div>
+<div class="col-12 mt-3">
+    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+</div>
+<?= $this->Form->end() ?>
