@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+
 class DigitalizacaoController extends AppController
 {
 
@@ -71,7 +72,7 @@ class DigitalizacaoController extends AppController
         $servicos = $this->Digitalizacao->Servico
             ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
             ->order(['nome_servico' => 'asc'])
-            ->all();
+            ->all(); // select de todos os serviços 
 
         if ($this->request->is('post')) {
 
