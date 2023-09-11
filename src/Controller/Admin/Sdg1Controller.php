@@ -38,7 +38,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('sdg1'));
     }
@@ -51,6 +51,11 @@
         if ($this->request->is(['patch', 'post', 'put'])) {
             $sdg1 = $this->Sdg1->patchEntity($sdg1, $this->request->getData());
             $data = $this->request->getData();
+            $data = $this->request->getData();
+            $data['funcionario'] = 'Itallo';
+            $data['capa'] = $data['copias'];
+            $data['total']  = $data['copias']  * $data['paginas'];
+            $data['capa'] = $data['copias'];
 
             error_reporting(0);
             $data['total']  = $data['copias']  * $data['paginas'];

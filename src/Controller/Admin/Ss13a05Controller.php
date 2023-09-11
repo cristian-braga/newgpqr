@@ -37,7 +37,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('ss13a05'));
     }
@@ -56,11 +56,11 @@
             $data['total']  = $data['copias']  * $data['paginas'];
             $ss13a05 = $this->Ss13a05->patchEntity($ss13a05, $data);
             if ($this->Ss13a05->save($ss13a05)) {
-                $this->Flash->success(__('Editado com sucesso.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O serviço não foi editado, tente novamente..'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('ss13a05'));
     }
@@ -70,9 +70,9 @@
         $this->request->allowMethod(['post', 'delete']);
         $ss13a05 = $this->Ss13a05->get($id);
         if ($this->Ss13a05->delete($ss13a05)) {
-            $this->Flash->success(__('Excluído com sucesso.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('O serviço não foi excluído, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

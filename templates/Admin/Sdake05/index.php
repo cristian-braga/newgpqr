@@ -1,4 +1,5 @@
-<div class="sdake05 index content">
+
+<h2 class="text-center text-gpqr mt-2 mb-4">SDAKE05</h2><div class="sdake05 index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
     <div class="table-responsive table-gpqr" style="margin-top:1%;">
         <table class="table table-borderless table-striped text-center align-middle">
@@ -28,14 +29,5 @@
             </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+    <?= $this->element('pagination') ?>
 </div>

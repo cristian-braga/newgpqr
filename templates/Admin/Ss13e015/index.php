@@ -20,8 +20,8 @@
                     <td><?= h($ss13e015->job) ?></td>
                     <td><?= h($ss13e015->data) ?></td>
                     <td>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ss13e015->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ss13e015->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $ss13e015->id)]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $ss13e015->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $ss13e015->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $ss13e015->id)]) ?>
                         <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $ss13e015->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>

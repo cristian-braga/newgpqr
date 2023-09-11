@@ -1,13 +1,6 @@
 <h3 class="text-center mt-4 mb-4">EDITAR</h3>
-<hr>
 <?= $this->Form->create($ss13a05,['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
     <div class="row g-3">
-        <div class="col-md-6">
-            <label for="sistema">Serviço:</label>
-            <div class="form-check form-check-inline">
-                <label><b>SS13A05</b></label>
-            </div>
-        </div>
         <div class="row g-3">
             <div class="col-md-6">
                 <label class="form-label">Referência</label>
