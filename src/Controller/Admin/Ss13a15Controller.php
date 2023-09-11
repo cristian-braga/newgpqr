@@ -3,79 +3,81 @@
 
     use App\Controller\AppController;
 
-    class Sdg1Controller extends AppController
+    class Ss13a15Controller extends AppController
 {
-
     public function index()
     {
-        $sdg1 = $this->paginate($this->Sdg1);
+        $ss13a15 = $this->paginate($this->Ss13a15);
 
-        $this->set(compact('sdg1'));
-    }
-      
-    public function pdf($id = null)
-    {
-        $sdg1 = $this->Sdg1->get($id, [
-            'contain' => [],
-        ]);
-
-        $this->set(compact('sdg1'));
+        $this->set(compact('ss13a15'));
     }
 
     public function add()
     {
-        $sdg1 = $this->Sdg1->newEmptyEntity();
+        $ss13a15 = $this->Ss13a15->newEmptyEntity();
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
             $data['funcionario'] = 'Itallo';
-            $data['capa'] = $data['copias'];
+            $data['capas'] = $data['copias'];
             $data['total']  = $data['copias']  * $data['paginas'];
-            $data['capa'] = $data['copias'];
-            $sdg1 = $this->Sdg1->patchEntity($sdg1, $data);
-            if ($this->Sdg1->save($sdg1)) {
+
+            $ss13a15 = $this->Ss13a15->patchEntity($ss13a15, $data);
+            if ($this->Ss13a15->save($ss13a15)) {
                 $this->Flash->success(__('Salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
         }
-        $this->set(compact('sdg1'));
+        $this->set(compact('ss13a15'));
     }
 
     public function edit($id = null)
     {
-        $sdg1 = $this->Sdg1->get($id, [
+        $ss13a15 = $this->Ss13a15->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $sdg1 = $this->Sdg1->patchEntity($sdg1, $this->request->getData());
+            $ss13a15 = $this->Ss13a15->patchEntity($ss13a15, $this->request->getData());
             $data = $this->request->getData();
-
-            error_reporting(0);
+            $data['funcionario'] = 'Itallo';
+            $data['capas'] = $data['copias'];
             $data['total']  = $data['copias']  * $data['paginas'];
-            $sdg1 = $this->Sdg1->patchEntity($sdg1, $data);
+            
 
-            if ($this->Sdg1->save($sdg1)) {
+            $data['totaltudo'] = $data['total'] + $data['total1'] + $data['total2'] + $data['total3'] + $data['total4'];
+
+            $ss13a15 = $this->Ss13a15->patchEntity($ss13a15, $data);
+            if ($this->Ss13a15->save($ss13a15)) {
                 $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
-        $this->set(compact('sdg1'));
+        $this->set(compact('ss13a15'));
     }
 
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $sdg1 = $this->Sdg1->get($id);
-        if ($this->Sdg1->delete($sdg1)) {
+        $ss13a15 = $this->Ss13a15->get($id);
+        if ($this->Ss13a15->delete($ss13a15)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
             $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function pdf($id = null)
+    {
+        $ss13a15 = $this->Ss13a15->get($id, [
+            'contain' => [],
+        ]);
+
+        $this->set(compact('ss13a15'));
     }
 }

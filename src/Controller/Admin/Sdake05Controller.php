@@ -16,13 +16,19 @@
     {
         $sdake05 = $this->Sdake05->newEmptyEntity();
         if ($this->request->is('post')) {
-            $sdake05 = $this->Sdake05->patchEntity($sdake05, $this->request->getData());
+
+            $data = $this->request->getData();
+            $data['funcionario'] = 'Itallo';
+            $data['capa'] = $data['copias'];
+            $data['total']  = $data['copias']  * $data['paginas'];
+
+            $sdake05 = $this->Sdake05->patchEntity($sdake05, $data);
             if ($this->Sdake05->save($sdake05)) {
-                $this->Flash->success(__('The sdake05 has been saved.'));
+                $this->Flash->success(__('Salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The sdake05 could not be saved. Please, try again.'));
+            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('sdake05'));
     }
@@ -34,12 +40,18 @@
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $sdake05 = $this->Sdake05->patchEntity($sdake05, $this->request->getData());
+            $data = $this->request->getData();
+            $data['funcionario'] = 'Itallo';
+            $data['capa'] = $data['copias'];
+            $data['total']  = $data['copias']  * $data['paginas'];
+
+            $sdake05 = $this->Sdake05->patchEntity($sdake05, $data);
             if ($this->Sdake05->save($sdake05)) {
-                $this->Flash->success(__('The sdake05 has been saved.'));
+                $this->Flash->success(__('O sdake05 foi salvo.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The sdake05 could not be saved. Please, try again.'));
+            $this->Flash->error(__('O sdake05 não foi salvo. Por favor, tente novamente.'));
         }
         $this->set(compact('sdake05'));
     }
@@ -49,9 +61,9 @@
         $this->request->allowMethod(['post', 'delete']);
         $sdake05 = $this->Sdake05->get($id);
         if ($this->Sdake05->delete($sdake05)) {
-            $this->Flash->success(__('The sdake05 has been deleted.'));
+            $this->Flash->success(__('Excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The sdake05 could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Não foi possível excluir. Por favor, tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

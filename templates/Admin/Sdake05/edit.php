@@ -1,32 +1,25 @@
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $sdake05->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $sdake05->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Sdake05'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="sdake05 form content">
-            <?= $this->Form->create($sdake05) ?>
-            <fieldset>
-                <legend><?= __('Edit Sdake05') ?></legend>
-                <?php
-                    echo $this->Form->control('copias');
-                    echo $this->Form->control('paginas');
-                    echo $this->Form->control('total');
-                    echo $this->Form->control('job');
-                    echo $this->Form->control('capa');
-                    echo $this->Form->control('funcionario');
-                    echo $this->Form->control('data_cadastro');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+<h3 class="text-center mt-2 mb-4">EDITAR</h3>
+<?= $this->Form->create($sdake05, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
+<div class="row g-3">
+    <div class="form-group col-md-6">
+        <label class="form-label">Cópias</label>
+        <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Cópias', 'label' => false]); ?>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="form-label">Páginas</label>
+        <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Páginas', 'label' => false]); ?>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="form-label">Job</label>
+        <?php echo $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Job', 'label' => false]); ?>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="form-label">Data</label>
+        <?php echo $this->Form->control('data_cadastro', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]); ?>
+    </div>
+    <div class="form-group" style="margin-top: 1%;">
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:1%;']) ?>
+        <?= $this->Form->end() ?>
     </div>
 </div>

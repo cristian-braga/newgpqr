@@ -1,12 +1,4 @@
-<style>
-    .btn-secondary {
-        margin-left: 15px;
-    }
 
-    .form-control1 {
-        margin-top: 10px;
-    }
-</style>
 <h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
 <hr>
 <?= $this->Form->create($sdake75) ?>

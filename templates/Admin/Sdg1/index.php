@@ -9,7 +9,7 @@
                     <th>N° de Páginas</th>
                     <th>Job</th>
                     <th>Data</th>
-                    <th>Ações</th>
+                    <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,5 +29,5 @@
             </tbody>
         </table>
     </div>
-    <?= $this->element('pagination') ?>
 </div>
+<?= $this->element('pagination') ?>

@@ -11,7 +11,7 @@
 
         <div class="row g-3">
             <div class="col-md-6">
-            <label class="form-label">Job</label>
+            <label class="form-label">JOB</label>
                 <input class="form-control" type="number" name="job" id="job" placeholder="Somente números" required maxlength="5" value="<?php echo $sdake75['job'] ?>">
             </div>
 

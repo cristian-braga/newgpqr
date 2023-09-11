@@ -25,7 +25,7 @@
     </div>
     <div class="form-group col-md-10"></div>
     <div class="form-group col-md-2">
-        <label class="form-label">Veículos com Averbação Incluída</label>
+        <label class="form-label" style="margin-bottom: 32px;">Veículos com Averbação Incluída</label>
         <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Cópias', 'label' => false]); ?>
         <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control form-control1', 'maxlenght' => 4, 'placeholder' => 'Páginas', 'label' => false]); ?>
     </div>
