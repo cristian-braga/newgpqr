@@ -13,7 +13,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-dollar-sign fa-3x" aria-hidden="true"></i>
                 <h5>FATURAMENTO</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'RelatorioFaturamento', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
@@ -21,8 +21,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa-solid fa-print fa-3x" aria-hidden="true"></i>
-                <h5>SERVIÇOS IMPRESSOS</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                <h5>IMPRESSÃO</h5>',
+                ['controller' => 'RelatorioImpressao', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>

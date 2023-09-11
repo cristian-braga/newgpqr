@@ -40,17 +40,17 @@ class RelatorioMultasController extends AppController
 
         $html = '
         <meta charset="UTF-8">
-        <body style="font-family: Arial; font-size: 14pt;">
-            <table border="1" style="width: 55%; text-align: center;">
+        <body style="font-family: Arial; font-size: 14pt; text-align: center; vertical-align: middle;">
+            <table border="1" style="width: 55%;">
                 <thead>
                     <tr>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;" colspan="4">
+                        <th colspan="4" style="background-color: #27333F; color: #FFF; border-color: #808080;">
                             <img src="https://www.geo.prodemge.gov.br/assets/images/logo.png" height="30" width="138"><br><br>
                             COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>GIM - GERÊNCIA DE IMPRESSÃO DIGITAL<br><br>
                         </th>
                     </tr>
                     <tr>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;" colspan="4">RELATÓRIO MULTAS</th>
+                        <th colspan="4" style="background-color: #27333F; color: #FFF; border-color: #808080;">RELATÓRIO MULTAS</th>
                     </tr>
                     <tr>
                         <th style="background-color: #DEDCDC;">Referência</th>
@@ -62,7 +62,7 @@ class RelatorioMultasController extends AppController
                 <tbody>';
                 foreach ($relatorio_multas as $multas) {
                     $html .= '
-                    <tr style="text-align: center;">
+                    <tr>
                         <td style="background-color: #F8F8FF;"><b>' . h($multas['mes']) . '</b></td>
                         <td>' . number_format(floatval($multas['ano_retrasado']), 0, ',', '.') . '</td>
                         <td>' . number_format(floatval($multas['ano_passado']), 0, ',', '.') . '</td>
@@ -70,11 +70,11 @@ class RelatorioMultasController extends AppController
                     </tr>';
                 }
                 $html .= '
-                    <tr style="text-align: center; font-weight: bold;">
-                        <td style="background-color: #DEDCDC;">Total</td>
-                        <td style="background-color: #DEDCDC;">' . number_format($ano_retrasado, 0, ',', '.') . '</td>
-                        <td style="background-color: #DEDCDC;">' . number_format($ano_passado, 0, ',', '.') . '</td>
-                        <td style="background-color: #DEDCDC;">' . number_format($ano_atual, 0, ',', '.') . '</td>
+                    <tr>
+                        <th style="background-color: #DEDCDC;">Total</th>
+                        <th style="background-color: #DEDCDC;">' . number_format($ano_retrasado, 0, ',', '.') . '</th>
+                        <th style="background-color: #DEDCDC;">' . number_format($ano_passado, 0, ',', '.') . '</th>
+                        <th style="background-color: #DEDCDC;">' . number_format($ano_atual, 0, ',', '.') . '</th>
                     </tr>
                 </tbody>
             </table>

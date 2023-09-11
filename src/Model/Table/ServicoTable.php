@@ -102,9 +102,9 @@ class ServicoTable extends Table
             ->allowEmptyString('correios_servico');
 
         $validator
-            ->scalar('impressa_servico')
-            ->maxLength('impressa_servico', 45)
-            ->allowEmptyString('impressa_servico');
+            ->scalar('impressao_servico')
+            ->maxLength('impressao_servico', 45)
+            ->allowEmptyString('impressao_servico');
 
         $validator
             ->scalar('tipo_impressao_servico')
