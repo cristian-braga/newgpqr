@@ -21,12 +21,10 @@
         <caption class="ms-2">Quantitativo de Impressões</caption>
         <thead class="table-secondary">
             <tr>
-                <th colspan="4">RELATÓRIO <?= $ano ?></th>
+                <th colspan="2">RELATÓRIO <?= $ano ?></th>
             </tr>
             <tr>
                 <th>Referência</th>
-                <th>A4</th>
-                <th>A5</th>
                 <th>Mensal</th>
             </tr>
         </thead>
@@ -34,15 +32,11 @@
             <?php foreach ($relatorio_impressao as $impressao) : ?>
                 <tr>
                     <td><b><?= h($impressao['mes']) ?></b></td>
-                    <td><?= $this->Number->format($impressao['total_A4']) ?></td>
-                    <td><?= $this->Number->format($impressao['total_A5']) ?></td>
                     <td><?= $this->Number->format($impressao['total_mes']) ?></td>
                 </tr>
             <?php endforeach; ?>
             <tr class="table-secondary">
                 <th>Total</th>
-                <th><?= $this->Number->format($totalA4) ?></th>
-                <th><?= $this->Number->format($totalA5) ?></th>
                 <th><?= $this->Number->format($total) ?></th>
             </tr>
         </tbody>

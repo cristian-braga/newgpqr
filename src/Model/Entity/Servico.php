@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property string|null $cliente_responsavel_servico
  * @property string|null $cliente_servico
  * @property string|null $correios_servico
- * @property string|null $impressa_servico
+ * @property string|null $impressao_servico
  * @property string|null $tipo_impressao_servico
  * @property string|null $tipo_preparo_servico
  * @property string|null $envelopamento_servico
@@ -50,7 +50,7 @@ class Servico extends Entity
         'cliente_responsavel_servico' => true,
         'cliente_servico' => true,
         'correios_servico' => true,
-        'impressa_servico' => true,
+        'impressao_servico' => true,
         'tipo_impressao_servico' => true,
         'tipo_preparo_servico' => true,
         'envelopamento_servico' => true,

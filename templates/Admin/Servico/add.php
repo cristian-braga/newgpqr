@@ -22,7 +22,7 @@
                     echo $this->Form->control('cliente_responsavel_servico');
                     echo $this->Form->control('cliente_servico');
                     echo $this->Form->control('correios_servico');
-                    echo $this->Form->control('impressa_servico');
+                    echo $this->Form->control('impressao_servico');
                     echo $this->Form->control('tipo_impressao_servico');
                     echo $this->Form->control('tipo_preparo_servico');
                     echo $this->Form->control('envelopamento_servico');

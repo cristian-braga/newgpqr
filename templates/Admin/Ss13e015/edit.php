@@ -22,15 +22,6 @@
         <?php echo $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Job', 'label' => false]); ?>
     </div>
 
-    <!-- <?php
-            echo $this->Form->control('copias');
-            echo $this->Form->control('paginas');
-            echo $this->Form->control('total');
-            echo $this->Form->control('job');
-            echo $this->Form->control('referencia');
-            echo $this->Form->control('data', ['empty' => true]);
-            echo $this->Form->control('funcionario');
-            ?> -->
     <div class="col-12 mt-3">
         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>

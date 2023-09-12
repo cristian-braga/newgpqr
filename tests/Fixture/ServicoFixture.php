@@ -31,7 +31,7 @@ class ServicoFixture extends TestFixture
                 'cliente_responsavel_servico' => 'Lorem ipsum dolor sit amet',
                 'cliente_servico' => 'Lorem ipsum dolor sit amet',
                 'correios_servico' => 'Lor',
-                'impressa_servico' => 'Lorem ipsum dolor sit amet',
+                'impressao_servico' => 'Lorem ipsum dolor sit amet',
                 'tipo_impressao_servico' => 'Lor',
                 'tipo_preparo_servico' => 'Lorem ipsum dolor sit amet',
                 'envelopamento_servico' => 'Lorem ipsum dolor sit a',
