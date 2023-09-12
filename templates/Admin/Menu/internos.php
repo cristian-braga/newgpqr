@@ -13,7 +13,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-book fa-3x" aria-hidden="true"></i>
                 <h5>ENCADERNAÇÃO</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'Encadernacao', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
