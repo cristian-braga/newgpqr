@@ -58,7 +58,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-users-between-lines fa-3x" aria-hidden="true"></i>
                 <h5>MULTAS POR CLIENTE</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'RelatorioCliente', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
