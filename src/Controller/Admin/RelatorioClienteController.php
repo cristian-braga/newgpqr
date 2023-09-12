@@ -5,30 +5,34 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
-class RelatorioMultasController extends AppController
+class RelatorioClienteController extends AppController
 {
     public function index()
     {
-        $relatorio_multas = $this->RelatorioMultas->queryMultas();
+        $cliente = $this->request->getQuery('cliente');
+
+        $relatorio_cliente = $this->RelatorioCliente->queryMultasPorCliente($cliente);
 
         $ano_atual = $ano_passado = $ano_retrasado = 0;
 
-        foreach ($relatorio_multas as $total) {
+        foreach ($relatorio_cliente as $total) {
             $ano_retrasado += $total['ano_retrasado'];
             $ano_passado += $total['ano_passado'];
             $ano_atual += $total['ano_atual'];
         }
 
-        $this->set(compact('relatorio_multas', 'ano_atual', 'ano_passado', 'ano_retrasado'));
+        $clientes = $this->RelatorioCliente->clientes()->toArray();
+
+        $this->set(compact('relatorio_cliente', 'ano_atual', 'ano_passado', 'ano_retrasado', 'clientes'));
     }
 
     public function exportar()
     {
-        $relatorio_multas = $this->RelatorioMultas->queryMultas();
+        $relatorio_cliente = $this->RelatorioCliente->queryMultasPorCliente();
 
         $ano_atual = $ano_passado = $ano_retrasado = 0;
 
-        foreach ($relatorio_multas as $total) {
+        foreach ($relatorio_cliente as $total) {
             $ano_retrasado += $total['ano_retrasado'];
             $ano_passado += $total['ano_passado'];
             $ano_atual += $total['ano_atual'];
@@ -37,7 +41,7 @@ class RelatorioMultasController extends AppController
         $html = '
         <meta charset="UTF-8">
         <body style="font-family: Arial; font-size: 14pt; text-align: center; vertical-align: middle;">
-            <table border="1" style="width: 55%;">
+            <table border="1" style="width: 80%;">
                 <thead>
                     <tr>
                         <th colspan="4" style="background-color: #27333F; color: #FFF; border-color: #808080;">
@@ -46,20 +50,20 @@ class RelatorioMultasController extends AppController
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="4" style="background-color: #27333F; color: #FFF; border-color: #808080;">RELATÓRIO MULTAS</th>
+                        <th colspan="4" style="background-color: #27333F; color: #FFF; border-color: #808080;">RELATÓRIO MULTAS POR CLIENTE</th>
                     </tr>
                     <tr>
-                        <th style="background-color: #DEDCDC;">Referência</th>
+                        <th style="background-color: #DEDCDC;">Cliente</th>
                         <th style="background-color: #DEDCDC;">' . (date('Y') - 2) . '</th>
                         <th style="background-color: #DEDCDC;">' . (date('Y') - 1) . '</th>
                         <th style="background-color: #DEDCDC;">' . date('Y') . '</th>
                     </tr>
                 </thead>
                 <tbody>';
-                foreach ($relatorio_multas as $multas) {
+                foreach ($relatorio_cliente as $multas) {
                     $html .= '
                     <tr>
-                        <td style="background-color: #F8F8FF;"><b>' . h($multas['mes']) . '</b></td>
+                        <td style="background-color: #F8F8FF;"><b>' . h($multas['cliente']) . '</b></td>
                         <td>' . number_format(floatval($multas['ano_retrasado']), 0, ',', '.') . '</td>
                         <td>' . number_format(floatval($multas['ano_passado']), 0, ',', '.') . '</td>
                         <td>' . number_format(floatval($multas['ano_atual']), 0, ',', '.') . '</td>
@@ -77,7 +81,7 @@ class RelatorioMultasController extends AppController
         </body>';
         
         //Nome do arquivo
-        $arquivo = 'Relatorio_Multas.xls';
+        $arquivo = 'Relatorio_Multas_Cliente.xls';
 
         // Configurações header para forçar o download
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
