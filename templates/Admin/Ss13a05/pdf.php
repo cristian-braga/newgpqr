@@ -15,7 +15,7 @@ ob_end_clean();
 $mpdf->allow_charset_conversion=true;
 
 $html = '<head>
-  <title>'.$ss13a05['sistema'].'</title>
+  <title>SS13A05</title>
   </head
   <body style="font-family: Helvetica">
 	<table border="1" width="100%">

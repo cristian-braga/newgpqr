@@ -1,4 +1,5 @@
-            <h3 class="text-center mt-2 mb-4">Cadastrar</h3>
+            <h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
+            <hr>
             <?= $this->Form->create($sdake05, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
             <div class="row">
                 <div class="form-group col-md-12">

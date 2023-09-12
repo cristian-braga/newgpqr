@@ -16,7 +16,7 @@ $mpdf->allow_charset_conversion = true;
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '
 <head>
-  <title>'.$ss13a15['sistema'].'</title>
+  <title>SS13A15</title>
   </head
   <body style="font-family: Helvetica">
 	<table border="1" width="100%">
@@ -29,7 +29,7 @@ $html = '
   </tr>
   <tr>
     <td colspan="4" style="font-size: 12px;padding: 5px;">SISTEMA/FASE</td>
-    <td colspan="4" style="border: none"><b>'.$ss13a15['sistema'].'</b></td>
+    <td colspan="4" style="border: none"><b>SS13A15</b></td>
     <td colspan="3" style="font-size: 12px;padding: 5px;">CLIENTE</td>
     <td colspan="2" style="font-size: center; 12px;padding: 5px;"><b>POLÍCIA CIVIL</b></td>
   </tr>
