@@ -218,9 +218,9 @@ class ImpressaoController extends AppController
             ]);
         }
 
-        $servicos = $this->Impressao->servicos()->toArray();
-
         $impressao = $this->paginate($query);
+
+        $servicos = $this->Impressao->servicos()->toArray();
 
         $this->set(compact('impressao', 'servicos'));
     }
