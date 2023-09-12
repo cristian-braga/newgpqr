@@ -1,27 +1,39 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Encadernacao $encadernacao
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $encadernacao->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $encadernacao->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Encadernacao'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="encadernacao form content">
-            <?= $this->Form->create($encadernacao) ?>
-            <fieldset>
-                <legend><?= __('Edit Encadernacao') ?></legend>
-                <?php
+<h3 class="text-center mt-2 mb-4">Editar</h3>
+<?= $this->Form->create($encadernacao, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
+<div class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Data</label>
+        <?php echo $this->Form->control('data_cadastro', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Ocorrência</label>
+        <?php echo $this->Form->control('ocorrencia', ['type' => 'number', 'class' => 'form-control', 'required', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Solicitante</label>
+        <?php echo $this->Form->control('solicitante', ['type' => 'text', 'class' => 'form-control', 'required', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Descrição</label>
+        <?php echo $this->Form->control('descricao', ['type' => 'text', 'class' => 'form-control', 'required', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Documentos</label>
+        <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'required', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Cópias</label>
+        <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'required', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6 mt-2">
+        <label class="form-label">Tipo de Capa</label>
+        <select class="form-select" name ="tipo_capa" aria-label="Default select example">
+            <option selected>Selecione:</option>
+            <option value="Somente Frente">Capa - Plástica</option>
+            <option value="Frente e Verso">Capa - Prodemge</option>
+        </select>
+    </div>
+    <!-- <?php
                     echo $this->Form->control('descricao');
                     echo $this->Form->control('paginas');
                     echo $this->Form->control('ocorrencia');
@@ -32,10 +44,10 @@
                     echo $this->Form->control('copias');
                     echo $this->Form->control('total');
                     echo $this->Form->control('capas');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+                ?> -->
+    <div class="col-12 mt-3">
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
     </div>
 </div>
+<?= $this->Form->end() ?>
