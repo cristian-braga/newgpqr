@@ -1,5 +1,5 @@
     <h3 class="text-center text-gpqr">Encadernação</h3>
-    <?= $this->Html->link(__('New Encadernacao'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
+    <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
@@ -20,10 +20,10 @@
                     <td><?= h($encadernacao->ocorrencia) ?></td>
                     <td><?= $encadernacao->copias === null ? '' : $this->Number->format($encadernacao->copias) ?></td>
                     <td><?= h($encadernacao->data_cadastro) ?></td>
-                    <td class="actions">
+                    <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $encadernacao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $encadernacao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $encadernacao->id)], ['class' => 'btn btn-outline-danger btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $encadernacao->id]) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $encadernacao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $encadernacao->id)]) ?>
+                        <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $encadernacao->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
