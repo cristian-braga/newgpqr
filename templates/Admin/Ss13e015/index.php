@@ -15,7 +15,7 @@
             <tbody>
                 <?php foreach ($ss13e015 as $ss13e015): ?>
                 <tr>
-                    <td>SS13e015</td>
+                    <td>SS13E015</td>
                     <td><?= $ss13e015->total === null ? '' : $this->Number->format($ss13e015->total) ?></td>
                     <td><?= h($ss13e015->job) ?></td>
                     <td><?= h($ss13e015->data) ?></td>

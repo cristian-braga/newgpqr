@@ -15,8 +15,8 @@ $mpdf->allow_charset_conversion = true;
 
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '<head>
-<title>'.$ss13e015['sistema'].'</title>
-</head
+<title>SS13E015</title>
+</head>
 <body style="font-family: Helvetica">
  <table border="1" width="100%">
     <tr>
@@ -28,7 +28,7 @@ $html = '<head>
   </tr>
   <tr>
       <td colspan="2" style="font-size: 12px;padding: 5px;">SISTEMA/FASE</td>
-      <td colspan="5" style="border: none"><b>'.$ss13e015['sistema'].'</b></td>
+      <td colspan="5" style="border: none"><b>SS13E015</b></td>
       <td style="font-size: 12px">TELEFONE</td>
       <td colspan="2" style="text-align: center; font-size: 14px">2129-9583</td>
   </td>
@@ -89,7 +89,7 @@ $html = '<head>
 </tr>
 </table>
 <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SITE: http://www.prodemge.mg.gov.br&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-MAIL: atendimento@prodemge.gov.br &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMEIRA VIA - CLIENTE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEGUNDA VIA - GIM    </span>
-<br><br><br><br>
+<br><br><br>
 ';
 // pega o conteudo do buffer, insere na variavel e limpa a memória
 ob_end_clean();

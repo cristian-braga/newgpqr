@@ -17,7 +17,7 @@ $mpdf->allow_charset_conversion = true;
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '
 <head>
-  <title>'.$ss13a20['sistema'].'</title>
+  <title>SS13A20</title>
   </head>
   <body style="font-family: Helvetica">
 	<table border="1" width="100%">
@@ -26,11 +26,11 @@ $html = '
     <th colspan="10" style="text-align: center;padding: 3px;background-color: #DEDCDC">REMESSA DE SERVIÇO</th>
   </tr>
   <tr>
-    <td colspan="13" style="font-size: 13px;text-align: center;padding: 8px;">COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          RUA DA BAHIA, 2277 - Lourdes - Belo Horizonte - MG - CEP: 30.160-012<br>                                                 TEL:(31) 3339-1600<br>                                              Recepção de serviços: 3339-1142</td>
+    <td colspan="13" style="font-size: 13px;text-align: center;padding: 8px;">COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          RUA DA BAHIA, 2277 - Savassi - Belo Horizonte - MG - CEP: 30.160-019<br>                                                 TEL:(31) 3339-1600<br>                                              Recepção de serviços: 3339-1142</td>
   </tr>
   <tr>
     <td colspan="4" style="font-size: 12px;padding: 5px;">SISTEMA/FASE</td>
-    <td colspan="4" style="border: none"><b>'.$ss13a20['sistema'].'</b></td>
+    <td colspan="4" style="border: none"><b>SS13A20</b></td>
     <td colspan="3" style="font-size: 12px;padding: 5px;">CLIENTE</td>
     <td colspan="2" style="font-size: center; 12px;padding: 5px;"><b>POLÍCIA CIVIL</b></td>
   </tr>
