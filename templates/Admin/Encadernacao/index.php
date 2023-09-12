@@ -1,0 +1,34 @@
+    <h3 class="text-center text-gpqr">Encadernação</h3>
+    <?= $this->Html->link(__('New Encadernacao'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
+    <div class="table-responsive table-gpqr">
+        <table class="table table-borderless table-striped text-center align-middle">
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>Páginas</th>
+                    <th>Ocorrência</th>
+                    <th>Cópias</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($encadernacao as $encadernacao): ?>
+                <tr>
+                    <td><?= h($encadernacao->descricao) ?></td>
+                    <td><?= $this->Number->format($encadernacao->paginas) ?></td>
+                    <td><?= h($encadernacao->ocorrencia) ?></td>
+                    <td><?= $encadernacao->copias === null ? '' : $this->Number->format($encadernacao->copias) ?></td>
+                    <td><?= h($encadernacao->data_cadastro) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $encadernacao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $encadernacao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $encadernacao->id)], ['class' => 'btn btn-outline-danger btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $encadernacao->id]) ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?= $this->element('pagination') ?>
