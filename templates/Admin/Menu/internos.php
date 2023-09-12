@@ -4,7 +4,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-print fa-3x" aria-hidden="true"></i>
                 <h5>IMPRESSÕES INTERNAS</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'ImpInternas', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
