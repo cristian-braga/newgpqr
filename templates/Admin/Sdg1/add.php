@@ -7,7 +7,8 @@
             <p><b>SDG1M001</b></p>
         </div>
     <div class="row g-3">
-        <div class="form-group col-md-2"><label class="form-label">Job</label>
+        <div class="form-group col-md-2">
+            <label class="form-label">Job</label>
             <?php echo $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Somente números', 'label' => false]); ?>
         </div>
 
@@ -16,11 +17,13 @@
             <?= $this->Form->control('dataAtual', ['type' => 'date', 'class' => 'form-control', 'required', 'label' => false]) ?>
         </div>
 
-        <div class="form-group col-md-2"><label class="form-label">Cópias</label>
+        <div class="form-group col-md-2">
+            <label class="form-label">Cópias</label>
             <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Cópias', 'label' => false]);?>
         </div>
 
-        <div class="form-group col-md-2"><label class="form-label">Páginas</label>
+        <div class="form-group col-md-2">
+            <label class="form-label">Páginas</label>
             <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Páginas', 'label' => false]); ?>
         </div>
             
