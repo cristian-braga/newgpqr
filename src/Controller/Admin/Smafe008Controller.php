@@ -31,7 +31,7 @@ class Smafe008Controller extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('smafe008'));
     }
@@ -43,12 +43,20 @@ class Smafe008Controller extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $smafe008 = $this->Smafe008->patchEntity($smafe008, $this->request->getData());
+            $data = $this->request->getData();
+            $data['funcionario'] = 'Itallo';
+            $data['total']  = $data['copias']  * $data['paginas'];
+            $data['total1'] = $data['copias1'] * $data['paginas1'];
+
+            $data['totaltudo'] = $data['total'] + $data['total1'];
+
+            $smafe008 = $this->Smafe008->patchEntity($smafe008, $data);
             if ($this->Smafe008->save($smafe008)) {
                 $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('smafe008'));
     }
