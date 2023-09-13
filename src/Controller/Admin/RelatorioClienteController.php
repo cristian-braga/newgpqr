@@ -23,12 +23,14 @@ class RelatorioClienteController extends AppController
 
         $clientes = $this->RelatorioCliente->clientes()->toArray();
 
-        $this->set(compact('relatorio_cliente', 'ano_atual', 'ano_passado', 'ano_retrasado', 'clientes'));
+        $this->set(compact('relatorio_cliente', 'ano_atual', 'ano_passado', 'ano_retrasado', 'clientes', 'cliente'));
     }
 
     public function exportar()
     {
-        $relatorio_cliente = $this->RelatorioCliente->queryMultasPorCliente();
+        $cliente = $this->request->getQuery('cliente');
+
+        $relatorio_cliente = $this->RelatorioCliente->queryMultasPorCliente($cliente);
 
         $ano_atual = $ano_passado = $ano_retrasado = 0;
 
