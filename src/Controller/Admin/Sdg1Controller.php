@@ -73,7 +73,7 @@
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $sdg1 = $this->Sdg1->get($id);
         if ($this->Sdg1->delete($sdg1)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));

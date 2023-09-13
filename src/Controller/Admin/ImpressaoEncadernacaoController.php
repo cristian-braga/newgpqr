@@ -63,7 +63,7 @@
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $impressaoEncadernacao = $this->ImpressaoEncadernacao->get($id);
         if ($this->ImpressaoEncadernacao->delete($impressaoEncadernacao)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));

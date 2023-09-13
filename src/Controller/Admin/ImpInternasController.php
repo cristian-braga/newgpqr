@@ -27,7 +27,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('impInternas'));
     }
@@ -48,7 +48,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('impInternas'));
     }
@@ -56,12 +56,12 @@
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $impInterna = $this->ImpInternas->get($id);
         if ($this->ImpInternas->delete($impInterna)) {
-            $this->Flash->success(__('The imp interna has been deleted.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The imp interna could not be deleted. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
