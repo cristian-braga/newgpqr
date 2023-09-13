@@ -19,7 +19,7 @@
                     <td><?= h($etiquetasPm->data) ?></td>
                     <td><?= $etiquetasPm->total === null ? '' : $this->Number->format($etiquetasPm->total) ?></td>
                     <td>                    
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $etiquetasPm->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $etiquetasPm->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                         <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $etiquetasPm->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $etiquetasPm->id)]) ?>
                         <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $etiquetasPm->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
