@@ -7,35 +7,35 @@
             <div class="row">
     <div class="col-md-3">
         <label class="form-label">Nome</label>
-        <?= $this->Form->control('nome', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
+        <?= $this->Form->control('nome', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
     </div>
     <div class="col-md-3">
         <label class="form-label">Matrícula</label>
-        <?= $this->Form->control('matricula', ['type' => 'text', 'class' => 'form-control', 'maxlenght' => 11, 'label' => false]) ?>
+        <?= $this->Form->control('matricula', ['type' => 'text', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'N° da matrícula', 'label' => false]) ?>
     </div>
     <div class="col-md-3">
         <label class="form-label">Email</label>
-        <?= $this->Form->control('email', ['type' => 'email', 'class' => 'form-control', 'label' => false]) ?>
+        <?= $this->Form->control('email', ['type' => 'email', 'class' => 'form-control', 'placeholder' => 'nome@email.com', 'label' => false]) ?>
     </div>
     <div class="col-md-3">
         <label class="form-label">Telefone</label>
-        <?= $this->Form->control('tel', ['type' => 'tel', 'class' => 'form-control', 'placeholder' => '(00) 00000-0000', 'pattern' => '\([0-9]{2}\)\s[0-9]{5}-[0-9]{4}', 'required',  'label' => false]) ?>
+        <?= $this->Form->control('tel', ['type' => 'tel', 'class' => 'form-control', 'placeholder' => '(00) 00000-0000', 'onkeyup' => 'handlePhone(event)', 'required',  'label' => false]) ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mt-3">
         <label class="form-label">Contato alternativo</label>
-        <?= $this->Form->control('contatoAlt', ['type' => 'text', 'class' => 'form-control', 'label' => false]) ?>
+        <?= $this->Form->control('contatoAlt', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'nome do contato alternativo', 'label' => false]) ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mt-3">
         <label class="form-label">Telefone do Contato alternativo</label>
         <?= $this->Form->control('telAlt', ['type' => 'tel', 'class' => 'form-control', 'placeholder' => '(00) 00000-0000', 'onkeyup' => 'handlePhone(event)', 'required',  'label' => false]) ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mt-3">
         <label class="form-label">Endereço</label>
-        <?= $this->Form->control('endereco', ['type' => 'tel', 'class' => 'form-control', 'label' => false]) ?>
+        <?= $this->Form->control('endereco', ['type' => 'tel', 'class' => 'form-control', 'placeholder' => 'seu endereço (opcional)', 'label' => false]) ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mt-3">
         <label class="form-label">Turno</label>
-        <?= $this->Form->control('turno', ['class' => 'form-select', 'label' => false]) ?>
+        <?= $this->Form->select('turno', ['Manhã' => 'Manhã', 'Tarde' => 'Tarde', 'Noite' => 'Noite'], ['class' => 'form-select', 'empty' => '-- Selecione --','required', 'label' => false]) ?>
     </div>
 </div>
 
@@ -44,8 +44,7 @@
     <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
 </div>
-            <?= $this->Form->end() ?>
-</div>
+<?= $this->Form->end() ?>
 
 <script>
     const handlePhone = (event) => {
