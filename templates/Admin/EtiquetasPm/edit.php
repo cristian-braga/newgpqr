@@ -30,7 +30,7 @@
     <div class="col-md-6">
         <label class="form-label"></label>
     </div>
-    <div class="col-md-6" style="margin-top:15px;">
+    <div class="col-md-6 mt-3">
         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:15px;']) ?>
         <?= $this->Form->end() ?>
