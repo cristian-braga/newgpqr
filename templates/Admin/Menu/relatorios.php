@@ -66,8 +66,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa-solid fa-file-invoice fa-3x" aria-hidden="true"></i>
-                <h5>PLANILHA GPDC</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                <h5>GPDC</h5>',
+                ['controller' => 'RelatorioGpdc', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>

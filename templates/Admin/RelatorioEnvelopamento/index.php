@@ -19,11 +19,11 @@
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 55%;">
     <table class="table text-center align-middle">
         <caption class="ms-2">Quantitativo de Envelopamentos</caption>
-        <thead class="table-secondary">
+        <thead>
             <tr>
                 <th colspan="4">RELATÓRIO <?= $ano ?></th>
             </tr>
-            <tr>
+            <tr class="table-secondary">
                 <th>Referência</th>
                 <th>A4</th>
                 <th>A5</th>
