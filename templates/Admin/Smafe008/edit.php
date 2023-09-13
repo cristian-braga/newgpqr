@@ -1,22 +1,5 @@
-<?php
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $smafe008->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $smafe008->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Smafe008'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="smafe008 form content">
+<h3 class="text-center">Editar</h3>
             <?= $this->Form->create($smafe008) ?>
-            <fieldset>
-                <legend><?= __('Edit Smafe008') ?></legend>
                 <?php
                     echo $this->Form->control('copias');
                     echo $this->Form->control('paginas');
@@ -27,9 +10,7 @@
                     echo $this->Form->control('data', ['empty' => true]);
                     echo $this->Form->control('funcionario');
                 ?>
-            </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Html->link(__('List Smafe008'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
+
