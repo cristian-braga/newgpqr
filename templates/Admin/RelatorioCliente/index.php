@@ -1,6 +1,6 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIO MULTAS POR CLIENTE</h2>
 <div class="d-flex mb-5">
-    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar'], ['class' => 'btn btn-secondary mx-auto']) ?>
+    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar', '?' => ['cliente' => $cliente]], ['class' => 'btn btn-secondary mx-auto']) ?>
 </div>
 <div class="conteudo mt-5">
     <?= $this->Form->create(null, ['type' => 'get']) ?>
@@ -17,7 +17,7 @@
     <?= $this->Form->end() ?>
 </div>
 <div class="table-gpqr mx-auto mb-5" style="width: 75%;">
-    <table class="table text-center align-middle">
+    <table class="table table-hover text-center align-middle">
         <caption class="ms-2">Multas por Cliente</caption>
         <thead class="table-secondary sticky-top">
             <tr>

@@ -39,8 +39,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa-solid fa-truck fa-3x" aria-hidden="true"></i>
-                <h5>RESUMO EXPEDIÇÃO</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                <h5>EXPEDIÇÃO</h5>',
+                ['controller' => 'RelatorioExpedicao', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
