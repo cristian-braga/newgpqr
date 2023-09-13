@@ -28,7 +28,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('sdake05'));
     }
@@ -47,11 +47,11 @@
 
             $sdake05 = $this->Sdake05->patchEntity($sdake05, $data);
             if ($this->Sdake05->save($sdake05)) {
-                $this->Flash->success(__('O sdake05 foi salvo.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O sdake05 não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('sdake05'));
     }
@@ -61,9 +61,9 @@
         $this->request->allowMethod(['post', 'delete']);
         $sdake05 = $this->Sdake05->get($id);
         if ($this->Sdake05->delete($sdake05)) {
-            $this->Flash->success(__('Excluído com sucesso.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('Não foi possível excluir. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

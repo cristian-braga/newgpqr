@@ -26,10 +26,6 @@ class RelatorioMultasController extends AppController
     {
         $relatorio_multas = $this->RelatorioMultas->queryMultas();
 
-        $atual = date('Y');
-        $passado = $atual - 1;
-        $retrasado = $atual - 2;
-
         $ano_atual = $ano_passado = $ano_retrasado = 0;
 
         foreach ($relatorio_multas as $total) {
@@ -54,9 +50,9 @@ class RelatorioMultasController extends AppController
                     </tr>
                     <tr>
                         <th style="background-color: #DEDCDC;">Referência</th>
-                        <th style="background-color: #DEDCDC;">' . $retrasado . '</th>
-                        <th style="background-color: #DEDCDC;">' . $passado . '</th>
-                        <th style="background-color: #DEDCDC;">' . $atual . '</th>
+                        <th style="background-color: #DEDCDC;">' . (date('Y') - 2) . '</th>
+                        <th style="background-color: #DEDCDC;">' . (date('Y') - 1) . '</th>
+                        <th style="background-color: #DEDCDC;">' . date('Y') . '</th>
                     </tr>
                 </thead>
                 <tbody>';

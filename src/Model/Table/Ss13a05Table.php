@@ -8,13 +8,14 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class Smafe08bTable extends Table
+
+class Ss13a05Table extends Table
 {
     public function initialize(array $config): void
     {
         parent::initialize($config);
 
-        $this->setTable('smafe08b');
+        $this->setTable('ss13a05');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
     }
@@ -26,6 +27,10 @@ class Smafe08bTable extends Table
             ->allowEmptyString('copias');
 
         $validator
+            ->integer('capas')
+            ->allowEmptyString('capas');
+
+        $validator
             ->integer('paginas')
             ->allowEmptyString('paginas');
 
@@ -34,18 +39,13 @@ class Smafe08bTable extends Table
             ->allowEmptyString('total');
 
         $validator
-            ->scalar('concurso')
-            ->maxLength('concurso', 5)
-            ->allowEmptyString('concurso');
-
-        $validator
             ->scalar('job')
             ->maxLength('job', 4)
             ->allowEmptyString('job');
 
         $validator
             ->scalar('referencia')
-            ->maxLength('referencia', 30)
+            ->maxLength('referencia', 45)
             ->allowEmptyString('referencia');
 
         $validator

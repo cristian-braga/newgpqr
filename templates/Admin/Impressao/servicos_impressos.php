@@ -21,9 +21,9 @@
         </div>
     <?= $this->Form->end() ?>
 </div>
-<div class="table-responsive table-gpqr">
+<div class="table-gpqr">
     <table class="table table-borderless table-striped text-center align-middle">
-        <thead>
+        <thead class="sticky-top">
             <tr>
                 <th>Serviço</th>
                 <th><?= $this->Paginator->sort('data_impressao', ['label' => 'Data Impressão']) ?></th>

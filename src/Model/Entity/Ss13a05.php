@@ -5,14 +5,13 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-class Smafe08b extends Entity
+class Ss13a05 extends Entity
 {
-    
     protected $_accessible = [
         'copias' => true,
+        'capas' => true,
         'paginas' => true,
         'total' => true,
-        'concurso' => true,
         'job' => true,
         'referencia' => true,
         'data' => true,

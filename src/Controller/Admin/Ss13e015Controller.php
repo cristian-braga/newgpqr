@@ -27,7 +27,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('ss13e015'));
     }
@@ -45,11 +45,11 @@
 
             $ss13e015 = $this->Ss13e015->patchEntity($ss13e015, $data);
             if ($this->Ss13e015->save($ss13e015)) {
-                $this->Flash->success(__('O Serviço foi salvo.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O Serviço não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('ss13e015'));
     }
