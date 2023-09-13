@@ -21,7 +21,7 @@
                         <td><?= h($sdake75->data) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $sdake75->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $sdake75->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $sdake75->id)]) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $sdake75->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço SDAKE75: {0}?', $sdake75->id)]) ?>
                             <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $sdake75->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                         </td>
                     </tr>

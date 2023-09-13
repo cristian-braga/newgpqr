@@ -72,7 +72,7 @@ class Sdake75Controller extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $sdake75 = $this->Sdake75->get($id);
         if ($this->Sdake75->delete($sdake75)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));

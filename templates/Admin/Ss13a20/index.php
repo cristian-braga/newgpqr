@@ -21,7 +21,7 @@
                     <td><?= h($ss13a20->data) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $ss13a20->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $ss13a20->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $ss13a20->id)]) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $ss13a20->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço SS13A20: {0}?', $ss13a20->id)]) ?>
                         <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $ss13a20->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>

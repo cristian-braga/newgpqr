@@ -20,7 +20,7 @@
                 <td><?= h($impInterna->data_cadastro) ?></td>
                 <td>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $impInterna->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $impInterna->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'],['confirm' => __('Are you sure you want to delete # {0}?', $impInterna->id)]) ?>
+                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $impInterna->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço IMPRESSÕES INTERNAS: {0}?', $impInterna->id)]) ?>
                     <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $impInterna->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                 </td>
             </tr>
