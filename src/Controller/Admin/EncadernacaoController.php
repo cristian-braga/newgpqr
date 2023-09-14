@@ -55,7 +55,7 @@
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $encadernacao = $this->Encadernacao->get($id);
         if ($this->Encadernacao->delete($encadernacao)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));

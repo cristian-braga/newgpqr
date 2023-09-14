@@ -6,10 +6,10 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Smafe09e10 Entity
+ * Smafe009010 Entity
  *
  * @property int $id
- * @property string|null $sistema
+ * @property string|null $servico
  * @property string|null $referencia
  * @property \Cake\I18n\FrozenDate|null $data
  * @property string|null $concurso
@@ -17,7 +17,7 @@ use Cake\ORM\Entity;
  * @property int|null $job
  * @property string|null $funcionario
  */
-class Smafe09e10 extends Entity
+class Smafe009010 extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -29,7 +29,7 @@ class Smafe09e10 extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'sistema' => true,
+        'servico' => true,
         'referencia' => true,
         'data' => true,
         'concurso' => true,

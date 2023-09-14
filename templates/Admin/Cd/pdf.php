@@ -105,7 +105,6 @@ for ($i = 0; $i < 1; $i++) {
   $mpdf->WriteHTML($html);
 }
 
-
 $mpdf->Output('Cd.pdf', \Mpdf\Output\Destination::INLINE);
 // imprime  \Mpdf\Output\Destination::DOWNLOAD
 

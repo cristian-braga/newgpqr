@@ -58,7 +58,7 @@
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $ss13a20 = $this->Ss13a20->get($id);
         if ($this->Ss13a20->delete($ss13a20)) {
             $this->Flash->success(__('Excluído com Sucesso.'));

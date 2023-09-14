@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-2" style="margin-top: 3.2rem;">
                 <?= $this->Form->button(__('Buscar'), ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
-                <?= $this->Html->link(__('Limpar'), ['action' => 'index'], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+                <?= $this->Html->link(__('Limpar'), ['action' => 'servicosExpedidos'], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
             </div>
         </div>
     <?= $this->Form->end() ?>

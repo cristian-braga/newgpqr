@@ -1,35 +1,49 @@
-<?php
-?>
+<h3 class="text-center">Editar</h3>
+<?= $this->Form->create($smafe008, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $smafe008->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $smafe008->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Smafe008'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="smafe008 form content">
-            <?= $this->Form->create($smafe008) ?>
-            <fieldset>
-                <legend><?= __('Edit Smafe008') ?></legend>
-                <?php
-                    echo $this->Form->control('copias');
-                    echo $this->Form->control('paginas');
-                    echo $this->Form->control('total');
-                    echo $this->Form->control('concurso');
-                    echo $this->Form->control('job');
-                    echo $this->Form->control('referencia');
-                    echo $this->Form->control('data', ['empty' => true]);
-                    echo $this->Form->control('funcionario');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+    <div class="col-md-6">
+        <label class="form-label">Referência</label>
+        <?php echo $this->Form->control('referencia', ['type' => 'month', 'class' => 'form-control', 'placeholder' => 'Referência', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Data</label>
+        <?php echo $this->Form->control('data', ['type' => 'date', 'class' => 'form-control', 'placeholder' => 'Referência', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Concurso</label>
+        <?php echo $this->Form->control('concurso', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Concurso', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Job</label>
+        <?php echo $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Job', 'label' => false]); ?>
+    </div>
+    <div class="col-md-12 mt-2">
+        <label class="form-label"><b>Relatório:</b></label>
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label"></label>
+        <label class="form-label">Cópias</label>
+        <?php echo $this->Form->control('copias', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Cópias', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Páginas</label>
+        <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Páginas', 'label' => false]); ?>
+    </div>
+    <div class="col-md-12 mt-2">
+        <label class="form-label"><b>Ata de Abertura e Fechamento:</b></label>
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label"></label>
+        <label class="form-label">Cópias</label>
+        <?php echo $this->Form->control('copias1', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Cópias', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Páginas</label>
+        <?php echo $this->Form->control('paginas1', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Páginas', 'label' => false]); ?>
+    </div>
+    <div class="col-md-6 mt-3">
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:15px;']) ?>
+        <?= $this->Form->end() ?>
     </div>
 </div>
