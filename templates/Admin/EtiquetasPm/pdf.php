@@ -50,7 +50,7 @@ $html = '<head>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['quantidade_etiquetas'].'</td>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['copias'].'</td>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['total'].'</td>
-  <td colspan="7" style="font-size: 15px; center; padding: 7px;" >'.$etiquetasPm['descricao'].'</td>
+  <td colspan="7" style="font-size: 15px; text-align:center; padding: 7px;" >'.$etiquetasPm['descricao'].'</td>
 </tr>
 <tr>
   <td colspan="10" style="text-align: center;padding: 8px;"><span style="font-weight:bold;font-size: 12px">RECLAMAÇÕES SERÃO ACEITAS ATÉ 05(CINCO) DIAS APÓS A ENTREGA DOS PRODUTOS</span><br><span style="font-size: 12px">DECLARO TER CONFERIDO E RECEBIDO O DESCRITO ACIMA</td></span>
