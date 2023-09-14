@@ -22,8 +22,8 @@
         <?= $this->Form->control('quantidade_etiquetas', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Etiquetas', 'required', 'label' => false]) ?>
     </div>
     <div class="col-md-2">
-        <label class="form-label">Job</label>
-        <?= $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'required', 'placeholder' => 'Concurso', 'label' => false]) ?>
+        <label class="form-label">JOB</label>
+        <?= $this->Form->control('job', ['type' => 'number', 'class' => 'form-control', 'required', 'placeholder' => 'JOB', 'label' => false]) ?>
     </div>
     <div class="col-12 mt-2">
         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>

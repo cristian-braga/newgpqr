@@ -63,7 +63,7 @@ class Smafe008Controller extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $smafe008 = $this->Smafe008->get($id);
         if ($this->Smafe008->delete($smafe008)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));

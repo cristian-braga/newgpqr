@@ -31,8 +31,8 @@
         </select>
     </div>
     <div class="col-md-2">
-        <label class="form-label">Documentos</label>
-        <?php echo $this->Form->control('documentos', ['type' => 'number', 'class' => 'form-control form-control1', 'maxlenght' => 4, 'placeholder' => 'Documentos', 'label' => false]); ?>
+        <label class="form-label">Páginas</label>
+        <?php echo $this->Form->control('documentos', ['type' => 'number', 'class' => 'form-control form-control1', 'maxlenght' => 4, 'placeholder' => 'Quant. de páginas', 'label' => false]); ?>
     </div>
     <div class="col-md-2">
         <label class="form-label">Cópias</label>
