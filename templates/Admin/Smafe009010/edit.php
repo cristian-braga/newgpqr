@@ -1,12 +1,9 @@
+<h3 class="text-center">Editar</h3>
 <?= $this->Form->create($smafe009010, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
 <div class="row">
     <div class="col-md-6">
         <label class="form-label">Serviço:</label>
-        <select class="form-select" name="servico" required>
-            <option selected disabled>Selecione:</option>
-            <option value="SMAFE009">SMAFE009</option>
-            <option value="SMAFE010">SMAFE010</option>
-        </select>
+        <?= $this->Form->select('servico', ['SMAFE009' => 'SMAFE009', 'SMAFE010' => 'SMAFE010'], ['class' => 'form-select', 'required', 'label' => false]) ?>
     </div>
     <div class="col-md-6">
         <label class="form-label">Referência</label>

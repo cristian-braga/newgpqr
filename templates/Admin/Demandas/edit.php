@@ -11,20 +11,18 @@
     </div>
     <div class="col-md-6">
         <label class="form-label">Tipo</label>
-        <?= $this->Form->select('demanda_tipo', ['Criação' => 'Criação', 'Melhoria' => 'Melhoria', 'Erro' => 'Erro'], ['class' => 'form-select', 'required', 'label' => false]) ?>
+        <?= $this->Form->select('demanda_tipo', ['Evolutiva' => 'Evolutiva', 'Melhoria' => 'Melhoria', 'Corretiva' => 'Corretiva'], ['class' => 'form-select', 'required', 'label' => false]) ?>
     </div>
     <div class="col-md-12">
         <label class="form-label">Descrição</label>
         <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" id="demanda_descricao" name="demanda_descricao"
-                style="height: 100px"></textarea>
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" id="demanda_descricao" name="demanda_descricao" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Digite...</label>
         </div>
     </div>
     <div class="col-12 mt-5">
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary float-end']) ?>
-        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary float-end mb-3']) ?>
-
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary'], ['style' => 'margin-left: 15px;']) ?>
     </div>
 </div>
 <?= $this->Form->end() ?>
