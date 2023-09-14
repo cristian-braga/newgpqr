@@ -65,7 +65,7 @@ $html = '<head>
   <td colspan="2" style="text-align: center; padding: 9px;">'.$impressaoEncadernacao['copias_imp'].'</td>
   <td colspan="2" style="text-align: center; padding: 9px;">'.$impressaoEncadernacao['paginas_imp'].'</td>
   <td colspan="1" style="text-align: center"; padding: 9px;>'.$impressaoEncadernacao['quant_capa'].'</td>
-  <td colspan="1" style="text-align: center ;padding: 9px;" bgcolor="#DEDCDC"><b>'.$impressaoEncadernacao['total_imp'].'</b></td>
+  <td colspan="1" style="text-align: center ;padding: 9px;" bgcolor="#DEDCDC"><b>'.$impressaoEncadernacao['quant_capa'].'</b></td>
 </tr>
   <tr>
     <td colspan="12" style="text-align: center;padding: 7px;"><span style="font-weight:bold;font-size: 13px; ">DECLARO TER CONFERIDO E RECEBIDO O DESCRITO ACIMA</span></td>

@@ -124,11 +124,11 @@ class Smb3e316Controller extends AppController
 
             $smb3e316 = $this->Smb3e316->patchEntity($smb3e316, $data);
             if ($this->Smb3e316->save($smb3e316)) {
-                $this->Flash->success(__('The smb3e316 has been saved.'));
+                $this->Flash->success(__('Salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The smb3e316 could not be saved. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('smb3e316'));
     }
@@ -141,23 +141,23 @@ class Smb3e316Controller extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $smb3e316 = $this->Smb3e316->patchEntity($smb3e316, $this->request->getData());
             if ($this->Smb3e316->save($smb3e316)) {
-                $this->Flash->success(__('The smb3e316 has been saved.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The smb3e316 could not be saved. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('smb3e316'));
     }
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get','delete']);
         $smb3e316 = $this->Smb3e316->get($id);
         if ($this->Smb3e316->delete($smb3e316)) {
-            $this->Flash->success(__('The smb3e316 has been deleted.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The smb3e316 could not be deleted. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -18,8 +18,8 @@
             <input class="form-control" type="number" name="ocorrencia" placeholder="Somente Números" required maxlength="6">
         </div>
         <div class="form-group col-md-2">
-            <label class="form-label">Quantidade de Páginas</label>
-            <input class="form-control" type="number" name="paginas_imp" placeholder="Nº de documentos">
+            <label class="form-label">Páginas</label>
+            <input class="form-control" type="number" name="paginas_imp" placeholder="Quantidade de Páginas">
         </div>
         <div class="form-group col-md-3">
             <label class="form-label">Solicitante</label>

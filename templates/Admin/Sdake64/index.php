@@ -16,7 +16,7 @@
                 <?php foreach ($sdake64 as $sdake64) : ?>
                     <tr>
                         <td>SDAKE64</td>
-                        <td><?= $this->Number->format($sdake64->paginas) ?></td>
+                        <td><?= $this->Number->format($sdake64->totaltudo) ?></td>
                         <td><?= h($sdake64->job) ?></td>
                         <td><?= h($sdake64->dataAtual) ?></td>
                         <td>
