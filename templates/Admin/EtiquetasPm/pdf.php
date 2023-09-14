@@ -16,7 +16,7 @@ $mpdf->allow_charset_conversion = true;
 
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '<head>
-<title>'.$etiquetasPm['sistema'].'</title>
+<title>ETIQUETAS PM</title>
 </head
 <body style="font-family: Helvetica">
   <table border="1" width="100%">

@@ -29,11 +29,11 @@ class CdController extends AppController
             $data['funcionario'] = 'Itallo';
             $cd = $this->Cd->patchEntity($cd, $data);
             if ($this->Cd->save($cd)) {
-                $this->Flash->success(__('The cd has been saved.'));
+                $this->Flash->success(__('Salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The cd could not be saved. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('cd'));
     }
@@ -46,23 +46,23 @@ class CdController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $cd = $this->Cd->patchEntity($cd, $this->request->getData());
             if ($this->Cd->save($cd)) {
-                $this->Flash->success(__('The cd has been saved.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The cd could not be saved. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('cd'));
     }
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $cd = $this->Cd->get($id);
         if ($this->Cd->delete($cd)) {
-            $this->Flash->success(__('The cd has been deleted.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The cd could not be deleted. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

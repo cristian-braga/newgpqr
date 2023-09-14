@@ -20,7 +20,7 @@
                 <td><?= h($saalm->dataAtual) ?></td>
                 <td>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $saalm->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                    <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $saalm->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $saalm->id)]) ?>
+                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $saalm->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço SAALM005: {0}?', $saalm->id)]) ?>
                     <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $saalm->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                 </td>
             </tr>
