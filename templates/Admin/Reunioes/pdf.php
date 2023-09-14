@@ -16,11 +16,11 @@ $mpdf->allow_charset_conversion = true;
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '
 <body style="font-family: Helvetica;">
-    <table width="100%" style="border-collapse: collapse;">
+    <table width="100%" style="border-collapse: collapse;" border="1">
         <thead>
             <tr>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;" colspan="6">
-                    <img src="https://www.geo.prodemge.gov.br/assets/images/logo.png" height="27" width="138"><br><br><b>ATA DE REUNIÃO</b><br><br>COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          RUA DA BAHIA, 2277 - Lourdes - Belo Horizonte - MG - CEP: 30.160-012<br><br>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;" colspan="6">
+                    <img src="../webroot/img/logo_prodemge.png" width="138px"><br><br><b>ATA DE REUNIÃO</b><br><br>COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          RUA DA BAHIA, 2277 - Savassi - Belo Horizonte - MG - CEP: 30.160-019<br><br>
                 </th>
             </tr>
         </thead>
@@ -29,7 +29,7 @@ $html = '
     <table border="1" width="100%" style="border-collapse: collapse; ">
         <thead>
             <tr>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Tema principal</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Tema principal</th>
             </tr>
         </thead>
         <tbody>
@@ -42,9 +42,9 @@ $html = '
     <table border="1" width="100%" style="border-collapse: collapse; ">
         <thead>
             <tr>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Local da reunião</th>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Data</th>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Horário</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Local da reunião</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Data</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Horário</th>
             </tr>
         </thead>
         <tbody>
@@ -59,8 +59,8 @@ $html = '
     <table border="1" width="100%" style="border-collapse: collapse; ">        
         <thead>
             <tr>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Pauta</th>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Responsáveis</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Pauta</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Responsáveis</th>
             </tr>
         </thead>
         <tbody>
@@ -74,7 +74,7 @@ $html = '
     <table border="1" width="100%" style="border-collapse: collapse; ">
         <thead>
             <tr>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Participantes</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Participantes</th>
             </tr>
         </thead>
         <tbody>
@@ -87,7 +87,7 @@ $html = '
     <table border="1" width="100%" style="border-collapse: collapse; ">
         <thead>
             <tr>
-                <th style="background-color: #27333F; color: #FFF; padding: 8px;">Súmula</th>
+                <th style="background-color:  #DEDCDC; color: #000; padding: 8px;">Súmula</th>
             </tr>
         </thead>
         <tbody>
