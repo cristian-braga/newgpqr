@@ -1,3 +1,4 @@
+<h3 class="text-center">Editar</h3>
 <?= $this->Form->create($smafe009010, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
 <div class="row">
     <div class="col-md-6">

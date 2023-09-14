@@ -1,11 +1,9 @@
 <?php
-    namespace App\Controller\Admin;
 
-    use App\Controller\AppController;
-
-    class Smafe009010Controller extends AppController
-    {
-
+namespace App\Controller\Admin;
+use App\Controller\AppController;
+class Smafe009010Controller extends AppController
+{
     public function index()
     {
         $smafe009010 = $this->paginate($this->Smafe009010);
@@ -20,6 +18,11 @@
 
             $data = $this->request->getData();
             $data['funcionario'] = 'Itallo';
+            if ($data['servico'] == 'SMAFE009') {
+                $data['descricao'] = 'Etiquetas para Envelope de Prova';
+            } else {
+                $data['descricao'] = 'Etiquetas para Concursos';
+            }
 
             $smafe009010 = $this->Smafe009010->patchEntity($smafe009010, $data);
             if ($this->Smafe009010->save($smafe009010)) {
@@ -39,12 +42,21 @@
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $smafe009010 = $this->Smafe009010->patchEntity($smafe009010, $this->request->getData());
+            $data = $this->request->getData();
+            $data['funcionario'] = 'Itallo';
+            if ($data['servico'] == 'SMAFE009') {
+                $data['descricao'] = 'Etiquetas para Envelope de Prova';
+            } else {
+                $data['descricao'] = 'Etiquetas para Concursos';
+            }
+
+            $smafe009010 = $this->Smafe009010->patchEntity($smafe009010, $data);
             if ($this->Smafe009010->save($smafe009010)) {
                 $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('smafe009010'));
     }
