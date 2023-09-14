@@ -56,7 +56,7 @@
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['get', 'post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $etiquetasPm = $this->EtiquetasPm->get($id);
         if ($this->EtiquetasPm->delete($etiquetasPm)) {
             $this->Flash->success(__('Serviço excluído com sucesso.'));

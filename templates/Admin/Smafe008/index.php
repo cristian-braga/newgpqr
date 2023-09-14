@@ -1,4 +1,4 @@
-<h2 class="text-center text-gpqr mt-2 mb-4">Smafe008</h2>
+<h2 class="text-center text-gpqr mt-2 mb-4">SMAFE008</h2>
 <div class="smafe008 index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
     <div class="table-responsive table-gpqr" style="margin-top: 1%;">
@@ -21,8 +21,8 @@
                     <td><?= $smafe008->totaltudo === null ? '' : $this->Number->format($smafe008->totaltudo) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $smafe008->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $smafe008->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $smafe008->id)]) ?>
-                        <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $smafe008->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $smafe008->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço SMAFE008: {0}?', $smafe008->id)]) ?>
+                        <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $smafe008->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
