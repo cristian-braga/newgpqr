@@ -29,7 +29,7 @@ $html = '<head>
 </tr>
 <tr>
   <td colspan="2" style="font-size: 15px;padding: 5px;">SERVIÇO</td>
-  <td colspan="5" style="border: none; font-size: 16px"><b>ETIQUETAS PM</b></td>
+  <td colspan="5" style="border: none; font-size: 16px"><b>Etiquetas PMMG</b></td>
   <td style="font-size: 15px">CONCURSO</td>
   <td colspan="2" style="text-align: center; font-size: 16px"><b>'.$etiquetasPm['concurso'].'</b></td>
 </tr>
@@ -47,7 +47,7 @@ $html = '<head>
 </tr>
 <tr>
 
-  <td style="text-align: center; font-size: 17px">'.$etiquetasPm['paginas'].'</td>
+  <td style="text-align: center; font-size: 17px">'.$etiquetasPm['quantidade_etiquetas'].'</td>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['copias'].'</td>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['total'].'</td>
   <td colspan="7" style="font-size: 15px; center; padding: 7px;" >'.$etiquetasPm['descricao'].'</td>
