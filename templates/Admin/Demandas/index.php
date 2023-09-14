@@ -23,72 +23,36 @@
                 <!-- inicialização do loop foreach para percorrer cada elemento registrado na tabela Demandas -->
                 <?php foreach ($demandas as $demanda): ?>
                 <tr>
-                    <td>
-                        <button type="submit" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal-<?= h($demanda->id) ?>">
-                            Detalhes
-                        </button>
-                        <div class="modal fade " id="exampleModal-<?= h($demanda->id) ?>" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog"
-                            data-bs-backdrop="false">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-body-secondary">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Demanda
-                                            <?= h($demanda->id) ?> - <?= h($demanda->demanda_resumo) ?> </h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container">
-                                            <h2 class="fs-5">Descrição</h2>
-                                            <p><textarea name="" id="" cols="50" rows="5" readonly><?= h($demanda->demanda_descricao) ?></textarea></p>
-                                            <hr>
-                                            <h2 class="fs-5">Responsável</h2>
-                                            <p> <?php if(!$demanda->demanda_responsavel) :?>
-                                                <div class="col"> - </div>
-                                                <?php elseif(isset($demanda['demanda_responsavel'])) : ?>
-                                                <div class="col"><?= h($demanda->demanda_responsavel) ?></div>
-                                                <?php endif; ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <td><?= $this->Html->link(__('Detalhes'), ['action' => 'view', $demanda->id], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+                    </td>
+                    <td><?= h($demanda->demanda_tipo) ?></td>
+                    <td><?= h($demanda->data_abertura) ?></td>
+                    <td><?= h($demanda->data_termino) ?> </td>
+                    <td><?= h($demanda->demanda_prioridade) ?></td>
+                    <td><?= h($demanda->status) ?></td>
+
+
+                    <?php if(!$demanda['demanda_responsavel']) : ?>
+                    <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary'], ['confirm' => __('Tem certeza que deseja aceitar essa demanda {0}', $demanda->id)]); ?>
+                    </td>
+                    <?php elseif(isset($demanda['demanda_log']) && isset($demanda['demanda_responsavel'])) : ?>
+                    <td><?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger disabled'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?>
+                    </td>
+                    <?php else : ?>
+                    <td> <?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?>
+                    </td>
+                    <?php endif; ?>
+
+
+                    <td>Pega quem ta logado</td>
+                    <td class="">
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $demanda->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $demanda->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $demanda->id)]) ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
-    <?php if(isset($demanda['demanda_responsavel'])): ?>
-    <?= $this->Form->postLink(__('Relatórios'), ['action' => 'relatorio', $demanda->id], ['class' => 'btn btn-outline-success']) ?>
-    <?php endif; ?>
-    </td>
-    <td><?= h($demanda->demanda_tipo) ?></td>
-    <td><?= h($demanda->data_abertura) ?></td>
-    <td><?= h($demanda->data_termino) ?> </td>
-    <td><?= h($demanda->demanda_prioridade) ?></td>
-    <td><?= h($demanda->status) ?></td>
-
-
-    <?php if(!$demanda['demanda_responsavel']) : ?>
-    <td> <?= $this->Form->postButton(__('Confirmar'), ['action' => 'confirmarDemanda', $demanda->id], ['class' => 'btn btn-primary'], ['confirm' => __('Tem certeza que deseja aceitar essa demanda {0}', $demanda->id)]); ?>
-    </td>
-    <?php elseif(isset($demanda['demanda_log']) && isset($demanda['demanda_responsavel'])) : ?>
-    <td><?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger disabled'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?>
-    </td>
-    <?php else : ?>
-    <td> <?= $this->Form->postButton(__('Dispensar'), ['action' => 'dispensarDemanda', $demanda->id], ['class' => 'btn btn-danger'], ['confirm' => __('Tem certeza que deseja dispensar essa Demanda {0}?', $demanda->id)]); ?>
-    </td>
-    <?php endif; ?>
-
-
-    <td>Pega quem ta logado</td>
-    <td class="actions">
-        <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107"></i>' . __('')), ['action' => 'edit', $demanda->id], ['escape' => false, 'class' => 'p-2']); ?>
-        <?= $this->Form->postLink(__('<i class="fa-regular fa-trash-can fa-lg" style="color: #dc3545;"></i>' . __('')), ['action' => 'delete', $demanda->id], ['escape' => false, 'class' => 'p-2'], ['confirm' => __('Tem certeza que quer deletar essa demanda # {0}?', $demanda->id)]) ?>
-
-    </td>
-    </tr>
-    <?php endforeach; ?>
-    </tbody>
-    </table>
-</div>
-<!-- Paginação do CakePHP, utilizado para gerar páginas caso, por exemplo, uma tabela seja extensa e a página tenha um limite -->
-<?= $this->element('pagination') ?>
+    <!-- Paginação do CakePHP, utilizado para gerar páginas caso, por exemplo, uma tabela seja extensa e a página tenha um limite -->
+    <?= $this->element('pagination') ?>
