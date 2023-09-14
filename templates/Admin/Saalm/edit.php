@@ -1,5 +1,4 @@
 <h3 class="text-center mt-2 mb-4">EDITAR</h3>
-<hr>
 <?= $this->Form->create($saalm,['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
 <div class="row g-3">
     <div class="col-md-6">
