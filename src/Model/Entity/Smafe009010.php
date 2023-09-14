@@ -36,5 +36,6 @@ class Smafe009010 extends Entity
         'quantidade_etiquetas' => true,
         'job' => true,
         'funcionario' => true,
+        'descricao' => true,
     ];
 }
