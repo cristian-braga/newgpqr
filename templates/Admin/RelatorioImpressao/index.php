@@ -21,7 +21,7 @@
         <caption class="ms-2">Quantitativo de Impressões</caption>
         <thead>
             <tr>
-                <th colspan="2">RELATÓRIO <?= $ano ?></th>
+                <th colspan="2" class="table-secondary">RELATÓRIO <?= $ano ?></th>
             </tr>
             <tr class="table-secondary">
                 <th>Referência</th>

@@ -21,7 +21,7 @@
         <caption class="ms-2">Quantitativo de Envelopamentos</caption>
         <thead>
             <tr>
-                <th colspan="4">RELATÓRIO <?= $ano ?></th>
+                <th colspan="4" class="table-secondary">RELATÓRIO <?= $ano ?></th>
             </tr>
             <tr class="table-secondary">
                 <th>Referência</th>

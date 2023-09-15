@@ -10,7 +10,7 @@
                 <th>Cliente</th>
                 <th>Serviço</th>
                 <th>Descrição</th>
-                <th>Tipo</th>
+                <th>Impressão</th>
                 <th>Preparo</th>
                 <th>Documentos</th>
                 <th>Folhas</th>

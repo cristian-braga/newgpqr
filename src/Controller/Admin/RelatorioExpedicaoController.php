@@ -13,12 +13,12 @@ class RelatorioExpedicaoController extends AppController
         $data_fim = $this->request->getQuery('data_fim');
         $filtro_servico = $this->request->getQuery('filtro_servico');
 
-        $dados = $this->RelatorioExpedicao->queryExpedicao($data_inicio, $data_fim, $filtro_servico);
+        $relatorio_expedicao = $this->RelatorioExpedicao->queryExpedicao($data_inicio, $data_fim, $filtro_servico);
 
         $grupos_servicos = [];
         $total = 0;
 
-        foreach ($dados as $elemento) {
+        foreach ($relatorio_expedicao as $elemento) {
             $servico = $elemento->nome_servico;
 
             if (array_key_exists($servico, $grupos_servicos)) {

@@ -3,8 +3,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
                 '<i class="fa-solid fa-square-poll-vertical fa-3x" aria-hidden="true"></i>
-                <h5>BOLETIM MENSAL</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                <h5>RELATÓRIOS MENSAIS</h5>',
+                ['controller' => 'RelatorioMensal', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
