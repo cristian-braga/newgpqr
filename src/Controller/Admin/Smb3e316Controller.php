@@ -7,11 +7,6 @@ use App\Controller\Service\AtividadeService;
 
 class Smb3e316Controller extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
         $smb3e316 = $this->paginate($this->Smb3e316);

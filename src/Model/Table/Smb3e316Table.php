@@ -11,12 +11,6 @@ use Cake\Validation\Validator;
 
 class Smb3e316Table extends Table
 {
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -24,6 +18,10 @@ class Smb3e316Table extends Table
         $this->setTable('smb3e316');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->hasMany('Smb3e316Cidades', [
+            'foreignKey' => 'cidade_id',
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator
@@ -67,6 +65,13 @@ class Smb3e316Table extends Table
             ->maxLength('unidade', 60)
             ->requirePresence('unidade', 'create')
             ->notEmptyString('unidade');
+        
+        $validator
+            ->scalar('codig_cidades')
+            ->maxLength('codig_cidades', 60)
+            ->requirePresence('codig_cidades', 'create')
+            ->notEmptyString('codig_cidades');
+
 
         return $validator;
     }

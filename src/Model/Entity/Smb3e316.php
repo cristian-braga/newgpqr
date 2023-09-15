@@ -17,5 +17,6 @@ class Smb3e316 extends Entity
         'funcionario' => true,
         'total' => true,
         'unidade' => true,
+        'codig_cidades' => true,
     ];
 }
