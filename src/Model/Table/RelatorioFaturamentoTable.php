@@ -34,27 +34,40 @@ class RelatorioFaturamentoTable extends Table
         ]);
     }
 
-    public function queryFaturamento()
+    public function queryFaturamento($data_inicio = NULL, $data_fim = NULL)
     {
         $connection = ConnectionManager::get('default');
 
-        $query = $connection->execute(
-            "SELECT
+        $query = "
+            SELECT
+                cliente_responsavel_servico AS cliente,
                 cliente_servico AS cliente_servico,
-                nome_servico AS nome_servico,
-                descricao_servico AS descricao_servico,
-                impressao_servico AS impressao_servico,
-                tipo_preparo_servico AS tipo_preparo_servico,
-                SUM(quantidade_documentos) AS total_docs,
-                SUM(quantidade_folhas) AS total_folhas
+                nome_servico AS servico,
+                descricao_servico AS descricao,
+                impressao_servico AS impressao,
+                tipo_preparo_servico AS preparo,
+                quantidade_documentos AS documentos,
+                quantidade_folhas AS folhas
             FROM expedicao
                 INNER JOIN atividade ON expedicao.atividade_id = atividade.id
                 INNER JOIN servico ON atividade.servico_id = servico.id
-            WHERE
-                cliente_servico LIKE 'DEER%'
-            GROUP BY nome_servico
-            ORDER BY cliente_servico ASC, nome_servico ASC"
-        )->fetchAll('assoc');
+            WHERE cliente_servico LIKE 'DEER%'
+        ";
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query .= "AND data_expedicao >= '{$data_inicio}'";
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query .= "AND data_expedicao <= '{$data_fim}'";
+        }
+
+        $query .= "
+            GROUP BY servico
+            ORDER BY cliente ASC, servico ASC
+        ";
+
+        $query = $connection->execute($query)->fetchAll('assoc');
 
         return $query;
     }

@@ -9,137 +9,60 @@ class RelatorioFaturamentoController extends AppController
 {
     public function index()
     {
-        $relatorio_faturamento = $this->RelatorioFaturamento->queryFaturamento();
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
 
-        $clientes = [];
+        $relatorio_faturamento = $this->RelatorioFaturamento->queryFaturamento($data_inicio, $data_fim);
+
         $total_docs = $total_folhas = 0;
 
         foreach ($relatorio_faturamento as $faturamento) {
-            $cliente = $faturamento['cliente_servico'];
-            unset($faturamento['cliente_servico']);
-
-            if (array_key_exists($cliente, $clientes)) {
-                $clientes[$cliente][] = $faturamento;
-            } else {
-                $clientes[$cliente] = [$faturamento];
-            }
-
-            $total_folhas += $faturamento['total_folhas'];
-            $total_docs += $faturamento['total_docs'];
+            $total_docs += $faturamento['documentos'];
+            $total_folhas += $faturamento['folhas'];
         }
 
-        foreach ($clientes as $key => $cliente) {
-            $totalDocPreparo = 0;
-            $totalFolhasPreparo = 0;
-            $totalDocImpressao = 0;
-            $totalFolhasImpressao = 0;
-            $totalDocCliente = 0;
-            $totalFolhasCliente = 0;
-
-            foreach ($cliente as $i => $servico) {
-                if ($i == 0) {
-                    $totalDocPreparo += $servico['total_docs'];
-                    $totalFolhasPreparo += $servico['total_folhas'];
-                    $totalDocImpressao += $servico['total_docs'];
-                    $totalFolhasImpressao += $servico['total_folhas'];
-                } else {
-                    if ($cliente[$i]['tipo_preparo_servico'] == $cliente[$i - 1]['tipo_preparo_servico']) {
-                        $totalDocPreparo += $servico['total_docs'];
-                        $totalFolhasPreparo += $servico['total_folhas'];
-                    }
-
-                    if ($cliente[$i]['impressao_servico'] == $cliente[$i - 1]['impressao_servico']) {
-                        $totalDocImpressao += $servico['total_docs'];
-                        $totalFolhasImpressao += $servico['total_folhas'];
-                    }
-                }
-
-                $totalDocCliente += $servico['total_docs'];
-                $totalFolhasCliente += $servico['total_folhas'];
-            }
-
-            $totais = [
-                'totalDocPreparo' => $totalDocPreparo,
-                'totalFolhasPreparo' => $totalFolhasPreparo,
-                'totalDocImpressao' => $totalDocImpressao,
-                'totalFolhasImpressao' => $totalFolhasImpressao,
-                'totalDocCliente' => $totalDocCliente,
-                'totalFolhasCliente' => $totalFolhasCliente
-            ];
-
-            $clientes[$key]['totais'] = $totais;
-        }
+        $subTotalDocPreparo = 0;
+        $subTotalFolhasPreparo = 0;
+        $subTotalDocImpressao = 0;
+        $subTotalFolhasImpressao = 0;
+        $subTotalDocCliente = 0;
+        $subTotalFolhasCliente = 0;
 
         $this->set(compact(
             'relatorio_faturamento',
-            'clientes',
+            'subTotalDocPreparo',
+            'subTotalFolhasPreparo',
+            'subTotalDocImpressao',
+            'subTotalFolhasImpressao',
+            'subTotalDocCliente',
+            'subTotalFolhasCliente',
             'total_folhas',
-            'total_docs'
+            'total_docs',
+            'data_inicio',
+            'data_fim'
         ));
     }
 
     public function exportar()
     {
-        $relatorio_faturamento = $this->RelatorioFaturamento->queryFaturamento();
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
 
-        $clientes = [];
+        $relatorio_faturamento = $this->RelatorioFaturamento->queryFaturamento($data_inicio, $data_fim);
+
         $total_docs = $total_folhas = 0;
 
         foreach ($relatorio_faturamento as $faturamento) {
-            $cliente = $faturamento['cliente_servico'];
-            unset($faturamento['cliente_servico']);
-
-            if (array_key_exists($cliente, $clientes)) {
-                $clientes[$cliente][] = $faturamento;
-            } else {
-                $clientes[$cliente] = [$faturamento];
-            }
-
-            $total_folhas += $faturamento['total_folhas'];
-            $total_docs += $faturamento['total_docs'];
+            $total_docs += $faturamento['documentos'];
+            $total_folhas += $faturamento['folhas'];
         }
 
-        foreach ($clientes as $key => $cliente) {
-            $totalDocPreparo = 0;
-            $totalFolhasPreparo = 0;
-            $totalDocImpressao = 0;
-            $totalFolhasImpressao = 0;
-            $totalDocCliente = 0;
-            $totalFolhasCliente = 0;
-
-            foreach ($cliente as $i => $servico) {
-                if ($i == 0) {
-                    $totalDocPreparo += $servico['total_docs'];
-                    $totalFolhasPreparo += $servico['total_folhas'];
-                    $totalDocImpressao += $servico['total_docs'];
-                    $totalFolhasImpressao += $servico['total_folhas'];
-                } else {
-                    if ($cliente[$i]['tipo_preparo_servico'] == $cliente[$i - 1]['tipo_preparo_servico']) {
-                        $totalDocPreparo += $servico['total_docs'];
-                        $totalFolhasPreparo += $servico['total_folhas'];
-                    }
-
-                    if ($cliente[$i]['impressao_servico'] == $cliente[$i - 1]['impressao_servico']) {
-                        $totalDocImpressao += $servico['total_docs'];
-                        $totalFolhasImpressao += $servico['total_folhas'];
-                    }
-                }
-
-                $totalDocCliente += $servico['total_docs'];
-                $totalFolhasCliente += $servico['total_folhas'];
-            }
-
-            $totais = [
-                'totalDocPreparo' => $totalDocPreparo,
-                'totalFolhasPreparo' => $totalFolhasPreparo,
-                'totalDocImpressao' => $totalDocImpressao,
-                'totalFolhasImpressao' => $totalFolhasImpressao,
-                'totalDocCliente' => $totalDocCliente,
-                'totalFolhasCliente' => $totalFolhasCliente
-            ];
-
-            $clientes[$key]['totais'] = $totais;
-        }
+        $subTotalDocPreparo = 0;
+        $subTotalFolhasPreparo = 0;
+        $subTotalDocImpressao = 0;
+        $subTotalFolhasImpressao = 0;
+        $subTotalDocCliente = 0;
+        $subTotalFolhasCliente = 0;
 
         $html = '
         <meta charset="UTF-8">
@@ -157,48 +80,82 @@ class RelatorioFaturamentoController extends AppController
                     </tr>
                     <tr>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Cliente</th>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Serviço</th>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Descrição</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Impressão</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Preparo</th>
+                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Sistema/Fase</th>
+                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Descrição</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Documentos</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Folhas</th>
                     </tr>
                 </thead>
                 <tbody>';
-                    foreach ($clientes as $cliente => $servicos) {
-                        foreach ($servicos as $key => $servico) {
-                            if ($key !== 'totais') {
-                                $html .= '
-                                <tr>
-                                    <td>' . h($cliente) . '</td>
-                                    <td>' . h($servico['nome_servico']) . '</td>
-                                    <td>' . h($servico['descricao_servico']) . '</td>
-                                    <td>' . h($servico['impressao_servico']) . '</td>
-                                    <td>' . h($servico['tipo_preparo_servico']) . '</td>
-                                    <td>' . number_format(floatval($servico['total_docs']), 0, ',', '.') . '</td>
-                                    <td>' . number_format(floatval($servico['total_folhas']), 0, ',', '.') . '</td>
-                                </tr>';
-                            }
-                        }
+                    foreach ($relatorio_faturamento as $key => $servico) {
                         $html .= '
                         <tr>
-                            <td colspan="3"></td>
-                            <td colspan="2" style="text-align: left; background-color: #DEDCDC;"><b>Total - ' . h($servicos[0]['tipo_preparo_servico']) . '</b></td>
-                            <td style="background-color: #DEDCDC;"><b>' . number_format($servicos['totais']['totalDocPreparo'], 0, ',', '.') . '</b></td>
-                            <td style="background-color: #DEDCDC;"><b>' . number_format($servicos['totais']['totalFolhasPreparo'], 0, ',', '.') . '</b></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="3" style="text-align: left; background-color: #DEDCDC;"><b>Total - ' . h($servicos[0]['impressao_servico']) . '</b></td>
-                            <td style="background-color: #DEDCDC;"><b>' . number_format($servicos['totais']['totalDocImpressao'], 0, ',', '.') . '</b></td>
-                            <td style="background-color: #DEDCDC;"><b>' . number_format($servicos['totais']['totalFolhasImpressao'], 0, ',', '.') . '</b></td>
-                        </tr>
-                        <tr>
-                            <td colspan="5" style="text-align: left; background-color: #DEDCDC;"><b>Total - ' . h($cliente) . '</b></td>
-                            <td style="background-color: #DEDCDC;"><b>' . number_format($servicos['totais']['totalDocCliente'], 0, ',', '.') . '</b></td>
-                            <td style="background-color: #DEDCDC;"><b>' . number_format($servicos['totais']['totalFolhasCliente'], 0, ',', '.') . '</b></td>
+                            <td style="background-color: #F8F8FF;">' . h($servico['cliente_servico']) . '</td>
+                            <td>' . h($servico['impressao']) . '</td>
+                            <td>' . h($servico['preparo']) . '</td>
+                            <td>' . h($servico['servico']) . '</td>
+                            <td>' . h($servico['descricao']) . '</td>
+                            <td>' . number_format(floatval($servico['documentos']), 0, ',', '.') . '</td>
+                            <td>' . number_format(floatval($servico['folhas']), 0, ',', '.') . '</td>
                         </tr>';
+                        
+                        if ($key == 0 || array_key_exists($key - 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['cliente'] == $relatorio_faturamento[$key - 1]['cliente']) {
+                            $subTotalDocCliente += $servico['documentos'];
+                            $subTotalFolhasCliente += $servico['folhas']; 
+                        } else {
+                            $subTotalDocCliente += $servico['documentos'];
+                            $subTotalFolhasCliente += $servico['folhas'];
+                        }
+    
+                        if ($key == 0 || array_key_exists($key - 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['preparo'] == $relatorio_faturamento[$key - 1]['preparo']) {
+                            $subTotalDocPreparo += $servico['documentos'];
+                            $subTotalFolhasPreparo += $servico['folhas'];
+                        } else {
+                            $subTotalDocPreparo += $servico['documentos'];
+                            $subTotalFolhasPreparo += $servico['folhas'];
+                        }
+    
+                        if ($key == 0 || array_key_exists($key - 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['impressao'] == $relatorio_faturamento[$key - 1]['impressao']) {
+                            $subTotalDocImpressao += $servico['documentos'];
+                            $subTotalFolhasImpressao += $servico['folhas'];
+                        } else {
+                            $subTotalDocImpressao += $servico['documentos'];
+                            $subTotalFolhasImpressao += $servico['folhas'];
+                        }
+
+                        if ($key == count($relatorio_faturamento) - 1 || array_key_exists($key + 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['preparo'] != $relatorio_faturamento[$key + 1]['preparo'] || array_key_exists($key + 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['cliente'] != $relatorio_faturamento[$key + 1]['cliente']) {
+                            $html .= '
+                            <tr>
+                                <th colspan="2"></th>
+                                <th colspan="3" style="text-align: left; background-color: #DEDCDC;"><b>Total - ' . h($servico['preparo']) . '</b></th>
+                                <th style="background-color: #DEDCDC;">' . number_format($subTotalDocPreparo, 0, ',', '.') . '</th>
+                                <th style="background-color: #DEDCDC;">' . number_format($subTotalFolhasPreparo, 0, ',', '.') . '</th>
+                            </tr>';
+                            $subTotalFolhasPreparo = $subTotalDocPreparo = 0;
+                        }
+
+                        if ($key == count($relatorio_faturamento) - 1 || array_key_exists($key + 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['impressao'] != $relatorio_faturamento[$key + 1]['impressao'] || array_key_exists($key + 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['cliente'] != $relatorio_faturamento[$key + 1]['cliente']) {
+                            $html .= '
+                            <tr>
+                                <th></th>
+                                <th colspan="4" style="text-align: left; background-color: #DEDCDC;">Total - ' . h($servico['impressao']) . ': </th>
+                                <th style="background-color: #DEDCDC;">' . number_format($subTotalDocImpressao, 0, ',', '.') . '</th>
+                                <th style="background-color: #DEDCDC;">' . number_format($subTotalFolhasImpressao, 0, ',', '.') . '</th>
+                            </tr>';
+                            $subTotalFolhasImpressao = $subTotalDocImpressao = 0;
+                        }
+
+                        if ($key == count($relatorio_faturamento) - 1 || array_key_exists($key + 1, $relatorio_faturamento) && $relatorio_faturamento[$key]['cliente'] != $relatorio_faturamento[$key + 1]['cliente']) {
+                            $html .= '
+                            <tr>
+                            <th colspan="5" style="text-align: left; background-color: #DEDCDC;">Total - ' . h($servico['cliente']) . ': </th>
+                            <th style="background-color: #DEDCDC;">' . number_format($subTotalDocCliente, 0, ',', '.') . '</th>
+                            <th style="background-color: #DEDCDC;">' . number_format($subTotalFolhasCliente, 0, ',', '.') . '</th>
+                            </tr>';
+                            $subTotalDocCliente = $subTotalFolhasCliente = 0;
+                        }
                     }
                     $html .= '
                     <tr>
