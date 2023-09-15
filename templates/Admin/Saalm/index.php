@@ -15,7 +15,7 @@
             <?php foreach ($saalm as $saalm) : ?>
             <tr>
                 <td>SAALM005</td>
-                <td><?= $this->Number->format($saalm->paginas) ?></td>
+                <td><?= $this->Number->format($saalm->total2) ?></td>
                 <td><?= h($saalm->job) ?></td>
                 <td><?= h($saalm->dataAtual) ?></td>
                 <td>
