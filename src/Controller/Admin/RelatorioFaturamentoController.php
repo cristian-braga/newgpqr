@@ -159,7 +159,7 @@ class RelatorioFaturamentoController extends AppController
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Cliente</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Serviço</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Descrição</th>
-                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Tipo</th>
+                        <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Impressão</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Preparo</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Documentos</th>
                         <th style="background-color: #27333F; color: #FFF; border-color: #808080;">Folhas</th>
