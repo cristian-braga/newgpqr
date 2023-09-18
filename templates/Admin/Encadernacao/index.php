@@ -1,4 +1,4 @@
-    <h3 class="text-center text-gpqr">Encadernação</h3>
+    <h3 class="text-center text-gpqr">ENCADERNAÇÃO</h3>
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-striped text-center align-middle">

@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-3 mt-2">
         <label class="form-label">Ocorrência</label>
-        <?php echo $this->Form->control('ocorrencia', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Ocorrência', 'label' => false]); ?>
+        <?php echo $this->Form->control('ocorrencia', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Ocorrência', 'label' => false]); ?>
     </div>
     <div class="col-md-3 mt-2">
         <label class="form-label">Descrição</label>
@@ -18,15 +18,15 @@
     </div>
     <div class="col-md-2 mt-2">
         <label class="form-label">Tipo de Capa</label>
-        <select class="form-select" name ="tipo_capa" aria-label="Default select example">
+        <select class="form-select" name ="tipo_capa">
             <option selected>Selecione:</option>
-            <option value="Somente Frente">Capa - Plástica</option>
-            <option value="Frente e Verso">Capa - Prodemge</option>
+            <option value="Capa Plástica">Capa - Plástica</option>
+            <option value="Capa PRODEMGE">Capa - Prodemge</option>
         </select>
     </div>
     <div class="col-md-2 mt-2">
-        <label class="form-label">Documentos</label>
-        <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Documentos', 'label' => false]); ?>
+        <label class="form-label">Páginas</label>
+        <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Quant. de Páginas', 'label' => false]); ?>
     </div>
     <div class="col-md-2 mt-2">
         <label class="form-label">Cópias</label>

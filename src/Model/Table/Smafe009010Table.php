@@ -82,6 +82,11 @@ class Smafe009010Table extends Table
             ->maxLength('funcionario', 60)
             ->allowEmptyString('funcionario');
 
+        $validator
+            ->scalar('descricao')
+            ->maxLength('descricao', 60)
+            ->allowEmptyString('descricao');    
+
         return $validator;
     }
 }

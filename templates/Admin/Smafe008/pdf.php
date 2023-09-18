@@ -15,7 +15,7 @@ $mpdf->allow_charset_conversion = true;
 
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '<head>
-<title>'.$smafe008['sistema'].'</title>
+<title>SMAFE008</title>
 </head
 <body style="font-family: Helvetica">
   <table border="1" width="100%">
@@ -27,27 +27,27 @@ $html = '<head>
   <td colspan="10" style="font-size: 13px;text-align: center;padding: 8px;">COMPANHIA DE TECNOLOGIA DA INFORMAÇÃO DO ESTADO DE MINAS GERAIS<br>          Rua da Bahia, 2277 - Savassi - Belo Horizonte - MG - CEP: 30.160-019<br>                                                 TEL:(31) 3339-1600 - Expedição de Serviços: 3339-1142</td>
 </tr>
 <tr>
-  <td colspan="2" style="font-size: 12px;padding: 5px;">SISTEMA/FASE</td>
-  <td colspan="5" style="border: none"><b>'.$smafe008['sistema'].'</b></td>
-  <td style="font-size: 12px">CONCURSO</td>
+  <td colspan="2" style="font-size: 10px;padding: 5px;">SISTEMA/FASE</td>
+  <td colspan="5" style="border: none"><b>SMAFE008</b></td>
+  <td style="font-size: 10px">CONCURSO</td>
   <td colspan="2" style="text-align: center; font-size: 14px"><b>'.$smafe008['concurso'].'</b></td>
 </tr>
 <tr>
-  <td colspan="2" style="font-size: 12px;padding: 5px;">CLIENTE</td>
+  <td colspan="2" style="font-size: 10px;padding: 5px;">CLIENTE</td>
   <td colspan="5" style="border: none"><b>PMMG</b></td>
-  <td style="font-size: 12px">TELEFONE</td>
+  <td style="font-size: 10px">TELEFONE</td>
   <td colspan="2" style="text-align: center; font-size: 14px">2123-9504</td>
 </tr>
 <tr>
-  <td colspan="2" style="font-size: 12px;padding: 5px;">LOCAL DE ENTREGA</td>
+  <td colspan="2" style="font-size: 10px;padding: 5px;">LOCAL DE ENTREGA</td>
   <td colspan="5" style="border: none"><b>Recursos Humanos - Concursos</b></td>
-  <td style="font-size: 12px">REMESSA</td>
+  <td style="font-size: 10px">REMESSA</td>
   <td colspan="2" style="text-align: center;font-size: 14px">ON-LINE</td>
 </tr>
 <tr>
-  <td colspan="2" style="font-size: 12px;padding: 5px;">ENTREGAR A</td>
+  <td colspan="2" style="font-size: 10px;padding: 5px;">ENTREGAR A</td>
   <td colspan="5" style="border: none"><b>Sgt. Mendes</b></td>
-  <td style="font-size: 12px">REF.</td>
+  <td style="font-size: 10px">REF.</td>
   <td colspan="2" style="text-align: center;font-size: 14px">'.$smafe008['referencia'].'</td>
 </tr>
 <tr style="background-color: #DEDCDC;">

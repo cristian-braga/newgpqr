@@ -34,7 +34,7 @@ $html = '<head>
     <td colspan="5" style="border: none"><b>IMPRESSÕES INTERNAS</b></td>
   </tr>
   <tr>
-    <td colspan="2" style="font-size: 13px;padding: 5px;">TIPO DE SERVIÇO</td>
+    <td colspan="2" style="font-size: 13px;padding: 5px;">TIPO DE IMPRESSÃO</td>
     <td colspan="5" style="border: none"><b>'.$impInternas['tipo'].'</b></td>
   </tr>
   <tr>
@@ -46,7 +46,7 @@ $html = '<head>
     <td colspan="5" style="border: none"><b>'.$impInternas['descricao'].'</b></td>
   </tr>
   <tr>
-    <td colspan="3" style="text-align: center;padding: 5px; background-color: #DEDCDC"><b>Tipo de serviço:</b></td>
+    <td colspan="3" style="text-align: center;padding: 5px; background-color: #DEDCDC"><b>Tipo de Impressão:</b></td>
     <td colspan="2" style="text-align: center;padding: 5px; background-color: #DEDCDC"><b>Páginas</b></td>
     <td colspan="3" style="text-align: center;padding: 5px; background-color: #DEDCDC"><b>Cópias</b></td>
     <td colspan="5" style="text-align: center;padding: 5px; background-color: #DEDCDC"><b>Ocorrência</b></td>

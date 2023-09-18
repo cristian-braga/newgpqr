@@ -21,8 +21,8 @@
                     <td><?= h($smb3e316->dataAtual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $smb3e316->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $smb3e316->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $smb3e316->id)]) ?>
-                        <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $smb3e316->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $smb3e316->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço SMB3E316: {0}?', $smb3e316->id)]) ?>
+                        <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $smb3e316->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

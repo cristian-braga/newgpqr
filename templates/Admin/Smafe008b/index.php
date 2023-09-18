@@ -23,8 +23,8 @@
                     <td><?= $smafe008b->total === null ? '' : $this->Number->format($smafe008b->total) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $smafe008b->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $smafe008b->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $smafe008b->id)]) ?>
-                        <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $smafe008b->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $smafe008b->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço SMAFE008B: {0}?', $smafe008b->id)]) ?>
+                        <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $smafe008b->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

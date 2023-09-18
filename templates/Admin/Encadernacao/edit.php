@@ -18,7 +18,7 @@
         <?php echo $this->Form->control('descricao', ['type' => 'text', 'class' => 'form-control', 'required', 'label' => false]); ?>
     </div>
     <div class="col-md-6">
-        <label class="form-label">Documentos</label>
+        <label class="form-label">Páginas</label>
         <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control', 'required', 'label' => false]); ?>
     </div>
     <div class="col-md-6">
@@ -27,10 +27,10 @@
     </div>
     <div class="col-md-6 mt-2">
         <label class="form-label">Tipo de Capa</label>
-        <select class="form-select" name ="tipo_capa" aria-label="Default select example">
+        <select class="form-select" name ="tipo_capa">
             <option selected>Selecione:</option>
-            <option value="Somente Frente">Capa - Plástica</option>
-            <option value="Frente e Verso">Capa - Prodemge</option>
+            <option value="Capa Plástica">Capa - Plástica</option>
+            <option value="Capa PRODEMGE">Capa - Prodemge</option>
         </select>
     </div>
     <!-- <?php

@@ -16,7 +16,7 @@ $mpdf->allow_charset_conversion = true;
 
 // criar as colunas no Banco e puxar elas aqui para ficar dinamico
 $html = '<head>
-<title>'.$etiquetasPm['sistema'].'</title>
+<title>ETIQUETAS PM</title>
 </head
 <body style="font-family: Helvetica">
   <table border="1" width="100%">
@@ -29,7 +29,7 @@ $html = '<head>
 </tr>
 <tr>
   <td colspan="2" style="font-size: 15px;padding: 5px;">SERVIÇO</td>
-  <td colspan="5" style="border: none; font-size: 16px"><b>'.$etiquetasPm['sistema'].'</b></td>
+  <td colspan="5" style="border: none; font-size: 16px"><b>Etiquetas PMMG</b></td>
   <td style="font-size: 15px">CONCURSO</td>
   <td colspan="2" style="text-align: center; font-size: 16px"><b>'.$etiquetasPm['concurso'].'</b></td>
 </tr>
@@ -47,10 +47,10 @@ $html = '<head>
 </tr>
 <tr>
 
-  <td style="text-align: center; font-size: 17px">'.$etiquetasPm['paginas'].'</td>
+  <td style="text-align: center; font-size: 17px">'.$etiquetasPm['quantidade_etiquetas'].'</td>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['copias'].'</td>
   <td style="text-align: center; font-size: 17px">'.$etiquetasPm['total'].'</td>
-  <td colspan="7" style="font-size: 15px; center; padding: 7px;" >'.$etiquetasPm['descricao'].'</td>
+  <td colspan="7" style="font-size: 15px; text-align:center; padding: 7px;" >'.$etiquetasPm['descricao'].'</td>
 </tr>
 <tr>
   <td colspan="10" style="text-align: center;padding: 8px;"><span style="font-weight:bold;font-size: 12px">RECLAMAÇÕES SERÃO ACEITAS ATÉ 05(CINCO) DIAS APÓS A ENTREGA DOS PRODUTOS</span><br><span style="font-size: 12px">DECLARO TER CONFERIDO E RECEBIDO O DESCRITO ACIMA</td></span>
@@ -77,7 +77,7 @@ $html = '<head>
 </tr>
 </table>
 <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SITE: http://www.prodemge.mg.gov.br&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-MAIL: atendimento@prodemge.gov.br &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMEIRA VIA - CLIENTE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEGUNDA VIA - GIM    </span>
-<br><br><br>
+<br><br><br><br>
 ';
 // pega o conteudo do buffer, insere na variavel e limpa a memória
 ob_end_clean();
