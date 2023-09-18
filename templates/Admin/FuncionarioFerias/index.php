@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 <?php foreach ($funcionarioFerias as $funcionarioFeria): ?>
-                <tr>
+                <tr> 
                     <td><?= h($funcionarioFeria->funcionario_nome) ?></td>
                     <td><?= $this->Number->format($funcionarioFeria->qtd_dias) ?></td>
                     <td><?= h($funcionarioFeria->data_inicio) ?></td>

@@ -1,0 +1,77 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Model\Table;
+
+use Cake\ORM\Query;
+use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+
+/**
+ * ContratosEstagiarios Model
+ *
+ * @method \App\Model\Entity\ContratosEstagiario newEmptyEntity()
+ * @method \App\Model\Entity\ContratosEstagiario newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario get($primaryKey, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\ContratosEstagiario[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ */
+class ContratosEstagiariosTable extends Table
+{
+    /**
+     * Initialize method
+     *
+     * @param array $config The configuration for the Table.
+     * @return void
+     */
+    public function initialize(array $config): void
+    {
+        parent::initialize($config);
+
+        $this->setTable('contratos_estagiarios');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
+    }
+
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator): Validator
+    {
+        $validator
+            ->scalar('funcionario')
+            ->maxLength('funcionario', 100)
+            ->requirePresence('funcionario', 'create')
+            ->notEmptyString('funcionario');
+
+        $validator
+            ->scalar('matricula')
+            ->maxLength('matricula', 45)
+            ->requirePresence('matricula', 'create')
+            ->notEmptyString('matricula');
+
+        $validator
+            ->date('inicio_contrato')
+            ->requirePresence('inicio_contrato', 'create')
+            ->notEmptyDate('inicio_contrato');
+
+        $validator
+            ->date('fim_contrato')
+            ->requirePresence('fim_contrato', 'create')
+            ->notEmptyDate('fim_contrato');
+
+        return $validator;
+    }
+}
