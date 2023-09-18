@@ -1,35 +1,26 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\FuncionarioFeria $funcionarioFeria
- */
-?>
+<h3 class="text-center mt-2 mb-4">EDITAR PROGRAMAÇÃO DE FÉRIAS DE FUNCIONÁRIO</h3>
+
+
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $funcionarioFeria->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $funcionarioFeria->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Funcionario Ferias'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+    <?= $this->Form->create($funcionarioFeria, ['id' => 'form','class' => 'mx-auto p-3 form ']) ?>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="form-label">Nome do funcionário</label>
+            <?= $this->Form->control('funcionario_nome', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="funcionarioFerias form content">
-            <?= $this->Form->create($funcionarioFeria) ?>
-            <fieldset>
-                <legend><?= __('Edit Funcionario Feria') ?></legend>
-                <?php
-                    echo $this->Form->control('funcionario_nome');
-                    echo $this->Form->control('qtd_dias');
-                    echo $this->Form->control('data_inicio');
-                    echo $this->Form->control('data_final');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="col-md-3">
+            <label class="form-label">Data de Início</label>
+            <?= $this->Form->control('data_inicio', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Data final</label>
+            <?= $this->Form->control('data_final', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
         </div>
     </div>
-</div>
+
+    <div class="mt-5">
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+    </div>
+    <?= $this->Form->end() ?>
