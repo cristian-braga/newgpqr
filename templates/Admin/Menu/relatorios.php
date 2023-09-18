@@ -1,9 +1,4 @@
-<?= $this->Html->link(
-    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
-    ['controller' => 'Menu', 'action' => 'index'],
-    ['class' => 'btn-voltar', 'escape' => false]
-) ?>
-<div class="container text-center mt-5">
+<div class="container text-center mt-4">
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(

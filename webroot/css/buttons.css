@@ -76,14 +76,15 @@
     =============================================*/
 .btn-voltar {
     position: absolute;
-    font-size: 1.2rem;
-    top: 15px;
-    left: 10px;
-    color: #000;
-    transition: transform 0.1s;
+    font-size: 1rem;
+    top: 25px;
+    left: 20px;
+    color: #fff;
+    filter: drop-shadow(0 0 2px #3b3b3b);
+    transition: 0.15s;
 }
 
 .btn-voltar:hover {
-    transform: scale(1.08);
-    color: #797979;
+    filter: none;
+    color: #000;
 }

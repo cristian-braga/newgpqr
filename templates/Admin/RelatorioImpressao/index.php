@@ -24,11 +24,11 @@
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 55%;">
     <table class="table text-center align-middle">
         <caption class="ms-2">Quantitativo de Impressões</caption>
-        <thead>
+        <thead class="table-secondary">
             <tr>
-                <th colspan="2" class="table-secondary">RELATÓRIO <?= $ano ?></th>
+                <th colspan="2">RELATÓRIO <?= $ano ?></th>
             </tr>
-            <tr class="table-secondary">
+            <tr>
                 <th>Referência</th>
                 <th>Mensal</th>
             </tr>
