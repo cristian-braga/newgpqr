@@ -1,3 +1,9 @@
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'etiquetas'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
+<br>
 <h3 class="text-center text-gpqr">SMAFE 009/010</h3>
 <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
 <div class="table-responsive table-gpqr" style="margin-top:1%;">

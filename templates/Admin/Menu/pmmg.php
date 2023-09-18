@@ -17,6 +17,24 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
+                '<i class="fa-solid fa-tag fa-3x" aria-hidden="true"></i>
+                <h5>SMAFE008</h5>',
+                ['controller' => 'Smafe008', 'action' => 'index'],
+                ['class' => 'menu-gpqr', 'escape' => false]
+            ) ?>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <?= $this->Html->link(
+                '<i class="fa-solid fa-tag fa-3x" aria-hidden="true"></i>
+                <h5>SMAFE008B</h5>',
+                ['controller' => 'Smafe008b', 'action' => 'index'],
+                ['class' => 'menu-gpqr', 'escape' => false]
+            ) ?>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <?= $this->Html->link(
                 '<i class="fa-regular fa-folder-open fa-3x" aria-hidden="true"></i>
                 <h5>SAALM005</h5>',
                 ['controller' => 'Saalm', 'action' => 'index'],
