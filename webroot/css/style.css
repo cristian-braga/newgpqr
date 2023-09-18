@@ -32,6 +32,7 @@ label {
 }
 
 .conteudo {
+    position: relative;
     padding: 1rem;
     background: #fff;
     border-radius: 0.4rem;
@@ -40,7 +41,7 @@ label {
     margin: 10px auto;
 }
 
-/*------scroll bar---------------------*/
+/*------ scroll bar ---------------------*/
 ::-webkit-scrollbar {
     width: 10px;
     height: 7px;

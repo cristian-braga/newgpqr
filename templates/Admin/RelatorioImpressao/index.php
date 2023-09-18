@@ -1,3 +1,8 @@
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'relatorios'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
 <h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIO DE IMPRESSÕES</h2>
 <div class="d-flex mb-5">
     <?= $this->Html->link(__('Exportar'), ['action' => 'exportar', '?' => ['filtro_ano' => $ano]], ['class' => 'btn btn-secondary mx-auto']) ?>
