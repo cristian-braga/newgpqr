@@ -6,18 +6,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Digitalizacao Entity
+ * FuncionarioFeria Entity
  *
  * @property int $id
- * @property string $funcionario
- * @property \Cake\I18n\FrozenDate $data_digitalizacao
- * @property int $quantidade_documentos
- * @property \Cake\I18n\FrozenDate $periodo
- * @property int $servico_id
- *
- * @property \App\Model\Entity\Servico $servico
+ * @property string $funcionario_nome
+ * @property int $qtd_dias
+ * @property \Cake\I18n\FrozenDate $data_inicio
+ * @property \Cake\I18n\FrozenDate $data_final
  */
-class Digitalizacao extends Entity
+class FuncionarioFeria extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -29,11 +26,9 @@ class Digitalizacao extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'funcionario' => true,
-        'data_digitalizacao' => true,
-        'quantidade_documentos' => true,
-        'periodo' => true,
-        'servico_id' => true,
-        'servico' => true
+        'funcionario_nome' => true,
+        'qtd_dias' => true,
+        'data_inicio' => true,
+        'data_final' => true,
     ];
 }

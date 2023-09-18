@@ -1,4 +1,3 @@
-
     <div class="conteudo" style="width: 45%;">
         <div class="digitalizacao view content">
             <h3 class="text-center text-primary-emphasis mt-2 mb-4"><?= h($digitalizacao->servico->nome_servico) ?></h3>

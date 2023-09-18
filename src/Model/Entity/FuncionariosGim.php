@@ -6,18 +6,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Digitalizacao Entity
+ * FuncionariosGim Entity
  *
  * @property int $id
- * @property string $funcionario
- * @property \Cake\I18n\FrozenDate $data_digitalizacao
- * @property int $quantidade_documentos
- * @property \Cake\I18n\FrozenDate $periodo
- * @property int $servico_id
- *
- * @property \App\Model\Entity\Servico $servico
+ * @property string $nome
+ * @property string $matricula
+ * @property string $email
+ * @property string $tel
+ * @property string $contatoAlt
+ * @property string $telAlt
+ * @property string $endereco
+ * @property string $turno
  */
-class Digitalizacao extends Entity
+class FuncionariosGim extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -29,11 +30,13 @@ class Digitalizacao extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'funcionario' => true,
-        'data_digitalizacao' => true,
-        'quantidade_documentos' => true,
-        'periodo' => true,
-        'servico_id' => true,
-        'servico' => true
+        'nome' => true,
+        'matricula' => true,
+        'email' => true,
+        'tel' => true,
+        'contatoAlt' => true,
+        'telAlt' => true,
+        'endereco' => true,
+        'turno' => true,
     ];
 }

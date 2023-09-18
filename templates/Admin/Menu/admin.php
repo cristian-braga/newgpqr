@@ -27,7 +27,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6">
 			<?= $this->Html->link(
 				'<i class="fa fa-suitcase fa-3x" aria-hidden="true"></i><h5>PROGRAMAÇÃO DE FÉRIAS</h5>',
-				['controller' => 'Ferias', 'action' => 'index'],
+				['controller' => 'FuncionarioFerias', 'action' => 'index'],
 				['class' => 'menu-gpqr', 'escape' => false]
 			) ?>
 		</div>
