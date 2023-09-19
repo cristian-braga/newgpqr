@@ -3,7 +3,7 @@
     ['controller' => 'Menu', 'action' => 'pmmg'],
     ['class' => 'btn-voltar', 'escape' => false]
 ) ?>
-<h2 class="text-center text-gpqr mt-2 mb-4">SMAFE008B</h2>
+<h3 class="text-center text-gpqr mt-2 mb-4">SMAFE008B</h3>
 <div class="smafe008b index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
     <div class="table-responsive table-gpqr" style="margin-top: 1%;">

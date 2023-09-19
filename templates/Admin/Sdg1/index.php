@@ -1,3 +1,8 @@
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'detran'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
 <h3 class="text-center text-gpqr mt-2 mb-4">SDG1M001</h3>
 <div class="sdg1 index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>

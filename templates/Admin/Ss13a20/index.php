@@ -1,4 +1,9 @@
-<h2 class="text-center text-gpqr mt-2 mb-4">SS13A20</h2>
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'detran'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
+<h3 class="text-center text-gpqr mt-2 mb-4">SS13A20</h3>
 <div class="ss13a20 index content">
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
     <div class="table-responsive table-gpqr" style="margin-top: 1%;">
