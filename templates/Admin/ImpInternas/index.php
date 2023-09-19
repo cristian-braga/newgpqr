@@ -1,4 +1,9 @@
-<h2 class="text-center text-gpqr mt-2 mb-4">IMPRESSÕES INTERNAS</h2>
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'internos'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
+<h3 class="text-center text-gpqr mt-2 mb-4">IMPRESSÕES INTERNAS</h3>
 <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
 <div class="table-responsive table-gpqr">
     <table class="table table-borderless table-striped text-center align-middle">
