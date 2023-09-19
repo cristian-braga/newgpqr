@@ -5,7 +5,7 @@
 ) ?>
 <h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIOS MENSAIS</h2>
 <div class="d-flex mb-5">
-    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar', '?' => ['filtro_ano' => $ano, 'data_inicio' => $data_inicio, 'data_fim' => $data_fim]], ['class' => 'btn btn-secondary mx-auto']) ?>
+    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar', '?' => ['filtro_ano' => $ano, 'data_inicio' => $data_inicio, 'data_fim' => $data_fim]], ['class' => 'btn btn-dark mx-auto']) ?>
 </div>
 <h4 class="text-center text-gpqr mt-5 mb-4">COMPARATIVO <?= date('Y') - 1 ?>/<?= date('Y') ?></h4>
 

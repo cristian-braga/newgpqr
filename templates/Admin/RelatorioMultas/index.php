@@ -5,7 +5,7 @@
 ) ?>
 <h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIO MULTAS</h2>
 <div class="d-flex mb-5">
-    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar'], ['class' => 'btn btn-secondary mx-auto']) ?>
+    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar'], ['class' => 'btn btn-dark mx-auto']) ?>
 </div>
 
 <div id="chart" class="table-gpqr mx-auto mb-5" style="width: 55%;"></div>
