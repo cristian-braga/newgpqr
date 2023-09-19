@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Medidores Model
@@ -54,7 +55,7 @@ class MedidoresTable extends Table
             ->date('data_cadastro')
             ->requirePresence('data_cadastro', 'create')
             ->notEmptyDate('data_cadastro');
-            
+
         $validator
             ->integer('nuv1_medidor1')
             ->notEmptyString('nuv1_medidor1');
@@ -72,5 +73,37 @@ class MedidoresTable extends Table
             ->notEmptyString('nuv2_medidor2');
 
         return $validator;
+    }
+
+    public function queryMedidores($ano)
+    {
+        $connection = ConnectionManager::get('default');
+
+        $query = $connection->execute(
+            "SELECT
+            YEAR(data_cadastro) AS ano,
+            CASE MONTH(data_cadastro)
+                WHEN 1 THEN 'Janeiro'
+                WHEN 2 THEN 'Fevereiro'
+                WHEN 3 THEN 'Março'
+                WHEN 4 THEN 'Abril'
+                WHEN 5 THEN 'Maio'
+                WHEN 6 THEN 'Junho'
+                WHEN 7 THEN 'Julho'
+                WHEN 8 THEN 'Agosto'
+                WHEN 9 THEN 'Setembro'
+                WHEN 10 THEN 'Outubro'
+                WHEN 11 THEN 'Novembro'
+                WHEN 12 THEN 'Dezembro'
+            END AS mes,
+            SUM(nuv1_medidor1) + SUM(nuv1_medidor2) AS total_nuv1,
+            SUM(nuv2_medidor1) + SUM(nuv2_medidor2) AS total_nuv2
+            FROM medidores
+            WHERE YEAR(data_cadastro) = {$ano} OR (YEAR(data_cadastro) = {$ano} - 1 AND MONTH(data_cadastro) = 12)
+            GROUP BY mes
+            ORDER BY ano ASC"
+        )->fetchAll('assoc');
+
+        return $query;
     }
 }

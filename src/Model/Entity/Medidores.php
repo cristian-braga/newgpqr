@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  * @property int $nuv1_medidor2
  * @property int $nuv2_medidor1
  * @property int $nuv2_medidor2
- * @property \Cake\I18n\FrozenDate $referencia
+ * @property \Cake\I18n\FrozenDate $data_cadastro
  */
 class Medidores extends Entity
 {
