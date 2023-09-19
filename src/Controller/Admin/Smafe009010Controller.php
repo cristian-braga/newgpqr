@@ -15,7 +15,6 @@ class Smafe009010Controller extends AppController
     {
         $smafe009010 = $this->Smafe009010->newEmptyEntity();
         if ($this->request->is('post')) {
-
             $data = $this->request->getData();
             $data['funcionario'] = 'Itallo';
             if ($data['servico'] == 'SMAFE009') {

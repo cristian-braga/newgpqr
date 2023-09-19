@@ -30,9 +30,10 @@ class Smb3e316Fixture extends TestFixture
                 'paginas' => 1,
                 'job' => 'Lor',
                 'capa' => 1,
-                'dataAtual' => '2023-08-28',
+                'dataAtual' => '2023-09-15',
                 'funcionario' => 'Lorem ipsum dolor sit amet',
                 'total' => 1,
+                'cod_cidade' => 1,
                 'unidade' => 'Lorem ipsum dolor sit amet',
             ],
         ];
