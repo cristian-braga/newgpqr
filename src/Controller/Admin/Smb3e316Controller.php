@@ -1,7 +1,6 @@
 <?php
     namespace App\Controller\Admin;
     use App\Controller\AppController;
-    use Cake\Datasource\ConnectionManager;
 
     class Smb3e316Controller extends AppController
     {
@@ -9,22 +8,15 @@
     public function index()
     {
         $smb3e316 = $this->paginate($this->Smb3e316);
-        $connection = ConnectionManager::get('default');
+        $cidades = $this->Smb3e316->queryCidades();
 
-        $cidades = $connection->execute(
-            "SELECT * FROM newgpqr.smb3e316_cidades;"
-        )->fetchAll('assoc');
-
-        $this->set(compact('smb3e316'));
+        $this->set(compact('smb3e316','cidades'));
     }
 
     public function add()
     {
         $smb3e316 = $this->Smb3e316->newEmptyEntity();
-        $connection = ConnectionManager::get('default');
-        $cidades = $connection->execute(
-            "SELECT * FROM newgpqr.smb3e316_cidades;"
-        )->fetchAll('assoc');
+        $cidades = $this->Smb3e316->queryCidades();
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
@@ -47,10 +39,7 @@
         $smb3e316 = $this->Smb3e316->get($id, [
             'contain' => [],
         ]);
-        $connection = ConnectionManager::get('default');
-        $cidades = $connection->execute(
-            "SELECT * FROM newgpqr.smb3e316_cidades;"
-        )->fetchAll('assoc');
+        $cidades = $this->Smb3e316->queryCidades();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $smb3e316 = $this->Smb3e316->patchEntity($smb3e316, $this->request->getData());
             $data = $this->request->getData();

@@ -9,31 +9,8 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Datasource\ConnectionManager;
 
-/**
- * Smb3e316 Model
- *
- * @method \App\Model\Entity\Smb3e316 newEmptyEntity()
- * @method \App\Model\Entity\Smb3e316 newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Smb3e316[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Smb3e316 get($primaryKey, $options = [])
- * @method \App\Model\Entity\Smb3e316 findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Smb3e316 patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Smb3e316[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Smb3e316|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Smb3e316 saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Smb3e316[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Smb3e316[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Smb3e316[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Smb3e316[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- */
 class Smb3e316Table extends Table
 {
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -43,12 +20,6 @@ class Smb3e316Table extends Table
         $this->setPrimaryKey('id');
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -97,7 +68,7 @@ class Smb3e316Table extends Table
 
         return $validator;
     }
-    public function queryMultas()
+    public function querycidades()
     {
         $connection = ConnectionManager::get('default');
 
