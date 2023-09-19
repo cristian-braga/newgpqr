@@ -9,13 +9,13 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Datasource\ConnectionManager;
 
-class Smb3e316Table extends Table
+class Smb3e329Table extends Table
 {
     public function initialize(array $config): void
     {
         parent::initialize($config);
 
-        $this->setTable('smb3e316');
+        $this->setTable('smb3e329');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
     }
@@ -33,7 +33,7 @@ class Smb3e316Table extends Table
 
         $validator
             ->scalar('job')
-            ->maxLength('job', 5)
+            ->maxLength('job', 4)
             ->requirePresence('job', 'create')
             ->notEmptyString('job');
 
@@ -42,9 +42,9 @@ class Smb3e316Table extends Table
             ->allowEmptyString('capa');
 
         $validator
-            ->date('dataAtual')
-            ->requirePresence('dataAtual', 'create')
-            ->notEmptyDate('dataAtual');
+            ->date('data_cadastro')
+            ->requirePresence('data_cadastro', 'create')
+            ->notEmptyDate('data_cadastro');
 
         $validator
             ->scalar('funcionario')
@@ -57,17 +57,14 @@ class Smb3e316Table extends Table
             ->allowEmptyString('total');
 
         $validator
-            ->integer('cod_cidade')
-            ->allowEmptyString('cod_cidade');
-
-        $validator
             ->scalar('unidade')
-            ->maxLength('unidade', 60)
+            ->maxLength('unidade', 100)
             ->requirePresence('unidade', 'create')
             ->notEmptyString('unidade');
 
         return $validator;
     }
+
     public function queryCidades()
     {
         $connection = ConnectionManager::get('default');
