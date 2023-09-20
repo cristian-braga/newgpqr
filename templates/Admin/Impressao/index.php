@@ -6,7 +6,7 @@
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th></th>
+                    <th><?= !$atividade->isEmpty() ? '<input type="checkbox" id="selec_todos" class="btn-shadow">' : '' ?></th>
                     <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
                     <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
                     <th>Remessa/OCR</th>
