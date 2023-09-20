@@ -20,7 +20,7 @@
         </div>
     <?= $this->Form->end() ?>
 </div>
-<div class="table-responsive table-gpqr mx-auto mb-5" style="width: 80%;">
+<div class="table-responsive table-gpqr mx-auto" style="width: 80%;">
     <table class="table table-hover text-center align-middle">
         <caption class="ms-2">Relatório Medidores</caption>
         <thead>
