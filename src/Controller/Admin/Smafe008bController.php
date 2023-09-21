@@ -5,9 +5,13 @@
 {
     public function index()
     {
-        $smafe008b = $this->paginate($this->Smafe008b);
+        $this->paginate = [
+            'limit' => 20,
+            'order' => ['data' => 'desc']
+        ];
 
-        $this->set(compact('smafe008b'));
+        $smafe008b = $this->paginate($this->Smafe008b);
+        $this->set(compact('smafe008b'));  
     }
 
     public function add()

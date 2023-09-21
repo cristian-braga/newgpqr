@@ -5,8 +5,12 @@
 {
     public function index()
     {
-        $encadernacao = $this->paginate($this->Encadernacao);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['data_cadastro' => 'desc']
+        ];
 
+        $encadernacao = $this->paginate($this->Encadernacao);
         $this->set(compact('encadernacao'));
     }
 

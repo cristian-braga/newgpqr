@@ -8,8 +8,12 @@
 
     public function index()
     {
-        $impInternas = $this->paginate($this->ImpInternas);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['data_cadastro' => 'desc']
+        ];
 
+        $impInternas = $this->paginate($this->ImpInternas);
         $this->set(compact('impInternas'));
     }
 

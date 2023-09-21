@@ -7,8 +7,12 @@
     {
     public function index()
     {
-        $impressaoEncadernacao = $this->paginate($this->ImpressaoEncadernacao);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['dataAtual' => 'desc']
+        ];
 
+        $impressaoEncadernacao = $this->paginate($this->ImpressaoEncadernacao);
         $this->set(compact('impressaoEncadernacao'));
     }
 

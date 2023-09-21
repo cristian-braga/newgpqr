@@ -7,8 +7,12 @@
 {
     public function index()
     {
-        $sdake05 = $this->paginate($this->Sdake05);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['data_cadastro' => 'desc']
+        ];
 
+        $sdake05 = $this->paginate($this->Sdake05);
         $this->set(compact('sdake05'));
     }
 
