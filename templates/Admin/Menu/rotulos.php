@@ -10,7 +10,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-tag fa-3x" aria-hidden="true"></i>
                 <h5>CORREIOS</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'RotulosCorreios', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
