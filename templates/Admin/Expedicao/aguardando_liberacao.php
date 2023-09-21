@@ -1,11 +1,11 @@
-<h3 class="text-center mt-2 mb-4">AGUARDANDO LIBERAÇÃO</h3>
+<h2 class="text-center text-gpqr mt-2 mb-4">AGUARDANDO LIBERAÇÃO</h2>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Expedicao', 'action' => 'confirmaExpedicao']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar mb-4', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th></th>
+                    <th><?= !$atividade->isEmpty() ? '<input type="checkbox" id="selec_todos" class="btn-shadow">' : '' ?></th>
                     <th>Serviço</th>
                     <th>Cadastro</th>
                     <th>Remessa/OCR</th>

@@ -3,7 +3,7 @@
     <table class="table table-borderless table-striped mb-4 align-middle">
         <tr>
             <th>Data de cadastro:</th>
-            <td><?= h($atividade->data_cadastro) ?></td>
+            <td><?= h($atividade->data_atividade) ?></td>
         </tr>
         <tr>
             <th>Responsável:</th>
@@ -30,10 +30,6 @@
             <td><?= h($atividade->recibo_postagem) ?></td>
         </tr>
         <tr>
-            <th>Status atual:</th>
-            <td><?= h($atividade->status_atividade->status_atual) ?></td>
-        </tr>
-        <tr>
             <th>Folhas de rosto:</th>
             <td><?= $this->Number->format($atividade->servico->folha_rosto) ?></td>
         </tr>
@@ -45,14 +41,40 @@
             <th>Quantidade de paginas:</th>
             <td><?= $this->Number->format($atividade->quantidade_paginas) ?></td>
         </tr>
-        <tr>
-            <th>Cadastro Atividade:</th>
-            <td><?= h($atividade->data_atividade) ?></td>
-        </tr>
+        <?php if ($servico_com_erro) : ?>
+            <tr>
+                <th>Status atual:</th>
+                <td class="text-danger"><b><?= h($atividade->status_atividade->status_atual) ?></b></td>
+            </tr>
+            <tr>
+                <th>Etapa do erro:</th>
+                <td><?= h($atividade->servicos_anulados[0]->etapa) ?></td>
+            </tr>
+            <tr>
+                <th colspan="2">Descrição do erro:</th>
+            </tr>
+            <tr>
+                <td colspan="2"><?= h($atividade->servicos_anulados[0]->observacao) ?></td>
+            </tr>
+        <?php else: ?>
+            <tr>
+                <th>Status atual:</th>
+                <td><?= h($atividade->status_atividade->status_atual) ?></td>
+            </tr>
+        <?php endif; ?>
     </table>
     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $atividade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow mb-3']) ?>
     <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $atividade->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow mb-3', 'confirm' => __('ATENÇÃO! Essa ação apagará o registro em TODAS as etapas e não poderá ser desfeita! Realmente deseja excluir o serviço:  {0}?', $atividade->servico->nome_servico)]) ?>
 </div>
+
+<!-- Condição para mostrar ou não o botão "Desfazer" -->
+<?php
+    if ($servico_com_erro) {
+        $display = "none";
+    } else {
+        $display = "";
+    }
+?>
 
 <?php if (!empty($atividade->impressao)) : ?>
     <div class="conteudo" style="width: 65%;">
@@ -74,7 +96,7 @@
                         <td><?= h($impressao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['controller' => 'Impressao', 'action' => 'edit', $impressao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Impressao', 'action' => 'voltarEtapa', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Impressão". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
+                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Impressao', 'action' => 'voltarEtapa', $impressao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'style' => "display: {$display};", 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Impressão". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -100,7 +122,7 @@
                     <td><?= h($conferencia->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Conferencia', 'action' => 'edit', $conferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Conferencia', 'action' => 'voltarEtapa', $conferencia->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Conferência". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Conferencia', 'action' => 'voltarEtapa', $conferencia->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'style' => "display: {$display};", 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Conferência". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -125,7 +147,7 @@
                     <td><?= h($envelopamento->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Envelopamento', 'action' => 'edit', $envelopamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Envelopamento', 'action' => 'voltarEtapa', $envelopamento->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Envelopamento". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Envelopamento', 'action' => 'voltarEtapa', $envelopamento->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'style' => "display: {$display};", 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Envelopamento". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -150,7 +172,7 @@
                     <td><?= h($triagem->status_atividade->status_atual) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Triagem', 'action' => 'edit', $triagem->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Triagem', 'action' => 'voltarEtapa', $triagem->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Triagem". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Triagem', 'action' => 'voltarEtapa', $triagem->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'style' => "display: {$display};", 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Triagem". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -190,7 +212,7 @@
                         <td><?= h($expedicao->status_atividade->status_atual) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['controller' => 'Expedicao', 'action' => 'edit', $expedicao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Expedicao', 'action' => 'voltarEtapa', $expedicao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Expedição/Liberação". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
+                            <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'Expedicao', 'action' => 'voltarEtapa', $expedicao->atividade_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'style' => "display: {$display};", 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Expedição/Liberação". Deseja continuar?', $atividade->servico->nome_servico)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

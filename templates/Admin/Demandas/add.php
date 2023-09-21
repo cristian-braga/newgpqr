@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-6">
         <label class="form-label">Tipo</label>
-        <?= $this->Form->select('demanda_tipo', ['Criação' => 'Criação', 'Melhoria' => 'Melhoria', 'Erro' => 'Erro'], ['class' => 'form-select', 'required', 'label' => false]) ?>
+        <?= $this->Form->select('demanda_tipo', ['Evolutiva' => 'Evolutiva', 'Melhoria' => 'Melhoria', 'Corretiva' => 'Corretiva'], ['class' => 'form-select', 'required', 'label' => false]) ?>
     </div>
     <div class="col-md-12">
         <label class="form-label">Descrição</label>
@@ -22,8 +22,8 @@
         </div>
     </div>
     <div class="col-12 mt-5">
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary float-end']) ?>
-        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary float-end mb-3']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
 
     </div>
 </div>

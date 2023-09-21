@@ -39,10 +39,19 @@ class AtividadeController extends AppController
                 'Envelopamento' => ['StatusAtividade'],
                 'Triagem' => ['StatusAtividade'],
                 'Expedicao' => ['StatusAtividade'],
+                'ServicosAnulados',
                 'Servico',
                 'StatusAtividade'
             ]
         ]);
+
+        $status = $atividade->status_atividade_id;
+
+        if (in_array($status, [15, 16, 17])) {
+            $servico_com_erro = true;
+        } else {
+            $servico_com_erro = false;
+        }
 
         $etapas = [
             'Impressão' => 'Impressão',
@@ -58,7 +67,7 @@ class AtividadeController extends AppController
             ->orderDesc('status_atual')
             ->all();
 
-        $this->set(compact('atividade', 'etapas', 'erros'));
+        $this->set(compact('atividade', 'servico_com_erro', 'etapas', 'erros'));
     }
 
     public function add()

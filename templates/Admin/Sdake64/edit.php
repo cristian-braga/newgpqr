@@ -1,10 +1,3 @@
-<?php
-
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Sdake64 $sdake64
- */
-?>
 <h3 class="text-center mt-2 mb-4">EDITAR SDAKE64</h3>
 
 <?= $this->Form->create($sdake64,['class' => 'mx-auto p-3 form', 'style' => 'width: 90%']) ?>
@@ -23,7 +16,7 @@
             <?php echo $this->Form->control('paginas', ['type' => 'number', 'class' => 'form-control mt-2', 'maxlenght' => 4, 'placeholder' => 'Páginas', 'label' => false]); ?>
         </div>
         <div class="col-md-2">
-            <label class="form-label">Veículos Não Incluídos - Fora de Circulação</label>
+            <label class="form-label" style="margin-bottom: 32px;">Veículos Não Incluídos - Fora de Circulação</label>
             <?php echo $this->Form->control('copias1', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Cópias', 'label' => false]);
             echo $this->Form->control('paginas1', ['type' => 'number', 'class' => 'form-control mt-2', 'maxlenght' => 4, 'placeholder' => 'Páginas', 'label' => false]); ?>
         </div>

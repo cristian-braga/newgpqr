@@ -14,10 +14,8 @@ use Cake\ORM\Entity;
  * @property int $quantidade_documentos
  * @property \Cake\I18n\FrozenDate $periodo
  * @property int $servico_id
- * @property int $status_digitalizacao_id
  *
  * @property \App\Model\Entity\Servico $servico
- * @property \App\Model\Entity\StatusDigitalizacao $status_digitalizacao
  */
 class Digitalizacao extends Entity
 {
@@ -36,8 +34,6 @@ class Digitalizacao extends Entity
         'quantidade_documentos' => true,
         'periodo' => true,
         'servico_id' => true,
-        'status_digitalizacao_id' => true,
-        'servico' => true,
-        'status_digitalizacao' => true,
+        'servico' => true
     ];
 }

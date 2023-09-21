@@ -6,7 +6,7 @@
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th></th>
+                    <th><?= !$atividade->isEmpty() ? '<input type="checkbox" id="selec_todos" class="btn-shadow">' : '' ?></th>
                     <th>Serviço</th>
                     <th>Cadastro</th>
                     <th>Remessa/OCR</th>

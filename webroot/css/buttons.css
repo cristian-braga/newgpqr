@@ -39,7 +39,6 @@
 /*==============================================
     BUTTON GPQR VIEW     
     =============================================*/
-
 .custom-btn {
     width: fit-content;
     color: #fff;
@@ -69,5 +68,23 @@
 
 .btn-gpqr-view:active {
     top: 2px;
+    color: #000;
+}
+
+/*==============================================
+    BUTTON VOLTAR     
+    =============================================*/
+.btn-voltar {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    font-size: 1rem;
+    color: #fff;
+    filter: drop-shadow(0 0 2px #3b3b3b);
+    transition: 0.15s;
+}
+
+.btn-voltar:hover {
+    filter: none;
     color: #000;
 }

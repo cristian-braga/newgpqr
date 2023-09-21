@@ -39,7 +39,7 @@
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Não pode ser salvo. Tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser salvo. Tente novamente.'));
         }
         $this->set(compact('saalm'));
     }
@@ -66,23 +66,23 @@
 
             $saalm = $this->Saalm->patchEntity($saalm, $data);
             if ($this->Saalm->save($saalm)) {
-                $this->Flash->success(__('O saalm foi salvo.'));
+                $this->Flash->success(__('Serviço editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O saalm não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('O serviço não pode ser editado. Tente novamente.'));
         }
         $this->set(compact('saalm'));
     }
         
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'get', 'delete']);
         $saalm = $this->Saalm->get($id);
         if ($this->Saalm->delete($saalm)) {
-            $this->Flash->success(__('The saalm has been deleted.'));
+            $this->Flash->success(__('Serviço excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The saalm could not be deleted. Please, try again.'));
+            $this->Flash->error(__('O serviço não pode ser excluído. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

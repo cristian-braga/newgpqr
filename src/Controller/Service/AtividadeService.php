@@ -42,11 +42,7 @@ class AtividadeService
                 $paginas = 0;
                 break;
             case 'A5':
-                if ($documentos % 2 == 1) {
-                    $folhas = ($documentos + 1) / 2;
-                } else {
-                    $folhas = $documentos / 2;
-                }
+                $folhas = ceil($documentos / 2);
                 $paginas = $folhas * 2;
                 break;
             case 'Etiqueta':

@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Impressa Servico') ?></th>
-                    <td><?= h($servico->impressa_servico) ?></td>
+                    <td><?= h($servico->impressao_servico) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Tipo Impressao Servico') ?></th>

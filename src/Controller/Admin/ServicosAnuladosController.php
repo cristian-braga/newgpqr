@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
@@ -21,6 +22,7 @@ class ServicosAnuladosController extends AppController
         $data_inicio = $this->request->getQuery('data_inicio');
         $data_fim = $this->request->getQuery('data_fim');
         $servico = $this->request->getQuery('servico');
+        $tipo_erro = $this->request->getQuery('tipo_erro');
 
         $this->paginate = [
             'limit' => 20,
@@ -32,6 +34,18 @@ class ServicosAnuladosController extends AppController
         ];
 
         $query = $this->ServicosAnulados->find();
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Servico.id =' => $servico
+            ]);
+        }
+
+        if (isset($tipo_erro) && $tipo_erro != '') {
+            $query->where([
+                'ServicosAnulados.status_atividade_id =' => $tipo_erro
+            ]);
+        }
 
         if (isset($data_inicio) && $data_inicio != '') {
             $query->where([
@@ -45,17 +59,13 @@ class ServicosAnuladosController extends AppController
             ]);
         }
 
-        if (isset($servico) && $servico != '') {
-            $query->where([
-                'Servico.id =' => $servico
-            ]);
-        }
-
         $servicos = $this->ServicosAnulados->servicos()->toArray();
+
+        $erros = $this->ServicosAnulados->tipos_erros()->toArray();
 
         $servicosAnulados = $this->paginate($query);
 
-        $this->set(compact('servicosAnulados', 'servicos'));
+        $this->set(compact('servicosAnulados', 'servicos', 'erros'));
     }
 
     public function view($id = null)

@@ -6,7 +6,7 @@
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th></th>
+                    <th><?= !$atividade->isEmpty() ? '<input type="checkbox" id="selec_todos" class="btn-shadow">' : '' ?></th>
                     <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
                     <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
                     <th>Remessa/OCR</th>
@@ -45,13 +45,14 @@
     </div>
 <?= $this->Form->end() ?>
 <?= $this->element('pagination') ?>
+
 <h4 class="text-center text-gpqr mt-5 mb-4">BALANÇO MENSAL DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto" style="width: 50%;">
     <table class="table table-borderless text-center">
         <thead>
-            <tr>
-                <th class="bg-body-secondary"><?= $nuv_1['nome'] ?></th>
-                <th class="bg-body-secondary"><?= $nuv_2['nome'] ?></th>
+            <tr class="table-secondary">
+                <th><?= $nuv_1['nome'] ?></th>
+                <th><?= $nuv_2['nome'] ?></th>
             </tr>
         </thead>
         <tbody>
@@ -61,15 +62,15 @@
             </tr>
             <?php
                 if ($nuv_1['participacao'] == $nuv_2['participacao']) {
-                    $classe_1 = $classe_2 = "bg-success-subtle";
+                    $classe_1 = $classe_2 = "table-danger";
                     $texto = "A quantidade de impressões está equilibrada";
                 } elseif ($nuv_1['participacao'] > $nuv_2['participacao']) {
-                    $classe_1 = "bg-success-subtle";
-                    $classe_2 = "bg-danger-subtle";
+                    $classe_1 = "table-success";
+                    $classe_2 = "table-danger";
                     $texto = "Imprima serviços na <b>" . $nuv_2['nome'] . "</b> para equilibrar a quantidade de impressões";
                 } else {
-                    $classe_1 = "bg-danger-subtle";
-                    $classe_2 = "bg-success-subtle";
+                    $classe_1 = "table-danger";
+                    $classe_2 = "table-success";
                     $texto = "Imprima serviços na <b>" . $nuv_1['nome'] . "</b> para equilibrar a quantidade de impressões";
                 }
             ?>
@@ -85,14 +86,15 @@
         </tbody>
     </table>
 </div>
+
 <h4 class="text-center text-gpqr mt-5 mb-4">RANKING MENSAL DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 35%;">
     <table class="table table-borderless table-hover text-center align-middle">
         <thead>
-            <tr>
-                <th class="bg-body-secondary">Posição</th>
-                <th class="bg-body-secondary">Funcionário</th>
-                <th class="bg-body-secondary">Total</th>
+            <tr class="table-secondary">
+                <th>Posição</th>
+                <th>Funcionário</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>

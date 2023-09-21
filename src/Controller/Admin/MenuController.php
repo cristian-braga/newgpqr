@@ -12,75 +12,39 @@ class MenuController extends AppController
     {
     }
 
-    public function menuipsemg()
+    public function admin()
     {
     }
 
-    public function menupm()
-    {
-    }
-
-    public function menudetran()
-    {
-    }
-
-    public function menuss13()
-    {
-    }
-
-    public function menudetran1()
-    {
-    }
-
-    public function menumultas()
-    {
-    }
-
-    public function menuetiquetas()
-    {
-    }
-
-    public function menuatividade()
-    {
-    }
-
-    public function menuexibicao()
-    {
-    }
-
-    public function menurelatorios()
-    {
-    }
-
-    public function relatoriomultas()
-    {
-    }
-
-    public function menuboletim()
-    {
-    }
-
-    public function menuAdmin()
-    {
-    }
-
-    public function menuremessas()
-    {
-    }
-
-    public function menuescala()
-    {
-    }
-
-    public function menurotulos()
+    public function remessas()
     {
     }
     
-    public function menupmmg()
+    public function pmmg()
     {
     }
 
-    public function menuinternos()
+    public function etiquetas()
+    {
+    }
+
+    public function detran()
+    {
+    }
+
+    public function internos()
+    {
+    }
+
+    public function relatorios()
+    {
+    }
+
+    public function rotulos()
+    {
+    }
+
+    public function escalas()
     {
     }
 }

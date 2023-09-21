@@ -1,5 +1,10 @@
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'remessas'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
 <div class="cd index content">
-    <h2 class="text-center text-gpqr mt-2 mb-4">CD</h2>
+    <h3 class="text-center text-gpqr mt-2 mb-4">CD</h3>
     <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary float-start mb-4']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-striped text-center align-middle">
@@ -25,22 +30,13 @@
                         <td><?= h($cd->observacao) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cd->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $cd->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow'], ['confirm' => __('Are you sure you want to delete # {0}?', $cd->id)]) ?>
-                            <?= $this->Html->link(__('Pdf'), ['action' => 'pdf', $cd->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $cd->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço CD: {0}?', $cd->id)]) ?>
+                            <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $cd->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+    <?= $this->element('pagination') ?>
 </div>

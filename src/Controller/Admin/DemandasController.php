@@ -38,12 +38,15 @@ class DemandasController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
-        $demanda = $this->Demandas->get($id, [
-            'contain' => [],
-        ]);
-    }
+
+     public function view($id = null)
+     {
+         $demanda = $this->Demandas->get($id, [
+             'contain' => [],
+         ]);
+ 
+         $this->set(compact('demanda'));
+     }
 
     /**
      * Add method
