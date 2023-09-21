@@ -1,4 +1,9 @@
-<h3 class="text-center text-gpqr mt-2 mb-4">Rotulos Correios</h3>
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'rotulos'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
+<h3 class="text-center text-gpqr mt-2 mb-4">Rótulos Correios</h3>
 <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
 <div class="rotulosCorreios index content">
     <div class="table-responsive table-gpqr mt-3">

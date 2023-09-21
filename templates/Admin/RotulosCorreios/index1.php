@@ -1,4 +1,9 @@
-<h3 class="text-center text-gpqr mt-2 mb-4">Rotulos Gral</h3>
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'Menu', 'action' => 'rotulos'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?>
+<h3 class="text-center text-gpqr mt-2 mb-4">Rótulos Gral</h3>
 <?= $this->Html->link(__('Cadastrar'), ['action' => 'add1'], ['class' => 'btn btn-secondary']) ?>
 <div class="rotulosCorreios index content">
     <div class="table-responsive table-gpqr mt-3">
@@ -18,8 +23,8 @@
                     <td><?= h($rotulosCorreio->cep_inicial) ?></td>
                     <td><?= h($rotulosCorreio->cep_final) ?></td>
                     <td>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $rotulosCorreio->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $rotulosCorreio->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço Rotulos Correios: {0}?', $rotulosCorreio->id)]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit1', $rotulosCorreio->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Html->link(__('Excluir'), ['action' => 'delete1', $rotulosCorreio->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço Rotulos Correios: {0}?', $rotulosCorreio->id)]) ?>
                         <?= $this->Html->link(__('PDF'), ['action' => 'pdf1', $rotulosCorreio->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                     </td>
                 </tr>
