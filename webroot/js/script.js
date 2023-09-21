@@ -26,3 +26,4 @@ function desabilitaBotao() {
 }
 
 desabilitaBotao();
+
