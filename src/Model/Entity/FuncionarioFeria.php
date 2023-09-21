@@ -28,7 +28,6 @@ class FuncionarioFeria extends Entity
     protected $_accessible = [
         'funcionario_nome' => true,
         'qtd_dias' => true,
-        'data_inicio' => true,
-        'data_final' => true,
+        'data_inicio' => true
     ];
 }

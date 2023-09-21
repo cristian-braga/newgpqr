@@ -97,6 +97,7 @@ class FuncionariosGimTable extends Table
             ->requirePresence('turno', 'create')
             ->notEmptyString('turno');
 
+
         return $validator;
     }
 }

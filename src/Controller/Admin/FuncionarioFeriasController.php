@@ -21,6 +21,11 @@ class FuncionarioFeriasController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 20,
+            'order' => ['data_inicio' => 'desc']
+        ];
+        
         $funcionarioFerias = $this->paginate($this->FuncionarioFerias);
 
         $this->set(compact('funcionarioFerias'));
