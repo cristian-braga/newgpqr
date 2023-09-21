@@ -12,7 +12,7 @@
     <!-- Google Charts -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <?= $this->Html->css(['cake', 'style', 'fontawesome/all', 'bootstrap.min', 'buttons']) ?>
+    <?= $this->Html->css(['style', 'fontawesome/all', 'bootstrap.min', 'buttons']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

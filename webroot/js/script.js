@@ -1,6 +1,15 @@
 function lancar() {
     const botao = document.getElementById('submit');
+    const selec_todos = document.getElementById('selec_todos');
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    selec_todos.addEventListener('click', function() {
+        const selecionado = selec_todos.checked;
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = selecionado;
+        });
+    });
 
     checkboxes.forEach(function(checkbox) {
         checkbox.addEventListener('click', function() {

@@ -6,7 +6,7 @@
         <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th></th>
+                    <th><?= !$atividade->isEmpty() ? '<input type="checkbox" id="selec_todos" class="btn-shadow">' : '' ?></th>
                     <th><?= $this->Paginator->sort('servico_id', ['label' => 'Serviço']) ?></th>
                     <th><?= $this->Paginator->sort('data_cadastro', ['label' => 'Cadastro']) ?></th>
                     <th>Remessa/OCR</th>
@@ -45,6 +45,7 @@
     </div>
 <?= $this->Form->end() ?>
 <?= $this->element('pagination') ?>
+
 <h4 class="text-center text-gpqr mt-5 mb-4">BALANÇO MENSAL DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto" style="width: 50%;">
     <table class="table table-borderless text-center">
@@ -85,6 +86,7 @@
         </tbody>
     </table>
 </div>
+
 <h4 class="text-center text-gpqr mt-5 mb-4">RANKING MENSAL DE IMPRESSÕES</h4>
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 35%;">
     <table class="table table-borderless table-hover text-center align-middle">

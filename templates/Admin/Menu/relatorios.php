@@ -1,3 +1,4 @@
+<h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIOS</h2>
 <div class="container text-center mt-4">
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">

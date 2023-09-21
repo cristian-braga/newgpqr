@@ -1,12 +1,6 @@
-<h3 class="text-center">EDITAR</h3>
-<?= $this->Form->create($etiquetasPm, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
-<div class="col-md-6">
-    <label for="sistema">Serviço:</label>
-    <div class="form-check form-check-inline">
-        <label><b>ETIQUETAS PMMG</b></label>
-    </div>
-</div>
-<div class="row g-3">
+<h3 class="text-center mt-2 mb-4">EDITAR</h3>
+<?= $this->Form->create($etiquetasPm, ['class' => 'mx-auto p-3 form', 'style' => 'width: 50%']) ?>
+<div class="row g-3 mt-3">
     <div class="col-md-6">
         <label class="form-label">Concurso</label>
         <?php echo $this->Form->control('concurso', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 4, 'placeholder' => 'Job', 'label' => false]); ?>
@@ -30,7 +24,7 @@
     <div class="col-md-6">
         <label class="form-label"></label>
     </div>
-    <div class="col-md-6 mt-3">
+    <div class="col-md-6" style="margin-top:15px;">
         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary'], ['style' => 'margin-left:15px;']) ?>
         <?= $this->Form->end() ?>
