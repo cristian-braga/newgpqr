@@ -6,9 +6,13 @@ class Smafe009010Controller extends AppController
 {
     public function index()
     {
-        $smafe009010 = $this->paginate($this->Smafe009010);
+        $this->paginate = [
+            'limit' => 20,
+            'order' => ['data' => 'asc']
+        ];
 
-        $this->set(compact('smafe009010'));
+        $smafe009010 = $this->paginate($this->Smafe009010);
+        $this->set(compact('smafe009010'));  
     }
 
     public function add()

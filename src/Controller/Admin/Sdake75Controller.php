@@ -11,10 +11,15 @@ class Sdake75Controller extends AppController
    
     public function index()
     {
-        $sdake75 = $this->paginate($this->Sdake75);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['data' => 'desc']
+        ];
 
+        $sdake75 = $this->paginate($this->Sdake75);
         $this->set(compact('sdake75'));
     }
+
 
    
     public function pdf($id = null)

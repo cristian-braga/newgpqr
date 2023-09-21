@@ -12,7 +12,7 @@ class Sdake64Controller extends AppController
     {
         $this->paginate = [
             'limit' => 25,
-            'order' => ['dataAtual' => 'asc']
+            'order' => ['dataAtual' => 'desc']
         ];
 
         $sdake64 = $this->paginate($this->Sdake64);

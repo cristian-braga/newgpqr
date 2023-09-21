@@ -7,8 +7,12 @@
     {
     public function index()
     {
-        $ss13e015 = $this->paginate($this->Ss13e015);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['data' => 'desc']
+        ];
 
+        $ss13e015 = $this->paginate($this->Ss13e015);
         $this->set(compact('ss13e015'));
     }
 

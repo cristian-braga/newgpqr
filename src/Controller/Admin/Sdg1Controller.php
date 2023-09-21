@@ -8,8 +8,12 @@
 
     public function index()
     {
-        $sdg1 = $this->paginate($this->Sdg1);
+        $this->paginate = [
+            'limit' => 25,
+            'order' => ['dataAtual' => 'desc']
+        ];
 
+        $sdg1 = $this->paginate($this->Sdg1);
         $this->set(compact('sdg1'));
     }
       

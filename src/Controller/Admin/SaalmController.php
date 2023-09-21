@@ -10,7 +10,7 @@
     {
         $this->paginate = [
             'limit' => 25,
-            'order' => ['dataAtual' => 'asc']
+            'order' => ['dataAtual' => 'desc']
         ];
 
         $saalm = $this->paginate($this->Saalm);

@@ -1,5 +1,5 @@
 <h3 class="text-center text-gpqr mt-2 mb-4">Rotulos Correios</h3>
-<?= $this->Html->link(__('Cadastrar'), ['action' => 'add1'], ['class' => 'btn btn-secondary']) ?>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
 <div class="rotulosCorreios index content">
     <div class="table-responsive table-gpqr mt-3">
         <table class="table table-borderless table-striped text-center align-middle">

@@ -22,7 +22,6 @@
 
     public function index1()
     {
-
         $this->paginate = [
             'limit' => 20,
             'conditions' => ['status_rotulo' => 'RotulosGral'],

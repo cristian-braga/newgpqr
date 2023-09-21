@@ -7,9 +7,13 @@
 {
     public function index()
     {
-        $etiquetasPm = $this->paginate($this->EtiquetasPm);
+        $this->paginate = [
+            'limit' => 20,
+            'order' => ['data' => 'desc']
+        ];
 
-        $this->set(compact('etiquetasPm'));
+        $etiquetasPm = $this->paginate($this->EtiquetasPm);
+        $this->set(compact('etiquetasPm'));  
     }
 
     public function add()
