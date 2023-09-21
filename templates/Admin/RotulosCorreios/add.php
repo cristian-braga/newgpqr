@@ -1,5 +1,5 @@
 <h3>Cadastrar Rótulos - Correios</h4>
-                <?= $this->Form->create($rotulosCorreio, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
+                <?= $this->Form->create($rotulosCorreios, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
                 <div class="row">
                     <div class="col-md-2">
                         <label class="form-label">Serviço:</label>

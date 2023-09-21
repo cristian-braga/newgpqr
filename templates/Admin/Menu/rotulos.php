@@ -19,7 +19,7 @@
             <?= $this->Html->link(
                 '<i class="fa-solid fa-tag fa-3x" aria-hidden="true"></i>
                 <h5>GRALD11 / GRALS11</h5>',
-                ['controller' => 'Sdake64', 'action' => 'index'],
+                ['controller' => 'RotulosCorreios', 'action' => 'index1'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
