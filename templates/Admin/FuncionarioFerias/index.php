@@ -8,7 +8,8 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('Funcionário') ?></th>
-                    <th><?= $this->Paginator->sort('Quantidade de dias') ?></th>
+                    <th><?= $this->Paginator->sort('Status') ?></th>
+                    <th><?= $this->Paginator->sort('Dias') ?></th>
                     <th><?= $this->Paginator->sort('Data de início') ?></th>
                     <th><?= $this->Paginator->sort('Data final') ?></th>
                     <th class="actions"><?= __('Ações') ?></th>
@@ -18,13 +19,20 @@
                 <?php foreach ($funcionarioFerias as $funcionarioFeria): ?>
                 <tr> 
                     <td><?= h($funcionarioFeria->funcionario_nome) ?></td>
+                    <?php $dataAtual = date('y-m-d'); ?>
+                    <?php if($funcionarioFeria->data_inicio->getTimeStamp() > strtotime(date('y-m-d'))) { ?>
+                    <td class="">Férias Marcadas</td>
+                    <?php } elseif($funcionarioFeria->data_inicio < $dataAtual && date('y-m-d', strtotime("+". $funcionarioFeria->qtd_dias . " days", $funcionarioFeria->data_inicio->getTimeStamp())) >= $dataAtual) { ?>
+                    <td class="">Em Férias</td>
+                    <?php } else { ?>
+                    <td class="">Férias finalizadas</td>
+                    <?php }; ?>
                     <td><?= $this->Number->format($funcionarioFeria->qtd_dias) ?></td>
                     <td><?= h($funcionarioFeria->data_inicio) ?></td>
-                    <td><?= h($funcionarioFeria->data_final) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $funcionarioFeria->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $funcionarioFeria->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $funcionarioFeria->id], ['confirm' => __('Are you sure you want to delete # {0}?', $funcionarioFeria->id)]) ?>
+                    <td>data final</td>
+                    <td class="">
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $funcionarioFeria->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $funcionarioFeria->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $funcionarioFeria->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

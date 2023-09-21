@@ -52,24 +52,13 @@ class FuncionarioFeriasTable extends Table
     {
         $validator
             ->scalar('funcionario_nome')
-            ->maxLength('funcionario_nome', 100)
-            ->requirePresence('funcionario_nome', 'create')
-            ->notEmptyString('funcionario_nome');
+            ->maxLength('funcionario_nome', 100);
 
         $validator
-            ->integer('qtd_dias')
-            ->requirePresence('qtd_dias', 'create')
-            ->notEmptyString('qtd_dias');
+            ->integer('qtd_dias');
 
         $validator
-            ->date('data_inicio')
-            ->requirePresence('data_inicio', 'create')
-            ->notEmptyDate('data_inicio');
-
-        $validator
-            ->date('data_final')
-            ->requirePresence('data_final', 'create')
-            ->notEmptyDate('data_final');
+            ->date('data_inicio');
 
         return $validator;
     }

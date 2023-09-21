@@ -10,12 +10,12 @@
             <?= $this->Form->control('funcionario_nome', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
-            <label class="form-label">Data de Início</label>
-            <?= $this->Form->control('data_inicio', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            <label class="form-label">Quantidade de Dias</label>
+            <?= $this->Form->control('qtd_dias', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
-            <label class="form-label">Data final</label>
-            <?= $this->Form->control('data_final', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            <label class="form-label">Data de Início</label>
+            <?= $this->Form->control('data_inicio', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
         </div>
     </div>
 
