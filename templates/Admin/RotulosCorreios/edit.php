@@ -1,4 +1,4 @@
-<?= $this->Form->create($rotulosCorreio) ?>
+<?= $this->Form->create($rotulosCorreios) ?>
 <div class="row">
     <div class="col-md-2">
         <label class="form-label">Serviço:</label>
