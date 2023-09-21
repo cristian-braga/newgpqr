@@ -67,7 +67,7 @@
 
 <h4 class="text-center text-gpqr mt-5 mb-4">CONTROLE DE IMPRESSÕES <?= $ano ?></h4>
 <div class="table-responsive table-gpqr mx-auto mb-5" style="width: 75%;">
-    <table class="table text-center align-middle">
+    <table class="table table-hover text-center align-middle">
         <caption class="ms-2">Controle de Impressões</caption>
         <thead>
             <tr>
