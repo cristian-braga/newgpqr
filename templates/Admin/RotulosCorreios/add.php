@@ -1,3 +1,8 @@
+<?= $this->Html->link(
+    '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
+    ['controller' => 'RotulosCorreios', 'action' => 'index'],
+    ['class' => 'btn-voltar', 'escape' => false]
+) ?><br><br>
 <h3>Cadastrar Rótulos - Correios</h4>
                 <?= $this->Form->create($rotulosCorreios, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
                 <div class="row">
