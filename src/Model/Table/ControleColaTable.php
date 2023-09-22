@@ -76,17 +76,4 @@ class ControleColaTable extends Table
 
         return $validator;
     }
-
-    public function queryControleCola()
-    {
-        $query = $this->find();
-        $query->select([
-                'operacao' => 'operacao',
-                'total' => $query->func()->sum('quantidade')
-            ])
-            ->group('operacao')
-            ->orderAsc('operacao');
-
-        return $query;
-    }
 }

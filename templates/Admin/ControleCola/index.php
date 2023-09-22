@@ -7,7 +7,7 @@
 <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary mb-4']) ?>
 <div class="table-responsive table-gpqr mx-auto" style="width: 65%;">
     <table class="table table-borderless table-striped text-center align-middle">
-        <caption class="ms-2">Posicione o mouse sobre o campo "Entrada" para visualizar o número da Nota Fiscal</caption>
+        <caption class="caption-top ms-2">Posicione o mouse sobre a operação "Entrada" para visualizar o número da Nota Fiscal</caption>
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('data_operacao', ['label' => 'Cadastro']) ?></th>
@@ -27,7 +27,7 @@
                         <td title="<?= ($cola->operacao == 'Entrada') ? 'Nota Fiscal: ' . h($cola->nota) : '' ?>"><?= h($cola->operacao) ?></td>
                         <td>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cola->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                            <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $cola->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir os dados?')]) ?>
+                            <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $cola->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir os dados?')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

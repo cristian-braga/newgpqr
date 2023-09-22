@@ -14,23 +14,19 @@ class ControleColaController extends AppController
             'order' => ['data_operacao' => 'desc']
         ];
 
-        $balanco_cola = $this->ControleCola->queryControleCola()->toArray();
+        $controle_cola = $this->paginate($this->ControleCola);
 
-        if (array_key_exists(0, $balanco_cola)) {
-            $total_entrada = $balanco_cola[0]->total;
-        } else {
-            $total_entrada = 0;
-        }
+        $total_entrada = $total_saida = 0;
 
-        if (array_key_exists(1, $balanco_cola)) {
-            $total_saida = $balanco_cola[1]->total;
-        } else {
-            $total_saida = 0;
+        foreach ($controle_cola as $item) {
+            if ($item->operacao == 'Entrada') {
+                $total_entrada += $item->quantidade;
+            } else {
+                $total_saida += $item->quantidade;
+            }
         }
         
         $saldo = $total_entrada - $total_saida;
-
-        $controle_cola = $this->paginate($this->ControleCola);
 
         $this->set(compact('controle_cola', 'total_entrada', 'total_saida', 'saldo'));
     }
