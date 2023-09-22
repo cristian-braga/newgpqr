@@ -1,16 +1,16 @@
 <?php
-    namespace App\Controller\Admin;
-    use App\Controller\AppController;
+namespace App\Controller\Admin;
 
-    class Smb3e316Controller extends AppController
-    {
+use App\Controller\AppController;
+
+class Smb3e316Controller extends AppController
+{
 
     public function index()
     {
         $smb3e316 = $this->paginate($this->Smb3e316);
-        $cidades = $this->Smb3e316->queryCidades();
 
-        $this->set(compact('smb3e316','cidades'));
+        $this->set(compact('smb3e316'));
     }
 
     public function add()
@@ -22,7 +22,7 @@
             $data = $this->request->getData();
             $data['funcionario'] = 'Itallo';
             $data['capa'] = $data['copias'];
-            $data['total']  = $data['copias']  * $data['paginas'];
+            $data['total'] = $data['paginas'] * $data['copias'];
             $smb3e316 = $this->Smb3e316->patchEntity($smb3e316, $data);
             if ($this->Smb3e316->save($smb3e316)) {
                 $this->Flash->success(__('Salvo com sucesso.'));
