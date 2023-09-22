@@ -34,11 +34,11 @@ class ContratosController extends AppController
         if ($this->request->is('post')) {
             $contrato = $this->Contratos->patchEntity($contrato, $this->request->getData());
             if ($this->Contratos->save($contrato)) {
-                $this->Flash->success(__('The contrato has been saved.'));
+                $this->Flash->success(__('O Contrato foi lançada com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The contrato could not be saved. Please, try again.'));
+            $this->Flash->error(__('O contrato não pode ser salva. Tente novamente.'));
         }
         $this->set(compact('contrato'));
     }
@@ -58,11 +58,11 @@ class ContratosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $contrato = $this->Contratos->patchEntity($contrato, $this->request->getData());
             if ($this->Contratos->save($contrato)) {
-                $this->Flash->success(__('The contrato has been saved.'));
+                $this->Flash->success(__('O Contrato foi Editado com Sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The contrato could not be saved. Please, try again.'));
+            $this->Flash->error(__('O contrato não pode ser Editado. Tente novamente.'));
         }
         $this->set(compact('contrato'));
     }
@@ -79,9 +79,9 @@ class ContratosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $contrato = $this->Contratos->get($id);
         if ($this->Contratos->delete($contrato)) {
-            $this->Flash->success(__('The contrato has been deleted.'));
+            $this->Flash->success(__('O Contrato foi Apagado.'));
         } else {
-            $this->Flash->error(__('The contrato could not be deleted. Please, try again.'));
+            $this->Flash->error(__('O Contrato não foi Apagado. Tente Novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

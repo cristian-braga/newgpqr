@@ -21,22 +21,21 @@
             <label class="form-label">Valor Mensal</label>
             <?= $this->Form->control('valo_mensal', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
             <label class="form-label">Valor Total</label>
             <?= $this->Form->control('valor_total', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
             <label class="form-label">Parcelas</label>
             <?= $this->Form->control('parcelas', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
             <label class="form-label">Saldo Contratual</label>
             <?= $this->Form->control('saldo_contratual', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
             <label class="form-label">Vencimento</label>
             <?= $this->Form->control('vencimento', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
-        </div>
     </div>
 
     <div class="mt-5">
