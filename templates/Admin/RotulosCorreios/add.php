@@ -3,10 +3,10 @@
     ['controller' => 'RotulosCorreios', 'action' => 'index'],
     ['class' => 'btn-voltar', 'escape' => false]
 ) ?><br><br>
-<h3>Cadastrar Rótulos - Correios</h4>
-                <?= $this->Form->create($rotulosCorreios, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
+<h3 class="text-center">Cadastrar Rótulos - Correios</h4>
+                <?= $this->Form->create($rotulosCorreios, ['id' => 'form', 'class' => 'mx-auto p-3 form', 'style' => 'width: 40%']) ?>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-6">
                         <label class="form-label">Serviço:</label>
                         <select name="servico" class="form-control">
                             <option value="" hidden selected disabled>Selecione...</option>
@@ -15,11 +15,11 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-6">
                         <label class="form-label">Espécie:</label>
                         <?= $this->Form->select('especie', ['RM/LC' => 'RM/LC', 'LC' => 'LC', 'RM' => 'RM'], ['class' => 'form-select', 'required', 'label' => false]) ?>
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-3">
                         <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
                         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
                     </div>

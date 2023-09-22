@@ -3,10 +3,10 @@
     ['controller' => 'RotulosCorreios', 'action' => 'index'],
     ['class' => 'btn-voltar', 'escape' => false]
 ) ?><br><br>
-<h3>Cadastrar Rótulos - Correios</h4>
-    <?= $this->Form->create($rotulosCorreios, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
+<h3 class="text-center">Cadastrar Rótulos - Correios</h4>
+    <?= $this->Form->create($rotulosCorreios, ['id' => 'form', 'class' => 'mx-auto p-3 form', 'style' => 'width: 40%']) ?>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-6">
             <label class="form-label">Destino:</label>
             <select name="destino" class="form-control">
                 <option value="" hidden selected disabled>Selecione...</option>
@@ -15,7 +15,7 @@
                 <option value="OUTROS ESTADOS">OUTROS ESTADOS</option>
             </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-6">
             <label class="form-label">Ano:</label>
             <?php $anos = [
                 date("Y") => date("Y"),               // Ano atual
@@ -24,6 +24,6 @@
             echo $this->Form->select('ano', $anos,['class' => 'form-select','required','label' => false]); ?></div>
         <div class="mt-2">
             <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary'], ['redirect' => 'index1']) ?>
-            <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+            <?= $this->Html->link(__('Cancelar'), ['action' => 'index1'], ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
