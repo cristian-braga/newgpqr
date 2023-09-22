@@ -16,10 +16,10 @@
         <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'maxlenght' => 11, 'label' => false]) ?>
     </div>
 </div>
-<div id="btn_add" class="col-md-12 mt-4">
+<div id="btn_add" class="col-md-12 mt-3">
     <button type="button" id="add_campo"><i class="fa fa-plus-circle fa-2x text-warning"></i></button>
 </div>
-<div class="mt-5">
+<div class="mt-3">
     <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
 </div>
