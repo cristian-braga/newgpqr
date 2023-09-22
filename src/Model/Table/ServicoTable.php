@@ -83,7 +83,7 @@ class ServicoTable extends Table
 
         $validator
             ->scalar('descricao_servico')
-            ->maxLength('descricao_servico', 45)
+            ->maxLength('descricao_servico', 60)
             ->allowEmptyString('descricao_servico');
 
         $validator
@@ -151,7 +151,7 @@ class ServicoTable extends Table
 
         $validator
             ->scalar('ativo')
-            ->maxLength('ativo', 45)
+            ->maxLength('ativo', 5)
             ->allowEmptyString('ativo');
 
         return $validator;
