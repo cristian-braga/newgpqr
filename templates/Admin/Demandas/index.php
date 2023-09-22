@@ -3,7 +3,7 @@
     <?= $this->Html->link(__('Cadastrar Demanda'), ['action' => 'add'], ['class' => 'btn btn-secondary float-end mb-4 me-2']) ?>
 
     <div class="table-responsive table-gpqr">
-        <table class="table table-borderless table-hover table-striped text-center mt-3">
+        <table class="table table-borderless table-striped text-center mt-3">
             <thead>
                 <tr>
                     <!-- gera ordenação dos resultados da tabela (no padrão cakePHP) -->
@@ -25,6 +25,8 @@
     <td>                
     <?php if(isset($demanda['demanda_responsavel'])): ?>
     <?= $this->Form->postLink(__('Relatórios'), ['action' => 'relatorio', $demanda->id], ['class' => 'btn btn-outline-success']) ?>
+    <?php else : ?>
+        <?= $this->Form->postLink(__('Detalhes'), ['action' => 'view', $demanda->id], ['class' => 'btn btn-outline-secondary']) ?>
     <?php endif; ?>
     </td>
     <td><?= h($demanda->demanda_tipo) ?></td>
@@ -47,6 +49,11 @@
 
 
     <td>Pega quem ta logado</td>
+    <td>
+        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $demanda->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $demanda->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $demanda->id)]) ?>
+
+    </td>
 
     </tr>
     <?php endforeach; ?>
