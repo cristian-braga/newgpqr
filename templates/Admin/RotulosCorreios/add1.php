@@ -21,16 +21,7 @@
                 date("Y") => date("Y"),               // Ano atual
                 date("Y") - 1 => date("Y") - 1,       // Ano passado
             ];
-
-            echo $this->Form->select(
-                'ano',
-                $anos,
-                [
-                    'class' => 'form-select',
-                    'required',
-                    'label' => false
-                ]
-            ); ?></div>
+            echo $this->Form->select('ano', $anos,['class' => 'form-select','required','label' => false]); ?></div>
         <div class="mt-2">
             <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary'], ['redirect' => 'index1']) ?>
             <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
