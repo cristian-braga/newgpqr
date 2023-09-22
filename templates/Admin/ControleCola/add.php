@@ -38,11 +38,11 @@
     const saida = document.getElementById("saida");
     const nota = document.getElementById("nota");
 
-    entrada.addEventListener('change', () => {
-        nota.toggleAttribute('disabled');
+    entrada.addEventListener('click', () => {
+        nota.disabled = false;
     });
 
-    saida.addEventListener('change', () => {
-        nota.toggleAttribute('disabled');
+    saida.addEventListener('click', () => {
+        nota.disabled = true;
     });
 </script>

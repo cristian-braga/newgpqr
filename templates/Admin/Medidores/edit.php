@@ -1,5 +1,5 @@
 <h3 class="text-center mt-2 mb-4">EDITAR MEDIDORES</h3>
-<?= $this->Form->create($medidores, ['class' => 'mx-auto p-3 form', 'style' => 'width: 45%']) ?>
+<?= $this->Form->create($medidores, ['class' => 'mx-auto p-3 form', 'style' => 'width: 40%']) ?>
     <div class="row g-3">
         <div class="col-md-6">
             <label class="form-label">Emissão do Relatório</label>
