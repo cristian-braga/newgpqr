@@ -47,4 +47,8 @@ class MenuController extends AppController
     public function escalas()
     {
     }
+
+    public function passagemTurno()
+    {
+    }
 }

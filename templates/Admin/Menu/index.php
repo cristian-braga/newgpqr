@@ -92,6 +92,15 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
+                '<i class="fa-solid fa-clipboard-list fa-3x" aria-hidden="true"></i>
+                <h5>RELATÓRIOS</h5>',
+                ['controller' => 'Menu', 'action' => 'relatorios'],
+                ['class' => 'menu-gpqr', 'escape' => false]
+            ) ?>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <?= $this->Html->link(
                 '<i class="fa fa-newspaper fa-3x" aria-hidden="true"></i>
                 <h5>REMESSAS</h5>',
                 ['controller' => 'Menu', 'action' => 'remessas'],
@@ -101,9 +110,9 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <?= $this->Html->link(
-                '<i class="fa-solid fa-clipboard-list fa-3x" aria-hidden="true"></i>
-                <h5>RELATÓRIOS</h5>',
-                ['controller' => 'Menu', 'action' => 'relatorios'],
+                '<i class="fa-solid fa-person-chalkboard fa-3x" aria-hidden="true"></i>
+                <h5>PASSAGEM DE TURNO</h5>',
+                ['controller' => 'PassagemTurno', 'action' => 'index'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
