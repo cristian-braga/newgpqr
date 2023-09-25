@@ -1,56 +1,60 @@
-<h3 class="text-center mt-2 mb-4">ADICIONAR ESCALA</h3>
-
-
-<div class="row">
-    <?= $this->Form->create($escala, ['id' => 'form','class' => 'mx-auto p-3 form ']) ?>
-
-    <div class="row">
-        <div class="col-md-3">
+<h3 class="text-center mt-2 mb-4">EDITAR ESCALA</h3>
+<?= $this->Form->create($escala, ['class' => 'mx-auto p-3 form', 'style' => 'width: 60%']) ?>
+<div class="container align-items-center"> 
+    <div class="row g-3">
+        <div class="col-md-6">
             <label class="form-label">Data Inicial</label>
-            <?= $this->Form->control('data_inicial', ['class' => 'form-control', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('data_inicial', ['class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <label class="form-label">Data Final</label>
-            <?= $this->Form->control('data_final', ['class' => 'form-control', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('data_final', ['class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
         </div>
-        <h3 class="p-3">Impressão</h3>
-        <div class="col-md-3">
+    </div>
+    <div class="row g-3 mt-5">
+        <h4 class="text-center"><b>Impressão</b></h4>
+        <div class="col-md-6">
             <label class="form-label">Funcionário 1</label>
             <?= $this->Form->control('imp_func1', ['class' => 'form-control', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <label class="form-label">Funcionário 2</label>
             <?= $this->Form->control('imp_func2', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <h3 class="p-3">Conferência</h3>
-        <div class="col-md-3">
+        <h4 class="text-center mt-5"><b>Conferência</b></h4>
+        <div class="col-md-6  offset-md-3">
             <label class="form-label">Funcionário</label>
             <?= $this->Form->control('conf_func', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <h3 class="p-3">Envelopamento</h3>
-        <div class="col-md-3">
+        <h4 class="text-center mt-5"><b>Envelopamento</b></h4>
+        <div class="col-md-6  offset-md-3">
             <label class="form-label">Funcionário</label>
             <?= $this->Form->control('env_func', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
-        <h3 class="p-3">Triagem</h3>
-        <div class="col-md-3">
+        <h4 class="text-center mt-5"><b>Triagem</b></h4>
+        <div class="col-md-4">
             <label class="form-label">Funcionário 1</label>
-            <?= $this->Form->control('tri_func1', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            <?= $this->Form->control('tri_func1', ['class' => 'form-control', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label class="form-label">Funcionário 2</label>
-            <?= $this->Form->control('tru_func2', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            <?= $this->Form->control('tru_func2', ['class' => 'form-control', 'label' => false]) ?>
         </div>
-        <h3 class="p-3">Expedição</h3>
-        <div class="col-md-3">
+        <div class="col-md-4">
+            <label class="form-label">Funcionário 3</label>
+            <?= $this->Form->control('tri_func3', ['class' => 'form-control', 'label' => false]) ?>
+        </div>
+        <h4 class="text-center mt-5"><b>Expedição</b></h4>
+        <div class="col-md-6  offset-md-3">
             <label class="form-label">Funcionário </label>
-            <?= $this->Form->control('exp_func', ['type' => 'date', 'class' => 'form-control', 'label' => false]) ?>
+            <?= $this->Form->control('exp_func', ['class' => 'form-control', 'label' => false]) ?>
+        </div>
+
+
+        <div class="col-12 mt-5">
+            <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
+            <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
-
-    <div class="mt-5">
-        <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-primary']) ?>
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
     </div>
-    <?= $this->Form->end() ?>
-
+<?= $this->Form->end() ?>
