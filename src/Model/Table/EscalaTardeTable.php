@@ -9,23 +9,23 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Escala Model
+ * EscalaTarde Model
  *
- * @method \App\Model\Entity\Escala newEmptyEntity()
- * @method \App\Model\Entity\Escala newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Escala[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Escala get($primaryKey, $options = [])
- * @method \App\Model\Entity\Escala findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Escala patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Escala[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Escala|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Escala saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Escala[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Escala[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Escala[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Escala[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\EscalaTarde newEmptyEntity()
+ * @method \App\Model\Entity\EscalaTarde newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\EscalaTarde[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\EscalaTarde get($primaryKey, $options = [])
+ * @method \App\Model\Entity\EscalaTarde findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\EscalaTarde patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\EscalaTarde[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\EscalaTarde|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\EscalaTarde saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\EscalaTarde[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\EscalaTarde[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\EscalaTarde[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\EscalaTarde[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class EscalaTable extends Table
+class EscalaTardeTable extends Table
 {
     /**
      * Initialize method
@@ -37,7 +37,7 @@ class EscalaTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('escala');
+        $this->setTable('escala_tarde');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
     }
@@ -65,12 +65,6 @@ class EscalaTable extends Table
             ->maxLength('imp_func1', 100)
             ->requirePresence('imp_func1', 'create')
             ->notEmptyString('imp_func1');
-
-        $validator
-            ->scalar('imp_func2')
-            ->maxLength('imp_func2', 100)
-            ->requirePresence('imp_func2', 'create')
-            ->notEmptyString('imp_func2');
 
         $validator
             ->scalar('conf_func')
