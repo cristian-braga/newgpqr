@@ -3,19 +3,19 @@
     <div class="row g-3">
         <div class="col-md-6">
             <label class="form-label">Nome do Serviço</label>
-            <?= $this->Form->control('nome_servico', ['class' => 'form-control text-uppercase', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('nome_servico', ['class' => 'form-control text-uppercase', 'placeholder' => 'Ex: A0DMD11, SDAKD11...', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-6">
             <label class="form-label">Código do Sistema</label>
-            <?= $this->Form->control('cod_sistema_servico', ['class' => 'form-control text-uppercase', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('cod_sistema_servico', ['class' => 'form-control text-uppercase', 'placeholder' => 'Ex: A0DM, SDAK...', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-12">
             <label class="form-label">Cliente Responsável Serviço</label>
-            <?= $this->Form->control('cliente_responsavel_servico', ['class' => 'form-control', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('cliente_responsavel_servico', ['class' => 'form-control', 'placeholder' => 'Ex: Polícia Civil do Estado de MG...', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-12">
             <label class="form-label">Cliente Serviço</label>
-            <?= $this->Form->control('cliente_servico', ['class' => 'form-control', 'required', 'label' => false]) ?>
+            <?= $this->Form->control('cliente_servico', ['class' => 'form-control', 'placeholder' => 'Ex: DETRAN - Departamento de Trânsito de MG...', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-8">
             <label class="form-label">Descrição Serviço</label>
