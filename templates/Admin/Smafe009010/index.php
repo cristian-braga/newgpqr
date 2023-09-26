@@ -27,7 +27,7 @@
                 </td>
                 <td>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $smafe009010->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $smafe009010->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $smafe009010->id)]) ?>
+                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $smafe009010->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o serviço SMAFE 009/010:  {0}?', $smafe009010->id)]) ?>
                     <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $smafe009010->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                 </td>
             </tr>
