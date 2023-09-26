@@ -26,7 +26,7 @@
                 <td><?= $etiquetasPm->total === null ? '' : $this->Number->format($etiquetasPm->total) ?></td>
                 <td>                    
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $etiquetasPm->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $etiquetasPm->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço ETIQUETAS PM: {0}?', $etiquetasPm->id)]) ?>
+                    <?= $this->Html->link(__('Excluir'), ['action' => 'delete', $etiquetasPm->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Deseja realmente excluir o serviço ETIQUETAS PMMG: {0}?', $etiquetasPm->id)]) ?>
                     <?= $this->Html->link(__('PDF'), ['action' => 'pdf', $etiquetasPm->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow', 'target' => '_blank']) ?>
                 </td>
             </tr>
