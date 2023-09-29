@@ -1,60 +1,40 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\EscalaTarde> $escalaTarde
- */
-?>
 <div class="escalaTarde index content">
-    <?= $this->Html->link(__('New Escala Tarde'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Escala Tarde') ?></h3>
-    <div class="table-responsive">
-        <table>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn bg-secondary bg-gradient text-white float-start mb-4']) ?>
+    <div class="table-responsive table-gpqr">
+        <table class="table table-borderless table-striped text-center align-middle">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('data_inicial') ?></th>
-                    <th><?= $this->Paginator->sort('data_final') ?></th>
-                    <th><?= $this->Paginator->sort('imp_func1') ?></th>
-                    <th><?= $this->Paginator->sort('conf_func') ?></th>
-                    <th><?= $this->Paginator->sort('env_func') ?></th>
-                    <th><?= $this->Paginator->sort('tri_func1') ?></th>
-                    <th><?= $this->Paginator->sort('tri_func2') ?></th>
-                    <th><?= $this->Paginator->sort('tri_func3') ?></th>
-                    <th><?= $this->Paginator->sort('exp_func') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                <th class=""> Data Inicial </th>
+                    <th class="">Data Final </th>
+                    <th class="" colspan="2">Impressão</th>
+                    <th class="">Conferência</th>
+                    <th class="">Envelopamento</th>
+                    <th class="" colspan="3">Triagem</th>
+                    <th class="">Expedição</th>
+                    <th class="actions  col-2"><?= __('Ações') ?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($escalaTarde as $escalaTarde): ?>
+                <?php foreach ($escalaTarde as $escalaT): ?>
                 <tr>
-                    <td><?= $this->Number->format($escalaTarde->id) ?></td>
-                    <td><?= h($escalaTarde->data_inicial) ?></td>
-                    <td><?= h($escalaTarde->data_final) ?></td>
-                    <td><?= h($escalaTarde->imp_func1) ?></td>
-                    <td><?= h($escalaTarde->conf_func) ?></td>
-                    <td><?= h($escalaTarde->env_func) ?></td>
-                    <td><?= h($escalaTarde->tri_func1) ?></td>
-                    <td><?= h($escalaTarde->tri_func2) ?></td>
-                    <td><?= h($escalaTarde->tri_func3) ?></td>
-                    <td><?= h($escalaTarde->exp_func) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $escalaTarde->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $escalaTarde->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $escalaTarde->id], ['confirm' => __('Are you sure you want to delete # {0}?', $escalaTarde->id)]) ?>
+                <td><?= h($escalaT->data_inicial) ?></td>
+                    <td ><?= h($escalaT->data_final) ?></td>
+                    <td class="bg-secondary bg-opacity-25"><?= h($escalaT->imp_func1) ?></td>
+                    <td class="bg-secondary bg-opacity-25"><?= h($escalaT->imp_func2) ?></td>
+                    <td><?= h($escalaT->conf_func) ?></td>
+                    <td><?= h($escalaT->env_func) ?></td>
+                    <td class="bg-secondary bg-opacity-25"><?= h($escalaT->tri_func1) ?></td>
+                    <td class="bg-secondary bg-opacity-25"><?= h($escalaT->tri_func2) ?></td>
+                    <td class="bg-secondary bg-opacity-25"><?= h($escalaT->tri_func3) ?></td>
+                    <td><?= h($escalaT->exp_func) ?></td>
+                    <td class="">
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $escalaT->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $escalaT->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $escalaT->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
 </div>
+<?= $this->element('pagination') ?>
