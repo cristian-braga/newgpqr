@@ -43,8 +43,6 @@
                         <td><?= date('m/Y', strtotime($dtg->periodo)) ?></td>
                         <td><?= h($dtg->funcionario) ?> </td>
                         <td>
-                            <!-- <?= $this->Html->link(__('<i class="fa-regular fa-pen-to-square fa-lg" style="color: #ffc107"></i>' . __('')), ['action' => 'edit', $dtg->id], ['escape' => false, 'class' => 'p-2']); ?>
-                        <?= $this->Form->postLink(__('<i class="fa-regular fa-trash-can fa-lg" style="color: #dc3545;"></i>' . __('')), ['action' => 'delete', $dtg->id], ['escape' => false, 'class' => 'p-2'], ['confirm' => __('Tem certeza que quer deletar essa Digitalizacao # {0}?', $dtg->id)]) ?>  -->
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $dtg->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $dtg->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $dtg->id)]) ?>
 
