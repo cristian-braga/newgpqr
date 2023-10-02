@@ -25,7 +25,7 @@
                     <td><?= h($contrato->contrato) ?></td>
                     <td><?= h($contrato->empresa) ?></td>
                     <td><?= h($contrato->maquina) ?></td>
-                    <td><?= $this->Number->format($contrato->valo_mensal) ?></td>
+                    <td><?= $this->Number->format($contrato->valor_mensal) ?></td>
                     <td><?= $this->Number->format($contrato->parcelas) ?></td>
                     <td><?= $this->Number->format($contrato->saldo_contratual) ?></td>
                     <td><?= h($contrato->vencimento) ?></td>

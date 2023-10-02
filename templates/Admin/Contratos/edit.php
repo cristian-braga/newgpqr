@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-3">
             <label class="form-label">Valor Mensal</label>
-            <?= $this->Form->control('valo_mensal', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
+            <?= $this->Form->control('valor_mensal', ['type' => 'number', 'class' => 'form-control', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
             <label class="form-label">Parcelas</label>

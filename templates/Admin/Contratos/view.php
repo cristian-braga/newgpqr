@@ -35,8 +35,8 @@
                     <td><?= $this->Number->format($contrato->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Valo Mensal') ?></th>
-                    <td><?= $this->Number->format($contrato->valo_mensal) ?></td>
+                    <th><?= __('Valor Mensal') ?></th>
+                    <td><?= $this->Number->format($contrato->valor_mensal) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Parcelas') ?></th>

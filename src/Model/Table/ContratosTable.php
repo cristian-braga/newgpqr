@@ -69,9 +69,9 @@ class ContratosTable extends Table
             ->notEmptyString('maquina');
 
         $validator
-            ->numeric('valo_mensal')
-            ->requirePresence('valo_mensal', 'create')
-            ->notEmptyString('valo_mensal');
+            ->numeric('valor_mensal')
+            ->requirePresence('valor_mensal', 'create')
+            ->notEmptyString('valor_mensal');
 
         $validator
             ->integer('parcelas')
@@ -88,7 +88,7 @@ class ContratosTable extends Table
             ->allowEmptyDate('vencimento');
 
             $validator
-            ->numeric('vencimento')
+            ->numeric('valor_total')
             ->requirePresence('valor_total', 'create')
             ->notEmptyString('valor_total');
 
