@@ -64,12 +64,12 @@ class DemandasController extends AppController
             $demanda = $this->Demandas->patchEntity($demanda, $dados);
             
             if ($this->Demandas->save($demanda)) {
-                $this->Flash->success(__('The demanda has been saved.'));
+                $this->Flash->success(__('Demanda salva com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
             else {
-                $this->Flash->error(__('Demanda não pode ser salva.'));
+                $this->Flash->error(__('Erro ao salvar demanda. Por favor, tente novamente.'));
             }
         }
 
@@ -192,7 +192,7 @@ class DemandasController extends AppController
             $demanda->data_termino = new DateTime(); 
             $demanda->status = 'Finalizada';
             if ($this->Demandas->save($demanda)) {
-                $this->Flash->success(__('Demanda finalizada! :)'));
+                $this->Flash->success(__('Demanda finalizada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
