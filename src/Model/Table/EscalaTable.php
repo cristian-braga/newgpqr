@@ -53,60 +53,43 @@ class EscalaTable extends Table
         $validator
             ->date('data_inicial')
             ->requirePresence('data_inicial', 'create')
-            ->notEmptyDate('data_inicial');
+            ->notEmptyDate('data_inicial', 'Campo obrigatório!');
 
         $validator
             ->date('data_final')
             ->requirePresence('data_final', 'create')
-            ->notEmptyDate('data_final');
+            ->notEmptyDate('data_final', 'Campo obrigatório!');
 
         $validator
-            ->scalar('imp_func1')
-            ->maxLength('imp_func1', 100)
-            ->requirePresence('imp_func1', 'create')
-            ->notEmptyString('imp_func1');
+            ->scalar('turno')
+            ->maxLength('turno', 10)
+            ->requirePresence('turno', 'create')
+            ->notEmptyString('turno');
 
         $validator
-            ->scalar('imp_func2')
-            ->maxLength('imp_func2', 100)
-            ->requirePresence('imp_func2', 'create')
-            ->notEmptyString('imp_func2');
+            ->scalar('impressao')
+            ->maxLength('impressao', 100)
+            ->allowEmptyString('impressao');
 
         $validator
-            ->scalar('conf_func')
-            ->maxLength('conf_func', 100)
-            ->requirePresence('conf_func', 'create')
-            ->notEmptyString('conf_func');
+            ->scalar('conferencia')
+            ->maxLength('conferencia', 100)
+            ->allowEmptyString('conferencia');
 
         $validator
-            ->scalar('env_func')
-            ->maxLength('env_func', 100)
-            ->requirePresence('env_func', 'create')
-            ->notEmptyString('env_func');
+            ->scalar('envelopamento')
+            ->maxLength('envelopamento', 100)
+            ->allowEmptyString('envelopamento');
 
         $validator
-            ->scalar('tri_func1')
-            ->maxLength('tri_func1', 100)
-            ->requirePresence('tri_func1', 'create')
-            ->notEmptyString('tri_func1');
+            ->scalar('triagem')
+            ->maxLength('triagem', 100)
+            ->allowEmptyString('triagem');
 
         $validator
-            ->scalar('tri_func2')
-            ->maxLength('tri_func2', 100)
-            ->requirePresence('tri_func2', 'create')
-            ->notEmptyString('tri_func2');
-
-        $validator
-            ->scalar('tri_func3')
-            ->maxLength('tri_func3', 100)
-            ->requirePresence('tri_func3', 'create')
-            ->notEmptyString('tri_func3');
-
-        $validator
-            ->scalar('exp_func')
-            ->maxLength('exp_func', 100)
-            ->requirePresence('exp_func', 'create')
-            ->notEmptyString('exp_func');
+            ->scalar('expedicao')
+            ->maxLength('expedicao', 100)
+            ->allowEmptyString('expedicao');
 
         return $validator;
     }
