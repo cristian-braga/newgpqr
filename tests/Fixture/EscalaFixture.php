@@ -26,16 +26,14 @@ class EscalaFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'data_inicial' => '2023-09-22',
-                'data_final' => '2023-09-22',
-                'imp_func1' => 'Lorem ipsum dolor sit amet',
-                'imp_func2' => 'Lorem ipsum dolor sit amet',
-                'conf_func' => 'Lorem ipsum dolor sit amet',
-                'env_func' => 'Lorem ipsum dolor sit amet',
-                'tri_func1' => 'Lorem ipsum dolor sit amet',
-                'tru_func2' => 'Lorem ipsum dolor sit amet',
-                'tri_func3' => 'Lorem ipsum dolor sit amet',
-                'exp_func' => 'Lorem ipsum dolor sit amet',
+                'data_inicial' => '2023-10-03',
+                'data_final' => '2023-10-03',
+                'turno' => 'Lorem ip',
+                'impressao' => 'Lorem ipsum dolor sit amet',
+                'conferencia' => 'Lorem ipsum dolor sit amet',
+                'envelopamento' => 'Lorem ipsum dolor sit amet',
+                'triagem' => 'Lorem ipsum dolor sit amet',
+                'expedicao' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();
