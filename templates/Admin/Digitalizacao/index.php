@@ -1,5 +1,5 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">DIGITALIZAÇÃO</h2>
-<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary mb-2']) ?>
 <div class="conteudo">
     <?= $this->Form->create(null, ['type' => 'get']) ?>
         <div class="row g-3">
