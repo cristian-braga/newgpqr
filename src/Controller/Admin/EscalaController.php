@@ -22,6 +22,8 @@ class EscalaController extends AppController
 
     public function add()
     {
+        $turnoEscala = $this->request->getQuery('turnoEscala');
+
         $escala = $this->Escala->newEmptyEntity();
 
         $dados = $this->request->getData();        
@@ -32,7 +34,7 @@ class EscalaController extends AppController
             if ($this->Escala->save($escala)) {
                 $this->Flash->success(__('Registro lançado com sucesso!'));
 
-                if ($dados['turno_escala'] === 'Manhã') {
+                if ($turnoEscala === 'manha') {
                     return $this->redirect(['action' => 'index']);
                 } else {
                     return $this->redirect(['action' => 'escalaTarde']);
@@ -42,7 +44,7 @@ class EscalaController extends AppController
             $this->Flash->error(__('Falha ao lançar registro. Tente novamente.'));
         }
 
-        $this->set(compact('escala'));
+        $this->set(compact('escala', 'turnoEscala'));
     }
 
     public function edit($id = null)
@@ -57,7 +59,7 @@ class EscalaController extends AppController
             if ($this->Escala->save($escala)) {
                 $this->Flash->success(__('Registro editado com sucesso!'));
 
-                if ($dados['turno_escala'] === 'Manhã') {
+                if ($dados['turno'] === 'Manhã') {
                     return $this->redirect(['action' => 'index']);
                 } else {
                     return $this->redirect(['action' => 'escalaTarde']);

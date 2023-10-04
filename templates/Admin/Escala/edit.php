@@ -42,7 +42,6 @@
             <label class="form-label">Expedição</label>
             <?= $this->Form->control('expedicao', ['class' => 'form-control', 'placeholder' => 'Ex: Nome 1 / Nome 2 / Nome 3', 'label' => false]) ?>
         </div>
-        <input type="hidden" id="turno_escala" name="turno_escala">
         <div class="col-12 mt-5">
             <?php
                 if ($escala->turno === 'Manhã') {
@@ -56,14 +55,3 @@
         </div>
     </div>
 <?= $this->Form->end() ?>
-
-<script>
-    const radios = document.querySelectorAll('input[type="radio"]');
-    const hidden = document.getElementById('turno_escala');
-
-    radios.forEach(radio => {
-        radio.addEventListener('click', () => {
-            hidden.value = radio.getAttribute('value');
-        });
-    });
-</script>
