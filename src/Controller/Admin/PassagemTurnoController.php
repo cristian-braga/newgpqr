@@ -9,14 +9,40 @@ class PassagemTurnoController extends AppController
 {
     public function index()
     {
+        $etapa = $this->request->getQuery('etapa');
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+
         $this->paginate = [
             'limit' => 15,
             'order' => ['data_cadastro' => 'desc']
         ];
 
-        $passagemTurno = $this->paginate($this->PassagemTurno);
+        $query =  $this->PassagemTurno->find();
 
-        $this->set(compact('passagemTurno'));
+        if (isset($etapa) && $etapa != '') {
+            $query->where([
+                'etapa' => $etapa
+            ]);
+        }
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        $passagemTurno = $this->paginate($query);
+
+        $etapas = $this->PassagemTurno->buscaEtapas()->toArray();
+
+        $this->set(compact('passagemTurno' , 'etapas'));
     }
 
     public function view($id = null)
