@@ -38,7 +38,7 @@
                     <?php }; ?>
                     <td><?= $this->Number->format($funcionarioFeria->qtd_dias) ?></td>
                     <td><?= h($funcionarioFeria->data_inicio) ?></td>
-                    <td><?= h(date('d/m/y', strtotime("+" . $funcionarioFeria->qtd_dias . " days", $funcionarioFeria->data_inicio->getTimeStamp()))) ?></td>
+                    <td><?= h(date('d/m/y', strtotime("+". $funcionarioFeria->qtd_dias . " days", $funcionarioFeria->data_inicio->getTimeStamp()))); ?></td>
                     <td class="">
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $funcionarioFeria->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                         <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $funcionarioFeria->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $funcionarioFeria->id)]) ?>

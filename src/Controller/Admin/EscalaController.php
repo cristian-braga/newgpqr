@@ -23,7 +23,6 @@ class EscalaController extends AppController
     public function add()
     {
         $escala = $this->Escala->newEmptyEntity();
-
         $dados = $this->request->getData();        
 
         if ($this->request->is('post')) {
