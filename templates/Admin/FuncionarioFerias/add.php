@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-3">
             <label class="form-label">Quantidade de Dias</label>
-            <?= $this->Form->control('qtd_dias', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
+            <?= $this->Form->control('qtd_dias', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite a quantidade', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
             <label class="form-label">Data de Início</label>

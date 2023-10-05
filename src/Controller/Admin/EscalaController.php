@@ -25,7 +25,6 @@ class EscalaController extends AppController
         $turnoEscala = $this->request->getQuery('turnoEscala');
 
         $escala = $this->Escala->newEmptyEntity();
-
         $dados = $this->request->getData();        
 
         if ($this->request->is('post')) {
