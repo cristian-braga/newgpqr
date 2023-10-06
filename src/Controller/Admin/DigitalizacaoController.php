@@ -99,7 +99,11 @@ class DigitalizacaoController extends AppController
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $this->request->getData());
+            $dados = $this->request->getData();
+
+            $dados['periodo'] = date('Y-m-01', strtotime($dados['periodo']));
+
+            $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $dados);
 
             if ($this->Digitalizacao->save($digitalizacao)) {
                 $this->Flash->success(__('Serviço editado com sucesso!'));
