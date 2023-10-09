@@ -18,7 +18,6 @@
             <tbody>
             <?php foreach ($contratosEstagiarios as $contratosEstagiario): ?>
                 <tr>
-                <td><?= $this->Number->format($contratosEstagiario->id) ?></td>
                     <td><?= h($contratosEstagiario->funcionario) ?></td>
                     <td><?= h($contratosEstagiario->matricula) ?></td>
                     <td><?= h($contratosEstagiario->inicio_contrato) ?></td>

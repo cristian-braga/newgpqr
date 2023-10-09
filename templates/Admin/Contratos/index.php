@@ -21,7 +21,6 @@
             <tbody>
             <?php foreach ($contratos as $contrato): ?>
                 <tr>
-                <td><?= $this->Number->format($contrato->id) ?></td>
                     <td><?= h($contrato->contrato) ?></td>
                     <td><?= h($contrato->empresa) ?></td>
                     <td><?= h($contrato->maquina) ?></td>
