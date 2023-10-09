@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-3">
             <label class="form-label">Nome do funcionário</label>
-            <?= $this->Form->control('funcionario_nome', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
+            <?= $this->Form->control('funcionario', ['class' => 'form-control', 'empty' => '-- Selecione --', 'required', 'placeholder' => 'digite o nome', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
             <label class="form-label">Matrícula</label>

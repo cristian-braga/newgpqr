@@ -1,4 +1,4 @@
-<h2 class="text-center text-gpqr mt-2 mb-4">Reuniões</h2>
+<h2 class="text-center text-gpqr mt-2 mb-4">REUNIÕES</h2>
 <div class="d-flex flex-column align-items-start">
     <div class="mb-4">
         <?= $this->Html->link(__('Cadastrar'), ['action' => 'add'], ['class' => 'btn btn-secondary']) ?>
