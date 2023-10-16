@@ -3,13 +3,15 @@ function lancar() {
     const selec_todos = document.getElementById('selec_todos');
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    selec_todos.addEventListener('click', function() {
-        const selecionado = selec_todos.checked;
-
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = selecionado;
+    if (selec_todos) {
+        selec_todos.addEventListener('click', function() {
+            const selecionado = selec_todos.checked;
+    
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = selecionado;
+            });
         });
-    });
+    }
 
     checkboxes.forEach(function(checkbox) {
         checkbox.addEventListener('click', function() {
@@ -35,4 +37,3 @@ function desabilitaBotao() {
 }
 
 desabilitaBotao();
-
