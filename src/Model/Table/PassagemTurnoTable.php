@@ -86,4 +86,17 @@ class PassagemTurnoTable extends Table
 
         return $validator;
     }
+
+    public function buscaEtapas()
+    {
+        $query = $this->find('list', ['keyField' => 'etapas', 'valueField' => 'etapas'])
+            ->select([
+                'etapas' => 'etapa'
+            ])
+            ->group('etapas')
+            ->orderAsc('etapas')
+            ->all();
+
+        return $query;
+    }
 }

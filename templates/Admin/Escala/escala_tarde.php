@@ -3,8 +3,8 @@
     ['controller' => 'Menu', 'action' => 'escalas'],
     ['class' => 'btn-voltar', 'escape' => false]
 ) ?>
-<h2 class="text-center text-gpqr mt-2 mb-4">ESCALA MANHÃ</h2>
-<?= $this->Html->link(__('Cadastrar'), ['action' => 'add', '?' => ['turnoEscala' => 'manha']], ['class' => 'btn btn-secondary mb-4']) ?>
+<h2 class="text-center text-gpqr mt-2 mb-4">ESCALA TARDE</h2>
+<?= $this->Html->link(__('Cadastrar'), ['action' => 'add', '?' => ['turnoEscala' => 'tarde']], ['class' => 'btn btn-secondary mb-4']) ?>
 <div class="table-responsive table-gpqr">
     <table class="table table-borderless table-striped text-center align-middle">
         <thead>

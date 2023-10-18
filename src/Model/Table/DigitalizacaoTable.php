@@ -84,44 +84,42 @@ class DigitalizacaoTable extends Table
         return $rules;
     }
 
-    // funçoes para os filtros da Digitalizacao
-
     public function selectServicos()
     {
-        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos'])
+        $servicos = $this->Servico
+            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
+            ->orderAsc('nome_servico')
+            ->all();
+
+        return $servicos;
+    }
+
+    // funçoes para os filtros da Digitalizacao
+    public function funcionarioFiltro()
+    {
+        $query = $this->find('list', ['keyField' => 'funcionarios', 'valueField' => 'funcionarios']) 
             ->select([
-                'id' => 'Servico.id',
-                'servicos' => 'Servico.nome_servico'
+                'funcionarios' => 'funcionario'
             ])
-            ->innerJoinWith('Servico')
-            ->group('Servico.nome_servico')
+            ->group('funcionarios')
+            ->orderAsc('funcionarios')
             ->all();
 
         return $query;
     }
 
-    public function periodoFiltro() {
-        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'periodo'])
-        ->select([
-            'id' => 'Digitalizacao.id',
-            'digitalizacao' => 'Digitalizacao.periodo'
-        ])
-        ->group('Digitalizacao.periodo')
-        ->all();
+    public function servicosFiltro()
+    {
+        $query = $this->find('list', ['keyField' => 'id', 'valueField' => 'servicos']) 
+            ->select([
+                'id' => 'Servico.id',
+                'servicos' => 'Servico.nome_servico'
+            ])
+            ->innerJoinWith('Servico')
+            ->group('servicos')
+            ->orderAsc('servicos')
+            ->all();
 
         return $query;
     }
-
-    public function funcionarioFiltro() {
-        
-        $query = $this->find('list', ['keyfield' => 'id', 'valueField' => 'funcionario']) 
-        ->select([
-            'id' => 'Digitalizacao.id',
-            'digitalizacao' => 'Digitalizacao.funcionario'
-        ])
-        ->group('Digitalizacao.funcionario')
-        ->all();
-
-        return $query;
-    }
-} 
+}

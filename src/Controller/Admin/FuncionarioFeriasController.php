@@ -58,11 +58,11 @@ class FuncionarioFeriasController extends AppController
         if ($this->request->is('post')) {
             $funcionarioFeria = $this->FuncionarioFerias->patchEntity($funcionarioFeria, $this->request->getData());
             if ($this->FuncionarioFerias->save($funcionarioFeria)) {
-                $this->Flash->success(__('The funcionario feria has been saved.'));
+                $this->Flash->success(__('Férias salvas com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The funcionario feria could not be saved. Please, try again.'));
+            $this->Flash->error(__('Férias não foram salvas com sucesso.'));
         }
         $this->set(compact('funcionarioFeria'));
     }
@@ -74,6 +74,7 @@ class FuncionarioFeriasController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
     public function edit($id = null)
     {
         $funcionarioFeria = $this->FuncionarioFerias->get($id, [
@@ -82,11 +83,11 @@ class FuncionarioFeriasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $funcionarioFeria = $this->FuncionarioFerias->patchEntity($funcionarioFeria, $this->request->getData());
             if ($this->FuncionarioFerias->save($funcionarioFeria)) {
-                $this->Flash->success(__('The funcionario feria has been saved.'));
+                $this->Flash->success(__('Programação de Férias atualizada com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The funcionario feria could not be saved. Please, try again.'));
+            $this->Flash->error(__('Programação de Férias não pode ser atualizada.'));
         }
         $this->set(compact('funcionarioFeria'));
     }
@@ -103,9 +104,9 @@ class FuncionarioFeriasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $funcionarioFeria = $this->FuncionarioFerias->get($id);
         if ($this->FuncionarioFerias->delete($funcionarioFeria)) {
-            $this->Flash->success(__('The funcionario feria has been deleted.'));
+            $this->Flash->success(__('Férias foram deletadas.'));
         } else {
-            $this->Flash->error(__('The funcionario feria could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Férias não podem ser deletadas.'));
         }
 
         return $this->redirect(['action' => 'index']);

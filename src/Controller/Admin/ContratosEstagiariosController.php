@@ -46,11 +46,11 @@ class ContratosEstagiariosController extends AppController
         if ($this->request->is('post')) {
             $contratosEstagiario = $this->ContratosEstagiarios->patchEntity($contratosEstagiario, $this->request->getData());
             if ($this->ContratosEstagiarios->save($contratosEstagiario)) {
-                $this->Flash->success(__('The contratos estagiario has been saved.'));
+                $this->Flash->success(__('Estagiário salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The contratos estagiario could not be saved. Please, try again.'));
+            $this->Flash->error(__('Estagiário não pode ser salvo.'));
         }
         $this->set(compact('contratosEstagiario'));
     }
@@ -70,11 +70,11 @@ class ContratosEstagiariosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $contratosEstagiario = $this->ContratosEstagiarios->patchEntity($contratosEstagiario, $this->request->getData());
             if ($this->ContratosEstagiarios->save($contratosEstagiario)) {
-                $this->Flash->success(__('The contratos estagiario has been saved.'));
+                $this->Flash->success(__('Estagiário atualizado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The contratos estagiario could not be saved. Please, try again.'));
+            $this->Flash->error(__('Estagiário não pode atualizado.'));
         }
         $this->set(compact('contratosEstagiario'));
     }
@@ -91,9 +91,9 @@ class ContratosEstagiariosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $contratosEstagiario = $this->ContratosEstagiarios->get($id);
         if ($this->ContratosEstagiarios->delete($contratosEstagiario)) {
-            $this->Flash->success(__('The contratos estagiario has been deleted.'));
+            $this->Flash->success(__('Estagiário deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The contratos estagiario could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Estagiário nã pode ser deletado.'));
         }
 
         return $this->redirect(['action' => 'index']);

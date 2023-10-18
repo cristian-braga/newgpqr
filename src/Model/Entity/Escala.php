@@ -11,14 +11,12 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property \Cake\I18n\FrozenDate $data_inicial
  * @property \Cake\I18n\FrozenDate $data_final
- * @property string $imp_func1
- * @property string $imp_func2
- * @property string $conf_func
- * @property string $env_func
- * @property string $tri_func1
- * @property string $tru_func2
- * @property string $tri_func3
- * @property string $exp_func
+ * @property string $turno
+ * @property string|null $impressao
+ * @property string|null $conferencia
+ * @property string|null $envelopamento
+ * @property string|null $triagem
+ * @property string|null $expedicao
  */
 class Escala extends Entity
 {
@@ -34,13 +32,11 @@ class Escala extends Entity
     protected $_accessible = [
         'data_inicial' => true,
         'data_final' => true,
-        'imp_func1' => true,
-        'imp_func2' => true,
-        'conf_func' => true,
-        'env_func' => true,
-        'tri_func1' => true,
-        'tri_func2' => true,
-        'tri_func3' => true,
-        'exp_func' => true,
+        'turno' => true,
+        'impressao' => true,
+        'conferencia' => true,
+        'envelopamento' => true,
+        'triagem' => true,
+        'expedicao' => true,
     ];
 }

@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
-use Cake\Datasource\ConnectionManager;
 
 class DigitalizacaoController extends AppController
 {
-
     public function index()
     {
         $servico = $this->request->getQuery('servico');
@@ -17,87 +15,60 @@ class DigitalizacaoController extends AppController
         $funcionario = $this->request->getQuery('funcionario');
 
         $this->paginate = [
-                'limit' => 20,
-                'contain' => ['Servico']
-                
-            ];
-        
-       $query =  $this->Digitalizacao->find();
+            'limit' => 20,
+            'contain' => ['Servico'],
+            'order' => ['data_digitalizacao' => 'desc']
+        ];
 
-       if(isset($servico) && $servico != '') {
+        $query =  $this->Digitalizacao->find();
+
+        if (isset($servico) && $servico != '') {
             $query->where([
                 'Digitalizacao.servico_id =' => $servico
             ]);
-       }
+        }
 
-       if(isset($periodo) && $periodo != '') {
-        $query->where([
-            'Digitalizacao.periodo' => $periodo
-        ]);
-       }
+        if (isset($periodo) && $periodo != '') {
+            $periodo = date('Y-m-01', strtotime($periodo));
 
-       if(isset($funcionario) && $funcionario != '') {
+            $query->where([
+                'Digitalizacao.periodo' => $periodo
+            ]);
+        }
+
+        if (isset($funcionario) && $funcionario != '') {
             $query->where([
                 'Digitalizacao.funcionario' => $funcionario
             ]);
-       }
-        
-       $periodos = $this->Digitalizacao->periodoFiltro()->toArray();
-       $servicos = $this->Digitalizacao->selectServicos()->toArray();
-       $funcionarios = $this->Digitalizacao->funcionarioFiltro()->toArray();
+        }
 
-        
-        $servicosExist = $this->paginate($query);
-        $dataExist = $this->paginate($query);
-        $funcExist = $this->paginate($query);
-        
+        $digitalizacao = $this->paginate($query);
 
-        $this->set(compact( 'servico', 'servicosExist', 'servicos', 'dataExist', 'periodo', 'periodos', 'funcionarios', 'funcExist', 'funcionario'));
-    }
-        
+        $servicos = $this->Digitalizacao->servicosFiltro()->toArray();
+        $funcionarios = $this->Digitalizacao->funcionarioFiltro()->toArray();
 
-    public function view($id = null)
-    {
-        $digitalizacao = $this->Digitalizacao->get($id, [
-            'contain' => ['Servico'],
-        ]);
-
-        $this->set(compact('digitalizacao'));
+        $this->set(compact('digitalizacao', 'servicos', 'funcionarios'));
     }
 
     public function add()
     {
-
-        $digitalizacao = $this->Digitalizacao->newEmptyEntity();
-
-        $servicos = $this->Digitalizacao->Servico
-            ->find('list', ['keyField' => 'id', 'valueField' => 'nome_servico'])
-            ->order(['nome_servico' => 'asc'])
-            ->all(); // select de todos os serviços 
-
         if ($this->request->is('post')) {
-
             $data = $this->request->getData();
 
             $servico_ids = $data['servico_id'];
             $quantDOM = $data['quantidade_documentos'];
             $periodo = $data['periodo'];
-            $funcionario = "LauraTeste";
-            $data['funcionario'] = $funcionario;
-            
 
             $digitalizacoesEnviar = [];
 
             for ($i = 0; $i < count($servico_ids); $i++) {
-
                 $digitalizacao = $this->Digitalizacao->newEmptyEntity();
-
 
                 $digitalizacoes = [
                     'servico_id' => $servico_ids[$i],
                     'quantidade_documentos' => $quantDOM[$i],
-                    'periodo' => $periodo[$i],
-                     'funcionario' => $funcionario,
+                    'periodo' => date('Y-m-01', strtotime($periodo[$i])),
+                    'funcionario' => 'Funcionário',
                     'data_digitalizacao' => date('Y-m-d')
                 ];
 
@@ -108,49 +79,58 @@ class DigitalizacaoController extends AppController
 
             if ($this->Digitalizacao->saveMany($digitalizacoesEnviar)) {
 
-                $this->Flash->success(__('Digitalização cadastrada com sucesso!.'));
+                $this->Flash->success(__('Serviço(s) cadastrados com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
-                
-            } else {
-
-                $this->Flash->error(__('Falha ao salvar digitalização.'));
             }
+
+            $this->Flash->error(__('Falha ao cadastrar serviço(s). Tente novamente.'));
         }
 
+        $servicos = $this->Digitalizacao->selectServicos()->toArray();
 
-        $this->set(compact('digitalizacao', 'servicos'));
+        $this->set(compact('servicos'));
     }
 
     public function edit($id = null)
     {
         $digitalizacao = $this->Digitalizacao->get($id, [
-            'contain' => [],
+            'contain' => ['Servico'],
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $this->request->getData());
+            $dados = $this->request->getData();
+
+            $dados['periodo'] = date('Y-m-01', strtotime($dados['periodo']));
+
+            $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $dados);
+
             if ($this->Digitalizacao->save($digitalizacao)) {
-                $this->Flash->success(__('Digitalização editada com sucesso!.'));
+                $this->Flash->success(__('Serviço editado com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Falha ao editar digitalização.'));
+
+            $this->Flash->error(__('Falha ao editar serviço.'));
         }
-        $servico = $this->Digitalizacao->Servico->find('list', ['limit' => 200])->all();
-        $this->set(compact('digitalizacao', 'servico'));
+
+        $servicos = $this->Digitalizacao->selectServicos()->toArray();
+
+        $this->set(compact('digitalizacao', 'servicos'));
     }
 
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+
         $digitalizacao = $this->Digitalizacao->get($id);
+
         if ($this->Digitalizacao->delete($digitalizacao)) {
-            $this->Flash->success(__('Digitalização deletada com sucesso!.'));
+            $this->Flash->success(__('Serviço excluído com sucesso!'));
         } else {
-            $this->Flash->error(__('Falha ao deletar digitalização.'));
+            $this->Flash->error(__('Falha ao excluir serviço.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
-
 }

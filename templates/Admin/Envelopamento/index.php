@@ -1,13 +1,6 @@
 <h2 class="text-center text-gpqr mt-2 mb-4">ENVELOPAMENTO</h2>
-<div class="btn-group dropstart float-end mb-4">
-    <?= $this->Form->button('Outras Páginas', ['type' => 'button', 'class' => 'btn btn-secondary dropdown-toggle', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => false]) ?>
-    <ul class="dropdown-menu dropdown-menu-dark">
-        <li><?= $this->Html->link(__('Serviços Envelopados'), ['action' => 'servicosEnvelopados'], ['class' => 'dropdown-item']) ?></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><?= $this->Html->link(__('Passagem de Turno'), ['controller' => 'PassagemTurno', 'action' => 'index'], ['class' => 'dropdown-item']) ?></li>
-        <li><?= $this->Html->link(__('Controle de Cola'), ['controller' => 'ControleCola', 'action' => 'index'], ['class' => 'dropdown-item']) ?></li>
-    </ul>
-</div>
+<?= $this->Html->link(__('Serviços Envelopados'), ['action' => 'servicosEnvelopados'], ['class' => 'btn btn-secondary float-end']) ?>
+<?= $this->Html->link(__('Controle de Cola'), ['controller' => 'ControleCola', 'action' => 'index'], ['class' => 'btn btn-secondary float-end mb-4 me-2']) ?>
 <?= $this->Form->create(null, ['url' => ['controller' => 'Envelopamento', 'action' => 'add']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">

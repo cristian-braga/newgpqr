@@ -32,7 +32,7 @@ class Contrato extends Entity
         'contrato' => true,
         'empresa' => true,
         'maquina' => true,
-        'valo_mensal' => true,
+        'valor_mensal' => true,
         'parcelas' => true,
         'saldo_contratual' => true,
         'vencimento' => true,
