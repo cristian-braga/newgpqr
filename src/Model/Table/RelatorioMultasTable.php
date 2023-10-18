@@ -60,7 +60,23 @@ class RelatorioMultasTable extends Table
             FROM expedicao
                 INNER JOIN atividade ON expedicao.atividade_id = atividade.id
                 INNER JOIN servico ON atividade.servico_id = servico.id
-            WHERE descricao_servico LIKE 'Multas%'
+            WHERE descricao_servico 
+            = 'Aviso de CNH a vencer' OR descricao_servico
+			= 'Cartas Aviso Pendências na Emissão CNH' OR descricao_servico
+            ='Cartas de Notificação' OR descricao_servico
+			='Cartas de Ofício' OR descricao_servico
+			='Cartas do GRAVAME' OR descricao_servico
+			='Comunicado de Acolhimento de Defesa DEER' OR descricao_servico
+			='Comunicado de Deferimento de Advertência' OR descricao_servico
+			='Comunicação de Acolhimento de Advertência' OR descricao_servico
+			='Comunicação de Acolhimento de Defesa' OR descricao_servico
+			='Comunicação de Aplicação de Advertência' OR descricao_servico
+			='Multas Diárias' OR descricao_servico
+			='Multas Semanais' OR descricao_servico
+			='Notificação de Veículo Apreendido' OR descricao_servico
+			='Notificação de Veículo Recuperado' OR descricao_servico
+			='Notificação do Processo Administrativo' OR descricao_servico
+			='Notificações de Impedimento'
             GROUP BY mes, MONTH(data_expedicao)
             ORDER BY MONTH(data_expedicao) ASC;"
         )->fetchAll('assoc');
