@@ -15,9 +15,9 @@
         </thead>
         <tbody>
             <?php foreach ($queryAdmins as $admin) : ?>
-                <?php $matricula = 'http://intranet3.prodemge.gov.br/images/contatos/' . substr($admin->matricula, 1, 3) . '/' . substr($admin->matricula, 1, 6) . '.jpg'; ?>
+                <?php $foto = 'http://intranet3.prodemge.gov.br/images/contatos/' . substr($admin->matricula, 1, 3) . '/' . substr($admin->matricula, 1, 6) . '.jpg'; ?>
                 <tr>
-                    <td><img style="border-radius: 5px; width: 50px; height: 60px;" src="<?= $matricula ?>"></td>
+                    <td><img style="border-radius: 5px; width: 50px; height: 60px;" src="<?= $foto ?>"></td>
                     <td><?= h($admin->funcionario) ?></td>
                     <td><?= h($admin->matricula) ?></td>
                     <td>
@@ -41,9 +41,9 @@
         </thead>
         <tbody>
             <?php foreach ($queryFuncionarios as $funcionario) : ?>
-                <?php $matricula = 'http://intranet3.prodemge.gov.br/images/contatos/' . substr($funcionario->matricula, 1, 3) . '/' . substr($funcionario->matricula, 1, 6) . '.jpg'; ?>
+                <?php $foto = 'http://intranet3.prodemge.gov.br/images/contatos/' . substr($funcionario->matricula, 1, 3) . '/' . substr($funcionario->matricula, 1, 6) . '.jpg'; ?>
                 <tr>
-                    <td><img style="border-radius: 5px; width: 50px; height: 60px;" src="<?= $matricula ?>"></td>
+                    <td><img style="border-radius: 5px; width: 50px; height: 60px;" src="<?= $foto ?>"></td>
                     <td><?= h($funcionario->funcionario) ?></td>
                     <td><?= h($funcionario->matricula) ?></td>
                     <td>

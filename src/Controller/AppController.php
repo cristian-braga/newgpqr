@@ -48,44 +48,49 @@ class AppController extends Controller
 
         $this->loadComponent('Flash');
 
-        // $this->loadComponent('Auth', [
-        //     'loginRedirect' => ['controller' => 'Menu', 'action' => 'index'],
-        //     'logoutRedirect' => ['controller' => 'Usuarios', 'action' => 'login'],
-        //     'authError' => false,
-        //     'authenticate' => [
-        //         'ProdemgeLdap' => [
-        //             'fields' => [
-        //                 'username' => 'username',
-        //                 'password' => 'password'
-        //             ],
-        //             'port' => \Cake\Core\Configure::read('Ldap.port'),
-        //             'host' => \Cake\Core\Configure::read('Ldap.host'),
-        //             'domain' => \Cake\Core\Configure::read('Ldap.domain'),
-        //             'baseDN' => function ($username, $domain) {
-        //                 $baseDN = \Cake\Core\Configure::read('Ldap.baseDN');
-        //                 return $baseDN;
-        //             },
-        //             'bindDN' => function ($username, $domain) {
-        //                 if (strpos($username, $domain) !== false) {
-        //                     $bindDN = $username;
-        //                 } else {
-        //                     $bindDN = $username . '@' . $domain;
-        //                 }
-        //                 return $bindDN;
-        //             },
-        //             'search' => function ($username) {
-        //                 $search = '(&(objectClass=user)(objectCategory=person)(samaccountname=' . $username . '))';
-        //                 return $search;
-        //             },
-        //             'logErrors' => true,
-        //             'options' => \Cake\Core\Configure::read('Ldap.options'),
-        //             'flash' => [
-        //                 'key' => 'ldap',
-        //                 'element' => 'Flash/error',
-        //             ]
-        //         ]
-        //     ]
-        // ]);
+        $this->loadComponent('Auth', [
+            // 'loginRedirect' => [
+            //         'controller' => 'Menu',
+            //         'action' => 'index'],
+            // 'logoutRedirect' => [
+            //         'controller' => 'Users',
+            //         'action' => 'login'
+            //     ],
+            // 'authError' => false,
+            // 'authenticate' => [
+            //     'ProdemgeLdap' => [
+            //         'fields' => [
+            //             'username' => 'username',
+            //             'password' => 'password'
+            //         ],
+            //         'port' => \Cake\Core\Configure::read('Ldap.port'),
+            //         'host' => \Cake\Core\Configure::read('Ldap.host'),
+            //         'domain' => \Cake\Core\Configure::read('Ldap.domain'),
+            //         'baseDN' => function ($username, $domain) {
+            //             $baseDN = \Cake\Core\Configure::read('Ldap.baseDN');
+            //             return $baseDN;
+            //         },
+            //         'bindDN' => function ($username, $domain) {
+            //             if (strpos($username, $domain) !== false) {
+            //                 $bindDN = $username;
+            //             } else {
+            //                 $bindDN = $username . '@' . $domain;
+            //             }
+            //             return $bindDN;
+            //         },
+            //         'search' => function ($username) {
+            //             $search = '(&(objectClass=user)(objectCategory=person)(samaccountname=' . $username . '))';
+            //             return $search;
+            //         },
+            //         'logErrors' => true,
+            //         'options' => \Cake\Core\Configure::read('Ldap.options'),
+            //         'flash' => [
+            //             'key' => 'ldap',
+            //             'element' => 'Flash/error',
+            //         ]
+            //     ]
+            // ]
+        ]);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -105,6 +110,10 @@ class AppController extends Controller
         if ($prefix == 'Admin') {
             if (($this->request->getParam('action') != null) && ($this->request->getParam('action') == 'login')) {
                 $this->viewBuilder()->setLayout('login');
+            } else {
+                $this->set('usuario', $this->Auth->user());
+
+                $this->viewBuilder()->setLayout('default');
             }
         }
     }

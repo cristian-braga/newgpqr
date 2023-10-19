@@ -23,9 +23,17 @@ class PermissoesController extends AppController
 
     public function add()
     {
-        $permissao = $this->Permissoes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $permissao = $this->Permissoes->patchEntity($permissao, $this->request->getData());
+            $dados = $this->request->getData();
+
+            $existe_permissao = $this->Permissoes->existePermissao($dados['matricula']);
+
+            if (!$existe_permissao) {
+                $permissao = $this->Permissoes->newEmptyEntity();
+                $permissao = $this->Permissoes->patchEntity($permissao, $dados);
+            } else {
+                $permissao = $this->Permissoes->patchEntity($existe_permissao, $dados);
+            }
 
             if ($this->Permissoes->save($permissao)) {
                 $this->Flash->success(__('Permissão concedida com sucesso!'));

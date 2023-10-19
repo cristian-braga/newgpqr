@@ -2,7 +2,7 @@
     <h2>SISTEMA GIM</h2>
     <?= $this->Flash->render() ?>
     <P>Para acessar, digite sua matrícula com o "p" e a senha</P>
-    <form method="post">
+    <?= $this->Form->create(null) ?>
         <div class="dados-usuario">
             <input type="text" name="username" required>
             <label>Matrícula</label>
@@ -11,6 +11,6 @@
             <input type="password" name="password" required>
             <label>Senha</label>
         </div>
-        <button type="submit">Acessar</button>
-    </form>
+        <?= $this->Form->button(__('Acessar')) ?>
+    <?= $this->Form->end() ?>
 </div>

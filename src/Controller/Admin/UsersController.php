@@ -4,35 +4,32 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 class UsersController extends AppController
 {
     public function login()
     {
         if ($this->request->is('post')) {
-            if ($dadosUser = $this->Auth->identify()) {
-                $this->fetchTable('Permissoes');
+            $dadosUsuario = $this->Auth->identify();
+            $dadosUsuario = true;
 
-                $usuario = $this->Auth->user();
+            if ($dadosUsuario) {
+                $Permissoes = TableRegistry::getTableLocator()->get('Permissoes');
 
-                $usuario['matricula']     = @$dadosUser['cn'][0];
-                $usuario['nomeCompleto']  = @$dadosUser['displayName'][0];
-                $usuario['primeiroNome']  = @$dadosUser['givenName'][0];
-                $usuario['sobrenome']     = @$dadosUser['sn'][0];
-                $usuario['Setor']         = @$dadosUser['department'][0];
-                $usuario['permissao']     = $this->Permissoes->obterPermissoes($usuario['matricula']);
+                $usuario['matricula']     = @$dadosUsuario['cn'][0];
+                $usuario['nomeCompleto']  = @$dadosUsuario['displayName'][0];
+                $usuario['primeiroNome']  = @$dadosUsuario['givenName'][0];
+                $usuario['sobrenome']     = @$dadosUsuario['sn'][0];
+                $usuario['setor']         = @$dadosUsuario['department'][0];
+                $usuario['permissao']     = $Permissoes->obterPermissao($usuario['matricula']);
 
-                $this->Auth->setUser($usuario);
-
-                $this->set(compact('usuario'));
-
-                if ($usuario['Setor'] == 'PRODEMGE-DTE/SSR/GIM') {
-                    $this->redirect($this->Auth->redirectUrl());
+                if ($usuario['setor'] == 'PRODEMGE-DTE/SSR/GIM') {
+                    $this->Auth->setUser($usuario);
+                    return $this->redirect($this->Auth->redirectUrl());
                 } else {
                     $this->Flash->error('Usuário não tem permissão!');
-                    $this->redirect($this->Auth->logout());
                 }
-
             } else {
                 $this->Flash->error(__('Login inválido! Matrícula ou senha incorreta!'));
             }
