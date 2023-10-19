@@ -71,6 +71,15 @@ class PermissoesTable extends Table
         return $validator;
     }
 
+    public function existePermissao($matricula)
+    {
+        $query = $this->find()
+            ->where(['matricula' => $matricula])
+            ->first();
+
+        return $query;
+    }
+
     public function obterAdmins()
     {
         $query = $this->find()
@@ -93,5 +102,25 @@ class PermissoesTable extends Table
             ->all();
         
         return $query;
+    }
+
+    public function obterPermissao($matricula)
+    {
+        $query = $this->find()
+            ->select('permissao')
+            ->where([
+                'matricula' => $matricula
+            ])
+            ->all();
+
+        $permissoes = [];
+        $i = 0;
+
+        foreach ($query as $item ) {
+            $permissoes[$i] = $item['permissao'];
+            $i++;
+        }
+
+        return $permissoes;
     }
 }

@@ -7,7 +7,7 @@
     <title>Sistema GIM</title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('login') ?>
+    <?= $this->Html->css(['style', 'login']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
