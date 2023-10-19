@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-sm navbar-gpqr">
-    <div class="perfil d-flex align-items-center">
+    <!-- <div class="perfil d-flex align-items-center">
         <?php $foto = 'http://intranet3.prodemge.gov.br/images/contatos/' . substr($usuario['matricula'], 1, 3) . '/' . substr($usuario['matricula'], 1, 6) . '.jpg'; ?>
         <img src="<?= $foto ?>" alt="foto">
         <div>
             <p class="text-light mb-0"><?= $usuario['primeiroNome'] ?></p>
             <span class="text-danger"><?= $usuario['permissao'][0] ?></span>
         </div>
-    </div>
+    </div> -->
     <div class="collapse navbar-collapse justify-content-center">
         <ul class="navbar-nav navbar-ul-gpqr">
 

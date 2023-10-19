@@ -48,7 +48,7 @@ class AppController extends Controller
 
         $this->loadComponent('Flash');
 
-        $this->loadComponent('Auth', [
+        // $this->loadComponent('Auth', [
             // 'loginRedirect' => [
             //         'controller' => 'Menu',
             //         'action' => 'index'],
@@ -90,7 +90,7 @@ class AppController extends Controller
             //         ]
             //     ]
             // ]
-        ]);
+        // ]);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -110,11 +110,12 @@ class AppController extends Controller
         if ($prefix == 'Admin') {
             if (($this->request->getParam('action') != null) && ($this->request->getParam('action') == 'login')) {
                 $this->viewBuilder()->setLayout('login');
-            } else {
-                $this->set('usuario', $this->Auth->user());
+            } 
+            // else {
+            //     $this->set('usuario', $this->Auth->user());
 
-                $this->viewBuilder()->setLayout('default');
-            }
+            //     $this->viewBuilder()->setLayout('default');
+            // }
         }
     }
 }
