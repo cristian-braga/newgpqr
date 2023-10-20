@@ -17,6 +17,25 @@ class RelatorioClienteTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
+    private $descricoes = [
+        "Aviso de CNH a vencer",
+        "Cartas Aviso Pendências na Emissão CNH",
+        "Cartas de Notificação",
+        "Cartas de Ofício",
+        "Cartas do GRAVAME",
+        "Comunicado de Acolhimento de Defesa DEER",
+        "Comunicado de Deferimento de Advertência",
+        "Comunicação de Acolhimento de Advertência",
+        "Comunicação de Acolhimento de Defesa",
+        "Comunicação de Aplicação de Advertência",
+        "Multas Diárias",
+        "Multas Semanais",
+        "Notificação de Veículo Apreendido",
+        "Notificação de Veículo Recuperado",
+        "Notificação do Processo Administrativo",
+        "Notificações de Impedimento"
+    ];
+    
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -44,7 +63,7 @@ class RelatorioClienteTable extends Table
             ->innerJoinWith('Atividade')
             ->innerJoinWith('Atividade.Servico')
             ->where([
-                'descricao_servico LIKE' => 'Multas%'
+                'descricao_servico IN' => $this->descricoes
             ])
             ->group('clientes')
             ->orderAsc('clientes')
@@ -57,28 +76,9 @@ class RelatorioClienteTable extends Table
     {
         $connection = ConnectionManager::get('default');
 
-        $descricoes = [
-            "Aviso de CNH a vencer",
-            "Cartas Aviso Pendências na Emissão CNH",
-            "Cartas de Notificação",
-            "Cartas de Ofício",
-            "Cartas do GRAVAME",
-            "Comunicado de Acolhimento de Defesa DEER",
-            "Comunicado de Deferimento de Advertência",
-            "Comunicação de Acolhimento de Advertência",
-            "Comunicação de Acolhimento de Defesa",
-            "Comunicação de Aplicação de Advertência",
-            "Multas Diárias",
-            "Multas Semanais",
-            "Notificação de Veículo Apreendido",
-            "Notificação de Veículo Recuperado",
-            "Notificação do Processo Administrativo",
-            "Notificações de Impedimento"
-        ];
-
         $descricoes = array_map(function($item) {
             return "'" . addslashes($item) . "'";
-        }, $descricoes);
+        }, $this->descricoes);
 
         $descricoes = implode(', ', $descricoes);
 
