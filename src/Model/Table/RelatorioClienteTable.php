@@ -57,32 +57,41 @@ class RelatorioClienteTable extends Table
     {
         $connection = ConnectionManager::get('default');
 
+        $descricoes = [
+            "Aviso de CNH a vencer",
+            "Cartas Aviso Pendências na Emissão CNH",
+            "Cartas de Notificação",
+            "Cartas de Ofício",
+            "Cartas do GRAVAME",
+            "Comunicado de Acolhimento de Defesa DEER",
+            "Comunicado de Deferimento de Advertência",
+            "Comunicação de Acolhimento de Advertência",
+            "Comunicação de Acolhimento de Defesa",
+            "Comunicação de Aplicação de Advertência",
+            "Multas Diárias",
+            "Multas Semanais",
+            "Notificação de Veículo Apreendido",
+            "Notificação de Veículo Recuperado",
+            "Notificação do Processo Administrativo",
+            "Notificações de Impedimento"
+        ];
+
+        $descricoes = array_map(function($item) {
+            return "'" . addslashes($item) . "'";
+        }, $descricoes);
+
+        $descricoes = implode(', ', $descricoes);
+
         $query = "
-        SELECT
-        cliente_servico AS cliente,
-        SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) - 2 THEN quantidade_documentos ELSE 0 END) AS ano_retrasado,
-        SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) - 1 THEN quantidade_documentos ELSE 0 END) AS ano_passado,
-        SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) THEN quantidade_documentos ELSE 0 END) AS ano_atual
-        FROM expedicao
-        INNER JOIN atividade ON expedicao.atividade_id = atividade.id
-        INNER JOIN servico ON atividade.servico_id = servico.id
-        WHERE descricao_servico 
-        = 'Aviso de CNH a vencer' OR descricao_servico
-        = 'Cartas Aviso Pendências na Emissão CNH' OR descricao_servico
-        ='Cartas de Notificação' OR descricao_servico
-        ='Cartas de Ofício' OR descricao_servico
-        ='Cartas do GRAVAME' OR descricao_servico
-        ='Comunicado de Acolhimento de Defesa DEER' OR descricao_servico
-        ='Comunicado de Deferimento de Advertência' OR descricao_servico
-        ='Comunicação de Acolhimento de Advertência' OR descricao_servico
-        ='Comunicação de Acolhimento de Defesa' OR descricao_servico
-        ='Comunicação de Aplicação de Advertência' OR descricao_servico
-        ='Multas Diárias' OR descricao_servico
-        ='Multas Semanais' OR descricao_servico
-        ='Notificação de Veículo Apreendido' OR descricao_servico
-        ='Notificação de Veículo Recuperado' OR descricao_servico
-        ='Notificação do Processo Administrativo' OR descricao_servico
-        ='Notificações de Impedimento'
+            SELECT
+                cliente_servico AS cliente,
+                SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) - 2 THEN quantidade_documentos ELSE 0 END) AS ano_retrasado,
+                SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) - 1 THEN quantidade_documentos ELSE 0 END) AS ano_passado,
+                SUM(CASE WHEN YEAR(data_expedicao) = YEAR(CURDATE()) THEN quantidade_documentos ELSE 0 END) AS ano_atual
+            FROM expedicao
+            INNER JOIN atividade ON expedicao.atividade_id = atividade.id
+            INNER JOIN servico ON atividade.servico_id = servico.id
+            WHERE descricao_servico IN ({$descricoes})
         ";
 
         if (isset($cliente)) {
