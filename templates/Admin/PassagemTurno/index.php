@@ -44,7 +44,7 @@
                         <td><?= h($passagemTurno->etapa) ?></td>
                         <td><?= h($passagemTurno->assunto) ?></td>
                         <td>
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $passagemTurno->id], ['class' => 'btn btn-outline-primary btn-sm btn-shadow']) ?>
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $passagemTurno->id], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $passagemTurno->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                             <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $passagemTurno->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Realmente deseja excluir o registro?')]) ?>
                         </td>
