@@ -11,12 +11,6 @@ use Cake\Datasource\ConnectionManager;
 
 class RelatorioClienteTable extends Table
 {
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     private $descricoes = [
         "Aviso de CNH a vencer",
         "Cartas Aviso Pendências na Emissão CNH",
@@ -36,6 +30,12 @@ class RelatorioClienteTable extends Table
         "Notificações de Impedimento"
     ];
     
+    /**
+     * Initialize method
+     *
+     * @param array $config The configuration for the Table.
+     * @return void
+     */    
     public function initialize(array $config): void
     {
         parent::initialize($config);
