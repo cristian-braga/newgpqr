@@ -13,7 +13,7 @@
 		<div class="col-lg-3 col-md-6 col-sm-3">
 			<?= $this->Html->link(
 				'<i class="fa-solid fa-file-circle-question fa-3x" aria-hidden="true"></i>
-				<h5>CONFERÊNCIA</h5>',
+				<h5>CONTROLE DE QUALIDADE</h5>',
 				['controller' => 'Digitalizacao', 'action' => ''],
 				['class' => 'menu-gpqr', 'escape' => false]
 			) ?>
@@ -22,7 +22,7 @@
 		<div class="col-lg-3 col-md-6 col-sm-3">
 			<?= $this->Html->link(
 				'<i class="fa-solid fa-file-arrow-up fa-3x" aria-hidden="true"></i>
-				<h5>LANÇAMENTO</h5>',
+				<h5>LANÇAMENTO ALFRESCO</h5>',
 				['controller' => 'Digitalizacao', 'action' => ''],
 				['class' => 'menu-gpqr', 'escape' => false]
 			) ?>
