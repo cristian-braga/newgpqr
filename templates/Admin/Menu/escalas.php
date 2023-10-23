@@ -4,17 +4,18 @@
 		<div class="col-lg-3 col-md-6 col-sm-3">
 			<?= $this->Html->link(
 				'<i class="fa-solid fa-people-line fa-3x" aria-hidden="true"></i>
-                <h5>MANHÃ</h5>',
+        <h5>MANHÃ</h5>',
 				['controller' => 'Escala', 'action' => 'index'],
-                ['class' => 'menu-gpqr', 'escape' => false]
+				['class' => 'menu-gpqr', 'escape' => false]
 			) ?>
 		</div>
-        
+
 		<div class="col-lg-3 col-md-6 col-sm-3">
 			<?= $this->Html->link(
-				'<i class="fa-solid fa-people-line fa-3x" aria-hidden="true"></i><h5>TARDE</h5>',
+				'<i class="fa-solid fa-people-line fa-3x" aria-hidden="true"></i>
+				<h5>TARDE</h5>',
 				['controller' => 'Escala', 'action' => 'escalaTarde'],
-                ['class' => 'menu-gpqr', 'escape' => false]
+				['class' => 'menu-gpqr', 'escape' => false]
 			) ?>
 		</div>
 	</div>

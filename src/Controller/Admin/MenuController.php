@@ -51,4 +51,8 @@ class MenuController extends AppController
     public function passagemTurno()
     {
     }
+
+    public function digitalizacao()
+    {
+    }
 }

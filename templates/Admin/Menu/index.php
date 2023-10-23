@@ -85,7 +85,7 @@
             <?= $this->Html->link(
                 '<i class="fa fa-cloud-upload fa-3x" aria-hidden="true"></i>
                 <h5>DIGITALIZAÇÃO</h5>',
-                ['controller' => 'Digitalizacao', 'action' => 'index'],
+                ['controller' => 'Menu', 'action' => 'digitalizacao'],
                 ['class' => 'menu-gpqr', 'escape' => false]
             ) ?>
         </div>
