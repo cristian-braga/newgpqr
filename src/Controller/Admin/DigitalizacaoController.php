@@ -1,83 +1,80 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\Service\DigitalizacaoService;
 
 class DigitalizacaoController extends AppController
 {
+    protected $DigitalizacaoService;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->DigitalizacaoService = new DigitalizacaoService();
+    }
+
     public function index()
     {
-        $servico = $this->request->getQuery('servico');
-        $periodo = $this->request->getQuery('periodo');
-        $funcionario = $this->request->getQuery('funcionario');
-
         $this->paginate = [
             'limit' => 20,
             'contain' => ['Servico'],
-            'order' => ['data_digitalizacao' => 'desc']
+            'conditions' => ['status_digitalizacao' => 'Aguardando Confirmação'],
+            'order' => ['data_cadastro' => 'desc']
         ];
 
-        $query =  $this->Digitalizacao->find();
+        $digitalizacao = $this->paginate($this->Digitalizacao);
 
-        if (isset($servico) && $servico != '') {
-            $query->where([
-                'Digitalizacao.servico_id =' => $servico
-            ]);
-        }
+        $this->set(compact('digitalizacao'));
+    }
 
-        if (isset($periodo) && $periodo != '') {
-            $periodo = date('Y-m-01', strtotime($periodo));
+    public function view($id = null)
+    {
+        $digitalizacao = $this->Digitalizacao->get($id, [
+            'contain' => [
+                'DigitQualidade',
+                'DigitLancamento',
+                'DigitConferencia'
+            ]
+        ]);
 
-            $query->where([
-                'Digitalizacao.periodo' => $periodo
-            ]);
-        }
-
-        if (isset($funcionario) && $funcionario != '') {
-            $query->where([
-                'Digitalizacao.funcionario' => $funcionario
-            ]);
-        }
-
-        $digitalizacao = $this->paginate($query);
-
-        $servicos = $this->Digitalizacao->servicosFiltro()->toArray();
-        $funcionarios = $this->Digitalizacao->funcionarioFiltro()->toArray();
-
-        $this->set(compact('digitalizacao', 'servicos', 'funcionarios'));
+        $this->set(compact('digitalizacao'));
     }
 
     public function add()
     {
         if ($this->request->is('post')) {
-            $data = $this->request->getData();
+            $dados = $this->request->getData();
 
-            $servico_ids = $data['servico_id'];
-            $quantDOM = $data['quantidade_documentos'];
-            $periodo = $data['periodo'];
+            $datas = $dados['data_postagem'];
+            $remessas = $dados['remessa'];
+            $documentos = $dados['quantidade_documentos'];
+            $servico_ids = $dados['servico_id'];
 
-            $digitalizacoesEnviar = [];
+            $digitalizacoes = [];
 
             for ($i = 0; $i < count($servico_ids); $i++) {
                 $digitalizacao = $this->Digitalizacao->newEmptyEntity();
 
-                $digitalizacoes = [
-                    'servico_id' => $servico_ids[$i],
-                    'quantidade_documentos' => $quantDOM[$i],
-                    'periodo' => date('Y-m-01', strtotime($periodo[$i])),
-                    'funcionario' => 'Funcionário',
-                    'data_digitalizacao' => date('Y-m-d')
+                $nova_digitalizacao = [
+                    'data_digitalizacao' => date('Y-m-d H:i:s'),
+                    'funcionario' => 'Funcionario',
+                    'data_cadastro' => date('Y-m-d'),
+                    'data_postagem' => $datas[$i],
+                    'remessa' => $remessas[$i],
+                    'quantidade_documentos' => $documentos[$i],
+                    'status_digitalizacao' => 'Aguardando Confirmação',
+                    'servico_id' => $servico_ids[$i]
                 ];
 
-                $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $digitalizacoes);
+                $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $nova_digitalizacao);
 
-                $digitalizacoesEnviar[] = $digitalizacao;
+                $digitalizacoes[] = $digitalizacao;
             }
 
-            if ($this->Digitalizacao->saveMany($digitalizacoesEnviar)) {
+            if ($this->Digitalizacao->saveMany($digitalizacoes)) {
 
                 $this->Flash->success(__('Serviço(s) cadastrados com sucesso!'));
 
@@ -94,24 +91,20 @@ class DigitalizacaoController extends AppController
 
     public function edit($id = null)
     {
-        $digitalizacao = $this->Digitalizacao->get($id, [
-            'contain' => ['Servico'],
-        ]);
+        $digitalizacao = $this->DigitalizacaoService->buscaRegistro($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dados = $this->request->getData();
 
-            $dados['periodo'] = date('Y-m-01', strtotime($dados['periodo']));
+            $edicaoSucesso = $this->DigitalizacaoService->edit($id, $dados);
 
-            $digitalizacao = $this->Digitalizacao->patchEntity($digitalizacao, $dados);
-
-            if ($this->Digitalizacao->save($digitalizacao)) {
-                $this->Flash->success(__('Serviço editado com sucesso!'));
+            if ($edicaoSucesso) {
+                $this->Flash->success(__('Digitalização editada com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
 
-            $this->Flash->error(__('Falha ao editar serviço.'));
+            $this->Flash->error(__('Falha ao editar digitalização. Tente novamente.'));
         }
 
         $servicos = $this->Digitalizacao->selectServicos()->toArray();
@@ -132,5 +125,90 @@ class DigitalizacaoController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function atualizaDigitalizacao()
+    {
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData('selecionados');
+
+            foreach ($dados as $id) {
+                $this->DigitalizacaoService->atualizaStatus($id, 'Aguardando Cont. Qualidade');
+            }
+    
+            $this->Flash->success('Serviço(s) lançado(s) com sucesso!');
+            
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+
+    // TELA DE SERVIÇOS DIGITALIZADOS
+    public function servicosDigitalizados()
+    {
+        $servico = $this->request->getQuery('servico');
+        $funcionario = $this->request->getQuery('funcionario');
+        $data_inicio = $this->request->getQuery('data_inicio');
+        $data_fim = $this->request->getQuery('data_fim');
+
+        $this->paginate = [
+            'limit' => 20,
+            'contain' => ['Servico'],
+            'conditions' => ['digitalizado' => 'Sim'],
+            'order' => ['data_digitalizacao' => 'desc']
+        ];
+
+        $query =  $this->Digitalizacao->find();
+
+        if (isset($servico) && $servico != '') {
+            $query->where([
+                'Digitalizacao.servico_id =' => $servico
+            ]);
+        }
+
+        if (isset($funcionario) && $funcionario != '') {
+            $query->where([
+                'Digitalizacao.funcionario' => $funcionario
+            ]);
+        }
+
+        if (isset($data_inicio) && $data_inicio != '') {
+            $query->where([
+                'Digitalizacao.data_cadastro >=' => $data_inicio
+            ]);
+        }
+
+        if (isset($data_fim) && $data_fim != '') {
+            $query->where([
+                'Digitalizacao.data_cadastro <=' => $data_fim
+            ]);
+        }
+
+        $digitalizacao = $this->paginate($query);
+
+        $servicos = $this->Digitalizacao->servicosFiltro()->toArray();
+        $funcionarios = $this->Digitalizacao->funcionarioFiltro()->toArray();
+
+        $this->set(compact('digitalizacao', 'servicos', 'funcionarios'));
+    }
+
+    /* Esse método altera o campo 'status_digitalizacao' na tabela 'digitalizacao' para que o serviço seja
+    novamente acessível na index e possa ser refeito */
+    public function voltarEtapa($digitalizacao_id)
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $sucesso = $this->DigitalizacaoService->atualizaStatus($digitalizacao_id, 'Aguardando Confirmação');
+
+            if ($sucesso) {
+                $digitalizacao = $this->Digitalizacao->existeDado($digitalizacao_id);
+
+                $this->Digitalizacao->delete($digitalizacao);
+
+                $this->Flash->success(__('Serviço alterado com sucesso!'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('Falha ao alterar serviço. Tente novamente.'));
+        }
     }
 }

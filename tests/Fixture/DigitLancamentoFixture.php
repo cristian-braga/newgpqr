@@ -6,16 +6,16 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * DigitalizacaoFixture
+ * DigitLancamentoFixture
  */
-class DigitalizacaoFixture extends TestFixture
+class DigitLancamentoFixture extends TestFixture
 {
     /**
      * Table name
      *
      * @var string
      */
-    public $table = 'digitalizacao';
+    public $table = 'digit_lancamento';
     /**
      * Init method
      *
@@ -26,15 +26,11 @@ class DigitalizacaoFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'data_digitalizacao' => '2023-10-24 14:07:39',
                 'funcionario' => 'Lorem ipsum dolor sit amet',
+                'data_lancamento' => '2023-10-24 09:25:02',
                 'data_cadastro' => '2023-10-24',
-                'data_postagem' => '2023-10-24',
-                'remessa' => 'Lorem ips',
-                'quantidade_documentos' => 1,
                 'status_digitalizacao' => 'Lorem ipsum dolor sit amet',
-                'digitalizado' => 'Lorem ip',
-                'servico_id' => 1,
+                'digit_cadastro_id' => 1,
             ],
         ];
         parent::init();
