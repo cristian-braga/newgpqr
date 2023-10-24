@@ -1,17 +1,21 @@
 <h3 class="text-center mt-2 mb-4">CADASTRAR</h3>
-<?= $this->Form->create(null, ['id' => 'form', 'class' => 'mx-auto p-3 form ']) ?>
+<?= $this->Form->create(null, ['id' => 'form', 'class' => 'mx-auto p-3 form']) ?>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label">Serviço</label>
             <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
         </div>
-        <div class="col-md-3">
-            <label class="form-label">Documentos</label>
-            <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>
+        <div class="col-md-2">
+            <label class="form-label">Remessa</label>
+            <?= $this->Form->control('remessa[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'N° da Remessa', 'required', 'label' => false]) ?>
         </div>
         <div class="col-md-3">
-            <label class="form-label">Período</label>
-            <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'required', 'label' => false]) ?>
+            <label class="form-label">Documentos</label>
+            <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Postagem</label>
+            <?= $this->Form->control('data_postagem[]', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
         </div>
     </div>
     <div id="btn_add" class="col-md-12 mt-3">
@@ -25,31 +29,34 @@
 
 <script>
     const form = document.getElementById('form');
-    const divBtnAdd = document.getElementById('btn_add');
-    const btnAddCampo = document.getElementById('add_campo');
-    const campoMax = 20;
+    const div_btn = document.getElementById('btn_add');
+    const btn_add = document.getElementById('add_campo');
+    const campos_max = 20;
     let x = 1;
 
-    btnAddCampo.addEventListener('click', () => {
-        if (x < campoMax) {
-            const novoCampo = document.createElement('div');
-            novoCampo.innerHTML = ` 
-                <div class="col-md-3">
+    btn_add.addEventListener('click', function() {
+        if (x < campos_max) {
+            const novo_campo = document.createElement('div');
+            novo_campo.innerHTML = `
+                <div class="col-md-2">
                     <?= $this->Form->control('servico_id[]', ['options' => $servicos, 'class' => 'form-select', 'empty' => '-- Selecione --', 'required', 'label' => false]) ?>
                 </div>
-                <div class="col-md-3">
-                    <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 10, 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>
+                <div class="col-md-2">
+                    <?= $this->Form->control('remessa[]', ['type' => 'number', 'class' => 'form-control', 'maxlenght' => 11, 'placeholder' => 'N° da Remessa', 'required', 'label' => false]) ?>
                 </div>
                 <div class="col-md-3">
-                    <?= $this->Form->control('periodo[]', ['type' => 'month', 'class' => 'form-control', 'required', 'label' => false]) ?>
+                    <?= $this->Form->control('quantidade_documentos[]', ['type' => 'number', 'class' => 'form-control', 'placeholder' => 'Quantidade de documentos', 'required', 'label' => false]) ?>
+                </div>
+                <div class="col-md-2">
+                    <?= $this->Form->control('data_postagem[]', ['type' => 'date', 'class' => 'form-control', 'value' => date('Y-m-d'), 'required', 'label' => false]) ?>
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn-remove mt-1" onclick="del_campo(this)"><i class="fa-regular fa-trash-can fa-lg text-danger"></i></button>
                 </div> `;
 
-            novoCampo.classList.add('row', 'mt-4');
+            novo_campo.classList.add('row', 'mt-4');
 
-            form.insertBefore(novoCampo, divBtnAdd);
+            form.insertBefore(novo_campo, div_btn);
             x++;
         }
     });

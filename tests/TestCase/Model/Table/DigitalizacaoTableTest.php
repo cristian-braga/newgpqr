@@ -26,7 +26,9 @@ class DigitalizacaoTableTest extends TestCase
     protected $fixtures = [
         'app.Digitalizacao',
         'app.Servico',
-        'app.StatusDigitalizacao',
+        'app.DigitConferencia',
+        'app.DigitLancamento',
+        'app.DigitQualidade',
     ];
 
     /**
@@ -71,6 +73,39 @@ class DigitalizacaoTableTest extends TestCase
      * @uses \App\Model\Table\DigitalizacaoTable::buildRules()
      */
     public function testBuildRules(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test selectServicos method
+     *
+     * @return void
+     * @uses \App\Model\Table\DigitalizacaoTable::selectServicos()
+     */
+    public function testSelectServicos(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test funcionarioFiltro method
+     *
+     * @return void
+     * @uses \App\Model\Table\DigitalizacaoTable::funcionarioFiltro()
+     */
+    public function testFuncionarioFiltro(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test servicosFiltro method
+     *
+     * @return void
+     * @uses \App\Model\Table\DigitalizacaoTable::servicosFiltro()
+     */
+    public function testServicosFiltro(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

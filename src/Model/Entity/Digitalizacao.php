@@ -9,13 +9,20 @@ use Cake\ORM\Entity;
  * Digitalizacao Entity
  *
  * @property int $id
+ * @property \Cake\I18n\FrozenTime $data_digitalizacao
  * @property string $funcionario
- * @property \Cake\I18n\FrozenDate $data_digitalizacao
+ * @property \Cake\I18n\FrozenDate $data_cadastro
+ * @property \Cake\I18n\FrozenDate $data_postagem
+ * @property string $remessa
  * @property int $quantidade_documentos
- * @property \Cake\I18n\FrozenDate $periodo
+ * @property string $status_digitalizacao
+ * @property string $digitalizado
  * @property int $servico_id
  *
  * @property \App\Model\Entity\Servico $servico
+ * @property \App\Model\Entity\DigitConferencia[] $digit_conferencia
+ * @property \App\Model\Entity\DigitLancamento[] $digit_lancamento
+ * @property \App\Model\Entity\DigitQualidade[] $digit_qualidade
  */
 class Digitalizacao extends Entity
 {
@@ -29,11 +36,18 @@ class Digitalizacao extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'funcionario' => true,
         'data_digitalizacao' => true,
+        'funcionario' => true,
+        'data_cadastro' => true,
+        'data_postagem' => true,
+        'remessa' => true,
         'quantidade_documentos' => true,
-        'periodo' => true,
+        'status_digitalizacao' => true,
+        'digitalizado' => true,
         'servico_id' => true,
-        'servico' => true
+        'servico' => true,
+        'digit_conferencia' => true,
+        'digit_lancamento' => true,
+        'digit_qualidade' => true,
     ];
 }

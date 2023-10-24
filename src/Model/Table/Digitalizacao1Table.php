@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -12,9 +13,6 @@ use Cake\Validation\Validator;
  * Digitalizacao Model
  *
  * @property \App\Model\Table\ServicoTable&\Cake\ORM\Association\BelongsTo $Servico
- * @property \App\Model\Table\DigitConferenciaTable&\Cake\ORM\Association\HasMany $DigitConferencia
- * @property \App\Model\Table\DigitLancamentoTable&\Cake\ORM\Association\HasMany $DigitLancamento
- * @property \App\Model\Table\DigitQualidadeTable&\Cake\ORM\Association\HasMany $DigitQualidade
  *
  * @method \App\Model\Entity\Digitalizacao newEmptyEntity()
  * @method \App\Model\Entity\Digitalizacao newEntity(array $data, array $options = [])
@@ -30,7 +28,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Digitalizacao[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Digitalizacao[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class DigitalizacaoTable extends Table
+
+class Digitalizacao1Table extends Table
 {
     /**
      * Initialize method
@@ -42,75 +41,34 @@ class DigitalizacaoTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('digitalizacao');
-        $this->setDisplayField('funcionario');
+        $this->setTable('digitalizacao1');
+        $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Servico', [
             'foreignKey' => 'servico_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('DigitConferencia', [
-            'foreignKey' => 'digitalizacao_id',
-        ]);
-        $this->hasMany('DigitLancamento', [
-            'foreignKey' => 'digitalizacao_id',
-        ]);
-        $this->hasMany('DigitQualidade', [
-            'foreignKey' => 'digitalizacao_id',
-        ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->dateTime('data_digitalizacao')
-            ->requirePresence('data_digitalizacao', 'create')
-            ->notEmptyDateTime('data_digitalizacao');
-
-        $validator
             ->scalar('funcionario')
             ->maxLength('funcionario', 45)
-            ->requirePresence('funcionario', 'create')
-            ->notEmptyString('funcionario');
+            ->allowEmptyString('funcionario');
 
         $validator
-            ->date('data_cadastro')
-            ->requirePresence('data_cadastro', 'create')
-            ->notEmptyDate('data_cadastro');
-
-        $validator
-            ->date('data_postagem')
-            ->requirePresence('data_postagem', 'create')
-            ->notEmptyDate('data_postagem');
-
-        $validator
-            ->scalar('remessa')
-            ->maxLength('remessa', 11)
-            ->requirePresence('remessa', 'create')
-            ->notEmptyString('remessa');
+            ->date('data_digitalizacao')
+            ->allowEmptyDate('data_digitalizacao');
 
         $validator
             ->integer('quantidade_documentos')
-            ->requirePresence('quantidade_documentos', 'create')
-            ->notEmptyString('quantidade_documentos');
+            ->allowEmptyString('quantidade_documentos');
 
         $validator
-            ->scalar('status_digitalizacao')
-            ->maxLength('status_digitalizacao', 45)
-            ->requirePresence('status_digitalizacao', 'create')
-            ->notEmptyString('status_digitalizacao');
-
-        $validator
-            ->scalar('digitalizado')
-            ->maxLength('digitalizado', 10)
-            ->notEmptyString('digitalizado');
+            ->scalar('periodo')
+            ->allowEmptyDate('periodo');
 
         $validator
             ->integer('servico_id')
@@ -119,13 +77,6 @@ class DigitalizacaoTable extends Table
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('servico_id', 'Servico'), ['errorField' => 'servico_id']);
@@ -143,6 +94,7 @@ class DigitalizacaoTable extends Table
         return $servicos;
     }
 
+    // funçoes para os filtros da Digitalizacao
     public function funcionarioFiltro()
     {
         $query = $this->find('list', ['keyField' => 'funcionarios', 'valueField' => 'funcionarios']) 
