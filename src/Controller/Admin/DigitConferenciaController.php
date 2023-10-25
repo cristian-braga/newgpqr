@@ -6,7 +6,7 @@ namespace App\Controller\Admin;
 use App\Controller\AppController;
 use App\Controller\Service\DigitalizacaoService;
 
-class DigitQualidadeController extends AppController
+class DigitConferenciaController extends AppController
 {
     protected $DigitalizacaoService;
     protected $DigitalizacaoTable;
@@ -23,7 +23,7 @@ class DigitQualidadeController extends AppController
         $this->paginate = [
             'limit' => 20,
             'contain' => ['Servico'],
-            'conditions' => ['status_digitalizacao' => 'Aguardando Cont. Qualidade'],
+            'conditions' => ['status_digitalizacao' => 'Aguardando Conferência'],
             'order' => ['data_cadastro' => 'desc']
         ];
 
@@ -40,29 +40,29 @@ class DigitQualidadeController extends AppController
             $digitalizacoes = [];
 
             for ($i = 0; $i < count($dados); $i++) {
-                $nova_digitQualidade = [
-                    'funcionario' => 'FuncionarioQualid',
-                    'data_qualidade' => date('Y-m-d H:i:s'),
+                $nova_digitConferencia = [
+                    'funcionario' => 'FuncionarioConfAlf',
+                    'data_conferencia' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
-                    'status_digitalizacao' => 'Conferido',
+                    'status_digitalizacao' => 'Conferido Alfresco',
                     'digitalizacao_id' => $dados[$i]
                 ];
 
-                $existe_registro = $this->DigitQualidade->existeDado($dados[$i]);
+                $existe_registro = $this->DigitConferencia->existeDado($dados[$i]);
 
                 if (!$existe_registro) {
-                    $digitQualidade = $this->DigitQualidade->newEmptyEntity();
-                    $digitQualidade = $this->DigitQualidade->patchEntity($digitQualidade, $nova_digitQualidade);
+                    $digitConferencia = $this->DigitConferencia->newEmptyEntity();
+                    $digitConferencia = $this->DigitConferencia->patchEntity($digitConferencia, $nova_digitConferencia);
                 } else {
-                    $digitQualidade = $this->DigitQualidade->patchEntity($existe_registro, $nova_digitQualidade);
+                    $digitConferencia = $this->DigitConferencia->patchEntity($existe_registro, $nova_digitConferencia);
                 }
                 
-                $digitalizacoes[] = $digitQualidade;
+                $digitalizacoes[] = $digitConferencia;
 
-                $this->DigitalizacaoService->atualizaStatus($dados[$i], 'Aguardando Lançamento');
+                $this->DigitalizacaoService->atualizaStatus($dados[$i], 'Conferido Alfresco');
             }
 
-            if ($this->DigitQualidade->saveMany($digitalizacoes)) {
+            if ($this->DigitConferencia->saveMany($digitalizacoes)) {
                 $this->Flash->success(__('Serviço(s) lançado(s) com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
@@ -74,23 +74,23 @@ class DigitQualidadeController extends AppController
 
     public function edit($id = null)
     {
-        $digitQualidade = $this->DigitQualidade->get($id, [
+        $digitConferencia = $this->DigitConferencia->get($id, [
             'contain' => ['Digitalizacao' => ['Servico']],
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $digitQualidade = $this->DigitQualidade->patchEntity($digitQualidade, $this->request->getData());
+            $digitConferencia = $this->DigitConferencia->patchEntity($digitConferencia, $this->request->getData());
 
-            if ($this->DigitQualidade->save($digitQualidade)) {
+            if ($this->DigitConferencia->save($digitConferencia)) {
                 $this->Flash->success(__('Serviço editado com sucesso!'));
 
-                return $this->redirect(['action' => 'servicosConferidos']);
+                return $this->redirect(['action' => 'servicosConcluidos']);
             }
 
             $this->Flash->error(__('Falha ao editar serviço. Tente novamente.'));
         }
 
-        $this->set(compact('digitQualidade'));
+        $this->set(compact('digitConferencia'));
     }
 
     public function editDigitalizacao($id = null)
@@ -116,8 +116,8 @@ class DigitQualidadeController extends AppController
         $this->set(compact('digitalizacao', 'servicos'));
     }
 
-    // TELA DE SERVIÇOS CONFERIDOS
-    public function servicosConferidos()
+    // TELA DE SERVIÇOS CONFERIDOS ALFRESCO
+    public function servicosConcluidos()
     {
         $servico = $this->request->getQuery('servico');
         $funcionario = $this->request->getQuery('funcionario');
@@ -129,11 +129,11 @@ class DigitQualidadeController extends AppController
             'contain' => [
                 'Digitalizacao' => ['Servico']
             ],
-            'conditions' => ['DigitQualidade.status_digitalizacao' => 'Conferido'],
-            'order' => ['data_qualidade' => 'desc']
+            'conditions' => ['DigitConferencia.status_digitalizacao' => 'Conferido Alfresco'],
+            'order' => ['data_lancamento' => 'desc']
         ];
 
-        $query = $this->DigitQualidade->find();
+        $query = $this->DigitConferencia->find();
 
         if (isset($servico) && $servico != '') {
             $query->where([
@@ -143,41 +143,41 @@ class DigitQualidadeController extends AppController
 
         if (isset($funcionario) && $funcionario != '') {
             $query->where([
-                'DigitQualidade.funcionario' => $funcionario
+                'DigitConferencia.funcionario' => $funcionario
             ]);
         }
 
         if (isset($data_inicio) && $data_inicio != '') {
             $query->where([
-                'DigitQualidade.data_cadastro >=' => $data_inicio
+                'DigitConferencia.data_cadastro >=' => $data_inicio
             ]);
         }
 
         if (isset($data_fim) && $data_fim != '') {
             $query->where([
-                'DigitQualidade.data_cadastro <=' => $data_fim
+                'DigitConferencia.data_cadastro <=' => $data_fim
             ]);
         }
 
-        $digitQualidade = $this->paginate($query);
+        $digitConferencia = $this->paginate($query);
 
-        $servicos = $this->DigitQualidade->servicosFiltro()->toArray();
-        $funcionarios = $this->DigitQualidade->funcionarioFiltro()->toArray();
+        $servicos = $this->DigitConferencia->servicosFiltro()->toArray();
+        $funcionarios = $this->DigitConferencia->funcionarioFiltro()->toArray();
         
-        $this->set(compact('digitQualidade', 'servicos', 'funcionarios'));
+        $this->set(compact('digitConferencia', 'servicos', 'funcionarios'));
     }
 
-    /* Esse método altera o campo 'status_digitalizacao' na tabela 'digit_qualidade' para que o serviço seja
+    /* Esse método altera o campo 'status_digitalizacao' na tabela 'digit_conferencia' para que o serviço seja
     novamente acessível na index e possa ser refeito */
     public function voltarEtapa($digitalizacao_id)
     {
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $sucesso = $this->DigitalizacaoService->atualizaStatus($digitalizacao_id, 'Aguardando Cont. Qualidade');
+            $sucesso = $this->DigitalizacaoService->atualizaStatus($digitalizacao_id, 'Aguardando Conferência');
 
             if ($sucesso) {
-                $digitalizacao = $this->DigitQualidade->existeDado($digitalizacao_id);
+                $digitalizacao = $this->DigitConferencia->existeDado($digitalizacao_id);
 
-                $this->DigitQualidade->delete($digitalizacao);
+                $this->DigitConferencia->delete($digitalizacao);
 
                 $this->Flash->success(__('Registro alterado com sucesso!'));
 

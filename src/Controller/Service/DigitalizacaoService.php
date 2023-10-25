@@ -32,14 +32,12 @@ class DigitalizacaoService
         return true;
     }
 
-    public function atualizaStatus($id, $status)
+    public function atualizaStatus($id, $status, $digitalizado = null)
     {
         $digitalizacao = $this->buscaRegistro($id);
 
-        if ($digitalizacao->digitalizado === 'Não') {
-            $novo_status['digitalizado'] = 'Sim';
-        } else {
-            $novo_status['digitalizado'] = 'Não';
+        if (isset($digitalizado)) {
+            $novo_status['digitalizado'] = $digitalizado;
         }
 
         $novo_status['status_digitalizacao'] = $status;

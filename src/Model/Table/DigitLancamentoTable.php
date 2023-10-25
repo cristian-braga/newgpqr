@@ -100,6 +100,15 @@ class DigitLancamentoTable extends Table
         return $rules;
     }
 
+    public function existeDado($digitalizacao_id)
+    {
+        $query = $this->find()
+            ->where(['digitalizacao_id' => $digitalizacao_id])
+            ->first();
+
+        return $query;
+    }
+
     public function funcionarioFiltro()
     {
         $query = $this->find('list', ['keyField' => 'funcionarios', 'valueField' => 'funcionarios']) 
@@ -120,7 +129,8 @@ class DigitLancamentoTable extends Table
                 'id' => 'Servico.id',
                 'servicos' => 'Servico.nome_servico'
             ])
-            ->innerJoinWith('Servico')
+            ->innerJoinWith('Digitalizacao')
+            ->innerJoinWith('Digitalizacao.Servico')
             ->group('servicos')
             ->orderAsc('servicos')
             ->all();

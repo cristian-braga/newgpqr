@@ -1,9 +1,9 @@
 <?= $this->Html->link(
     '<i class="fa-solid fa-circle-arrow-left fa-2xl"></i>',
-    ['controller' => 'DigitQualidade', 'action' => 'index'],
+    ['controller' => 'DigitConferencia', 'action' => 'index'],
     ['class' => 'btn-voltar', 'escape' => false]
 ) ?>
-<h3 class="text-center mt-2 mb-4">SERVIÇOS CONFERIDOS</h3>
+<h3 class="text-center mt-2 mb-4">SERVIÇOS CONCLUÍDOS</h3>
 <div class="conteudo mt-5">
     <?= $this->Form->create(null, ['type' => 'get']) ?>
         <div class="row g-3">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-2" style="margin-top: 3.2rem;">
                 <?= $this->Form->button(__('Buscar'), ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
-                <?= $this->Html->link(__('Limpar'), ['action' => 'servicosConferidos'], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+                <?= $this->Html->link(__('Limpar'), ['action' => 'servicosLancados'], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
             </div>
         </div>
     <?= $this->Form->end() ?>
@@ -35,7 +35,7 @@
         <thead class="sticky-top">
             <tr>
                 <th>Serviço</th>
-                <th><?= $this->Paginator->sort('data_qualidade', ['label' => 'Data Controle']) ?></th>
+                <th><?= $this->Paginator->sort('data_conferencia', ['label' => 'Data Conferência']) ?></th>
                 <th><?= $this->Paginator->sort('funcionario', ['label' => 'Responsável']) ?></th>
                 <th>Remessa</th>
                 <th>Documentos</th>
@@ -44,17 +44,17 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($digitQualidade as $digitQualidade) : ?>
+            <?php foreach ($digitConferencia as $digitConferencia) : ?>
                 <tr>
-                    <td><?= $this->Html->link($digitQualidade->digitalizacao->servico->nome_servico, ['controller' => 'Digitalizacao', 'action' => 'view', $digitQualidade->digitalizacao->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
-                    <td><?= h($digitQualidade->data_qualidade) ?></td>
-                    <td><?= h($digitQualidade->funcionario) ?></td>
-                    <td><?= h($digitQualidade->digitalizacao->remessa) ?></td>
-                    <td><?= $this->Number->format($digitQualidade->digitalizacao->quantidade_documentos) ?></td>
-                    <td class="bg-success-subtle"><b><?= h($digitQualidade->status_digitalizacao) ?></b></td>
+                    <td><?= $this->Html->link($digitConferencia->digitalizacao->servico->nome_servico, ['controller' => 'Digitalizacao', 'action' => 'view', $digitConferencia->digitalizacao->id], ['class' => 'custom-btn btn-gpqr-view']) ?></td>
+                    <td><?= h($digitConferencia->data_conferencia) ?></td>
+                    <td><?= h($digitConferencia->funcionario) ?></td>
+                    <td><?= h($digitConferencia->digitalizacao->remessa) ?></td>
+                    <td><?= $this->Number->format($digitConferencia->digitalizacao->quantidade_documentos) ?></td>
+                    <td class="bg-success-subtle"><b><?= h($digitConferencia->status_digitalizacao) ?></b></td>
                     <td>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $digitQualidade->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Desfazer'), ['action' => 'voltarEtapa', $digitQualidade->digitalizacao_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Cont. Qualidade". Deseja continuar?', $digitQualidade->digitalizacao->servico->nome_servico)]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $digitConferencia->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['action' => 'voltarEtapa', $digitConferencia->digitalizacao_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Conferência". Deseja continuar?', $digitConferencia->digitalizacao->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

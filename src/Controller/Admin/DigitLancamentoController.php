@@ -6,7 +6,7 @@ namespace App\Controller\Admin;
 use App\Controller\AppController;
 use App\Controller\Service\DigitalizacaoService;
 
-class DigitQualidadeController extends AppController
+class DigitLancamentoController extends AppController
 {
     protected $DigitalizacaoService;
     protected $DigitalizacaoTable;
@@ -23,7 +23,7 @@ class DigitQualidadeController extends AppController
         $this->paginate = [
             'limit' => 20,
             'contain' => ['Servico'],
-            'conditions' => ['status_digitalizacao' => 'Aguardando Cont. Qualidade'],
+            'conditions' => ['status_digitalizacao' => 'Aguardando Lançamento'],
             'order' => ['data_cadastro' => 'desc']
         ];
 
@@ -40,29 +40,29 @@ class DigitQualidadeController extends AppController
             $digitalizacoes = [];
 
             for ($i = 0; $i < count($dados); $i++) {
-                $nova_digitQualidade = [
-                    'funcionario' => 'FuncionarioQualid',
-                    'data_qualidade' => date('Y-m-d H:i:s'),
+                $nova_digitLancamento = [
+                    'funcionario' => 'FuncionarioLançam',
+                    'data_lancamento' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
-                    'status_digitalizacao' => 'Conferido',
+                    'status_digitalizacao' => 'Lançado',
                     'digitalizacao_id' => $dados[$i]
                 ];
 
-                $existe_registro = $this->DigitQualidade->existeDado($dados[$i]);
+                $existe_registro = $this->DigitLancamento->existeDado($dados[$i]);
 
                 if (!$existe_registro) {
-                    $digitQualidade = $this->DigitQualidade->newEmptyEntity();
-                    $digitQualidade = $this->DigitQualidade->patchEntity($digitQualidade, $nova_digitQualidade);
+                    $digitLancamento = $this->DigitLancamento->newEmptyEntity();
+                    $digitLancamento = $this->DigitLancamento->patchEntity($digitLancamento, $nova_digitLancamento);
                 } else {
-                    $digitQualidade = $this->DigitQualidade->patchEntity($existe_registro, $nova_digitQualidade);
+                    $digitLancamento = $this->DigitLancamento->patchEntity($existe_registro, $nova_digitLancamento);
                 }
                 
-                $digitalizacoes[] = $digitQualidade;
+                $digitalizacoes[] = $digitLancamento;
 
-                $this->DigitalizacaoService->atualizaStatus($dados[$i], 'Aguardando Lançamento');
+                $this->DigitalizacaoService->atualizaStatus($dados[$i], 'Aguardando Conferência');
             }
 
-            if ($this->DigitQualidade->saveMany($digitalizacoes)) {
+            if ($this->DigitLancamento->saveMany($digitalizacoes)) {
                 $this->Flash->success(__('Serviço(s) lançado(s) com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
@@ -74,23 +74,23 @@ class DigitQualidadeController extends AppController
 
     public function edit($id = null)
     {
-        $digitQualidade = $this->DigitQualidade->get($id, [
+        $digitLancamento = $this->DigitLancamento->get($id, [
             'contain' => ['Digitalizacao' => ['Servico']],
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $digitQualidade = $this->DigitQualidade->patchEntity($digitQualidade, $this->request->getData());
+            $digitLancamento = $this->DigitLancamento->patchEntity($digitLancamento, $this->request->getData());
 
-            if ($this->DigitQualidade->save($digitQualidade)) {
+            if ($this->DigitLancamento->save($digitLancamento)) {
                 $this->Flash->success(__('Serviço editado com sucesso!'));
 
-                return $this->redirect(['action' => 'servicosConferidos']);
+                return $this->redirect(['action' => 'servicosLancados']);
             }
 
             $this->Flash->error(__('Falha ao editar serviço. Tente novamente.'));
         }
 
-        $this->set(compact('digitQualidade'));
+        $this->set(compact('digitLancamento'));
     }
 
     public function editDigitalizacao($id = null)
@@ -116,8 +116,8 @@ class DigitQualidadeController extends AppController
         $this->set(compact('digitalizacao', 'servicos'));
     }
 
-    // TELA DE SERVIÇOS CONFERIDOS
-    public function servicosConferidos()
+    // TELA DE SERVIÇOS LANÇADOS
+    public function servicosLancados()
     {
         $servico = $this->request->getQuery('servico');
         $funcionario = $this->request->getQuery('funcionario');
@@ -129,11 +129,11 @@ class DigitQualidadeController extends AppController
             'contain' => [
                 'Digitalizacao' => ['Servico']
             ],
-            'conditions' => ['DigitQualidade.status_digitalizacao' => 'Conferido'],
-            'order' => ['data_qualidade' => 'desc']
+            'conditions' => ['DigitLancamento.status_digitalizacao' => 'Lançado'],
+            'order' => ['data_lancamento' => 'desc']
         ];
 
-        $query = $this->DigitQualidade->find();
+        $query = $this->DigitLancamento->find();
 
         if (isset($servico) && $servico != '') {
             $query->where([
@@ -143,41 +143,41 @@ class DigitQualidadeController extends AppController
 
         if (isset($funcionario) && $funcionario != '') {
             $query->where([
-                'DigitQualidade.funcionario' => $funcionario
+                'DigitLancamento.funcionario' => $funcionario
             ]);
         }
 
         if (isset($data_inicio) && $data_inicio != '') {
             $query->where([
-                'DigitQualidade.data_cadastro >=' => $data_inicio
+                'DigitLancamento.data_cadastro >=' => $data_inicio
             ]);
         }
 
         if (isset($data_fim) && $data_fim != '') {
             $query->where([
-                'DigitQualidade.data_cadastro <=' => $data_fim
+                'DigitLancamento.data_cadastro <=' => $data_fim
             ]);
         }
 
-        $digitQualidade = $this->paginate($query);
+        $digitLancamento = $this->paginate($query);
 
-        $servicos = $this->DigitQualidade->servicosFiltro()->toArray();
-        $funcionarios = $this->DigitQualidade->funcionarioFiltro()->toArray();
+        $servicos = $this->DigitLancamento->servicosFiltro()->toArray();
+        $funcionarios = $this->DigitLancamento->funcionarioFiltro()->toArray();
         
-        $this->set(compact('digitQualidade', 'servicos', 'funcionarios'));
+        $this->set(compact('digitLancamento', 'servicos', 'funcionarios'));
     }
 
-    /* Esse método altera o campo 'status_digitalizacao' na tabela 'digit_qualidade' para que o serviço seja
+    /* Esse método altera o campo 'status_digitalizacao' na tabela 'digit_lancamento' para que o serviço seja
     novamente acessível na index e possa ser refeito */
     public function voltarEtapa($digitalizacao_id)
     {
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $sucesso = $this->DigitalizacaoService->atualizaStatus($digitalizacao_id, 'Aguardando Cont. Qualidade');
+            $sucesso = $this->DigitalizacaoService->atualizaStatus($digitalizacao_id, 'Aguardando Lançamento');
 
             if ($sucesso) {
-                $digitalizacao = $this->DigitQualidade->existeDado($digitalizacao_id);
+                $digitalizacao = $this->DigitLancamento->existeDado($digitalizacao_id);
 
-                $this->DigitQualidade->delete($digitalizacao);
+                $this->DigitLancamento->delete($digitalizacao);
 
                 $this->Flash->success(__('Registro alterado com sucesso!'));
 

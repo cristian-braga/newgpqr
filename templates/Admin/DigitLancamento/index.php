@@ -3,9 +3,9 @@
     ['controller' => 'Menu', 'action' => 'digitalizacao'],
     ['class' => 'btn-voltar', 'escape' => false]
 ) ?>
-<h2 class="text-center text-gpqr mt-2 mb-4">CONTROLE DE QUALIDADE</h2>
-<?= $this->Html->link(__('Serviços Conferidos'), ['action' => 'servicosConferidos'], ['class' => 'btn btn-secondary float-end mb-4']) ?>
-<?= $this->Form->create(null, ['url' => ['controller' => 'DigitQualidade', 'action' => 'add']]) ?>
+<h2 class="text-center text-gpqr mt-2 mb-4">LANÇAMENTO ALFRESCO</h2>
+<?= $this->Html->link(__('Serviços Lançados'), ['action' => 'servicosLancados'], ['class' => 'btn btn-secondary float-end mb-4']) ?>
+<?= $this->Form->create(null, ['url' => ['controller' => 'DigitLancamento', 'action' => 'add']]) ?>
     <?= $this->Form->button('Lançar', ['id' => 'submit', 'class' => 'btn btn-dark btn-lancar', 'style' => 'visibility: hidden;']) ?>
     <div class="table-responsive table-gpqr">
         <table class="table table-borderless table-striped text-center align-middle">
