@@ -44,7 +44,7 @@ class DigitConferenciaController extends AppController
                     'funcionario' => 'FuncionarioConfAlf',
                     'data_conferencia' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
-                    'status_digitalizacao' => 'Conferido Alfresco',
+                    'status_digitalizacao' => 'Concluído',
                     'digitalizacao_id' => $dados[$i]
                 ];
 
@@ -59,7 +59,7 @@ class DigitConferenciaController extends AppController
                 
                 $digitalizacoes[] = $digitConferencia;
 
-                $this->DigitalizacaoService->atualizaStatus($dados[$i], 'Conferido Alfresco');
+                $this->DigitalizacaoService->atualizaStatus($dados[$i], 'Concluído');
             }
 
             if ($this->DigitConferencia->saveMany($digitalizacoes)) {
@@ -129,7 +129,7 @@ class DigitConferenciaController extends AppController
             'contain' => [
                 'Digitalizacao' => ['Servico']
             ],
-            'conditions' => ['DigitConferencia.status_digitalizacao' => 'Conferido Alfresco'],
+            'conditions' => ['DigitConferencia.status_digitalizacao' => 'Concluído'],
             'order' => ['data_lancamento' => 'desc']
         ];
 

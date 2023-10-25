@@ -21,7 +21,7 @@ class DigitalizacaoController extends AppController
         $this->paginate = [
             'limit' => 20,
             'contain' => ['Servico'],
-            'conditions' => ['status_digitalizacao' => 'Aguardando Confirmação'],
+            'conditions' => ['status_digitalizacao' => 'Aguardando Digitalização'],
             'order' => ['data_cadastro' => 'desc']
         ];
 
@@ -66,7 +66,7 @@ class DigitalizacaoController extends AppController
                     'data_postagem' => $datas[$i],
                     'remessa' => $remessas[$i],
                     'quantidade_documentos' => $documentos[$i],
-                    'status_digitalizacao' => 'Aguardando Confirmação',
+                    'status_digitalizacao' => 'Aguardando Digitalização',
                     'digitalizado' => 'Não',
                     'servico_id' => $servico_ids[$i]
                 ];
@@ -198,7 +198,7 @@ class DigitalizacaoController extends AppController
     public function voltarEtapa($id)
     {
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $sucesso = $this->DigitalizacaoService->atualizaStatus($id, 'Aguardando Confirmação', 'Não');
+            $sucesso = $this->DigitalizacaoService->atualizaStatus($id, 'Aguardando Digitalização', 'Não');
 
             if ($sucesso) {
                 $this->Flash->success(__('Serviço alterado com sucesso!'));

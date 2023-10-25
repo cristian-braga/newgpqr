@@ -52,12 +52,15 @@ class DigitalizacaoTable extends Table
         ]);
         $this->hasMany('DigitConferencia', [
             'foreignKey' => 'digitalizacao_id',
+            'dependent' => true
         ]);
         $this->hasMany('DigitLancamento', [
             'foreignKey' => 'digitalizacao_id',
+            'dependent' => true
         ]);
         $this->hasMany('DigitQualidade', [
             'foreignKey' => 'digitalizacao_id',
+            'dependent' => true
         ]);
     }
 

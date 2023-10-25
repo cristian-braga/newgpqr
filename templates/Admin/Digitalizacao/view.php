@@ -76,7 +76,7 @@
                 <tr>
                     <td><?= h($digit_lancamento->funcionario) ?></td>
                     <td><?= h($digit_lancamento->data_lancamento) ?></td>
-                    <td><?= h($conferencia->status_digitalizacao) ?></td>
+                    <td><?= h($digit_lancamento->status_digitalizacao) ?></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'DigitLancamento', 'action' => 'edit', $digit_lancamento->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                         <?= $this->Form->postLink(__('Desfazer'), ['controller' => 'DigitLancamento', 'action' => 'voltarEtapa', $digit_lancamento->digitalizacao_id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Lançamento". Deseja continuar?', $digitalizacao->servico->nome_servico)]) ?>
