@@ -26,9 +26,10 @@
                     <td><?= h($funcionariosGim->tel) ?></td>
                     <td><?= h($funcionariosGim->turno) ?></td>
                     <td>
-                        <?= $this->Html->link(__('Detalhes'), ['action' => 'view', $funcionariosGim->id], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
+                         <?= $this->Html->link(__('Detalhes'), ['action' => 'view', $funcionariosGim->id], ['class' => 'btn btn-outline-secondary btn-sm btn-shadow']) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $funcionariosGim->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
                         <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $funcionariosGim->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow ', 'confirm' => __('Realmente deseja excluir o serviço:  {0}?', $funcionariosGim->id)]) ?>
+
                     </td>
                 </tr>
                 <?php endforeach; ?>
