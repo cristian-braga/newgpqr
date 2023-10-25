@@ -5,7 +5,7 @@
 ) ?>
 <h2 class="text-center text-gpqr mt-2 mb-4">RELATÓRIO MULTAS POR CLIENTE</h2>
 <div class="d-flex mb-5">
-    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar', '?' => ['cliente' => $cliente]], ['class' => 'btn btn-dark']) ?>
+    <?= $this->Html->link(__('Exportar'), ['action' => 'exportar', '?' => ['cliente' => $cliente]], ['class' => 'btn btn-dark mx-auto']) ?>
 </div>
 <div class="conteudo mt-5">
     <?= $this->Form->create(null, ['type' => 'get']) ?>
