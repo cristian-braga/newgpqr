@@ -54,7 +54,7 @@
                     <td class="bg-success-subtle"><b>Digitalizado</b></td>
                     <td>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $digitalizacao->id], ['class' => 'btn btn-outline-warning btn-sm btn-shadow']) ?>
-                        <?= $this->Form->postLink(__('Desfazer'), ['action' => 'voltarEtapa', $digitalizacao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Cadastro". Deseja continuar?', $digitalizacao->servico->nome_servico)]) ?>
+                        <?= $this->Form->postLink(__('Desfazer'), ['action' => 'voltarEtapa', $digitalizacao->id], ['class' => 'btn btn-outline-danger btn-sm btn-shadow', 'confirm' => __('Esta ação somente fará com que o serviço: {0} volte para "Aguardando Digitalização". Deseja continuar?', $digitalizacao->servico->nome_servico)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
