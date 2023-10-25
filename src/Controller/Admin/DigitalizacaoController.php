@@ -36,7 +36,8 @@ class DigitalizacaoController extends AppController
             'contain' => [
                 'DigitQualidade',
                 'DigitLancamento',
-                'DigitConferencia'
+                'DigitConferencia',
+                'Servico'
             ]
         ]);
 
@@ -66,6 +67,7 @@ class DigitalizacaoController extends AppController
                     'remessa' => $remessas[$i],
                     'quantidade_documentos' => $documentos[$i],
                     'status_digitalizacao' => 'Aguardando Confirmação',
+                    'digitalizado' => 'Não',
                     'servico_id' => $servico_ids[$i]
                 ];
 
@@ -133,7 +135,7 @@ class DigitalizacaoController extends AppController
             $dados = $this->request->getData('selecionados');
 
             foreach ($dados as $id) {
-                $this->DigitalizacaoService->atualizaStatus($id, 'Aguardando Cont. Qualidade');
+                $this->DigitalizacaoService->atualizaStatus($id, 'Aguardando Cont. Qualidade', 'Sim');
             }
     
             $this->Flash->success('Serviço(s) lançado(s) com sucesso!');
@@ -193,16 +195,12 @@ class DigitalizacaoController extends AppController
 
     /* Esse método altera o campo 'status_digitalizacao' na tabela 'digitalizacao' para que o serviço seja
     novamente acessível na index e possa ser refeito */
-    public function voltarEtapa($digitalizacao_id)
+    public function voltarEtapa($id)
     {
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $sucesso = $this->DigitalizacaoService->atualizaStatus($digitalizacao_id, 'Aguardando Confirmação');
+            $sucesso = $this->DigitalizacaoService->atualizaStatus($id, 'Aguardando Confirmação', 'Não');
 
             if ($sucesso) {
-                $digitalizacao = $this->Digitalizacao->existeDado($digitalizacao_id);
-
-                $this->Digitalizacao->delete($digitalizacao);
-
                 $this->Flash->success(__('Serviço alterado com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
