@@ -116,7 +116,7 @@ class DigitalizacaoController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'post', 'delete']);
 
         $digitalizacao = $this->Digitalizacao->get($id);
 
