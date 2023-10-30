@@ -94,7 +94,7 @@ class AtividadeController extends AppController
                     'data_atividade' => date('Y-m-d H:i:s'),
                     'data_postagem' => $datas[$i],
                     'data_cadastro' => date('Y-m-d'),
-                    'funcionario' => 'Cristian',
+                    'funcionario' => 'Funcionário',
                     'remessa_atividade' => $remessas[$i],
                     'quantidade_documentos' => $documentos[$i],
                     'quantidade_folhas' => $folhas_paginas['folhas'],

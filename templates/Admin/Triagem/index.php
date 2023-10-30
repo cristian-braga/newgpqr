@@ -45,3 +45,29 @@
     </div>
 <?= $this->Form->end() ?>
 <?= $this->element('pagination') ?>
+
+<h4 class="text-center text-gpqr mt-5 mb-4">RANKING MENSAL DE TRIAGENS</h4>
+<div class="table-responsive table-gpqr mx-auto mb-5" style="width: 35%;">
+    <table class="table table-borderless table-hover text-center align-middle">
+        <thead>
+            <tr class="table-secondary">
+                <th>Posição</th>
+                <th>Funcionário</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($ranking_mensal)) : ?>
+                <?php foreach ($ranking_mensal as $posicao => $funcionario) : ?>
+                    <tr>
+                        <th><?= $posicao + 1 ?>°</th>
+                        <td><?= $funcionario->nome ?></td>
+                        <td><?= $this->Number->format($funcionario->total_documentos) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <td colspan="3">Ainda não existem lançamentos</td>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>

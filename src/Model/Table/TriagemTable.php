@@ -127,4 +127,24 @@ class TriagemTable extends Table
 
         return $query;
     }
+
+    public function dadosTriagens()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome' => 'Triagem.funcionario',
+                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+            ])
+            ->innerJoinWith('Atividade')
+            ->where([
+                'Triagem.status_atividade_id' => 8,
+                'MONTH(Triagem.data_triagem)' => date('m'),
+                'YEAR(Triagem.data_triagem)' => date('Y')
+            ])
+            ->group('nome')
+            ->orderDesc('total_documentos')
+            ->all();
+
+        return $query;
+    }
 }
