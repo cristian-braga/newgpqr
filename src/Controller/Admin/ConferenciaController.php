@@ -43,7 +43,7 @@ class ConferenciaController extends AppController
 
             for ($i = 0; $i < count($dados); $i++) {
                 $nova_conferencia = [
-                    'funcionario' => 'funcionario',
+                    'funcionario' => 'Funcionário',
                     'data_conferencia' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],
