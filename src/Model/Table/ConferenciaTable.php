@@ -127,4 +127,24 @@ class ConferenciaTable extends Table
 
         return $query;
     }
+
+    public function dadosConferencia()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome' => 'Conferencia.funcionario',
+                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+            ])
+            ->innerJoinWith('Atividade')
+            ->where([
+                'Conferencia.status_atividade_id' => 14,
+                'MONTH(Conferencia.data_conferencia)' => date('m'),
+                'YEAR(Conferencia.data_conferencia)' => date('Y')
+            ])
+            ->group('nome')
+            ->orderDesc('total_documentos')
+            ->all();
+
+        return $query;
+    }
 }
