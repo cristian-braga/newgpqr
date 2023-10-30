@@ -27,9 +27,11 @@ class ConferenciaController extends AppController
             'order' => ['data_cadastro' => 'desc']
         ];
 
+        $ranking_mensal = $this->Conferencia->dadosConferencia()->toArray();
+
         $atividade = $this->paginate($this->AtividadeTable);
 
-        $this->set(compact('atividade'));
+        $this->set(compact('atividade', 'ranking_mensal'));
     }
 
     public function add()
@@ -41,7 +43,7 @@ class ConferenciaController extends AppController
 
             for ($i = 0; $i < count($dados); $i++) {
                 $nova_conferencia = [
-                    'funcionario' => 'CristianConf',
+                    'funcionario' => 'funcionario',
                     'data_conferencia' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],
