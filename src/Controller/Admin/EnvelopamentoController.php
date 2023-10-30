@@ -29,7 +29,11 @@ class EnvelopamentoController extends AppController
 
         $atividade = $this->paginate($this->AtividadeTable);
 
-        $this->set(compact('atividade'));
+        // -------------------------------- RANKING DE ENVELOPAMENTOS ----------------------------------
+        // Método na EnvelopamentoTable dos valores para o ranking
+        $ranking_mensal = $this->Envelopamento->dadosEnvelopamentos()->toArray();
+
+        $this->set(compact('atividade', 'ranking_mensal'));
     }
 
     public function add()
@@ -41,7 +45,7 @@ class EnvelopamentoController extends AppController
 
             for ($i = 0; $i < count($dados); $i++) {
                 $novo_envelopamento = [
-                    'funcionario' => 'CristianEnv',
+                    'funcionario' => 'Funcionário',
                     'data_envelopamento' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],

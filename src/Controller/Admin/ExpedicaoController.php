@@ -57,13 +57,13 @@ class ExpedicaoController extends AppController
                 }
 
                 $dados_expedicao = [
-                    'funcionario' => 'CristianExp',
+                    'funcionario' => 'Funcionário',
                     'data_lancamento' => date('Y-m-d H:i:s'),
                     'data_expedicao' => $dados['data_expedicao'],
                     'capas' => $capas[$i],
                     'solicitante' => $solicitantes[$i],
                     'responsavel_remessa' => $responsaveis_remessas[$i],
-                    'responsavel_expedicao' => 'CristianExp',
+                    'responsavel_expedicao' => 'Funcionário',
                     'responsavel_coleta' => $dados['responsavel_coleta'],
                     'observacao' => $observacoes[$i],
                     'hora' => $dados['hora'],

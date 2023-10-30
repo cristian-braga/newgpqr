@@ -29,7 +29,11 @@ class TriagemController extends AppController
 
         $atividade = $this->paginate($this->AtividadeTable);
 
-        $this->set(compact('atividade'));
+        // -------------------------------- RANKING DE TRIAGENS ----------------------------------
+        // Método na TriagemTable dos valores para o ranking
+        $ranking_mensal = $this->Triagem->dadosTriagens()->toArray();
+
+        $this->set(compact('atividade', 'ranking_mensal'));
     }
 
     public function add()
@@ -41,7 +45,7 @@ class TriagemController extends AppController
 
             for ($i = 0; $i < count($dados); $i++) {
                 $nova_triagem = [
-                    'funcionario' => 'CristianTri',
+                    'funcionario' => 'Funcionário',
                     'data_triagem' => date('Y-m-d H:i:s'),
                     'data_cadastro' => date('Y-m-d'),
                     'atividade_id' => $dados[$i],

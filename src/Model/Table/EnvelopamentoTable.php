@@ -127,4 +127,24 @@ class EnvelopamentoTable extends Table
 
         return $query;
     }
+
+    public function dadosEnvelopamentos()
+    {
+        $query = $this->find();
+        $query->select([
+                'nome' => 'Envelopamento.funcionario',
+                'total_documentos' => $query->func()->sum('Atividade.quantidade_documentos')
+            ])
+            ->innerJoinWith('Atividade')
+            ->where([
+                'Envelopamento.status_atividade_id' => 6,
+                'MONTH(Envelopamento.data_envelopamento)' => date('m'),
+                'YEAR(Envelopamento.data_envelopamento)' => date('Y')
+            ])
+            ->group('nome')
+            ->orderDesc('total_documentos')
+            ->all();
+
+        return $query;
+    }
 }

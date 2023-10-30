@@ -85,7 +85,7 @@ class ServicosAnuladosController extends AppController
         if ($this->request->is('post')) {
             $dados = $this->request->getData();
 
-            $dados['funcionario'] = 'CristianErro';
+            $dados['funcionario'] = 'Funcionário';
             $dados['data_cadastro'] = date('Y-m-d');
 
             $existe_registro = $this->ServicosAnulados->existeDado($dados['atividade_id']);
