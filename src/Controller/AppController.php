@@ -107,7 +107,7 @@ class AppController extends Controller
             $prefix = $this->request->getParam('prefix');
         }
 
-        if ($prefix == 'Admin') {
+        if ($prefix == 'admin') {
             if (($this->request->getParam('action') != null) && ($this->request->getParam('action') == 'login')) {
                 $this->viewBuilder()->setLayout('login');
             } 
